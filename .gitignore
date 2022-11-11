@@ -1,0 +1,9 @@
+.Rproj.user
+.Rhistory
+.DS_Store
+.vscode/
+parabar.Rcheck/
+*.tar.gz
+**/temp*
+.temp
+.cache
