@@ -1,4 +1,4 @@
-#' @include constants.R
+#' @include Exception.R
 
 Bar <- R6::R6Class("Bar",
     private = list(
@@ -7,22 +7,22 @@ Bar <- R6::R6Class("Bar",
 
     public = list(
         initialize = function() {
-            stop(.__ERRORS__$abstract_class)
+            Exception$abstract_class_not_instantiable(self)
         },
 
         # Abstract method for creating a progress bar.
         create = function(total, initial, ...) {
-            stop(.__ERRORS__$not_implemented)
+            Exception$method_not_implemented()
         },
 
         # Abstract method for updating a progress bar.
         update = function(current) {
-            stop(.__ERRORS__$not_implemented)
+            Exception$method_not_implemented()
         },
 
         # Abstract method for terminating a progress bar.
         terminate = function() {
-            stop(.__ERRORS__$not_implemented)
+            Exception$method_not_implemented()
         }
     )
 )

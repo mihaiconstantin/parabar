@@ -1,4 +1,4 @@
-#' @include constants.R BasicBar.R ModernBar.R
+#' @include Exception.R BasicBar.R ModernBar.R
 
 # Factory for fetching bar types of different instances.
 BarFactory <- R6::R6Class("BarFactory",
@@ -8,7 +8,7 @@ BarFactory <- R6::R6Class("BarFactory",
                 switch(type,
                     basic = BasicBar$new(),
                     modern = ModernBar$new(),
-                    stop(.__ERRORS__$not_developed)
+                    Exception$feature_not_developed()
                 )
             )
         }
