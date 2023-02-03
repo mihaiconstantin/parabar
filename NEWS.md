@@ -5,6 +5,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 ### Added
+- Add `Helper`, `Warning`, and `Exception` `R6` classes. These classes contain
+  static member methods that provide useful utilities, handle warning messages,
+  and throw informative errors, respectively.
 - Add `UML` diagram for package classes. The classes provided by `parabar` can
   be split in three categories, namely (1) backend classes responsible for
   managing clusters, (2) context classes that decorate backend objects with
