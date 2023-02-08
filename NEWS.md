@@ -5,6 +5,30 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 ### Added
+- Add classes to work with synchronous and asynchronous backends:
+  - `Service`: represents an *interface* that all concrete backends must
+    implement. It contains the methods (i.e., operations) that can be requested
+    from a given backend instance. These methods form the main API of `parabar`.
+  - `Backend`: represents an abstract class that implements the `Service`
+    interface. It contains fields and methods relevant to all concrete backend
+    implementations that extend the class.
+  - `SyncBackend`: represents a concrete implementation for a synchronous
+    backend. When executing a task in parallel via the `sapply` method, the
+    caller process (i.e., usually the interactive `R` session) is blocked until
+    the task finishes executing.
+  - `AsyncBackend`: represents a concrete implementation for an asynchronous
+    backend. After lunching a task in parallel via the `sapply` method, the
+    method returns immediately leaving the caller process (e.g., the interactive
+    `R` session) free. The computation of the task is offloaded to a permanent
+    background `R` session. One can read the state of the task using the public
+    field (i.e., active binding) `task_state`. Furthermore, the results can be
+    fetched from the background session using the `get_output` method, which can
+    either block the main process to wait for the results, or attempt to fetch
+    them immediately and throw an error if not successful.
+  - `Specification`: represents an auxiliary class that encapsulates the logic
+    for determining the type of cluster to create (i.e., via
+    `parallel::makeCluster`), and the number of nodes (i.e., `R` processes) for
+    the cluster.
 - Add `Helper`, `Warning`, and `Exception` `R6` classes. These classes contain
   static member methods that provide useful utilities, handle warning messages,
   and throw informative errors, respectively.
