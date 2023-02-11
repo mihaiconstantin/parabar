@@ -5,6 +5,29 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 ### Added
+- Implement initial software design. For a helicopter view, the design consists
+  of `backend` and `context` objects. A `backend` represents a set of operations
+  that can be deployed on a cluster produced by `parallel::makeCluster`. The
+  backend, therefore, interacts with the cluster via specific operations defined
+  by the `Service` interface. The `context` represents the specific conditions
+  in which the backend operations are invoked. A regular context object simply
+  forwards the call to the corresponding backend method. However, a more complex
+  context can augment the operation before invoking the backend operation. One
+  example of a complex context is the `ProgressDecorator` class. This class
+  extends the regular `Context` class and decorates the backend `sapply`
+  operation to provide progress tracking and display a progress bar.
+- Add context classes to consume and decorate backend APIs. Since the context
+  classes implement the `Service` interface, the client can interact with
+  context objects as if they represents instances of `Backend` type. This
+  release introduces the following contexts:
+  - `Context`: represents a regular context that wraps backend objects. In other
+    words, all `Service` methods calls implemented by this context are forwarded
+    to the corresponding methods implemented by the backend object.
+  - `ProgressDecorator`: represents a progress tracking context. This context
+    decorates the `sapply` method available on the backend instance to log the
+    progress after each task execution and display a progress bar.
+  - `ContextFactory`: represents a blueprint for obtaining specific context
+    instances.
 - Add classes to work with synchronous and asynchronous backends:
   - `Service`: represents an *interface* that all concrete backends must
     implement. It contains the methods (i.e., operations) that can be requested
