@@ -24,5 +24,10 @@ Bar <- R6::R6Class("Bar",
         terminate = function() {
             Exception$method_not_implemented()
         }
+    ),
+
+    active = list(
+        # Get the bar engine.
+        engine = function() { return(private$.bar) }
     )
 )
