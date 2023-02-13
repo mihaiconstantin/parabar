@@ -52,6 +52,8 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
     for determining the type of cluster to create (i.e., via
     `parallel::makeCluster`), and the number of nodes (i.e., `R` processes) for
     the cluster.
+  - `BackendFactory`: represents a blueprint for obtaining concrete backend
+    implementations.
 - Add `Helper`, `Warning`, and `Exception` `R6` classes. These classes contain
   static member methods that provide useful utilities, handle warning messages,
   and throw informative errors, respectively.
@@ -67,5 +69,5 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Add `Bar` abstraction for working with progress bars in `R`. Currently, two
   types of of progress bars are supported (i.e., `BasicBar` and `ModernBar`).
   `BasicBar` uses as engine the `utils::txtProgressBar`, and `ModernBar` relies
-  on the `R6` class obtained from `progress::progress_bar`. Specific concrete of
-  these bar types can be requested from the `BarFactory`.
+  on the `R6` class obtained from `progress::progress_bar`. Specific concrete
+  instances of these bar types can be requested from the `BarFactory`.
