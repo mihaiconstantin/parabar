@@ -36,10 +36,11 @@
 #' ### Backends
 #' A **`backend`** represents a set of operations, defined by the
 #' [`parabar::Service`] interface, that can be deployed on a cluster returned by
-#' [parallel::makeCluster()]. Backends can be synchronous or asynchronous. The
-#' former will block the execution of the current `R` session until the parallel
-#' task is completed, while the latter will return immediately and the task will
-#' be executed in a background `R` session.
+#' [parallel::makeCluster()]. Backends can be synchronous (i.e.,
+#' [`parabar::SyncBackend`]) or asynchronous (i.e., [`parabar::AsyncBackend`]).
+#' The former will block the execution of the current `R` session until the
+#' parallel task is completed, while the latter will return immediately and the
+#' task will be executed in a background `R` session.
 #'
 #' The [parabar::Service] interface defines the following operations:
 #' [`start()`][parabar::Service], [`stop()`][parabar::Service],
