@@ -15,3 +15,14 @@ get_option <- function(option) {
     # Invoke the helper.
     Helper$get_option(option)
 }
+
+
+#' @template set-option
+#' @export
+set_option <- function(option, value) {
+    # Invoke the helper.
+    Helper$set_option(option, value)
+
+    # Remain silent.
+    invisible()
+}
