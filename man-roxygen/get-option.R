@@ -19,5 +19,3 @@
 #' known, an error is thrown.
 #'
 #' @seealso [`parabar::Options`], [parabar::set_default_options()], [base::options()], [base:getOptions()]
-#'
-#' @export

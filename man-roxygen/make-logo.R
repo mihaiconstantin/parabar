@@ -22,5 +22,3 @@
 #' cat(logo)
 #'
 #' @seealso [`parabar::LOGO`]
-#'
-#' @export

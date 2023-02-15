@@ -1,4 +1,5 @@
 #' @template make-logo
+#' @export
 make_logo <- function(template = "./inst/assets/logo/logo.txt", version = c(1, 0, 0)) {
     # Load the ASCII logo.
     logo <- readLines(template)
