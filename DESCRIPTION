@@ -1,5 +1,5 @@
 Package: parabar
-Title: Package title
+Title: Progress Bar for Parallel Tasks
 Version: 0.1.0
 Authors@R:
     person(given = "Mihai",
@@ -7,8 +7,12 @@ Authors@R:
            role = c("aut", "cre"),
            email = "mihai@mihaiconstantin.com",
            comment = c(ORCID = "0000-0002-6460-0107"))
-Description: Package description.
+Description: A package designed to provide a simple interface in the form of R6
+    classes for executing tasks in parallel, while also providing functionality
+    for tracking and displaying the progress of the tasks.
 License: MIT + file LICENSE
+URL: https://parabar.mihaiconstantin.com
+BugReports: https://github.com/mihaiconstantin/parabar/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1

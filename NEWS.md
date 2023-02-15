@@ -5,6 +5,8 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 ### Added
+- Add package object documentation and relevant information in `DESCRIPTION`
+  file.
 - Add `parabar` logo startup message for interactive `R` sessions.
 - Add function to generate package logo based on the `ASCII` template in
   `inst/assets/logo/logo.txt`.
