@@ -1,6 +1,7 @@
 #' @include Options.R Helper.R
 
 #' @template set-default-options
+#' @export
 set_default_options <- function() {
     # Set `Options` instance.
     options(parabar = Options$new())
@@ -11,6 +12,7 @@ set_default_options <- function() {
 
 
 #' @template get-option
+#' @export
 get_option <- function(option) {
     # Invoke the helper.
     Helper$get_option(option)

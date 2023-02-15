@@ -16,5 +16,3 @@
 #' function.
 #'
 #' @seealso [`parabar::Options`], [parabar::get_option()]
-#'
-#' @export
