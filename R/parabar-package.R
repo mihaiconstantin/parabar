@@ -15,6 +15,10 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
+#' @template parabar
+"_PACKAGE"
+
+
 # On package load.
 .onLoad <- function(libname, pkgname) {
     # Set package options.
