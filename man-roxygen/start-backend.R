@@ -80,12 +80,12 @@
 #'     print(paste0("Hello, ", name, "!"))
 #' })
 #'
-#' # Run a task in parallel (i.e., approx. five seconds).
+#' # Run a task in parallel (i.e., approx. 1.25 seconds).
 #' backend$sapply(
-#'     x = 1:1000,
+#'     x = 1:10,
 #'     fun = function(x) {
 #'         # Sleep a bit.
-#'         Sys.sleep(0.01)
+#'         Sys.sleep(0.25)
 #'
 #'         # Compute something.
 #'         output <- x + 1
@@ -108,7 +108,7 @@
 #' backend$peek()
 #'
 #' # Stop the backend.
-#' stop_backend(backend)
+#' backend$stop()
 #'
 #' # Check that the backend is not active.
 #' backend$active
