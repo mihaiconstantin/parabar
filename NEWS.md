@@ -5,6 +5,9 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 ### Added
+- Add `parabar` logo startup message for interactive `R` sessions.
+- Add function to generate package logo based on the `ASCII` template in
+  `inst/assets/logo/logo.txt`.
 - Add exported wrapper `get_option` for `Helper$get_option`. This function is
   available to end-users and can be used to get the value of a specific option
   or its default value.
