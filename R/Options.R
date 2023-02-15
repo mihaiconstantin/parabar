@@ -2,14 +2,16 @@
 #' Class for Package Options
 #'
 #' @description
-#' This class holds public fields that represent the package [base::options()]
-#' used to configure the default behavior of the functionality
-#' [`parabar::parabar`] provides.
+#' This class holds public fields that represent the package
+#' [`options`][base::options()] used to configure the default behavior of the
+#' functionality [`parabar::parabar`] provides.
 #'
 #' @details
 #' An instance of this class is automatically created and stored in the session
 #' [`base::.Options`] at load time. This instance can be accessed and changed
-#' via [`getOption("parabar")`][base:getOptions()].
+#' via [`getOption("parabar")`][base:getOptions()]. Specific package
+#' [`options`][base::options()] can be retrieved using the helper function
+#' [parabar::get_option()].
 #'
 #' @examples
 #' # Set the default package options (i.e., automatically set at load time).
@@ -30,7 +32,7 @@
 #' # Check that the change was applied (i.e., `progress_track: FALSE`).
 #' getOption("parabar")
 #'
-#' @seealso [parabar::set_default_options()]
+#' @seealso [parabar::set_default_options()], [parabar::get_option()]
 #'
 #' @keywords internal
 Options <- R6::R6Class("Options",
