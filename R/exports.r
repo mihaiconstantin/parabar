@@ -1,4 +1,4 @@
-#' @include Options.R
+#' @include Options.R Helper.R
 
 #' @template set-default-options
 set_default_options <- function() {
@@ -7,4 +7,11 @@ set_default_options <- function() {
 
     # Remain silent.
     invisible(NULL)
+}
+
+
+#' @template get-option
+get_option <- function(option) {
+    # Invoke the helper.
+    Helper$get_option(option)
 }
