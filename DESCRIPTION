@@ -11,6 +11,8 @@ Description: A package designed to provide a simple interface in the form of R6
     classes for executing tasks in parallel, while also providing functionality
     for tracking and displaying the progress of the tasks.
 License: MIT + file LICENSE
+URL: https://parabar.mihaiconstantin.com
+BugReports: https://github.com/mihaiconstantin/parabar/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
