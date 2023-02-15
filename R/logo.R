@@ -1,0 +1,40 @@
+#' @title
+#' Generate package ASCII logo
+#'
+#' @description
+#' This function is meant for generating or updating the logo. After running
+#' this procedure we end up with what is stored in the [`parabar::LOGO`]
+#' constant.
+#'
+#' @param template A character string representing the path to the logo
+#' template.
+#'
+#' @param version A numerical vector of three positive integers representing the
+#' version of the package to append to the logo.
+#'
+#' @return The ASCII logo.
+#'
+#' @examples \dontrun{
+#' # Generate the logo.
+#' logo <- make_logo()
+#'
+#' # Print the logo.
+#' cat(logo, sep = "\n")}
+#'
+#' @keywords internal
+make_logo <- function(template = "./inst/assets/logo/logo.txt", version = c(1, 0, 0)) {
+    # Load the ASCII logo.
+    logo <- readLines(template)
+    logo <- dput(logo)
+
+    # Update versioning.
+    logo <- gsub("{{major}}", version[1], logo, perl = TRUE)
+    logo <- gsub("{{minor}}", version[2], logo, perl = TRUE)
+    logo <- gsub("{{patch}}", version[3], logo, perl = TRUE)
+
+    # Condensed version.
+    logo <- paste(logo, collapse = "\n")
+
+    return(logo)
+}
+
