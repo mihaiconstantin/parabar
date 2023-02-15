@@ -5,6 +5,11 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 ### Added
+- Add exported wrapper `set_option` for `Helper$set_option`. This function is
+  available to end-users and can be used to set the value of a specific option.
+- Add helper method for setting package options. The static method
+  `Helper$set_option` is a wrapper around `base::getOption` that sets the value
+  of a specific option if it exists, or throws an error otherwise.
 - Add package object documentation and relevant information in `DESCRIPTION`
   file.
 - Add `parabar` logo startup message for interactive `R` sessions.
