@@ -56,6 +56,7 @@ start_backend <- function(cores, cluster_type = "psock", backend_type = "async")
 }
 
 
+#' @template stop-backend
 #' @export
 stop_backend <- function(backend) {
     # Stop the backend
