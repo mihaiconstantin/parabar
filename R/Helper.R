@@ -5,3 +5,18 @@ Helper <- R6::R6Class("Helper")
 Helper$get_class_name <- function(object) {
     return(class(object)[1])
 }
+
+# Get package option, or corresponding default value.
+Helper$get_option <- function(option) {
+    # Get the `Options` instance from the global options, or create a new one.
+    options <- getOption("parabar", default = Options$new())
+
+    # If the requested option is unknown.
+    if (!(option %in% ls(options))) {
+        # Throw an error.
+        Exception$unknown_package_option(option)
+    }
+
+    # Return the value.
+    return(options[[option]])
+}

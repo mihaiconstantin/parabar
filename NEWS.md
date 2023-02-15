@@ -5,6 +5,19 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 ### Added
+- Add exported wrapper `get_option` for `Helper$get_option`. This function is
+  available to end-users and can be used to get the value of a specific option
+  or its default value.
+- Add helper method for getting package options or their defaults. The static
+  method `Helper$get_option` is a wrapper around `base::getOption` that returns
+  the value of a specific option if it exists, or the default value set by the
+  `Options` class otherwise.
+- Add `Options` `R6` class and `set_default_options` function to manage package
+  options for `parabar`. The documented fields of the `Options` class represent
+  the options that can be configured by the user. The `set_default_options`
+  function can be used to set the default package options and is automatically
+  run at package load time. In a nutshell, `set_default_options` stores an
+  instance of `Options` in the `base::.Options` list under the key `parabar`.
 - Implement initial software design. For a helicopter view, the design consists
   of `backend` and `context` objects. A `backend` represents a set of operations
   that can be deployed on a cluster produced by `parallel::makeCluster`. The

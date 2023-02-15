@@ -82,3 +82,12 @@ Exception$type_not_assignable <- function(actual, expected) {
     # Throw the error.
     stop(message, call. = FALSE)
 }
+
+# Exception for when requestiong unknown package options.
+Exception$unknown_package_option <- function(option) {
+    # Construct exception message.
+    message = paste0("Unknown package option '", option, "'.")
+
+    # Throw the error.
+    stop(message, call. = FALSE)
+}
