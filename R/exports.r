@@ -54,3 +54,13 @@ start_backend <- function(cores, cluster_type = "psock", backend_type = "async")
     # Return the backend.
     return(backend)
 }
+
+
+#' @export
+stop_backend <- function(backend) {
+    # Stop the backend
+    backend$stop()
+
+    # Remain silent.
+    invisible()
+}
