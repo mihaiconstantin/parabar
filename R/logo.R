@@ -25,7 +25,15 @@
 make_logo <- function(template = "./inst/assets/logo/logo.txt", version = c(1, 0, 0)) {
     # Load the ASCII logo.
     logo <- readLines(template)
+
+    # Redirect console output.
+    sink("/dev/null")
+
+    # Parse the logo.
     logo <- dput(logo)
+
+    # Remove output redirection.
+    sink()
 
     # Update versioning.
     logo <- gsub("{{major}}", version[1], logo, perl = TRUE)
