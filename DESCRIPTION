@@ -16,3 +16,25 @@ BugReports: https://github.com/mihaiconstantin/parabar/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
+Collate:
+    'TaskState.R'
+    'Helper.R'
+    'Exception.R'
+    'Specification.R'
+    'Service.R'
+    'Backend.R'
+    'AsyncBackend.R'
+    'SyncBackend.R'
+    'BackendFactory.R'
+    'Bar.R'
+    'ModernBar.R'
+    'BasicBar.R'
+    'BarFactory.R'
+    'Context.R'
+    'ProgressDecorator.R'
+    'ContextFactory.R'
+    'Options.R'
+    'Warning.R'
+    'exports.r'
+    'logo.R'
+    'parabar-package.R'
