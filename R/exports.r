@@ -1,4 +1,4 @@
-#' @include Options.R Helper.R
+#' @include Options.R Helper.R Specification.R BackendFactory.R ContextFactory.R Exception.R BarFactory.R
 
 #' @template set-default-options
 #' @export
@@ -27,4 +27,30 @@ set_option <- function(option, value) {
 
     # Remain silent.
     invisible()
+}
+
+
+#' @template start-backend
+#' @export
+start_backend <- function(cores, cluster_type = "psock", backend_type = "async") {
+    # Create specification object.
+    specification <- Specification$new()
+
+    # Set specification cores.
+    specification$set_cores(cores)
+
+    # Set the specification cluster type.
+    specification$set_type(cluster_type)
+
+    # Initialize a backend factory.
+    backend_factory <- BackendFactory$new()
+
+    # Get a backend instance of the desired type.
+    backend <- backend_factory$get(backend_type)
+
+    # Start the backend.
+    backend$start(specification)
+
+    # Return the backend.
+    return(backend)
 }
