@@ -1,5 +1,5 @@
 Package: parabar
-Title: Package title
+Title: Progress Bar for Parallel Tasks
 Version: 0.1.0
 Authors@R:
     person(given = "Mihai",
