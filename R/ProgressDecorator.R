@@ -60,7 +60,7 @@ ProgressDecorator <- R6::R6Class("ProgressDecorator",
         # Show the progress bar based on the backend task execution.
         .show_progress = function(total, log) {
             # Get the checking delay from options.
-            timeout <- getOption("parabar.progress.timeout", default = 0.001)
+            timeout <- Helper$get_option("progress_timeout")
 
             # Initialize the bar at the initial starting point.
             do.call(
