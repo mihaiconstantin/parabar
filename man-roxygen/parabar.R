@@ -1,12 +1,6 @@
 #' @title
 #' Progress Bar for Parallel Tasks
 #'
-#' @description
-#' [`parabar`] is a package that provides a simple interface in the form of
-#' [`R6::R6`] classes for executing tasks in parallel via a
-#' [`parallel::parallel`] cluster, while also providing functionality for
-#' tracking and displaying the progress of the tasks.
-#'
 #' @details
 #' The package is aimed at two audiences: (1) end-users who want to execute a
 #' task in parallel in an interactive `R` session and track the execution

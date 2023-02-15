@@ -7,7 +7,9 @@ Authors@R:
            role = c("aut", "cre"),
            email = "mihai@mihaiconstantin.com",
            comment = c(ORCID = "0000-0002-6460-0107"))
-Description: Package description.
+Description: A package designed to provide a simple interface in the form of R6
+    classes for executing tasks in parallel, while also providing functionality
+    for tracking and displaying the progress of the tasks.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
