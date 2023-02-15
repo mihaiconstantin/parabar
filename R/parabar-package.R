@@ -15,6 +15,12 @@
 # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
+# Imports.
+#' @importFrom parallel detectCores makeCluster stopCluster clusterExport
+#' @importFrom parallel clusterEvalQ parSapply parApply clusterCall
+#' @importFrom R6 R6Class
+#' @importFrom progress progress_bar
+
 #' @template parabar
 "_PACKAGE"
 
