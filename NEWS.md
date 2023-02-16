@@ -5,6 +5,13 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 ### Added
+- Add exported wrapper `par_sapply` to run tasks in parallel and display a
+  progress bar if appropriate.
+- Add exported wrapper `stop_backend` to stop a backend instance.
+- Add exported wrapper `start_backend` to create a backend instance based on the
+  specified specification.
+- Add exported wrapper `configure_bar` for configuring the type and behavior of
+  the progress bar.
 - Add exported wrapper `set_option` for `Helper$set_option`. This function is
   available to end-users and can be used to set the value of a specific option.
 - Add helper method for setting package options. The static method
