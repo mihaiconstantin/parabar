@@ -10,6 +10,28 @@
 #' @seealso
 #' [`parabar::Bar`], [`parabar::ModernBar`]
 #'
+#' @examples
+#' # Create a basic bar instance.
+#' bar <- BasicBar$new()
+#'
+#' # Specify the number of ticks to be performed.
+#' total <- 100
+#'
+#' # Create the progress bar.
+#' bar$create(total = total, initial = 0)
+#'
+#' # Use the progress bar.
+#' for (i in 1:total) {
+#'     # Sleep a bit.
+#'     Sys.sleep(0.03)
+#'
+#'     # Update the progress bar.
+#'     bar$update(i)
+#' }
+#'
+#' # Terminate the progress bar.
+#' bar$terminate()
+#'
 #' @export
 BasicBar <- R6::R6Class("BasicBar",
     inherit = Bar,
