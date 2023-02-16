@@ -15,4 +15,5 @@
 #' [`R6::R6`] class for more information on the default values set by this
 #' function.
 #'
-#' @seealso [`parabar::Options`], [parabar::get_option()]
+#' @seealso
+#' [`parabar::Options`], [parabar::get_option()]

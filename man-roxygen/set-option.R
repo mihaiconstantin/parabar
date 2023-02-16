@@ -28,4 +28,6 @@
 #' # Get the status of progress tracking again.
 #' get_option("progress_track")
 #'
-#' @seealso [`parabar::Options`], [parabar::get_option()], [parabar::set_default_options()]
+#' @seealso
+#' [`parabar::Options`], [parabar::get_option()],
+#' [parabar::set_default_options()]

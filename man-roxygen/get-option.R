@@ -18,4 +18,6 @@
 #' [`parabar::Options`]). If the requested [`option`][`parabar::Options`] is not
 #' known, an error is thrown.
 #'
-#' @seealso [`parabar::Options`], [parabar::set_default_options()], [base::options()], [base:getOptions()]
+#' @seealso
+#' [`parabar::Options`], [parabar::set_default_options()], [base::options()],
+#' [base:getOptions()]
