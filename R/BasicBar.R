@@ -98,7 +98,7 @@ BasicBar <- R6::R6Class("BasicBar",
         },
 
         #' @description
-        #' Terminate the progress bar by calling [`utils::close()`] on the
+        #' Terminate the progress bar by calling [`base::close()`] on the
         #' private field `.bar`.
         terminate = function() {
             private$.terminate()
