@@ -1,5 +1,24 @@
-# Blue print for class handling warning issuing.
-Warning <- R6::R6Class("Warning")
+#' @include Helper.R
+
+#' @title
+#' Package Warnings
+#'
+#' @description
+#' This class contains static methods for throwing warnings with informative
+#' messages.
+#'
+#' @format
+#' \describe{
+#'   \item{\code{Warning$requested_cluster_cores_too_low()}}{Warning for not requesting enough cluster cores.}
+#'   \item{\code{Warning$requested_cluster_cores_too_high()}}{Warning for requesting too many cluster cores.}
+#'   \item{\code{Warning$requested_cluster_type_not_supported()}}{Warning for requesting an unsupported cluster type.}
+#'   \item{\code{Warning$progress_not_supported_for_backend()}}{Warning for using a backend incompatible with progress tracking.}
+#' }
+#'
+#' @export
+Warning <- R6::R6Class("Warning",
+    cloneable = FALSE
+)
 
 # Warning for not requesting enough cluster cores.
 Warning$requested_cluster_cores_too_low <- function() {
