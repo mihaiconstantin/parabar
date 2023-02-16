@@ -1,6 +1,17 @@
 #' @include Exception.R Service.R
 
-# Blueprint for creating a backend that implements the `Service` interface.
+#' @title
+#' Backend
+#'
+#' @description
+#' This is an abstract class that serves as a base class for all concrete
+#' backend implementations. It defines the common properties that all concrete
+#' backends require.
+#'
+#' @seealso
+#' [`parabar::Service`], [`parabar::SyncBackend`], [`parabar::AsyncBackend`]
+#'
+#' @export
 Backend <- R6::R6Class("Backend",
     inherit = Service,
 
@@ -25,20 +36,26 @@ Backend <- R6::R6Class("Backend",
     ),
 
     public = list(
-        # Constructor.
+        #' @description
+        #' Create a new [`parabar::Backend`] object.
+        #'
+        #' @return
+        #' Instantiating this call will throw an error.
         initialize = function() {
             Exception$abstract_class_not_instantiable(self)
         }
     ),
 
     active = list(
-        # Get the cluster object.
+        #' @field cluster The cluster object used by the backend.
         cluster = function() { return(private$.cluster) },
 
-        # Indicate whether the backend implementation supports progress tracking.
+        #' @field supports_progress A boolean value indicating whether the
+        #' backend implementation supports progress tracking.
         supports_progress = function() { return(private$.supports_progress) },
 
-        # Get the active state of the cluster.
+        #' @field active A boolean value indicating whether the backend
+        #' implementation has an active cluster.
         active = function() { return(private$.active) }
     )
 )
