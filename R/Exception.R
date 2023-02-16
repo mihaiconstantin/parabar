@@ -9,18 +9,18 @@
 #'
 #' @format
 #' \describe{
-#'   \item{\code{$abstract_class_not_instantiable()}}{Exception for instantiating abstract classes or interfaces.}
-#'   \item{\code{$method_not_implemented()}}{Exception for calling methods without an implementation.}
-#'   \item{\code{$feature_not_developed()}}{Exception for running into things not yet developed.}
-#'   \item{\code{$not_enough_cores()}}{Exception for requesting more cores than available on the machine.}
-#'   \item{\code{$cluster_active()}}{Exception for attempting to start a cluster while another one is active.}
-#'   \item{\code{$cluster_not_active()}}{Exception for attempting to stop a cluster while not active.}
-#'   \item{\code{$async_task_not_started()}}{Exception for reading results while an asynchronous task has not yet started.}
-#'   \item{\code{$async_task_running()}}{Exception for reading results while an asynchronous task is running.}
-#'   \item{\code{$async_task_completed()}}{Exception for reading results while a completed asynchronous task has unread results.}
-#'   \item{\code{$temporary_file_creation_failed()}}{Exception for reading results while an asynchronous task is running.}
-#'   \item{\code{$type_not_assignable()}}{Exception for when providing incorrect object types.}
-#'   \item{\code{$unknown_package_option()}}{Exception for when requesting unknown package options.}
+#'   \item{\code{Exception$abstract_class_not_instantiable()}}{Exception for instantiating abstract classes or interfaces.}
+#'   \item{\code{Exception$method_not_implemented()}}{Exception for calling methods without an implementation.}
+#'   \item{\code{Exception$feature_not_developed()}}{Exception for running into things not yet developed.}
+#'   \item{\code{Exception$not_enough_cores()}}{Exception for requesting more cores than available on the machine.}
+#'   \item{\code{Exception$cluster_active()}}{Exception for attempting to start a cluster while another one is active.}
+#'   \item{\code{Exception$cluster_not_active()}}{Exception for attempting to stop a cluster while not active.}
+#'   \item{\code{Exception$async_task_not_started()}}{Exception for reading results while an asynchronous task has not yet started.}
+#'   \item{\code{Exception$async_task_running()}}{Exception for reading results while an asynchronous task is running.}
+#'   \item{\code{Exception$async_task_completed()}}{Exception for reading results while a completed asynchronous task has unread results.}
+#'   \item{\code{Exception$temporary_file_creation_failed()}}{Exception for reading results while an asynchronous task is running.}
+#'   \item{\code{Exception$type_not_assignable()}}{Exception for when providing incorrect object types.}
+#'   \item{\code{Exception$unknown_package_option()}}{Exception for when requesting unknown package options.}
 #' }
 #'
 #' @export
