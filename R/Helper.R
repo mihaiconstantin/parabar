@@ -1,7 +1,24 @@
-# Blue print for class storing various static helper methods.
-Helper <- R6::R6Class("Helper")
+#' @include Options.R
 
-# Add helper for getting the class of a given instance.
+#' @title
+#' Package Helpers
+#'
+#' @description
+#' This class contains static helper methods.
+#'
+#' @format
+#' \describe{
+#'   \item{\code{Helper$get_class_name()}}{Helper for getting the class of a given object.}
+#'   \item{\code{Helper$get_option()}}{Get package option, or corresponding default value.}
+#'   \item{\code{Helper$set_option()}}{Set package option.}
+#' }
+#'
+#' @export
+Helper <- R6::R6Class("Helper",
+    cloneable = FALSE
+)
+
+# Helper for getting the class of a given instance.
 Helper$get_class_name <- function(object) {
     return(class(object)[1])
 }
@@ -12,7 +29,7 @@ Helper$get_option <- function(option) {
     options <- getOption("parabar", default = Options$new())
 
     # If the requested option is unknown.
-    if (!(option %in% ls(options))) {
+    if (!option %in% ls(options)) {
         # Throw an error.
         Exception$unknown_package_option(option)
     }
@@ -27,7 +44,7 @@ Helper$set_option <- function(option, value) {
     options <- getOption("parabar", default = Options$new())
 
     # If the requested option is unknown.
-    if (!(option %in% ls(options))) {
+    if (!option %in% ls(options)) {
         # Throw an error.
         Exception$unknown_package_option(option)
     }
