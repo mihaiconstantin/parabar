@@ -1,7 +1,32 @@
 #' @include Helper.R
 
-# Blue print for class handling exception throwing.
-Exception <- R6::R6Class("Exception")
+#' @title
+#' Package Exceptions
+#'
+#' @description
+#' This class contains static methods for throwing exceptions with informative
+#' messages.
+#'
+#' @format
+#' \describe{
+#'   \item{\code{$abstract_class_not_instantiable()}}{Exception for instantiating abstract classes or interfaces.}
+#'   \item{\code{$method_not_implemented()}}{Exception for calling methods without an implementation.}
+#'   \item{\code{$feature_not_developed()}}{Exception for running into things not yet developed.}
+#'   \item{\code{$not_enough_cores()}}{Exception for requesting more cores than available on the machine.}
+#'   \item{\code{$cluster_active()}}{Exception for attempting to start a cluster while another one is active.}
+#'   \item{\code{$cluster_not_active()}}{Exception for attempting to stop a cluster while not active.}
+#'   \item{\code{$async_task_not_started()}}{Exception for reading results while an asynchronous task has not yet started.}
+#'   \item{\code{$async_task_running()}}{Exception for reading results while an asynchronous task is running.}
+#'   \item{\code{$async_task_completed()}}{Exception for reading results while a completed asynchronous task has unread results.}
+#'   \item{\code{$temporary_file_creation_failed()}}{Exception for reading results while an asynchronous task is running.}
+#'   \item{\code{$type_not_assignable()}}{Exception for when providing incorrect object types.}
+#'   \item{\code{$unknown_package_option()}}{Exception for when requesting unknown package options.}
+#' }
+#'
+#' @export
+Exception <- R6::R6Class("Exception",
+    cloneable = FALSE
+)
 
 # Exception for instantiating abstract classes or interfaces.
 Exception$abstract_class_not_instantiable <- function(object) {
@@ -83,7 +108,7 @@ Exception$type_not_assignable <- function(actual, expected) {
     stop(message, call. = FALSE)
 }
 
-# Exception for when requestiong unknown package options.
+# Exception for when requesting unknown package options.
 Exception$unknown_package_option <- function(option) {
     # Construct exception message.
     message = paste0("Unknown package option '", option, "'.")
