@@ -30,6 +30,38 @@ set_option <- function(option, value) {
 }
 
 
+#' @template configure-bar
+#' @export
+configure_bar <- function(type = "modern", ...) {
+    # If the type is not known.
+    if (!type %in% c("modern", "basic")) {
+        # Throw an error.
+        Exception$feature_not_developed()
+    }
+
+    # Update the bar type in options.
+    set_option("progress_bar_type", type)
+
+    # Capture the bar configuration requested by the user.
+    user_bar_config <- list(...)
+
+    # If the configuration is not empty.
+    if (length(user_bar_config)) {
+        # Get the default config options.
+        bar_config <- get_option("progress_bar_config")
+
+        # Combine the configurations.
+        bar_config[[type]] <- utils::modifyList(bar_config[[type]], user_bar_config)
+
+        # Set the bar config in options.
+        set_option("progress_bar_config", bar_config)
+    }
+
+    # Remain silent.
+    invisible()
+}
+
+
 #' @template start-backend
 #' @export
 start_backend <- function(cores, cluster_type = "psock", backend_type = "async") {
