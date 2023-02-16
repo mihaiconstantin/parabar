@@ -5,6 +5,7 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 ### Added
+- Add preliminary package documentation to `README` file.
 - Add exported wrapper `par_sapply` to run tasks in parallel and display a
   progress bar if appropriate.
 - Add exported wrapper `stop_backend` to stop a backend instance.
