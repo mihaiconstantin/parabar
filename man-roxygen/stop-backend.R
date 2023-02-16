@@ -31,4 +31,5 @@
 #' # Check that the backend is not active.
 #' backend$active
 #'
-#' @seealso [parabar::start_backend()], [`parabar::Service`]
+#' @seealso
+#' [parabar::start_backend()], [`parabar::Service`]
