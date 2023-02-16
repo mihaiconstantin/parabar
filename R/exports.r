@@ -99,6 +99,7 @@ stop_backend <- function(backend) {
 }
 
 
+#' @template par-sapply
 #' @export
 par_sapply <- function(backend, x, fun, ...) {
     # If no backend is provided.
