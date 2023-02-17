@@ -9,6 +9,67 @@
 #' tasks in parallel on a [parallel::makeCluster()] cluster synchronously (i.e.,
 #' blocking the main `R` session).
 #'
+#' @examples
+#' # Create a specification object.
+#' specification <- Specification$new()
+#'
+#' # Set the number of cores.
+#' specification$set_cores(cores = 2)
+#'
+#' # Set the cluster type.
+#' specification$set_type(type = "psock")
+#'
+#' # Create a synchronous backend object.
+#' backend <- SyncBackend$new()
+#'
+#' # Start the cluster on the backend.
+#' backend$start(specification)
+#'
+#' # Check if there is anything on the backend.
+#' backend$peek()
+#'
+#' # Create a dummy variable.
+#' name <- "parabar"
+#'
+#' # Export the variable to the backend.
+#' backend$export("name")
+#'
+#' # Run an expression on the backend.
+#' backend$evaluate({
+#'     # Print the name.
+#'     print(paste0("Hello, ", name, "!"))
+#' })
+#'
+#' # Run a task in parallel (i.e., approx. 1.25 seconds).
+#' backend$sapply(
+#'     x = 1:10,
+#'     fun = function(x) {
+#'         # Sleep a bit.
+#'         Sys.sleep(0.25)
+#'
+#'         # Compute something.
+#'         output <- x + 1
+#'
+#'         # Return the result.
+#'         return(output)
+#'     }
+#' )
+#'
+#' # Get the task output.
+#' backend$get_output()
+#'
+#' # Clear the backend.
+#' backend$clear()
+#'
+#' # Check that there is nothing on the cluster.
+#' backend$peek()
+#'
+#' # Stop the backend.
+#' backend$stop()
+#'
+#' # Check that the backend is not active.
+#' backend$active
+#'
 #' @seealso
 #' [`parabar::Service`], [`parabar::SyncBackend`], and
 #' [`parabar::AsyncBackend`].
