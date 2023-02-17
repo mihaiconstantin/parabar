@@ -4,11 +4,8 @@
 #' BackendFactory
 #'
 #' @description
-#' This is a concrete implementation of the abstract class [`parabar::Bar`]
-#' using the [`progress::progress_bar`] as engine for the progress bar.
-#'
-#' @seealso
-#' [`parabar::Bar`], [`parabar::BasicBar`], [`parabar::ModernBar`]
+#' This class is a factory that provides concrete implementations of the
+#' [`parabar::Bar`] abstract class.
 #'
 #' @examples
 #' # Create a bar factory.
