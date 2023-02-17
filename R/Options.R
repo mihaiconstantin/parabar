@@ -9,7 +9,7 @@
 #' @details
 #' An instance of this class is automatically created and stored in the session
 #' [`base::.Options`] at load time. This instance can be accessed and changed
-#' via [`getOption("parabar")`][base:getOptions()]. Specific package
+#' via [`getOption("parabar")`][base::getOption()]. Specific package
 #' [`options`][base::options()] can be retrieved using the helper function
 #' [parabar::get_option()].
 #'
