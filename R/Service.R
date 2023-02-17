@@ -119,8 +119,8 @@ Service <- R6::R6Class("Service",
         #' @details
         #' This method fetches the output of the task execution after calling
         #' the `sapply()` method. It returns the output and immediately removes
-        #' it from the backend. Therefore, subsequent calls to this method will
-        #' return `NULL`. This method should be called after the execution of a
+        #' it from the backend. Therefore, subsequent calls to this method are
+        #' not advised. This method should be called after the execution of a
         #' task.
         #'
         #' @return
