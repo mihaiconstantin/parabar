@@ -439,7 +439,9 @@ context$stop()
 Check out the UML diagram below for a quick overview of the package design.
 
 <p align="center">
-    <img src="man/figures/parabar-design.png" alt="parabar Software Design"/>
+    <a href="https://raw.githubusercontent.com/mihaiconstantin/parabar/main/inst/design/parabar-design.drawio.svg">
+        <img src="man/figures/parabar-design.png" alt="parabar Software Design"/>
+    </a>
 </p>
 
 ## Contributing
