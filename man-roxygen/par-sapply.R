@@ -33,7 +33,7 @@
 #'
 #' @return
 #' A vector or list of the same length as `x` containing the results of the
-#' `fun`. The output resembles that of [base::sapply()].
+#' `fun`. The output format resembles that of [base::sapply()].
 #'
 #' @examples
 #' # Start an asynchronous backend.

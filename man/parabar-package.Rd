@@ -84,12 +84,16 @@ execution and display a progress bar.
 The following are the main classes provided by \code{parabar}:
 \itemize{
 \item \code{\link{Service}}: interface for backend operations.
+\item \code{\link{Backend}}: abstract class that serves as a base class for all
+concrete implementations.
 \item \code{\link{SyncBackend}}: synchronous backend extending the abstract
 \code{\link{Backend}} class.
 \item \code{\link{AsyncBackend}}: asynchronous backend extending the abstract
 \code{\link{Backend}} class.
 \item \code{\link{Specification}}: backend specification used when starting a
 backend.
+\item \code{\link{TaskState}}: determine the state of a task deployed to an
+asynchronous backend.
 \item \code{\link{BackendFactory}}: factory for creating backend objects.
 \item \code{\link{Context}}: default context for executing backend operations.
 \item \code{\link{ProgressDecorator}}: context for decorating the
@@ -104,6 +108,8 @@ backend.
 \code{\link{parabar}} also exposes several classes for creating and updating
 different progress bars, namely:
 \itemize{
+\item \code{\link{Bar}}: abstract class defining the pure virtual methods to be
+implemented by concrete bar classes.
 \item \code{\link{BasicBar}}: a simple, but robust, bar created via
 \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}} extending the \code{\link{Bar}} abstract class.
 \item \code{\link{ModernBar}}: a modern bar created via \code{\link[progress:progress_bar]{progress::progress_bar}}
@@ -113,11 +119,24 @@ extending the \link{Bar} abstract class.
 
 Finally, \code{\link{parabar}} uses several \code{\link[base:options]{base::options()}} to configure the
 behavior of the functionality it provides. For more information on the
-options used and their see default values, see \code{\link{Options}}.
+options used and their see default values, see the \code{\link{Options}}
+class.
 
 For more information about the design of \code{\link{parabar}}, check out the
 documentation and the \code{UML} diagram at
 \href{https://parabar.mihaiconstantin.com}{parabar.mihaiconstantin.com}.
+
+\if{html}{
+\out{<span style="display: block; text-align: center">}
+
+\out{<span style="display: block; margin-top: 1rem; margin-bottom: 0.5rem">}\strong{Software Design}
+
+\out{</span>}
+
+\figure{parabar-design.png}{options: style="max-width: 95\%;" alt="parabar Software Design"}
+
+\out{</span>}
+}
 }
 
 \seealso{
