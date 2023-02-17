@@ -10,6 +10,75 @@
 #' session) on a [parallel::makeCluster()] cluster created in a background `R`
 #' [`session`][`callr::r_session`].
 #'
+#' @examples
+#' # Create a specification object.
+#' specification <- Specification$new()
+#'
+#' # Set the number of cores.
+#' specification$set_cores(cores = 2)
+#'
+#' # Set the cluster type.
+#' specification$set_type(type = "psock")
+#'
+#' # Create an asynchronous backend object.
+#' backend <- AsyncBackend$new()
+#'
+#' # Start the cluster on the backend.
+#' backend$start(specification)
+#'
+#' # Check if there is anything on the backend.
+#' backend$peek()
+#'
+#' # Create a dummy variable.
+#' name <- "parabar"
+#'
+#' # Export the variable to the backend.
+#' backend$export("name")
+#'
+#' # Run an expression on the backend.
+#' backend$evaluate({
+#'     # Print the name.
+#'     print(paste0("Hello, ", name, "!"))
+#' })
+#'
+#' # Run a task in parallel (i.e., approx. 2.5 seconds).
+#' backend$sapply(
+#'     x = 1:10,
+#'     fun = function(x) {
+#'         # Sleep a bit.
+#'         Sys.sleep(0.5)
+#'
+#'         # Compute something.
+#'         output <- x + 1
+#'
+#'         # Return the result.
+#'         return(output)
+#'     }
+#' )
+#'
+#' # Right know the main process is free and the task is executing on a `psock`
+#' # cluster started in a background `R` session.
+#'
+#' # Trying to get the output immediately will throw an error, indicating that the
+#' # task is still running.
+#' backend$get_output()
+#'
+#' # However, we can block the main process and wait for the task to complete
+#' # before fetching the results.
+#' backend$get_output(wait = TRUE)
+#'
+#' # Clear the backend.
+#' backend$clear()
+#'
+#' # Check that there is nothing on the cluster.
+#' backend$peek()
+#'
+#' # Stop the backend.
+#' backend$stop()
+#'
+#' # Check that the backend is not active.
+#' backend$active
+#'
 #' @seealso
 #' [`parabar::Service`], [`parabar::Backend`], and
 #' [`parabar::SyncBackend`].
