@@ -11,7 +11,7 @@ functionality \code{\link{parabar}} provides.
 \details{
 An instance of this class is automatically created and stored in the session
 \code{\link[base:options]{base::.Options}} at load time. This instance can be accessed and changed
-via \code{\link[=base:getOptions]{getOption("parabar")}}. Specific package
+via \code{\link[base:options]{getOption("parabar")}}. Specific package
 \code{\link[base:options]{options}} can be retrieved using the helper function
 \code{\link[=get_option]{get_option()}}.
 }
