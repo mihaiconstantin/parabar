@@ -7,9 +7,6 @@
 #' This is a concrete implementation of the abstract class [`parabar::Bar`]
 #' using the [`utils::txtProgressBar()`] as engine for the progress bar.
 #'
-#' @seealso
-#' [`parabar::Bar`], [`parabar::ModernBar`]
-#'
 #' @examples
 #' # Create a basic bar instance.
 #' bar <- BasicBar$new()
@@ -31,6 +28,9 @@
 #'
 #' # Terminate the progress bar.
 #' bar$terminate()
+#'
+#' @seealso
+#' [`parabar::Bar`] and [`parabar::ModernBar`].
 #'
 #' @export
 BasicBar <- R6::R6Class("BasicBar",
