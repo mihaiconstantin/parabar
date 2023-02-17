@@ -124,5 +124,5 @@ backend$active
 
 }
 \seealso{
-\code{\link[=stop_backend]{stop_backend()}}, \code{\link{Service}}
+\code{\link[=stop_backend]{stop_backend()}} and \code{\link{Service}}.
 }

@@ -18,7 +18,7 @@ par_sapply(backend, x, fun, ...)
 }
 \value{
 A vector or list of the same length as \code{x} containing the results of the
-\code{fun}. The output resembles that of \code{\link[base:lapply]{base::sapply()}}.
+\code{fun}. The output format resembles that of \code{\link[base:lapply]{base::sapply()}}.
 }
 \description{
 This function can be used to run a task in parallel. The task is executed in
