@@ -9,8 +9,8 @@
 #' [`parabar::Context`] class must implement this interface.
 #'
 #' @seealso
-#' [`parabar::Backend`], [`parabar::SyncBackend`], and
-#' [`parabar::AsyncBackend`].
+#' [`parabar::Backend`], [`parabar::SyncBackend`], [`parabar::AsyncBackend`],
+#' and [`parabar::Context`].
 #'
 #' @export
 Service <- R6::R6Class("Service",
