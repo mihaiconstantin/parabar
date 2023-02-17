@@ -9,7 +9,8 @@
 #' [`parabar::Context`] class must implement this interface.
 #'
 #' @seealso
-#' [`parabar::Backend`], [`parabar::SyncBackend`], [`parabar::AsyncBackend`]
+#' [`parabar::Backend`], [`parabar::SyncBackend`], and
+#' [`parabar::AsyncBackend`].
 #'
 #' @export
 Service <- R6::R6Class("Service",
@@ -32,7 +33,7 @@ Service <- R6::R6Class("Service",
         #' @return
         #' This method returns void. The resulting backend must be stored in the
         #' `.cluster` private field on the [`parabar::Backend`] abstract class,
-        #' and accessible to any concrete backend implementation via the active
+        #' and accessible to any concrete backend implementations via the active
         #' binding `cluster`.
         start = function(specification) {
             Exception$method_not_implemented()
@@ -117,10 +118,10 @@ Service <- R6::R6Class("Service",
         #'
         #' @details
         #' This method fetches the output of the task execution after calling
-        #' the `sapply()` method. It returns the output from the backend and
-        #' immediately removes it from the backend. Therefore, subsequent calls
-        #' to this method will return `NULL`. This method should be called after
-        #' the execution of a task.
+        #' the `sapply()` method. It returns the output and immediately removes
+        #' it from the backend. Therefore, subsequent calls to this method will
+        #' return `NULL`. This method should be called after the execution of a
+        #' task.
         #'
         #' @return
         #' A vector or list of the same length as `x` containing the results of
