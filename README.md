@@ -11,7 +11,7 @@
 </h1>
 
 <p align="center">
-    <a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Repository status"/></a>
+    <a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Repository status"/></a>
     <a href="https://github.com/mihaiconstantin/parbar/releases"><img src="https://img.shields.io/github/v/release/mihaiconstantin/parabar?display_name=tag&sort=semver"/></a>
     <a href="https://www.r-pkg.org/pkg/parabar"><img src="https://www.r-pkg.org/badges/version/parabar" alt="CRAN version"/></a>
 </p>
