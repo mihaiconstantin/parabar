@@ -9,7 +9,9 @@
 #'
 #' @details
 #' This class cannot be instantiated. It needs to be extended by concrete
-#' subclasses that implement the pure virtual methods.
+#' subclasses that implement the pure virtual methods. Instances of concrete
+#' backend implementations can be conveniently obtained using the
+#' [`parabar::BarFactory`] class.
 #'
 #' @seealso
 #' [`parabar::BasicBar`] and [`parabar::ModernBar`].
