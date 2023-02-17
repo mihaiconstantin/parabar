@@ -5,7 +5,7 @@
 #' This function is used to set the default [`options`][base::options()] values
 #' for the [`parabar::parabar`] package. The function is automatically called at
 #' package load and the entry created can be retrieved via
-#' [`getOption("parabar")`][base:getOptions()]. Specific package
+#' [`getOption("parabar")`][base::getOption()]. Specific package
 #' [`options`][base::options()] can be retrieved using the helper function
 #' [parabar::get_option()].
 #'

@@ -4,7 +4,7 @@
 #'
 #' @description
 #' This class is a factory that provides concrete implementations of the
-#' [`parabar::Backend`] abstract class .
+#' [`parabar::Backend`] abstract class.
 #'
 #' @examples
 #' # Create a backend factory.
