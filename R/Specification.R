@@ -1,6 +1,52 @@
 #' @include Exception.R
 
-# Blueprint for determining and holding cluster specifications.
+#' @title
+#' Specification
+#'
+#' @description
+#' This class contains the information required to start a backend. An instance
+#' of this class is used by the `start` method of the [`parabar::Service`]
+#' interface.
+#'
+#' @examples
+#' # Create a specification object.
+#' specification <- Specification$new()
+#'
+#' # Set the number of cores.
+#' specification$set_cores(cores = 4)
+#'
+#' # Set the cluster type.
+#' specification$set_type(type = "psock")
+#'
+#' # Get the number of cores.
+#' specification$cores
+#'
+#' # Get the cluster type.
+#' specification$type
+#'
+#' # Attempt to set too many cores.
+#' specification$set_cores(cores = 100)
+#'
+#' # Check that the cores were reasonably set.
+#' specification$cores
+#'
+#' # Allow the object to determine the adequate cluster type.
+#' specification$set_type(type = NULL)
+#'
+#' # Check the type determined.
+#' specification$type
+#'
+#' # Attempt to set an invalid cluster type.
+#' specification$set_type(type = "invalid")
+#'
+#' # Check that the type was set to `psock`.
+#' specification$type
+#'
+#' @seealso
+#' [`parabar::Service`], [`parabar::Backend`], [`parabar::SyncBackend`], and
+#' [`parabar::AsyncBackend`].
+#'
+#' @export
 Specification <- R6::R6Class("Specification",
     private = list(
         # Number of cores for the cluster.
@@ -87,13 +133,32 @@ Specification <- R6::R6Class("Specification",
     ),
 
     public = list(
-        # Validate and set the number of cores based on availability.
+        #' @description
+        #' Set the number of nodes to use in the cluster.
+        #'
+        #' @param cores The number of nodes to use in the cluster.
+        #'
+        #' @details
+        #' This method also performs a validation of the requested number of
+        #' cores, ensuring that the the value lies between `2` and
+        #' `parallel::detectCores() - 1`.
         set_cores = function(cores) {
             # Set cores.
             private$.cores <- private$.validate_requested_cores(cores)
         },
 
-        # Set or select the type of cluster to create.
+        #' @description
+        #' Set the type of cluster to create.
+        #'
+        #' @param type The type of cluster to create. Possible values are
+        #' `"fork"` and `"psock"`. Defaults to `"psock"`.
+        #'
+        #' @details
+        #' If no type is explicitly requested (i.e., `type = NULL`), the type is
+        #' determined based on the operating system. On Unix-like systems, the
+        #' type is set to `"fork"`, while on Windows systems, the type is set to
+        #' `"psock"`. If an unknown type is requested, a warning is issued and
+        #' the type is set to `"psock"`.
         set_type = function(type) {
             # Set type.
             private$.type <- private$.validate_requested_type(type)
@@ -101,10 +166,10 @@ Specification <- R6::R6Class("Specification",
     ),
 
     active = list(
-        # Get the number of cores.
+        #' @field cores The number of nodes to use in the cluster creation.
         cores = function() { return(private$.cores) },
 
-        # Get the cluster type.
+        #' @field type The type of cluster to create.
         type = function() { return(private$.type) }
     )
 )

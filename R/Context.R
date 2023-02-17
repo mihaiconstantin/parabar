@@ -1,6 +1,85 @@
 #' @include Backend.R
 
-# Blueprint for creating a vanilla context manager for consuming backend APIs.
+#' @title
+#' Context
+#'
+#' @description
+#' This class represents the base context for interacting with
+#' [`parabar::Backend`] implementations via the [`parabar::Service`] interface.
+#'
+#' @details
+#' This class is a vanilla wrapper around a [`parabar::Backend`] implementation.
+#' It registers a backend instance and forwards all [`parabar::Service`] methods
+#' calls to the backend instance. Subclasses can override any of the
+#' [`parabar::Service`] methods to decorate the backend instance with additional
+#' functionality (e.g., see the [`parabar::ProgressDecorator`] class).
+#'
+#' @examples
+#' # Define a task to run in parallel.
+#' task <- function(x, y) {
+#'     # Sleep a bit.
+#'     Sys.sleep(0.25)
+#'
+#'     # Return the result of a computation.
+#'     return(x + y)
+#' }
+#'
+#' # Create a specification object.
+#' specification <- Specification$new()
+#'
+#' # Set the number of cores.
+#' specification$set_cores(cores = 2)
+#'
+#' # Set the cluster type.
+#' specification$set_type(type = "psock")
+#'
+#' # Create a backend factory.
+#' backend_factory <- BackendFactory$new()
+#'
+#' # Get a synchronous backend instance.
+#' backend <- backend_factory$get("sync")
+#'
+#' # Create a base context object.
+#' context <- Context$new()
+#'
+#' # Register the backend with the context.
+#' context$set_backend(backend)
+#'
+#' # From now all, all backend operations are intercepted by the context.
+#'
+#' # Start the backend.
+#' context$start(specification)
+#'
+#' # Run a task in parallel (i.e., approx. 1.25 seconds).
+#' context$sapply(x = 1:10, fun = task, y = 10)
+#'
+#' # Get the task output.
+#' context$get_output()
+#'
+#' # Close the backend.
+#' context$stop()
+#'
+#' # Get an asynchronous backend instance.
+#' backend <- backend_factory$get("async")
+#'
+#' # Register the backend with the same context object.
+#' context$set_backend(backend)
+#'
+#' # Start the backend reusing the specification object.
+#' context$start(specification)
+#'
+#' # Run a task in parallel (i.e., approx. 1.25 seconds).
+#' context$sapply(x = 1:10, fun = task, y = 10)
+#'
+#' # Get the task output.
+#' backend$get_output(wait = TRUE)
+#'
+#' # Close the backend.
+#' context$stop()
+#'
+#' @seealso
+#' [`parabar::Service`], [`parabar::Backend`], and
+#' [`parabar::ProgressDecorator`].
 Context <- R6::R6Class("Context",
     private = list(
         # The backend used by the context manager.
@@ -8,55 +87,130 @@ Context <- R6::R6Class("Context",
     ),
 
     public = list(
-        # Set the backend.
+        #' @description
+        #' Set the backend instance to be used by the context.
+        #'
+        #' @param backend An object of class [`parabar::Backend`] that
+        #' implements the [`parabar::Service`] interface.
         set_backend = function(backend) {
             private$.backend <- backend
         },
 
-        # Start a backend.
+        #' @description
+        #' Start the backend.
+        #'
+        #' @param specification An object of class [`parabar::Specification`]
+        #' that contains the backend configuration.
+        #'
+        #' @return
+        #' This method returns void. The resulting backend must be stored in the
+        #' `.cluster` private field on the [`parabar::Backend`] abstract class,
+        #' and accessible to any concrete backend implementations via the active
+        #' binding `cluster`.
         start = function(specification) {
             # Consume the backend API.
             private$.backend$start(specification)
         },
 
-        # Stop the backend.
+        #' @description
+        #' Stop the backend.
+        #'
+        #' @return
+        #' This method returns void.
         stop = function() {
             # Consume the backend API.
             private$.backend$stop()
         },
 
-        # Clear the backend.
+        #' @description
+        #' Remove all objects from the backend. This function is equivalent to
+        #' calling `rm(list = ls(all.names = TRUE))` on each node in the
+        #' backend.
+        #'
+        #' @return
+        #' This method returns void.
         clear = function() {
             # Consume the backend API.
             private$.backend$clear()
         },
 
-        # Inspect the backend.
+        #' @description
+        #' Inspect the backend for variables available in the `.GlobalEnv`.
+        #'
+        #' @return
+        #' This method returns a list of character vectors, where each element
+        #' corresponds to a node in the backend. The character vectors contain
+        #' the names of the variables available in the `.GlobalEnv` on each
+        #' node.
         peek = function() {
             # Consume the backend API.
             private$.backend$peek()
         },
 
-        # Export variables on the backend.
+        #' @description
+        #' Export variables from a given environment to the backend.
+        #'
+        #' @param variables A character vector of variable names to export.
+        #'
+        #' @param environment An environment object from which to export the
+        #' variables.
+        #'
+        #' @return This method returns void.
         export = function(variables, environment) {
             # Consume the backend API.
             # TODO: Check that this works as expected (i.e., the environment).
             private$.backend$export(variables, environment)
         },
 
-        # Evaluate an expression on the backend.
+        #' @description
+        #' Evaluate an arbitrary expression on the backend.
+        #'
+        #' @param expression An expression object to evaluate on the backend.
+        #'
+        #' @return
+        #' This method returns the result of the expression evaluation.
         evaluate = function(expression) {
             # Consume the backend API.
             private$.backend$evaluate(expression)
         },
 
-        # Run tasks on the backend.
+        #' @description
+        #' Run a task on the backend akin to [parallel::parSapply()].
+        #'
+        #' @param x A vector (i.e., usually of integers) to pass to the `fun`
+        #' function.
+        #'
+        #' @param fun A function to apply to each element of `x`.
+        #'
+        #' @param ... Additional arguments to pass to the `fun` function.
+        #'
+        #' @return
+        #' This method returns void. The output of the task execution must be
+        #' stored in the private field `.output` on the [`parabar::Backend`]
+        #' abstract class, and is accessible via the `get_output()` method.
         sapply = function(x, fun, ...) {
             # Consume the backend API.
             private$.backend$sapply(x = x, fun = fun, ...)
         },
 
-        # Return the task results.
+        #' @description
+        #' Get the output of the task execution.
+        #'
+        #' @param ... Additional arguments to pass to the backend registered
+        #' with the context. This is useful for backends that require additional
+        #' arguments to fetch the output (e.g., [`AsyncBackend$get_output(wait =
+        #' TRUE)`][`parabar::AsyncBackend`]).
+        #'
+        #' @details
+        #' This method fetches the output of the task execution after calling
+        #' the `sapply()` method. It returns the output and immediately removes
+        #' it from the backend. Therefore, subsequent calls to this method are
+        #' not advised. This method should be called after the execution of a
+        #' task.
+        #'
+        #' @return
+        #' A vector or list of the same length as `x` containing the results of
+        #' the `fun`. It resembles the format of [base::sapply()].
         get_output = function(...) {
             # Consume the backend API.
             private$.backend$get_output(...)
@@ -64,7 +218,8 @@ Context <- R6::R6Class("Context",
     ),
 
     active = list(
-        # Get the currently set backend.
+        #' @field backend The [`parabar::Backend`] object registered with the
+        #' context.
         backend = function() { return(private$.backend) }
     )
 )

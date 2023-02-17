@@ -32,7 +32,7 @@
 #' # Check that the change was applied (i.e., `progress_track: FALSE`).
 #' getOption("parabar")
 #'
-#' @seealso [parabar::set_default_options()], [parabar::get_option()]
+#' @seealso [parabar::set_default_options()], and [parabar::get_option()].
 #'
 #' @keywords internal
 Options <- R6::R6Class("Options",

@@ -5,6 +5,7 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 ### Added
+- Export all `R6` classes as developer API and regenerate the namespace.
 - Add preliminary package documentation to `README` file.
 - Add exported wrapper `par_sapply` to run tasks in parallel and display a
   progress bar if appropriate.
@@ -22,7 +23,7 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   file.
 - Add `parabar` logo startup message for interactive `R` sessions.
 - Add function to generate package logo based on the `ASCII` template in
-  `inst/assets/logo/logo.txt`.
+  `inst/assets/logo/parabar-logo.txt`.
 - Add exported wrapper `get_option` for `Helper$get_option`. This function is
   available to end-users and can be used to get the value of a specific option
   or its default value.
@@ -83,6 +84,8 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
     for determining the type of cluster to create (i.e., via
     `parallel::makeCluster`), and the number of nodes (i.e., `R` processes) for
     the cluster.
+  - `TaskState`: represents an auxiliary class that encapsulates the logic for
+    determining the state of a task.
   - `BackendFactory`: represents a blueprint for obtaining concrete backend
     implementations.
 - Add `Helper`, `Warning`, and `Exception` `R6` classes. These classes contain
