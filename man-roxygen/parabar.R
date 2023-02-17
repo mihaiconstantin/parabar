@@ -67,12 +67,16 @@
 #'
 #' The following are the main classes provided by `parabar`:
 #' - [`parabar::Service`]: interface for backend operations.
+#' - [`parabar::Backend`]: abstract class that serves as a base class for all
+#'   concrete implementations.
 #' - [`parabar::SyncBackend`]: synchronous backend extending the abstract
 #'   [`parabar::Backend`] class.
 #' - [`parabar::AsyncBackend`]: asynchronous backend extending the abstract
 #'   [`parabar::Backend`] class.
 #' - [`parabar::Specification`]: backend specification used when starting a
 #'   backend.
+#' - [`parabar::TaskState`]: determine the state of a task deployed to an
+#'   asynchronous backend.
 #' - [`parabar::BackendFactory`]: factory for creating backend objects.
 #' - [`parabar::Context`]: default context for executing backend operations.
 #' - [`parabar::ProgressDecorator`]: context for decorating the
@@ -82,6 +86,8 @@
 #' @section Progress Bars:
 #' [`parabar::parabar`] also exposes several classes for creating and updating
 #' different progress bars, namely:
+#' - [`parabar::Bar`]: abstract class defining the pure virtual methods to be
+#'   implemented by concrete bar classes.
 #' - [`parabar::BasicBar`]: a simple, but robust, bar created via
 #'   [utils::txtProgressBar()] extending the [`parabar::Bar`] abstract class.
 #' - [`parabar::ModernBar`]: a modern bar created via [`progress::progress_bar`]
