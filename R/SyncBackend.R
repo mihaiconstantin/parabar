@@ -1,6 +1,19 @@
 #' @include Exception.R Backend.R Specification.R
 
-# Blueprint for creating a backend that runs operations on a cluster synchronously.
+#' @title
+#' SyncBackend
+#'
+#' @description
+#' This is a concrete implementation of the abstract class [`parabar::Backend`]
+#' that implements the [`parabar::Service`] interface. This backend executes
+#' tasks in parallel on a [parallel::makeCluster()] cluster synchronously (i.e.,
+#' blocking the main `R` session).
+#'
+#' @seealso
+#' [`parabar::Service`], [`parabar::SyncBackend`], and
+#' [`parabar::AsyncBackend`].
+#'
+#' @export
 SyncBackend <- R6::R6Class("SyncBackend",
     inherit = Backend,
 
@@ -85,10 +98,18 @@ SyncBackend <- R6::R6Class("SyncBackend",
     ),
 
     public = list(
-        # Enable object constructor (i.e., `R` caveat).
-        initialize = function() { invisible() },
+        #' @description
+        #' Create a new [`parabar::SyncBackend`] object.
+        #'
+        #' @return
+        #' An object of class [`parabar::SyncBackend`].
+        initialize = function() {},
 
-        # Destructor.
+        #' @description
+        #' Destroys a [`parabar::SyncBackend`] object.
+        #'
+        #' @return
+        #' An object of class [`parabar::SyncBackend`].
         finalize = function() {
            # If a cluster is active, stop before deleting the instance.
             if (private$.active) {
@@ -97,27 +118,62 @@ SyncBackend <- R6::R6Class("SyncBackend",
             }
         },
 
-        # Create a cluster.
+        #' @description
+        #' Start the backend.
+        #'
+        #' @param specification An object of class [`parabar::Specification`]
+        #' that contains the backend configuration.
+        #'
+        #' @return
+        #' This method returns void. The resulting backend must be stored in the
+        #' `.cluster` private field on the [`parabar::Backend`] abstract class,
+        #' and accessible to any concrete backend implementations via the active
+        #' binding `cluster`.
         start = function(specification) {
             private$.start(specification)
         },
 
-        # Stop the currently active cluster.
+        #' @description
+        #' Stop the backend.
+        #'
+        #' @return
+        #' This method returns void.
         stop = function() {
             private$.stop()
         },
 
-        # Clean the cluster.
+        #' @description
+        #' Remove all objects from the backend. This function is equivalent to
+        #' calling `rm(list = ls(all.names = TRUE))` on each node in the
+        #' backend.
+        #'
+        #' @return
+        #' This method returns void.
         clear = function() {
             private$.clear()
         },
 
-        # Inspect the cluster.
+        #' @description
+        #' Inspect the backend for variables available in the `.GlobalEnv`.
+        #'
+        #' @return
+        #' This method returns a list of character vectors, where each element
+        #' corresponds to a node in the backend. The character vectors contain
+        #' the names of the variables available in the `.GlobalEnv` on each
+        #' node.
         peek = function() {
             private$.peek()
         },
 
-        # Export variables on the cluster.
+        #' @description
+        #' Export variables from a given environment to the backend.
+        #'
+        #' @param variables A character vector of variable names to export.
+        #'
+        #' @param environment An environment object from which to export the
+        #' variables.
+        #'
+        #' @return This method returns void.
         export = function(variables, environment) {
             # If no environment is provided.
             if (missing(environment)) {
@@ -129,18 +185,49 @@ SyncBackend <- R6::R6Class("SyncBackend",
             private$.export(variables, environment)
         },
 
-        # Evaluate an expression on the cluster.
+        #' @description
+        #' Evaluate an arbitrary expression on the backend.
+        #'
+        #' @param expression An expression object to evaluate on the backend.
+        #'
+        #' @return
+        #' This method returns the result of the expression evaluation.
         evaluate = function(expression) {
             # Evaluate the expression.
             private$.evaluate(substitute(expression))
         },
 
-        # Run tasks on the backend.
+        #' @description
+        #' Run a task on the backend akin to [parallel::parSapply()].
+        #'
+        #' @param x A vector (i.e., usually of integers) to pass to the `fun`
+        #' function.
+        #'
+        #' @param fun A function to apply to each element of `x`.
+        #'
+        #' @param ... Additional arguments to pass to the `fun` function.
+        #'
+        #' @return
+        #' This method returns void. The output of the task execution must be
+        #' stored in the private field `.output` on the [`parabar::Backend`]
+        #' abstract class, and is accessible via the `get_output()` method.
         sapply = function(x, fun, ...) {
             private$.output = private$.sapply(x, fun, ...)
         },
 
-        # Return the task results.
+        #' @description
+        #' Get the output of the task execution.
+        #'
+        #' @details
+        #' This method fetches the output of the task execution after calling
+        #' the `sapply()` method. It returns the output from the backend and
+        #' immediately removes it from the backend. Therefore, subsequent calls
+        #' to this method will return `NULL`. This method should be called after
+        #' the execution of a task.
+        #'
+        #' @return
+        #' A vector or list of the same length as `x` containing the results of
+        #' the `fun`. It resembles the format of [base::sapply()].
         get_output = function() {
             # Reset the output on exit.
             on.exit({
