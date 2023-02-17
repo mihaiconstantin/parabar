@@ -71,7 +71,7 @@
 #' backend$active
 #'
 #' @seealso
-#' [`parabar::Service`], [`parabar::SyncBackend`], and
+#' [`parabar::Service`], [`parabar::Backend`], and
 #' [`parabar::AsyncBackend`].
 #'
 #' @export
@@ -167,7 +167,7 @@ SyncBackend <- R6::R6Class("SyncBackend",
         initialize = function() {},
 
         #' @description
-        #' Destroys a [`parabar::SyncBackend`] object.
+        #' Destroy the current [`parabar::SyncBackend`] instance.
         #'
         #' @return
         #' An object of class [`parabar::SyncBackend`].
@@ -281,10 +281,10 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #'
         #' @details
         #' This method fetches the output of the task execution after calling
-        #' the `sapply()` method. It returns the output from the backend and
-        #' immediately removes it from the backend. Therefore, subsequent calls
-        #' to this method will return `NULL`. This method should be called after
-        #' the execution of a task.
+        #' the `sapply()` method. It returns the output and immediately removes
+        #' it from the backend. Therefore, subsequent calls to this method will
+        #' return `NULL`. This method should be called after the execution of a
+        #' task.
         #'
         #' @return
         #' A vector or list of the same length as `x` containing the results of
