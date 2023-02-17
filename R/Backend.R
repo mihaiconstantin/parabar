@@ -8,6 +8,12 @@
 #' backend implementations. It defines the common properties that all concrete
 #' backends require.
 #'
+#' @details
+#' This class cannot be instantiated. It needs to be extended by concrete
+#' subclasses that implement the pure virtual methods. Instances of concrete
+#' backend implementations can be conveniently obtained using the
+#' [`parabar::BackendFactory`] class.
+#'
 #' @seealso
 #' [`parabar::Service`], [`parabar::SyncBackend`], [`parabar::AsyncBackend`],
 #' and [`parabar::BackendFactory`].
