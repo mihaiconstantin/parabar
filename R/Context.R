@@ -4,8 +4,8 @@
 #' Context
 #'
 #' @description
-#' This class represents the base context for interacting with a
-#' [`parabar::Backend`] implementation via the [`parabar::Service`] interface.
+#' This class represents the base context for interacting with
+#' [`parabar::Backend`] implementations via the [`parabar::Service`] interface.
 #'
 #' @details
 #' This class is a vanilla wrapper around a [`parabar::Backend`] implementation.
@@ -45,7 +45,7 @@
 #' # Register the backend with the context.
 #' context$set_backend(backend)
 #'
-#' # From now all, all backend operations are interecepted by the context.
+#' # From now all, all backend operations are intercepted by the context.
 #'
 #' # Start the backend.
 #' context$start(specification)

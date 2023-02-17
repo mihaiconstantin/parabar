@@ -63,7 +63,7 @@
 #' # Register the backend with the context.
 #' context$set_backend(backend)
 #'
-#' # From now all, all backend operations are interecepted by the context.
+#' # From now all, all backend operations are intercepted by the context.
 #'
 #' # Start the backend.
 #' context$start(specification)
