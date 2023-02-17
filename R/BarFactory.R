@@ -26,6 +26,9 @@
 #' # Check the class of the bar instance.
 #' class(bar)
 #'
+#' @seealso
+#' [`parabar::Bar`], [`parabar::BasicBar`], and [`parabar::ModernBar`].
+#'
 #' @export
 BarFactory <- R6::R6Class("BarFactory",
     public = list(

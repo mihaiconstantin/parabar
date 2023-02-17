@@ -9,7 +9,8 @@
 #' backends require.
 #'
 #' @seealso
-#' [`parabar::Service`], [`parabar::SyncBackend`], [`parabar::AsyncBackend`]
+#' [`parabar::Service`], [`parabar::SyncBackend`], [`parabar::AsyncBackend`],
+#' and [`parabar::BackendFactory`].
 #'
 #' @export
 Backend <- R6::R6Class("Backend",

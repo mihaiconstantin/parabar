@@ -12,7 +12,7 @@
 #' subclasses that implement the pure virtual methods.
 #'
 #' @seealso
-#' [`parabar::BasicBar`], [`parabar::ModernBar`]
+#' [`parabar::BasicBar`] and [`parabar::ModernBar`].
 #'
 #' @export
 Bar <- R6::R6Class("Bar",
