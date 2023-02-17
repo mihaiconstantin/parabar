@@ -100,6 +100,8 @@
 #'
 #' @seealso
 #' [`parabar::AsyncBackend`]
+#'
+#' @export
 TaskState <- R6::R6Class("TaskState",
     private = list(
         .task_not_started = NULL,
