@@ -47,7 +47,11 @@ Backend <- R6::R6Class("Backend",
     ),
 
     active = list(
-        #' @field cluster The cluster object used by the backend.
+        #' @field cluster The cluster object used by the backend. For
+        #' [`parabar::SyncBackend`] objects, this is a cluster object created by
+        #' [parallel::makeCluster()]. For [`parabar::AsyncBackend`] objects,
+        #' this is a permanent `R` session created by [`callr::r_session`] that
+        #' contains the [parallel::makeCluster()] cluster object.
         cluster = function() { return(private$.cluster) },
 
         #' @field supports_progress A boolean value indicating whether the
