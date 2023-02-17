@@ -5,6 +5,8 @@ project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
 ### Added
+- Add `GitHub` workflow to automatically check the package on several platforms
+  and `R` versions.
 - Export all `R6` classes as developer API and regenerate the namespace.
 - Add preliminary package documentation to `README` file.
 - Add exported wrapper `par_sapply` to run tasks in parallel and display a
