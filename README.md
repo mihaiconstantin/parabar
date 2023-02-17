@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://parabar.mihaiconstantin.com">
-        <img width="300px" src="./inst/assets/logo/parabar-logo.png" alt="parabar logo"/>
+        <img width="300px" src="man/figures/parabar-logo.png" alt="parabar logo"/>
     </a>
 </p>
 
@@ -439,7 +439,7 @@ context$stop()
 Check out the UML diagram below for a quick overview of the package design.
 
 <p align="center">
-    <img src="./inst/design/parabar-design.drawio.svg" alt="parabar design"/>
+    <img src="man/figures/parabar-design.png" alt="parabar Software Design"/>
 </p>
 
 ## Contributing
