@@ -11,6 +11,8 @@
 #' [`session`][`callr::r_session`].
 #'
 #' @examples
+#' \dontrun{
+#'
 #' # Create a specification object.
 #' specification <- Specification$new()
 #'
@@ -78,7 +80,8 @@
 #'
 #' # Check that the backend is not active.
 #' backend$active
-#'
+#' }
+#' 
 #' @seealso
 #' [`parabar::Service`], [`parabar::Backend`], and
 #' [`parabar::SyncBackend`].

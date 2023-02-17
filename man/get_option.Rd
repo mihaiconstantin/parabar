@@ -26,5 +26,5 @@ instead.
 }
 \seealso{
 \code{\link{Options}}, \code{\link[=set_default_options]{set_default_options()}}, \code{\link[base:options]{base::options()}},
-\code{\link[=base:getOptions]{base:getOptions()}}
+\code{\link[base:options]{base::getOption()}}
 }

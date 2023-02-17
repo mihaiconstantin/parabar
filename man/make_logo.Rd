@@ -25,11 +25,14 @@ this procedure we end up with what is stored in the \code{\link{LOGO}}
 constant.
 }
 \examples{
+\dontrun{
+
 # Generate the logo.
 logo <- make_logo()
 
 # Print the logo.
 cat(logo)
+}
 
 }
 \seealso{

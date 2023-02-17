@@ -11,6 +11,8 @@ session) on a \code{\link[parallel:makeCluster]{parallel::makeCluster()}} cluste
 \code{\link[callr:r_session]{session}}.
 }
 \examples{
+\dontrun{
+
 # Create a specification object.
 specification <- Specification$new()
 
@@ -78,7 +80,7 @@ backend$stop()
 
 # Check that the backend is not active.
 backend$active
-
+}
 }
 \seealso{
 \code{\link{Service}}, \code{\link{Backend}}, and

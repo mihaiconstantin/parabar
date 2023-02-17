@@ -80,6 +80,8 @@
 #' @seealso
 #' [`parabar::Service`], [`parabar::Backend`], and
 #' [`parabar::ProgressDecorator`].
+#'
+#' @export
 Context <- R6::R6Class("Context",
     private = list(
         # The backend used by the context manager.

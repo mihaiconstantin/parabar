@@ -5,7 +5,7 @@
 \title{BackendFactory}
 \description{
 This class is a factory that provides concrete implementations of the
-\code{\link{Backend}} abstract class .
+\code{\link{Backend}} abstract class.
 }
 \examples{
 # Create a backend factory.

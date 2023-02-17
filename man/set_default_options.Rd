@@ -16,7 +16,7 @@ function.
 This function is used to set the default \code{\link[base:options]{options}} values
 for the \code{\link{parabar}} package. The function is automatically called at
 package load and the entry created can be retrieved via
-\code{\link[=base:getOptions]{getOption("parabar")}}. Specific package
+\code{\link[base:options]{getOption("parabar")}}. Specific package
 \code{\link[base:options]{options}} can be retrieved using the helper function
 \code{\link[=get_option]{get_option()}}.
 }
