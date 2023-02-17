@@ -30,7 +30,7 @@
 #' # Check that the cores were reasonably set.
 #' specification$cores
 #'
-#' # Allow the object to determine the adequente cluster type.
+#' # Allow the object to determine the adequate cluster type.
 #' specification$set_type(type = NULL)
 #'
 #' # Check the type determined.

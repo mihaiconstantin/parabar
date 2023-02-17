@@ -475,7 +475,7 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
         #' the task execution. See the [`parabar::TaskState`] class for more
         #' information on how the statues are determined. The following statuses
         #' are available:
-        #' - `task_not_started`: Indicates whether the backend is busy. `TRUE`
+        #' - `task_not_started`: Indicates whether the backend is free. `TRUE`
         #' signifies that no task has been started and the backend is free to
         #' deploy.
         #' - `task_is_running`: Indicates whether a task is currently running on
