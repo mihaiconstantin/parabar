@@ -114,4 +114,4 @@
 #' backend$active
 #'
 #' @seealso
-#' [parabar::stop_backend()], [`parabar::Service`]
+#' [parabar::stop_backend()] and [`parabar::Service`].

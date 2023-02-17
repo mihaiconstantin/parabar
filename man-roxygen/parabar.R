@@ -90,7 +90,8 @@
 #'
 #' Finally, [`parabar::parabar`] uses several [base::options()] to configure the
 #' behavior of the functionality it provides. For more information on the
-#' options used and their see default values, see [`parabar::Options`].
+#' options used and their see default values, see the [`parabar::Options`]
+#' class.
 #'
 #' For more information about the design of [`parabar::parabar`], check out the
 #' documentation and the `UML` diagram at
