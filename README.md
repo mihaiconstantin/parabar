@@ -47,6 +47,7 @@ installed and loaded the package.
 ### Users
 In general, the usage of [`parabar`](https://parabar.mihaiconstantin.com)
 consists of the following steps:
+
 1. Start a backend for parallel processing.
 2. Execute a task in parallel.
 3. Stop the backend.
@@ -250,6 +251,7 @@ session until the parallel task is completed, while the latter will return
 immediately and the task will be executed in a background `R` session.
 
 The `Service` interface defines the following operations:
+
 - `start`
 - `stop`
 - `clear`
@@ -272,6 +274,7 @@ after each task execution and display a progress bar.
 
 #### Main Classes
 The following are the main classes provided by `parabar`:
+
 - `Service`: interface for backend operations
 - `SyncBackend`: synchronous backend extending the abstract `Backend` class and
   implementing the `Service` interface
@@ -287,6 +290,7 @@ The following are the main classes provided by `parabar`:
 
 Additionally, [`parabar`](https://parabar.mihaiconstantin.com) also provides
 several classes for creating and updating different progress bars, namely:
+
 - `BasicBar`: a simple, but robust, bar created via
   [`utils::txtProgressBar`](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/txtProgressBar.html)
   extending the `Bar` abstract class
