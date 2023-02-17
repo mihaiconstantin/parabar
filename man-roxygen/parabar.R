@@ -103,4 +103,16 @@
 #' documentation and the `UML` diagram at
 #' [parabar.mihaiconstantin.com](https://parabar.mihaiconstantin.com).
 #'
+#' \if{html}{
+#' \out{<span style="display: block; text-align: center">}
+#'
+#' \out{<span style="display: block; margin-top: 1rem; margin-bottom: 0.5rem">}\strong{Software Design}
+#'
+#' \out{</span>}
+#'
+#' \figure{parabar-design.png}{options: style="max-width: 95\%;" alt="parabar Software Design"}
+#'
+#' \out{</span>}
+#' }
+#'
 #' @keywords internal
