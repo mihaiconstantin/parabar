@@ -84,13 +84,13 @@
 #' }
 #'
 #' # Sleep for a bit to wait for the task to complete.
-#' Sys.sleep(0.5)
+#' Sys.sleep(1)
 #'
 #' # Check that the task is completed (i.e., the output needs to be retrieved).
 #' check_state(backend$cluster)
 #'
 #' # Get the output.
-#' output <- backend$get_output()
+#' output <- backend$get_output(wait = TRUE)
 #'
 #' # Check that the task has not been started (i.e., the backend is free again).
 #' check_state(backend$cluster)
