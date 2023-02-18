@@ -13,9 +13,9 @@
 <!-- badges: start -->
 <p align="center">
     <a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Repository status"/></a>
-    <a href="https://github.com/mihaiconstantin/parbar/releases"><img src="https://img.shields.io/github/v/release/mihaiconstantin/parabar?display_name=tag&sort=semver"/></a>
-    <a href="https://www.r-pkg.org/pkg/parabar"><img src="https://www.r-pkg.org/badges/version/parabar" alt="CRAN version"/></a>
-    <a href="https://www.r-pkg.org/pkg/parabar"><img src="https://cranlogs.r-pkg.org/badges/grand-total/parabar" alt="CRAN RStudio mirror downloads"/></a>
+    <a href="https://github.com/mihaiconstantin/parabar/releases"><img src="https://img.shields.io/github/v/release/mihaiconstantin/parabar?display_name=tag&sort=semver"/></a>
+    <a href="https://github.com/mihaiconstantin/parabar"><img src="https://www.r-pkg.org/badges/version/parabar" alt="CRAN version"/></a>
+    <a href="https://github.com/mihaiconstantin/parabar"><img src="https://cranlogs.r-pkg.org/badges/grand-total/parabar" alt="CRAN RStudio mirror downloads"/></a>
     <a href="https://github.com/mihaiconstantin/parabar/actions"><img src="https://github.com/mihaiconstantin/parabar/workflows/R-CMD-check/badge.svg" alt="R-CMD-check" /></a>
 </p>
 <!-- badges: end -->
@@ -456,4 +456,4 @@ Check out the UML diagram below for a quick overview of the package design.
 
 ## License
 The code in this repository is licensed under the [MIT
-license](https://opensource.org/licenses/MIT).
+license](https://opensource.org/license/mit).
