@@ -1,3 +1,8 @@
+# parabar 0.9.2
+## Fixed
+- Fix package description in `DESCRIPTION` file to comply with `CRAN`
+  requirements.
+
 # parabar 0.9.1
 ## Fixed
 - Update broken links in `README` file.
