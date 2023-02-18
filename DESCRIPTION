@@ -1,15 +1,14 @@
 Package: parabar
 Title: Progress Bar for Parallel Tasks
-Version: 0.9.1
+Version: 0.9.2
 Authors@R:
     person(given = "Mihai",
            family = "Constantin",
            role = c("aut", "cre"),
            email = "mihai@mihaiconstantin.com",
            comment = c(ORCID = "0000-0002-6460-0107"))
-Description: A package designed to provide a simple interface in the form of R6
-    classes for executing tasks in parallel, while also providing functionality
-    for tracking and displaying the progress of the tasks.
+Description: A simple interface in the form of R6 classes for executing tasks in
+    parallel, tracking their progress, and displaying acurate progress bars.
 License: MIT + file LICENSE
 URL: https://parabar.mihaiconstantin.com
 BugReports: https://github.com/mihaiconstantin/parabar/issues
