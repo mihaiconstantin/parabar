@@ -1,5 +1,7 @@
 # parabar 0.9.2
 ## Fixed
+- Update `man-roxygen/parabar.R` `\html{...}` to fix `HTML` validation errors.
+  Closes [#6](https://github.com/mihaiconstantin/parabar/issues/6).
 - Fix package description in `DESCRIPTION` file to comply with `CRAN`
   requirements.
 
