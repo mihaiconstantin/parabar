@@ -20,6 +20,7 @@
 #' @importFrom parallel clusterEvalQ parSapply parApply clusterCall
 #' @importFrom R6 R6Class
 #' @importFrom progress progress_bar
+#' @importFrom callr r_session
 
 #' @template parabar
 "_PACKAGE"
