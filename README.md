@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://parabar.mihaiconstantin.com">
-        <img width="300px" src="man/figures/parabar-logo.png" alt="parabar logo"/>
+        <img width="180px" src="man/figures/logo.png" alt="parabar logo"/>
     </a>
 </p>
 
@@ -10,11 +10,13 @@
     <sub>...and more</sub>
 </h1>
 
+<!-- badges: start -->
 <p align="center">
     <a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Repository status"/></a>
     <a href="https://github.com/mihaiconstantin/parbar/releases"><img src="https://img.shields.io/github/v/release/mihaiconstantin/parabar?display_name=tag&sort=semver"/></a>
     <a href="https://www.r-pkg.org/pkg/parabar"><img src="https://www.r-pkg.org/badges/version/parabar" alt="CRAN version"/></a>
 </p>
+<!-- badges: end -->
 
 A [`parabar`](https://parabar.mihaiconstantin.com) is a package designed to
 provide a simple interface for executing tasks in parallel, while also providing
