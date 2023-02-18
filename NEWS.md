@@ -96,7 +96,7 @@
   classes providing a common interface for creating and interacting with various
   progress bars.
 
-# parabar 0.0.1
+# parabar 0.1.0
 ## Added
 - Add `Bar` abstraction for working with progress bars in `R`. Currently, two
   types of of progress bars are supported (i.e., `BasicBar` and `ModernBar`).
