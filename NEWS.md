@@ -1,8 +1,9 @@
-# parabar 0.9.0
+# parabar 0.9.1
 ## Fixed
 - Update broken links in `README` file.
 - Disable examples for `par_sapply` exported function due to exceeding the
   `CRAN` time limit for running examples.
+
 # parabar 0.9.0
 ## Added
 - Add package website via `pkgdown` and `GitHub` pages.
