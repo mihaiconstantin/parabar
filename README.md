@@ -456,4 +456,4 @@ Check out the UML diagram below for a quick overview of the package design.
 
 ## License
 The code in this repository is licensed under the [MIT
-license](https://opensource.org/license/mit).
+license](https://opensource.org/license/mit/).
