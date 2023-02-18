@@ -36,6 +36,8 @@
 #' `fun`. The output format resembles that of [base::sapply()].
 #'
 #' @examples
+#' \dontrun{
+#'
 #' # Start an asynchronous backend.
 #' backend <- start_backend(cores = 2, cluster_type = "psock", backend_type = "async")
 #'
@@ -74,6 +76,7 @@
 #'
 #' # Stop the backend.
 #' stop_backend(backend)
+#' }
 #'
 #' # Run the task using the `base::sapply` (i.e., non-parallel).
 #' results <- par_sapply(NULL, 1:300, function(x) { Sys.sleep(0.01) })
