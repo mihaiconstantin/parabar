@@ -1,0 +1,4 @@
+url: http://parabar.mihaiconstantin.com/
+template:
+  bootstrap: 5
+  bootswatch: flatly

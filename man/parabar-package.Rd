@@ -6,6 +6,8 @@
 \alias{parabar-package}
 \title{Progress Bar for Parallel Tasks}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 A package designed to provide a simple interface in the form of R6 classes for executing tasks in parallel, while also providing functionality for tracking and displaying the progress of the tasks.
 }
 \details{

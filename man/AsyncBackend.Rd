@@ -81,6 +81,7 @@ backend$stop()
 # Check that the backend is not active.
 backend$active
 }
+
 }
 \seealso{
 \code{\link{Service}}, \code{\link{Backend}}, and

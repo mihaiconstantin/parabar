@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://parabar.mihaiconstantin.com">
-        <img width="300px" src="./inst/assets/logo/parabar-logo.png" alt="parabar logo"/>
+        <img width="180px" src="man/figures/logo.png" alt="parabar logo"/>
     </a>
 </p>
 
@@ -10,11 +10,13 @@
     <sub>...and more</sub>
 </h1>
 
+<!-- badges: start -->
 <p align="center">
-    <a href="https://www.repostatus.org/#wip"><img src="https://www.repostatus.org/badges/latest/wip.svg" alt="Repository status"/></a>
+    <a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Repository status"/></a>
     <a href="https://github.com/mihaiconstantin/parbar/releases"><img src="https://img.shields.io/github/v/release/mihaiconstantin/parabar?display_name=tag&sort=semver"/></a>
     <a href="https://www.r-pkg.org/pkg/parabar"><img src="https://www.r-pkg.org/badges/version/parabar" alt="CRAN version"/></a>
 </p>
+<!-- badges: end -->
 
 A [`parabar`](https://parabar.mihaiconstantin.com) is a package designed to
 provide a simple interface for executing tasks in parallel, while also providing
@@ -47,6 +49,7 @@ installed and loaded the package.
 ### Users
 In general, the usage of [`parabar`](https://parabar.mihaiconstantin.com)
 consists of the following steps:
+
 1. Start a backend for parallel processing.
 2. Execute a task in parallel.
 3. Stop the backend.
@@ -250,6 +253,7 @@ session until the parallel task is completed, while the latter will return
 immediately and the task will be executed in a background `R` session.
 
 The `Service` interface defines the following operations:
+
 - `start`
 - `stop`
 - `clear`
@@ -272,6 +276,7 @@ after each task execution and display a progress bar.
 
 #### Main Classes
 The following are the main classes provided by `parabar`:
+
 - `Service`: interface for backend operations
 - `SyncBackend`: synchronous backend extending the abstract `Backend` class and
   implementing the `Service` interface
@@ -287,6 +292,7 @@ The following are the main classes provided by `parabar`:
 
 Additionally, [`parabar`](https://parabar.mihaiconstantin.com) also provides
 several classes for creating and updating different progress bars, namely:
+
 - `BasicBar`: a simple, but robust, bar created via
   [`utils::txtProgressBar`](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/txtProgressBar.html)
   extending the `Bar` abstract class
@@ -435,7 +441,9 @@ context$stop()
 Check out the UML diagram below for a quick overview of the package design.
 
 <p align="center">
-    <img src="./inst/design/parabar-design.drawio.svg" alt="parabar design"/>
+    <a href="https://raw.githubusercontent.com/mihaiconstantin/parabar/main/inst/design/parabar-design.drawio.svg">
+        <img src="man/figures/parabar-design.png" alt="parabar Software Design"/>
+    </a>
 </p>
 
 ## Contributing

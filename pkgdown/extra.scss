@@ -1,0 +1,14 @@
+// Adjust website header.
+#main {
+    // Hide redundant logo.
+    .page-header {
+        img {
+            display: none;
+        }
+    }
+
+    // Add margin on the top for the logo.
+    p:first-child {
+        margin-top: 1.5rem;
+    }
+}
