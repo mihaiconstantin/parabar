@@ -8,7 +8,7 @@ Authors@R:
            email = "mihai@mihaiconstantin.com",
            comment = c(ORCID = "0000-0002-6460-0107"))
 Description: A simple interface in the form of R6 classes for executing tasks in
-    parallel, tracking their progress, and displaying acurate progress bars.
+    parallel, tracking their progress, and displaying accurate progress bars.
 License: MIT + file LICENSE
 URL: https://parabar.mihaiconstantin.com
 BugReports: https://github.com/mihaiconstantin/parabar/issues
