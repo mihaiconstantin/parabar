@@ -121,7 +121,7 @@ ProgressDecorator <- R6::R6Class("ProgressDecorator",
         .bar = NULL,
 
         # Progress bar configuration.
-        .bar_config = NULL,
+        .bar_config = list(),
 
         # Create a temporary file to log progress from backend tasks.
         .make_log = function() {
