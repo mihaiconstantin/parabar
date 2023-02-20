@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-A simple interface in the form of R6 classes for executing tasks in parallel, tracking their progress, and displaying acurate progress bars.
+A simple interface in the form of R6 classes for executing tasks in parallel, tracking their progress, and displaying accurate progress bars.
 }
 \details{
 The package is aimed at two audiences: (1) end-users who want to execute a
