@@ -153,7 +153,14 @@ ProgressDecorator <- R6::R6Class("ProgressDecorator",
             fun_body[[length_fun_body + 1]] <- substitute(
                 # The injected expression.
                 on.exit({
+                    # Acquire an exclusive lock.
+                    log_lock <- filelock::lock(log_lock_path)
+
+                    # Write the line.
                     cat("\n", file = log, sep = "", append = TRUE)
+
+                    # Release the lock.
+                    filelock::unlock(log_lock)
                 }),
 
                 # The environment to use for substitution.
@@ -275,6 +282,9 @@ ProgressDecorator <- R6::R6Class("ProgressDecorator",
         sapply = function(x, fun, ...) {
             # Create file for logging progress.
             log <- private$.make_log()
+
+            # Determine file log lock path.
+            log_lock_path <- paste0(log, ".lock")
 
             # Clear the temporary file on function exit.
             on.exit({

@@ -17,6 +17,7 @@ Imports:
     progress,
     parallel,
     callr,
+    filelock,
     utils
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
