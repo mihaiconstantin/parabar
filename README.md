@@ -86,9 +86,9 @@ Progress tracking not supported for backend of type 'SyncBackend'.
 ```
 
 The reason for this is because progress tracking only works for asynchronous
-backends. Furthermore, [`parabar`](https://parabar.mihaiconstantin.com) enables
-progress tracking by default at load time. We can disable this by option to get rid
-of the warning message.
+backends, and [`parabar`](https://parabar.mihaiconstantin.com) enables progress
+tracking by default at load time. We can disable this by option to get rid of
+the warning message.
 
 ```r
 # Disable progress tracking.
@@ -223,7 +223,7 @@ stop_backend(backend)
 ```
 
 #### No Backend
-Finally, we can also the `par_sapply` function without a backend, which will
+Finally, we can also the `?par_sapply` function without a backend, which will
 resort to running the task sequentially by means of
 [`utils::sapply`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/lapply.html).
 
@@ -240,7 +240,7 @@ results <- par_sapply(backend = NULL, 1:300, function(x) {
 ```
 
 ### Developers
-[`parabar`](https://parabar.mihaiconstantin.com) provides a reach API for
+[`parabar`](https://parabar.mihaiconstantin.com) provides a rich API for
 developers who want to use the package in their own projects.
 
 From a high-level perspective, the package consists of **`backends`** and
@@ -248,66 +248,67 @@ From a high-level perspective, the package consists of **`backends`** and
 parallel.
 
 #### Backends
-A **`backend`** represents a set of operations, defined by the `Service`
-interface. Backends can be synchronous (i.e., `SyncBackend`) or asynchronous
-(i.e., `AsyncBackend`). The former will block the execution of the current `R`
+A **`backend`** represents a set of operations, defined by the `?Service`
+interface. Backends can be synchronous (i.e., `?SyncBackend`) or asynchronous
+(i.e., `?AsyncBackend`). The former will block the execution of the current `R`
 session until the parallel task is completed, while the latter will return
 immediately and the task will be executed in a background `R` session.
 
-The `Service` interface defines the following operations:
+The `?Service` interface defines the following operations:
 
-- `start`
-- `stop`
-- `clear`
-- `peek`
-- `export`
-- `evaluate`
-- `sapply`
-- `get_output`
+- `start`: Start the backend.
+- `stop`: Stop the backend.
+- `clear`: Remove all objects from the backend.
+- `peek`: Show the variables names available on the backend.
+- `export`: Export variables from a given environment to the backend.
+- `evaluate`: Evaluate an arbitrary expression on the backend.
+- `sapply`: Run a task on the backend.
+- `get_output`: Get the output of the task execution.
 
 Check out the documentation for `Service` for more information on each method.
 
 #### Contexts
 A **`context`** represents the specific conditions in which a backend object
-operates. The default context class (i.e., `Context`) simply forwards the call
+operates. The default context class (i.e., `?Context`) simply forwards the call
 to the corresponding backend method. However, a more complex context can augment
 the operation before forwarding the call to the backend. One example of a
-complex context is the `ProgressDecorator` class. This class extends the regular
-`Context` class and decorates the backend `sapply` operation to log the progress
-after each task execution and display a progress bar.
+complex context is the `?ProgressDecorator` class. This class extends the
+regular `?Context` class and decorates the backend `sapply` operation to log the
+progress after each task execution and display a progress bar.
 
 #### Main Classes
-The following are the main classes provided by `parabar`:
+The following are the main classes provided by
+[`parabar`](https://parabar.mihaiconstantin.com):
 
-- `Service`: interface for backend operations
-- `SyncBackend`: synchronous backend extending the abstract `Backend` class and
-  implementing the `Service` interface
-- `AsyncBackend`: asynchronous backend extending the abstract `Backend` class
-  and implementing the `Service` interface
-- `Specification`: backend specification used when starting a backend
-- `BackendFactory`: factory for creating `Backend` objects
-- `Context`: default context for executing backend operations without
-  interference
-- `ProgressDecorator`: context for decorating the `sapply` operation to track
-  and display the progress
-- `ContextFactory`: factory for creating `Context` objects
+- `Service`: Interface for backend operations.
+- `SyncBackend`: Synchronous backend extending the abstract `Backend` class and
+  implementing the `Service` interface.
+- `AsyncBackend`: Asynchronous backend extending the abstract `Backend` class
+  and implementing the `Service` interface.
+- `Specification`: Backend specification used when starting a backend.
+- `BackendFactory`: Factory for creating `Backend` objects.
+- `Context`: Default context for executing backend operations without
+  interference.
+- `ProgressDecorator`: Context for decorating the `sapply` operation to track
+  and display the progress.
+- `ContextFactory`: Factory for creating `Context` objects.
 
 Additionally, [`parabar`](https://parabar.mihaiconstantin.com) also provides
 several classes for creating and updating different progress bars, namely:
 
-- `BasicBar`: a simple, but robust, bar created via
+- `BasicBar`: A simple, but robust, bar created via
   [`utils::txtProgressBar`](https://stat.ethz.ch/R-manual/R-devel/library/utils/html/txtProgressBar.html)
-  extending the `Bar` abstract class
-- `ModernBar`: a modern bar created via
+  extending the `Bar` abstract class.
+- `ModernBar`: A modern bar created via
   [`progress::progress_bar`](https://cran.r-project.org/package=progress)
-  extending the `Bar` abstract class
-- `BarFactory`: factory for creating `Bar` objects
+  extending the `Bar` abstract class.
+- `BarFactory`: Factory for creating `Bar` objects.
 
 #### Examples
 Below there is an example of how to use the package
 [`R6`](https://adv-r.hadley.nz/r6.html) class API.
 
-We start by creating a `Specification` object instructing the `Backend` object
+We start by creating a `?Specification` object instructing the `?Backend` object
 how to create a cluster via the built-in function
 [`parallel::makeCluster`](https://stat.ethz.ch/R-manual/R-devel/library/parallel/html/makeCluster.html).
 
@@ -319,7 +320,7 @@ specification$set_type("psock")
 ```
 
 We proceed by obtaining an asynchronous backend instance from the
-`BackendFactory` and starting the backend using the `Specification` instance
+`?BackendFactory` and starting the backend using the `?Specification` instance
 above.
 
 ```r
@@ -366,8 +367,8 @@ results <- backend$get_output(wait = TRUE)
 
 We can now introduce the `context` concept to decorate the `backend` instance
 and, in this example, track the progress of the task. First, we obtain an
-`Context` instance from the `ContextFactory`. Furthermore, since we are using an
-asynchronous backend, we can request a context that facilitates
+`?Context` instance from the `?ContextFactory`. Furthermore, since we are using
+an asynchronous backend, we can request a context that facilitates
 progress-tracking.
 
 ```r
@@ -381,12 +382,12 @@ context <- context_factory$get("progress")
 context$set_backend(backend)
 ```
 
-The `Context` class (i.e., and it's subclasses) implements the `Service`
+The `?Context` class (i.e., and it's subclasses) implements the `?Service`
 interface, which means that we can use it to execute backend operations.
 
-Since we are using the `ProgressDecorator` context, we also need to register a
-`Bar` instance with the context. First, let's obtain a `Bar` instance from the
-`BarFactory`.
+Since we are using the `?ProgressDecorator` context, we also need to register a
+`?Bar` instance with the context. First, let's obtain a `?Bar` instance from the
+`?BarFactory`.
 
 ```r
 # Create a bar factory.
