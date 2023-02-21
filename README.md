@@ -450,9 +450,9 @@ Check out the UML diagram below for a quick overview of the package design.
 
 ## Contributing
 - Any contributions are welcome and greatly appreciated. Please open a [pull
-  request](https://github.com/mihaiconstantin/powerly/pulls) on GitHub.
+  request](https://github.com/mihaiconstantin/parabar/pulls) on GitHub.
 - To report bugs, or request new features, please open an
-  [issue](https://github.com/mihaiconstantin/powerly/issues) on GitHub.
+  [issue](https://github.com/mihaiconstantin/parabar/issues) on GitHub.
 
 ## License
 The code in this repository is licensed under the [MIT
