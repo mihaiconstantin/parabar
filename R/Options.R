@@ -34,7 +34,8 @@
 #'
 #' @seealso [parabar::set_default_options()], and [parabar::get_option()].
 #'
-#' @keywords internal
+#'
+#' @export
 Options <- R6::R6Class("Options",
     cloneable = FALSE,
 
