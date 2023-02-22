@@ -2,3 +2,17 @@ url: http://parabar.mihaiconstantin.com/
 template:
   bootstrap: 5
   bootswatch: flatly
+reference:
+  - subtitle: Main Functions
+    desc: Functions intended for use in interactive `R` sessions.
+  - contents:
+    - matches("start_|stop_|par_|configure_|set_|get_")
+  - subtitle: Developer Classes
+    desc: API based on the `R6` class system for package developers.
+  - contents:
+    - matches("([A-Z][a-z0-9]+)+")
+  - subtitle: Miscellaneous
+    desc: Very specific functions that may safely be ignored.
+  - contents:
+    - make_logo
+    - LOGO
