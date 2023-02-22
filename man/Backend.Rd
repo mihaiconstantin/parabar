@@ -2,7 +2,7 @@
 % Please edit documentation in R/Backend.R
 \name{Backend}
 \alias{Backend}
-\title{\emph{Backend}}
+\title{Backend}
 \description{
 This is an abstract class that serves as a base class for all concrete
 backend implementations. It defines the common properties that all concrete
@@ -16,7 +16,7 @@ backend implementations can be conveniently obtained using the
 }
 \seealso{
 \code{\link{Service}}, \code{\link{SyncBackend}}, \code{\link{AsyncBackend}},
-and \code{\link{BackendFactory}}.
+\code{\link{BackendFactory}}, and \code{\link{Context}}.
 }
 \section{Super class}{
 \code{\link[parabar:Service]{parabar::Service}} -> \code{Backend}

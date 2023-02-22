@@ -39,5 +39,6 @@ backend$active
 
 }
 \seealso{
-\code{\link[=start_backend]{start_backend()}}, \code{\link{Service}}
+\code{\link[=start_backend]{start_backend()}}, \code{\link{Service}}, \code{\link{Backend}}, and
+\code{\link{BackendFactory}}.
 }

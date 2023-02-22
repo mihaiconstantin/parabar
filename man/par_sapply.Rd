@@ -44,19 +44,28 @@ context is also used if the progress tracking is disabled via the
 }
 }
 \examples{
-\dontrun{
+\donttest{
+
+# Define a simple task.
+task <- function(x) {
+    # Perform computations.
+    Sys.sleep(0.01)
+
+    # Return the result.
+    return(x + 1)
+}
 
 # Start an asynchronous backend.
 backend <- start_backend(cores = 2, cluster_type = "psock", backend_type = "async")
 
 # Run a task in parallel.
-results <- par_sapply(backend, 1:300, function(x) { Sys.sleep(0.01) })
+results <- par_sapply(backend, x = 1:300, fun = task)
 
 # Disable progress tracking.
 set_option("progress_track", FALSE)
 
 # Run a task in parallel.
-results <- par_sapply(backend, 1:300, function(x) { Sys.sleep(0.01) })
+results <- par_sapply(backend, x = 1:300, fun = task)
 
 # Enable progress tracking.
 set_option("progress_track", TRUE)
@@ -65,7 +74,7 @@ set_option("progress_track", TRUE)
 configure_bar(type = "modern", format = "[:bar] :percent")
 
 # Run a task in parallel.
-results <- par_sapply(backend, 1:300, function(x) { Sys.sleep(0.01) })
+results <- par_sapply(backend, x = 1:300, fun = task)
 
 # Stop the backend.
 stop_backend(backend)
@@ -74,20 +83,21 @@ stop_backend(backend)
 backend <- start_backend(cores = 2, cluster_type = "psock", backend_type = "sync")
 
 # Run a task in parallel.
-results <- par_sapply(backend, 1:300, function(x) { Sys.sleep(0.01) })
+results <- par_sapply(backend, x = 1:300, fun = task)
 
 # Disable progress tracking to remove the warning that progress is not supported.
 set_option("progress_track", FALSE)
 
 # Run a task in parallel.
-results <- par_sapply(backend, 1:300, function(x) { Sys.sleep(0.01) })
+results <- par_sapply(backend, x = 1:300, fun = task)
 
 # Stop the backend.
 stop_backend(backend)
-}
 
 # Run the task using the `base::sapply` (i.e., non-parallel).
-results <- par_sapply(NULL, 1:300, function(x) { Sys.sleep(0.01) })
+results <- par_sapply(NULL, x = 1:300, fun = task)
+
+}
 
 }
 \seealso{

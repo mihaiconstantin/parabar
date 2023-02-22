@@ -11,8 +11,6 @@ session) on a \code{\link[parallel:makeCluster]{parallel::makeCluster()}} cluste
 \code{\link[callr:r_session]{session}}.
 }
 \examples{
-\dontrun{
-
 # Create a specification object.
 specification <- Specification$new()
 
@@ -63,7 +61,7 @@ backend$sapply(
 
 # Trying to get the output immediately will throw an error, indicating that the
 # task is still running.
-backend$get_output()
+\dontrun{backend$get_output()}
 
 # However, we can block the main process and wait for the task to complete
 # before fetching the results.
@@ -80,12 +78,11 @@ backend$stop()
 
 # Check that the backend is not active.
 backend$active
-}
 
 }
 \seealso{
-\code{\link{Service}}, \code{\link{Backend}}, and
-\code{\link{SyncBackend}}.
+\code{\link{Service}}, \code{\link{Backend}}, \code{\link{SyncBackend}}, and
+\code{\link{ProgressDecorator}}.
 }
 \section{Super classes}{
 \code{\link[parabar:Service]{parabar::Service}} -> \code{\link[parabar:Backend]{parabar::Backend}} -> \code{AsyncBackend}

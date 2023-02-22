@@ -72,8 +72,8 @@ backend$active
 
 }
 \seealso{
-\code{\link{Service}}, \code{\link{Backend}}, and
-\code{\link{AsyncBackend}}.
+\code{\link{Service}}, \code{\link{Backend}}, \code{\link{AsyncBackend}}, and
+\code{\link{Context}}.
 }
 \section{Super classes}{
 \code{\link[parabar:Service]{parabar::Service}} -> \code{\link[parabar:Backend]{parabar::Backend}} -> \code{SyncBackend}

@@ -88,6 +88,10 @@ backend.
 \if{html}{\out{<div class="r">}}\preformatted{Service$clear()}\if{html}{\out{</div>}}
 }
 
+\subsection{Details}{
+This method is ran by default when the backend is started.
+}
+
 \subsection{Returns}{
 This method returns void.
 }

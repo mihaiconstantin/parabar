@@ -79,8 +79,8 @@ context$stop()
 
 }
 \seealso{
-\code{\link{Service}}, \code{\link{Backend}}, and
-\code{\link{ProgressDecorator}}.
+\code{\link{ProgressDecorator}}, \code{\link{Service}}, \code{\link{Backend}},
+and \code{\link{SyncBackend}}.
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
