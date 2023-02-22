@@ -32,9 +32,21 @@
 #' # Check that the change was applied (i.e., `progress_track: FALSE`).
 #' getOption("parabar")
 #'
-#' @seealso [parabar::set_default_options()], and [parabar::get_option()].
+#' # We can also use the built-in helpers to get and set options more conveniently.
 #'
-#' @keywords internal
+#' # Get the progress tracking option.
+#' get_option("progress_track")
+#'
+#' # Set the progress tracking option to `TRUE`.
+#' set_option("progress_track", TRUE)
+#'
+#' # Check that the change was applied (i.e., `progress_track: TRUE`).
+#' get_option("progress_track")
+#'
+#' @seealso [parabar::get_option()], [parabar::set_option()], and
+#' [parabar::set_default_options()].
+#'
+#' @export
 Options <- R6::R6Class("Options",
     cloneable = FALSE,
 

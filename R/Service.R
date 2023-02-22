@@ -53,6 +53,9 @@ Service <- R6::R6Class("Service",
         #' calling `rm(list = ls(all.names = TRUE))` on each node in the
         #' backend.
         #'
+        #' @details
+        #' This method is ran by default when the backend is started.
+        #'
         #' @return
         #' This method returns void.
         clear = function() {

@@ -71,8 +71,8 @@
 #' backend$active
 #'
 #' @seealso
-#' [`parabar::Service`], [`parabar::Backend`], and
-#' [`parabar::AsyncBackend`].
+#' [`parabar::Service`], [`parabar::Backend`], [`parabar::AsyncBackend`], and
+#' [`parabar::Context`].
 #'
 #' @export
 SyncBackend <- R6::R6Class("SyncBackend",

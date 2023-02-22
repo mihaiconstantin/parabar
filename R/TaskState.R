@@ -99,7 +99,7 @@
 #' backend$stop()
 #'
 #' @seealso
-#' [`parabar::AsyncBackend`]
+#' [`parabar::AsyncBackend`] and [`parabar::ProgressDecorator`].
 #'
 #' @export
 TaskState <- R6::R6Class("TaskState",
