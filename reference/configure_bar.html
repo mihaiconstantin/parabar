@@ -14,7 +14,7 @@ Options instance in the base::.Options list."><meta property="og:image" content=
     
     <a class="navbar-brand me-2" href="../index.html">parabar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,21 +91,21 @@ named arguments of the <code><a href="https://rdrr.io/r/utils/txtProgressBar.htm
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/progress/man/progress_bar.html" class="external-link">progress::progress_bar</a></code>, <code><a href="https://rdrr.io/r/utils/txtProgressBar.html" class="external-link">utils::txtProgressBar()</a></code>,
-<code><a href="set_default_options.html">set_default_options()</a></code>, <code><a href="get_option.html">get_option()</a></code>,
-<code><a href="set_option.html">set_option()</a></code></p></div>
+<code><a href="option.html">set_default_options()</a></code>, <code><a href="option.html">get_option()</a></code>,
+<code><a href="option.html">set_option()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Set the default package options.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="set_default_options.html">set_default_options</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">set_default_options</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get the progress bar type from options.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="get_option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_bar_type"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_bar_type"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "modern"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get the progress bar configuration from options.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="get_option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_bar_config"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_bar_config"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $modern</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $modern$show_after</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
@@ -122,7 +122,7 @@ named arguments of the <code><a href="https://rdrr.io/r/utils/txtProgressBar.htm
 <span class="r-in"><span><span class="fu">configure_bar</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"modern"</span>, format <span class="op">=</span> <span class="st">"[:bar] :percent"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check that the configuration has been updated in the options.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="get_option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_bar_config"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_bar_config"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $modern</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $modern$show_after</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
@@ -139,9 +139,9 @@ named arguments of the <code><a href="https://rdrr.io/r/utils/txtProgressBar.htm
 <span class="r-in"><span><span class="fu">configure_bar</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"basic"</span>, style <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check that the configuration has been updated in the options.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="get_option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_bar_type"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_bar_type"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "basic"</span>
-<span class="r-in"><span><span class="fu"><a href="get_option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_bar_config"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_bar_config"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $modern</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $modern$show_after</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
@@ -163,7 +163,7 @@ named arguments of the <code><a href="https://rdrr.io/r/utils/txtProgressBar.htm
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Mihai Constantin.</p>
+  <p></p><p>Developed by <a href="https://mihaiconstantin.com" class="external-link">Mihai Constantin</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

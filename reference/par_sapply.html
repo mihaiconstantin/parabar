@@ -16,7 +16,7 @@ See the Details section for more information on how this function works."><meta 
     
     <a class="navbar-brand me-2" href="../index.html">parabar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,28 +112,37 @@ context is also used if the progress tracking is disabled via the
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Define a simple task.</span></span></span>
+<span class="r-in"><span><span class="va">task</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="co"># Perform computations.</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>    <span class="co"># Return the result.</span></span></span>
+<span class="r-in"><span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">x</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Start an asynchronous backend.</span></span></span>
 <span class="r-in"><span><span class="va">backend</span> <span class="op">&lt;-</span> <span class="fu"><a href="start_backend.html">start_backend</a></span><span class="op">(</span>cores <span class="op">=</span> <span class="fl">2</span>, cluster_type <span class="op">=</span> <span class="st">"psock"</span>, backend_type <span class="op">=</span> <span class="st">"async"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run a task in parallel.</span></span></span>
-<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">par_sapply</span><span class="op">(</span><span class="va">backend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">par_sapply</span><span class="op">(</span><span class="va">backend</span>, x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, fun <span class="op">=</span> <span class="va">task</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Disable progress tracking.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="set_option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run a task in parallel.</span></span></span>
-<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">par_sapply</span><span class="op">(</span><span class="va">backend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">par_sapply</span><span class="op">(</span><span class="va">backend</span>, x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, fun <span class="op">=</span> <span class="va">task</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Enable progress tracking.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="set_option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Change the progress bar options.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="configure_bar.html">configure_bar</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"modern"</span>, format <span class="op">=</span> <span class="st">"[:bar] :percent"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run a task in parallel.</span></span></span>
-<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">par_sapply</span><span class="op">(</span><span class="va">backend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">par_sapply</span><span class="op">(</span><span class="va">backend</span>, x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, fun <span class="op">=</span> <span class="va">task</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Stop the backend.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="stop_backend.html">stop_backend</a></span><span class="op">(</span><span class="va">backend</span><span class="op">)</span></span></span>
@@ -142,20 +151,22 @@ context is also used if the progress tracking is disabled via the
 <span class="r-in"><span><span class="va">backend</span> <span class="op">&lt;-</span> <span class="fu"><a href="start_backend.html">start_backend</a></span><span class="op">(</span>cores <span class="op">=</span> <span class="fl">2</span>, cluster_type <span class="op">=</span> <span class="st">"psock"</span>, backend_type <span class="op">=</span> <span class="st">"sync"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run a task in parallel.</span></span></span>
-<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">par_sapply</span><span class="op">(</span><span class="va">backend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">par_sapply</span><span class="op">(</span><span class="va">backend</span>, x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, fun <span class="op">=</span> <span class="va">task</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Progress tracking not supported for backend of type 'SyncBackend'.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Disable progress tracking to remove the warning that progress is not supported.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="set_option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run a task in parallel.</span></span></span>
-<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">par_sapply</span><span class="op">(</span><span class="va">backend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">par_sapply</span><span class="op">(</span><span class="va">backend</span>, x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, fun <span class="op">=</span> <span class="va">task</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Stop the backend.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="stop_backend.html">stop_backend</a></span><span class="op">(</span><span class="va">backend</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run the task using the `base::sapply` (i.e., non-parallel).</span></span></span>
-<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">par_sapply</span><span class="op">(</span><span class="cn">NULL</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">par_sapply</span><span class="op">(</span><span class="cn">NULL</span>, x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, fun <span class="op">=</span> <span class="va">task</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -164,7 +175,7 @@ context is also used if the progress tracking is disabled via the
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Mihai Constantin.</p>
+  <p></p><p>Developed by <a href="https://mihaiconstantin.com" class="external-link">Mihai Constantin</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

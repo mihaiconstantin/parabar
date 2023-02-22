@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="index.html">parabar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -126,10 +126,10 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <p>At this point you will notice the following warning message:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode txt"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Warning message:</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Progress tracking not supported for backend of type 'SyncBackend'.</span></code></pre></div>
-<p>The reason for this is because progress tracking only works for asynchronous backends. Furthermore, <a href="https://parabar.mihaiconstantin.com" class="external-link"><code>parabar</code></a> enables progress tracking by default at load time. We can disable this by option to get rid of the warning message.</p>
+<p>The reason for this is because progress tracking only works for asynchronous backends, and <a href="https://parabar.mihaiconstantin.com" class="external-link"><code>parabar</code></a> enables progress tracking by default at load time. We can disable this by option to get rid of the warning message.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Disable progress tracking.</span></span>
-<span><span class="fu"><a href="reference/set_option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>We can verify that the warning message is gone by running the task again, reusing the backend we created earlier.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Run a task in parallel.</span></span>
@@ -152,7 +152,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <p>First, let’s ensure progress tracking is enabled (i.e., we disabled it above).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Enable progress tracking.</span></span>
-<span><span class="fu"><a href="reference/set_option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Now, we can proceed with creating the backend and running the task.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Start an asynchronous backend.</span></span>
@@ -200,7 +200,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <p>We can also disable the progress bar for asynchronous backends altogether, by adjusting the package options.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Disable progress tracking.</span></span>
-<span><span class="fu"><a href="reference/set_option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Run a task in parallel.</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/par_sapply.html">par_sapply</a></span><span class="op">(</span><span class="va">backend</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
@@ -218,7 +218,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <div class="section level4">
 <h4 id="no-backend">No Backend<a class="anchor" aria-label="anchor" href="#no-backend"></a>
 </h4>
-<p>Finally, we can also the <code>par_sapply</code> function without a backend, which will resort to running the task sequentially by means of <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/lapply.html" class="external-link"><code>utils::sapply</code></a>.</p>
+<p>Finally, we can also the <code><a href="reference/par_sapply.html">?par_sapply</a></code> function without a backend, which will resort to running the task sequentially by means of <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/lapply.html" class="external-link"><code>utils::sapply</code></a>.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Run the task sequentially using the `base::sapply`.</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/par_sapply.html">par_sapply</a></span><span class="op">(</span>backend <span class="op">=</span> <span class="cn">NULL</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
@@ -233,73 +233,81 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <div class="section level3">
 <h3 id="developers">Developers<a class="anchor" aria-label="anchor" href="#developers"></a>
 </h3>
-<p><a href="https://parabar.mihaiconstantin.com" class="external-link"><code>parabar</code></a> provides a reach API for developers who want to use the package in their own projects.</p>
+<p><a href="https://parabar.mihaiconstantin.com" class="external-link"><code>parabar</code></a> provides a rich API for developers who want to use the package in their own projects.</p>
 <p>From a high-level perspective, the package consists of <strong><code>backends</code></strong> and <strong><code>contexts</code></strong> in which these backends are employed for executing tasks in parallel.</p>
 <div class="section level4">
 <h4 id="backends">Backends<a class="anchor" aria-label="anchor" href="#backends"></a>
 </h4>
-<p>A <strong><code>backend</code></strong> represents a set of operations, defined by the <code>Service</code> interface. Backends can be synchronous (i.e., <code>SyncBackend</code>) or asynchronous (i.e., <code>AsyncBackend</code>). The former will block the execution of the current <code>R</code> session until the parallel task is completed, while the latter will return immediately and the task will be executed in a background <code>R</code> session.</p>
-<p>The <code>Service</code> interface defines the following operations:</p>
+<p>A <strong><code>backend</code></strong> represents a set of operations, defined by the <code><a href="reference/Service.html">?Service</a></code> interface. Backends can be synchronous (i.e., <code><a href="reference/SyncBackend.html">?SyncBackend</a></code>) or asynchronous (i.e., <code><a href="reference/AsyncBackend.html">?AsyncBackend</a></code>). The former will block the execution of the current <code>R</code> session until the parallel task is completed, while the latter will return immediately and the task will be executed in a background <code>R</code> session.</p>
+<p>The <code><a href="reference/Service.html">?Service</a></code> interface defines the following operations:</p>
 <ul>
-<li><code>start</code></li>
-<li><code>stop</code></li>
-<li><code>clear</code></li>
-<li><code>peek</code></li>
-<li><code>export</code></li>
-<li><code>evaluate</code></li>
-<li><code>sapply</code></li>
-<li><code>get_output</code></li>
+<li>
+<code>start</code>: Start the backend.</li>
+<li>
+<code>stop</code>: Stop the backend.</li>
+<li>
+<code>clear</code>: Remove all objects from the backend.</li>
+<li>
+<code>peek</code>: Show the variables names available on the backend.</li>
+<li>
+<code>export</code>: Export variables from a given environment to the backend.</li>
+<li>
+<code>evaluate</code>: Evaluate an arbitrary expression on the backend.</li>
+<li>
+<code>sapply</code>: Run a task on the backend.</li>
+<li>
+<code>get_output</code>: Get the output of the task execution.</li>
 </ul>
 <p>Check out the documentation for <code>Service</code> for more information on each method.</p>
 </div>
 <div class="section level4">
 <h4 id="contexts">Contexts<a class="anchor" aria-label="anchor" href="#contexts"></a>
 </h4>
-<p>A <strong><code>context</code></strong> represents the specific conditions in which a backend object operates. The default context class (i.e., <code>Context</code>) simply forwards the call to the corresponding backend method. However, a more complex context can augment the operation before forwarding the call to the backend. One example of a complex context is the <code>ProgressDecorator</code> class. This class extends the regular <code>Context</code> class and decorates the backend <code>sapply</code> operation to log the progress after each task execution and display a progress bar.</p>
+<p>A <strong><code>context</code></strong> represents the specific conditions in which a backend object operates. The default context class (i.e., <code><a href="reference/Context.html">?Context</a></code>) simply forwards the call to the corresponding backend method. However, a more complex context can augment the operation before forwarding the call to the backend. One example of a complex context is the <code><a href="reference/ProgressDecorator.html">?ProgressDecorator</a></code> class. This class extends the regular <code><a href="reference/Context.html">?Context</a></code> class and decorates the backend <code>sapply</code> operation to log the progress after each task execution and display a progress bar.</p>
 </div>
 <div class="section level4">
 <h4 id="main-classes">Main Classes<a class="anchor" aria-label="anchor" href="#main-classes"></a>
 </h4>
-<p>The following are the main classes provided by <code>parabar</code>:</p>
+<p>The following are the main classes provided by <a href="https://parabar.mihaiconstantin.com" class="external-link"><code>parabar</code></a>:</p>
 <ul>
 <li>
-<code>Service</code>: interface for backend operations</li>
+<code>Service</code>: Interface for backend operations.</li>
 <li>
-<code>SyncBackend</code>: synchronous backend extending the abstract <code>Backend</code> class and implementing the <code>Service</code> interface</li>
+<code>SyncBackend</code>: Synchronous backend extending the abstract <code>Backend</code> class and implementing the <code>Service</code> interface.</li>
 <li>
-<code>AsyncBackend</code>: asynchronous backend extending the abstract <code>Backend</code> class and implementing the <code>Service</code> interface</li>
+<code>AsyncBackend</code>: Asynchronous backend extending the abstract <code>Backend</code> class and implementing the <code>Service</code> interface.</li>
 <li>
-<code>Specification</code>: backend specification used when starting a backend</li>
+<code>Specification</code>: Backend specification used when starting a backend.</li>
 <li>
-<code>BackendFactory</code>: factory for creating <code>Backend</code> objects</li>
+<code>BackendFactory</code>: Factory for creating <code>Backend</code> objects.</li>
 <li>
-<code>Context</code>: default context for executing backend operations without interference</li>
+<code>Context</code>: Default context for executing backend operations without interference.</li>
 <li>
-<code>ProgressDecorator</code>: context for decorating the <code>sapply</code> operation to track and display the progress</li>
+<code>ProgressDecorator</code>: Context for decorating the <code>sapply</code> operation to track and display the progress.</li>
 <li>
-<code>ContextFactory</code>: factory for creating <code>Context</code> objects</li>
+<code>ContextFactory</code>: Factory for creating <code>Context</code> objects.</li>
 </ul>
 <p>Additionally, <a href="https://parabar.mihaiconstantin.com" class="external-link"><code>parabar</code></a> also provides several classes for creating and updating different progress bars, namely:</p>
 <ul>
 <li>
-<code>BasicBar</code>: a simple, but robust, bar created via <a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/txtProgressBar.html" class="external-link"><code>utils::txtProgressBar</code></a> extending the <code>Bar</code> abstract class</li>
+<code>BasicBar</code>: A simple, but robust, bar created via <a href="https://stat.ethz.ch/R-manual/R-devel/library/utils/html/txtProgressBar.html" class="external-link"><code>utils::txtProgressBar</code></a> extending the <code>Bar</code> abstract class.</li>
 <li>
-<code>ModernBar</code>: a modern bar created via <a href="https://cran.r-project.org/package=progress" class="external-link"><code>progress::progress_bar</code></a> extending the <code>Bar</code> abstract class</li>
+<code>ModernBar</code>: A modern bar created via <a href="https://cran.r-project.org/package=progress" class="external-link"><code>progress::progress_bar</code></a> extending the <code>Bar</code> abstract class.</li>
 <li>
-<code>BarFactory</code>: factory for creating <code>Bar</code> objects</li>
+<code>BarFactory</code>: Factory for creating <code>Bar</code> objects.</li>
 </ul>
 </div>
 <div class="section level4">
 <h4 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h4>
 <p>Below there is an example of how to use the package <a href="https://adv-r.hadley.nz/r6.html" class="external-link"><code>R6</code></a> class API.</p>
-<p>We start by creating a <code>Specification</code> object instructing the <code>Backend</code> object how to create a cluster via the built-in function <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/html/makeCluster.html" class="external-link"><code>parallel::makeCluster</code></a>.</p>
+<p>We start by creating a <code><a href="reference/Specification.html">?Specification</a></code> object instructing the <code><a href="reference/Backend.html">?Backend</a></code> object how to create a cluster via the built-in function <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/html/makeCluster.html" class="external-link"><code>parallel::makeCluster</code></a>.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a specification object.</span></span>
 <span><span class="va">specification</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/Specification.html">Specification</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">specification</span><span class="op">$</span><span class="fu">set_cores</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span>
 <span><span class="va">specification</span><span class="op">$</span><span class="fu">set_type</span><span class="op">(</span><span class="st">"psock"</span><span class="op">)</span></span></code></pre></div>
-<p>We proceed by obtaining an asynchronous backend instance from the <code>BackendFactory</code> and starting the backend using the <code>Specification</code> instance above.</p>
+<p>We proceed by obtaining an asynchronous backend instance from the <code><a href="reference/BackendFactory.html">?BackendFactory</a></code> and starting the backend using the <code><a href="reference/Specification.html">?Specification</a></code> instance above.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a backend factory.</span></span>
 <span><span class="va">backend_factory</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/BackendFactory.html">BackendFactory</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span>
@@ -325,7 +333,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <p>We can, however, block the caller process and wait for the task to complete before fetching the results.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">backend</span><span class="op">$</span><span class="fu">get_output</span><span class="op">(</span>wait <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>We can now introduce the <code>context</code> concept to decorate the <code>backend</code> instance and, in this example, track the progress of the task. First, we obtain an <code>Context</code> instance from the <code>ContextFactory</code>. Furthermore, since we are using an asynchronous backend, we can request a context that facilitates progress-tracking.</p>
+<p>We can now introduce the <code>context</code> concept to decorate the <code>backend</code> instance and, in this example, track the progress of the task. First, we obtain an <code><a href="reference/Context.html">?Context</a></code> instance from the <code><a href="reference/ContextFactory.html">?ContextFactory</a></code>. Furthermore, since we are using an asynchronous backend, we can request a context that facilitates progress-tracking.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a context factory.</span></span>
 <span><span class="va">context_factory</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/ContextFactory.html">ContextFactory</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span>
@@ -335,8 +343,8 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <span></span>
 <span><span class="co"># Register the backend with the context.</span></span>
 <span><span class="va">context</span><span class="op">$</span><span class="fu">set_backend</span><span class="op">(</span><span class="va">backend</span><span class="op">)</span></span></code></pre></div>
-<p>The <code>Context</code> class (i.e., and it’s subclasses) implements the <code>Service</code> interface, which means that we can use it to execute backend operations.</p>
-<p>Since we are using the <code>ProgressDecorator</code> context, we also need to register a <code>Bar</code> instance with the context. First, let’s obtain a <code>Bar</code> instance from the <code>BarFactory</code>.</p>
+<p>The <code><a href="reference/Context.html">?Context</a></code> class (i.e., and it’s subclasses) implements the <code><a href="reference/Service.html">?Service</a></code> interface, which means that we can use it to execute backend operations.</p>
+<p>Since we are using the <code><a href="reference/ProgressDecorator.html">?ProgressDecorator</a></code> context, we also need to register a <code><a href="reference/Bar.html">?Bar</a></code> instance with the context. First, let’s obtain a <code><a href="reference/Bar.html">?Bar</a></code> instance from the <code><a href="reference/BarFactory.html">?BarFactory</a></code>.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a bar factory.</span></span>
 <span><span class="va">bar_factory</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/BarFactory.html">BarFactory</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span>
@@ -423,7 +431,8 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Mihai Constantin <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6460-0107" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>
+<a href="https://mihaiconstantin.com" class="external-link">Mihai Constantin</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6460-0107" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -444,7 +453,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Mihai Constantin.</p>
+<p>Developed by <a href="https://mihaiconstantin.com" class="external-link">Mihai Constantin</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

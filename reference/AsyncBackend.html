@@ -18,7 +18,7 @@ session."><meta property="og:image" content="http://parabar.mihaiconstantin.com/
     
     <a class="navbar-brand me-2" href="../index.html">parabar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.9.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,8 +64,8 @@ session) on a <code><a href="https://rdrr.io/r/parallel/makeCluster.html" class=
 
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="Service.html">Service</a></code>, <code><a href="Backend.html">Backend</a></code>, and
-<code><a href="SyncBackend.html">SyncBackend</a></code>.</p></div>
+    <div class="dont-index"><p><code><a href="Service.html">Service</a></code>, <code><a href="Backend.html">Backend</a></code>, <code><a href="SyncBackend.html">SyncBackend</a></code>, and
+<code><a href="ProgressDecorator.html">ProgressDecorator</a></code>.</p></div>
     </div>
     <div class="section level2">
     <h2 id="super-classes">Super classes<a class="anchor" aria-label="anchor" href="#super-classes"></a></h2>
@@ -84,7 +84,7 @@ deploy.</p></li>
 the backend.</p></li>
 <li><p><code>task_is_completed</code>: Indicates whether a task has finished
 executing. <code>TRUE</code> signifies that the output of the task has not been
-fetched. Calling the method <code><a href="get_option.html">get_option()</a></code> will move the output from
+fetched. Calling the method <code><a href="option.html">get_option()</a></code> will move the output from
 the background <code>R</code> session to the main <code>R</code> session. Once the output
 has been fetched, the backend is free to deploy another task.</p></li>
 </ul></dd>
@@ -333,9 +333,7 @@ the <code>fun</code>. It resembles the format of <code><a href="https://rdrr.io/
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Create a specification object.</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create a specification object.</span></span></span>
 <span class="r-in"><span><span class="va">specification</span> <span class="op">&lt;-</span> <span class="va"><a href="Specification.html">Specification</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Set the number of cores.</span></span></span>
@@ -352,6 +350,12 @@ the <code>fun</code>. It resembles the format of <code><a href="https://rdrr.io/
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check if there is anything on the backend.</span></span></span>
 <span class="r-in"><span><span class="va">backend</span><span class="op">$</span><span class="fu">peek</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Create a dummy variable.</span></span></span>
 <span class="r-in"><span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"parabar"</span></span></span>
@@ -364,6 +368,12 @@ the <code>fun</code>. It resembles the format of <code><a href="https://rdrr.io/
 <span class="r-in"><span>    <span class="co"># Print the name.</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Hello, "</span>, <span class="va">name</span>, <span class="st">"!"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Hello, parabar!"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Hello, parabar!"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run a task in parallel (i.e., approx. 2.5 seconds).</span></span></span>
 <span class="r-in"><span><span class="va">backend</span><span class="op">$</span><span class="fu">sapply</span><span class="op">(</span></span></span>
@@ -385,24 +395,31 @@ the <code>fun</code>. It resembles the format of <code><a href="https://rdrr.io/
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Trying to get the output immediately will throw an error, indicating that the</span></span></span>
 <span class="r-in"><span><span class="co"># task is still running.</span></span></span>
-<span class="r-in"><span><span class="va">backend</span><span class="op">$</span><span class="fu">get_output</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="va">backend</span><span class="op">$</span><span class="fu">get_output</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># However, we can block the main process and wait for the task to complete</span></span></span>
 <span class="r-in"><span><span class="co"># before fetching the results.</span></span></span>
 <span class="r-in"><span><span class="va">backend</span><span class="op">$</span><span class="fu">get_output</span><span class="op">(</span>wait <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  2  3  4  5  6  7  8  9 10 11</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clear the backend.</span></span></span>
 <span class="r-in"><span><span class="va">backend</span><span class="op">$</span><span class="fu">clear</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check that there is nothing on the cluster.</span></span></span>
 <span class="r-in"><span><span class="va">backend</span><span class="op">$</span><span class="fu">peek</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Stop the backend.</span></span></span>
 <span class="r-in"><span><span class="va">backend</span><span class="op">$</span><span class="kw">stop</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check that the backend is not active.</span></span></span>
 <span class="r-in"><span><span class="va">backend</span><span class="op">$</span><span class="va">active</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
@@ -411,7 +428,7 @@ the <code>fun</code>. It resembles the format of <code><a href="https://rdrr.io/
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Mihai Constantin.</p>
+  <p></p><p>Developed by <a href="https://mihaiconstantin.com" class="external-link">Mihai Constantin</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

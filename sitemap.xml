@@ -79,25 +79,19 @@
     <loc>http://parabar.mihaiconstantin.com/reference/configure_bar.html</loc>
   </url>
   <url>
-    <loc>http://parabar.mihaiconstantin.com/reference/get_option.html</loc>
-  </url>
-  <url>
     <loc>http://parabar.mihaiconstantin.com/reference/index.html</loc>
   </url>
   <url>
     <loc>http://parabar.mihaiconstantin.com/reference/make_logo.html</loc>
   </url>
   <url>
+    <loc>http://parabar.mihaiconstantin.com/reference/option.html</loc>
+  </url>
+  <url>
     <loc>http://parabar.mihaiconstantin.com/reference/par_sapply.html</loc>
   </url>
   <url>
     <loc>http://parabar.mihaiconstantin.com/reference/parabar-package.html</loc>
-  </url>
-  <url>
-    <loc>http://parabar.mihaiconstantin.com/reference/set_default_options.html</loc>
-  </url>
-  <url>
-    <loc>http://parabar.mihaiconstantin.com/reference/set_option.html</loc>
   </url>
   <url>
     <loc>http://parabar.mihaiconstantin.com/reference/start_backend.html</loc>
