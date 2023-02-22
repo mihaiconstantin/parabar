@@ -1,17 +1,21 @@
 # parabar 0.9.4
+
 ## Changed
 - Improve documentation for exported objects.
 - Merge documentations of `get_option`, `set_option`, and `set_default_options`.
 - Improved `README`. More specifically, added description for `Service`
   interface methods and enabled documentation linking (i.e., via `?`) for
   `pkgdown` website.
+
 ## Added
 - Add custom styles to `extra.scss` to improve documentation website.
 - Add `S3` print method for the `LOGO` object.
+
 ## Fixed
 - Add missing export for `Options` class.
 
 # parabar 0.9.3
+
 ## Changed
 - Change type of private field `.bar_config` in `ProgressDecorator` class to
   `list`. This way, the `configure_bar()` method of `ProgressBar` class becomes
@@ -24,6 +28,7 @@
 - Fix typo in `DESCRIPTION`.
 
 # parabar 0.9.2
+
 ## Fixed
 - Update `man-roxygen/parabar.R` `\html{...}` to fix `HTML` validation errors.
   Closes [#6](https://github.com/mihaiconstantin/parabar/issues/6).
@@ -31,12 +36,14 @@
   requirements.
 
 # parabar 0.9.1
+
 ## Fixed
 - Update broken links in `README` file.
 - Disable examples for `par_sapply` exported function due to exceeding the
   `CRAN` time limit for running examples.
 
 # parabar 0.9.0
+
 ## Added
 - Add package website via `pkgdown` and `GitHub` pages.
 - Add `GitHub` workflow to automatically check the package on several platforms
@@ -135,6 +142,7 @@
   progress bars.
 
 # parabar 0.1.0
+
 ## Added
 - Add `Bar` abstraction for working with progress bars in `R`. Currently, two
   types of of progress bars are supported (i.e., `BasicBar` and `ModernBar`).
