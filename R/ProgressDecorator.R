@@ -25,8 +25,6 @@
 #' class to decorate the backend instance with additional functionality.
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # Define a task to run in parallel.
 #' task <- function(x, y) {
 #'     # Sleep a bit.
@@ -55,7 +53,7 @@
 #' context <- ProgressDecorator$new()
 #'
 #' # Attempt to set the incompatible backend instance.
-#' context$set_backend(backend)
+#' \dontrun{context$set_backend(backend)}
 #'
 #' # Get a backend instance that does support progress tracking.
 #' backend <- backend_factory$get("async")
@@ -106,7 +104,6 @@
 #'
 #' # Close the backend.
 #' context$stop()
-#' }
 #'
 #' @seealso
 #' [`parabar::Context`], [`parabar::Service`], [`parabar::Backend`], and

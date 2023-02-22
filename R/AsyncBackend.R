@@ -11,8 +11,6 @@
 #' [`session`][`callr::r_session`].
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # Create a specification object.
 #' specification <- Specification$new()
 #'
@@ -63,7 +61,7 @@
 #'
 #' # Trying to get the output immediately will throw an error, indicating that the
 #' # task is still running.
-#' backend$get_output()
+#' \dontrun{backend$get_output()}
 #'
 #' # However, we can block the main process and wait for the task to complete
 #' # before fetching the results.
@@ -80,8 +78,7 @@
 #'
 #' # Check that the backend is not active.
 #' backend$active
-#' }
-#' 
+#'
 #' @seealso
 #' [`parabar::Service`], [`parabar::Backend`], [`parabar::SyncBackend`], and
 #' [`parabar::ProgressDecorator`].
