@@ -1,7 +1,7 @@
 #' @include Exception.R Service.R
 
 #' @title
-#' *Backend*
+#' Backend
 #'
 #' @description
 #' This is an abstract class that serves as a base class for all concrete
