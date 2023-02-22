@@ -20,7 +20,7 @@
 #' # Use the progress bar.
 #' for (i in 1:total) {
 #'     # Sleep a bit.
-#'     Sys.sleep(0.03)
+#'     Sys.sleep(0.02)
 #'
 #'     # Update the progress bar.
 #'     bar$update(i)
