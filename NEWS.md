@@ -14,14 +14,14 @@
 # parabar 0.9.3
 ## Changed
 - Change type of private field `.bar_config` in `ProgressDecorator` class to
-  `list`. This way the `configure_bar()` method of `ProgressBar` class becomes
+  `list`. This way, the `configure_bar()` method of `ProgressBar` class becomes
   an optional step.
 
 ## Fixed
 - Implement file locking when logging progress from child processes to avoid
   race conditions. The implementation is based on the `filelock` package. Closes
   [#8](https://github.com/mihaiconstantin/parabar/issues/8).
-- Fix typo in `DESCRIPTION`
+- Fix typo in `DESCRIPTION`.
 
 # parabar 0.9.2
 ## Fixed
