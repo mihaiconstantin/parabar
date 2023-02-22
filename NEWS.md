@@ -1,3 +1,16 @@
+# parabar 0.9.4
+## Changed
+- Improve documentation for exported objects.
+- Merge documentations of `get_option`, `set_option`, and `set_default_options`.
+- Improved `README`. More specifically, added description for `Service`
+  interface methods and enabled documentation linking (i.e., via `?`) for
+  `pkgdown` website.
+## Added
+- Add custom styles to `extra.scss` to improve documentation website.
+- Add `S3` print method for the `LOGO` object.
+## Fixed
+- Add missing export for `Options` class.
+
 # parabar 0.9.3
 ## Changed
 - Change type of private field `.bar_config` in `ProgressDecorator` class to
