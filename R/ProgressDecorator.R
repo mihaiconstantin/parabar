@@ -28,7 +28,7 @@
 #' # Define a task to run in parallel.
 #' task <- function(x, y) {
 #'     # Sleep a bit.
-#'     Sys.sleep(0.25)
+#'     Sys.sleep(0.15)
 #'
 #'     # Return the result of a computation.
 #'     return(x + y)
@@ -81,7 +81,7 @@
 #'     format = " > completed :current out of :total tasks [:percent] [:elapsed]"
 #' )
 #'
-#' # Run a task in parallel (i.e., approx. 3.125 seconds).
+#' # Run a task in parallel (i.e., approx. 1.9 seconds).
 #' context$sapply(x = 1:25, fun = task, y = 10)
 #'
 #' # Get the task output.
@@ -96,7 +96,7 @@
 #' # Remove the previous bar configuration.
 #' context$configure_bar()
 #'
-#' # Run a task in parallel (i.e., approx. 3.125 seconds).
+#' # Run a task in parallel (i.e., approx. 1.9 seconds).
 #' context$sapply(x = 1:25, fun = task, y = 10)
 #'
 #' # Get the task output.
