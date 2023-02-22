@@ -14,7 +14,7 @@
 #' [`parabar::BarFactory`] class.
 #'
 #' @seealso
-#' [`parabar::BasicBar`] and [`parabar::ModernBar`].
+#' [`parabar::BasicBar`], [`parabar::ModernBar`], and [`parabar::BarFactory`].
 #'
 #' @export
 Bar <- R6::R6Class("Bar",

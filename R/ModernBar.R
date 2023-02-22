@@ -30,7 +30,7 @@
 #' bar$terminate()
 #'
 #' @seealso
-#' [`parabar::Bar`] and [`parabar::BasicBar`].
+#' [`parabar::Bar`], [`parabar::BasicBar`], and [`parabar::BarFactory`].
 #'
 #' @export
 ModernBar <- R6::R6Class("ModernBar",

@@ -16,7 +16,7 @@
 #'
 #' @seealso
 #' [`parabar::Service`], [`parabar::SyncBackend`], [`parabar::AsyncBackend`],
-#' and [`parabar::BackendFactory`].
+#' [`parabar::BackendFactory`], and [`parabar::Context`].
 #'
 #' @export
 Backend <- R6::R6Class("Backend",

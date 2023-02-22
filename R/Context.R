@@ -78,8 +78,8 @@
 #' context$stop()
 #'
 #' @seealso
-#' [`parabar::Service`], [`parabar::Backend`], and
-#' [`parabar::ProgressDecorator`].
+#' [`parabar::ProgressDecorator`], [`parabar::Service`], [`parabar::Backend`],
+#' and [`parabar::SyncBackend`].
 #'
 #' @export
 Context <- R6::R6Class("Context",
