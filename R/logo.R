@@ -35,6 +35,9 @@ make_logo <- function(template = "./inst/assets/logo/parabar-logo.txt", version 
 #' @format
 #' An object of class `character` containing the `ASCII` logo.
 #'
+#' @examples
+#' print(LOGO)
+#'
 #' @seealso [parabar::make_logo()]
 #'
 #' @export
