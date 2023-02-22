@@ -85,7 +85,7 @@ context$configure_bar(
 context$sapply(x = 1:25, fun = task, y = 10)
 
 # Get the task output.
-backend$get_output()
+backend$get_output(wait = TRUE)
 
 # Change the bar type.
 bar <- bar_factory$get("basic")
@@ -100,7 +100,7 @@ context$configure_bar()
 context$sapply(x = 1:25, fun = task, y = 10)
 
 # Get the task output.
-backend$get_output()
+backend$get_output(wait = TRUE)
 
 # Close the backend.
 context$stop()
