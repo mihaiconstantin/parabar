@@ -2,7 +2,7 @@
 % Please edit documentation in R/Service.R
 \name{Service}
 \alias{Service}
-\title{\emph{Service}}
+\title{Service}
 \description{
 This is an interface that defines the operations available on a
 \code{\link{Backend}} implementation. Backend implementations and the

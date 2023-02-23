@@ -1,7 +1,7 @@
 #' @include Exception.R
 
 #' @title
-#' *Service*
+#' Service
 #'
 #' @description
 #' This is an interface that defines the operations available on a
