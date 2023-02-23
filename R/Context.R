@@ -167,13 +167,19 @@ Context <- R6::R6Class("Context",
         #' @description
         #' Evaluate an arbitrary expression on the backend.
         #'
-        #' @param expression An expression object to evaluate on the backend.
+        #' @param expression An unquoted expression to evaluate on the backend.
         #'
         #' @return
         #' This method returns the result of the expression evaluation.
         evaluate = function(expression) {
-            # Consume the backend API.
-            private$.backend$evaluate(expression)
+            # Capture the expression.
+            capture <- substitute(expression)
+
+            # Create the call.
+            capture_call <- bquote(private$.backend$evaluate(.(capture)))
+
+            # Perform the call.
+            eval(capture_call)
         },
 
         #' @description

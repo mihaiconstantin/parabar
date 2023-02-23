@@ -147,7 +147,7 @@ Evaluate an arbitrary expression on the backend.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{expression}}{An expression object to evaluate on the backend.}
+\item{\code{expression}}{An unquoted expression to evaluate on the backend.}
 }
 \if{html}{\out{</div>}}
 }
