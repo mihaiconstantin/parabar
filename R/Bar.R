@@ -1,7 +1,7 @@
 #' @include Exception.R
 
 #' @title
-#' *Bar*
+#' Bar
 #'
 #' @description
 #' This is an abstract class that defines the pure virtual methods a concrete
@@ -14,7 +14,7 @@
 #' [`parabar::BarFactory`] class.
 #'
 #' @seealso
-#' [`parabar::BasicBar`] and [`parabar::ModernBar`].
+#' [`parabar::BasicBar`], [`parabar::ModernBar`], and [`parabar::BarFactory`].
 #'
 #' @export
 Bar <- R6::R6Class("Bar",

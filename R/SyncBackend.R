@@ -34,7 +34,10 @@
 #' # Export the variable to the backend.
 #' backend$export("name")
 #'
-#' # Run an expression on the backend.
+#' # Remove variable from current environment.
+#' rm(name)
+#'
+#' # Run an expression on the backend, using the exported variable `name`.
 #' backend$evaluate({
 #'     # Print the name.
 #'     print(paste0("Hello, ", name, "!"))
@@ -71,8 +74,8 @@
 #' backend$active
 #'
 #' @seealso
-#' [`parabar::Service`], [`parabar::Backend`], and
-#' [`parabar::AsyncBackend`].
+#' [`parabar::Service`], [`parabar::Backend`], [`parabar::AsyncBackend`], and
+#' [`parabar::Context`].
 #'
 #' @export
 SyncBackend <- R6::R6Class("SyncBackend",
@@ -141,8 +144,11 @@ SyncBackend <- R6::R6Class("SyncBackend",
 
         # Evaluate an expression on the cluster.
         .evaluate = function(expression) {
+            # Capture the expression.
+            capture <- substitute(expression)
+
             # Evaluate the expression.
-            parallel::clusterCall(private$.cluster, eval, expression)
+            parallel::clusterCall(private$.cluster, eval, capture)
         },
 
         # A wrapper around `parallel:parSapply` to run tasks on the cluster.
@@ -249,13 +255,19 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' @description
         #' Evaluate an arbitrary expression on the backend.
         #'
-        #' @param expression An expression object to evaluate on the backend.
+        #' @param expression An unquoted expression to evaluate on the backend.
         #'
         #' @return
         #' This method returns the result of the expression evaluation.
         evaluate = function(expression) {
-            # Evaluate the expression.
-            private$.evaluate(substitute(expression))
+            # Capture the expression.
+            capture <- substitute(expression)
+
+            # Create call.
+            capture_call <- bquote(private$.evaluate(.(capture)))
+
+            # Perform the call.
+            eval(capture_call)
         },
 
         #' @description

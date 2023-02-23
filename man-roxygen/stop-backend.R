@@ -32,4 +32,5 @@
 #' backend$active
 #'
 #' @seealso
-#' [parabar::start_backend()], [`parabar::Service`]
+#' [parabar::start_backend()], [`parabar::Service`], [`parabar::Backend`], and
+#' [`parabar::BackendFactory`].

@@ -20,7 +20,7 @@
 #' # Use the progress bar.
 #' for (i in 1:total) {
 #'     # Sleep a bit.
-#'     Sys.sleep(0.03)
+#'     Sys.sleep(0.02)
 #'
 #'     # Update the progress bar.
 #'     bar$update(i)
@@ -30,7 +30,7 @@
 #' bar$terminate()
 #'
 #' @seealso
-#' [`parabar::Bar`] and [`parabar::ModernBar`].
+#' [`parabar::Bar`], [`parabar::ModernBar`], and [`parabar::BarFactory`].
 #'
 #' @export
 BasicBar <- R6::R6Class("BasicBar",

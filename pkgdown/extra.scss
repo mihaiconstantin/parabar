@@ -1,14 +1,67 @@
-// Adjust website header.
-#main {
-    // Hide redundant logo.
-    .page-header {
-        img {
-            display: none;
+@media (min-width: 1400px) {
+    body {
+        font-size: var(--bs-body-font-size);
+    }
+}
+
+.container {
+    main {
+        margin-top: 0;
+
+        // Hide redundant logo inserted by `pkgdown`.
+        .page-header {
+            img {
+                display: none;
+            }
+        }
+
+       div.sourceCode pre, .citation pre {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
+            border-radius: .5rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .section {
+            img {
+                box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
+                padding: 1rem;
+                border-radius: 1rem;
+            }
         }
     }
 
-    // Add margin on the top for the logo.
-    p:first-child {
-        margin-top: 1.5rem;
+    .row {
+        display: flex;
+        justify-content: space-between;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        border-radius: 1rem;
+        padding: 2rem;
+        margin-top: 5.25rem;
+    }
+}
+
+.row > aside {
+    margin-top: 0;
+}
+
+aside {
+    div {
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
+        padding: 1rem 1rem;
+        border-radius: 1rem;
+        margin-bottom: 1.5rem;
+
+        h2 {
+            margin-top: 0;
+        }
+
+        ul {
+            margin-bottom: 0;
+
+            li:last-of-type {
+                margin-bottom: 0;
+            }
+        }
     }
 }

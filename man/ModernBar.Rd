@@ -20,7 +20,7 @@ bar$create(total = total, initial = 0)
 # Use the progress bar.
 for (i in 1:total) {
     # Sleep a bit.
-    Sys.sleep(0.03)
+    Sys.sleep(0.02)
 
     # Update the progress bar.
     bar$update(i)
@@ -31,7 +31,7 @@ bar$terminate()
 
 }
 \seealso{
-\code{\link{Bar}} and \code{\link{BasicBar}}.
+\code{\link{Bar}}, \code{\link{BasicBar}}, and \code{\link{BarFactory}}.
 }
 \section{Super class}{
 \code{\link[parabar:Bar]{parabar::Bar}} -> \code{ModernBar}

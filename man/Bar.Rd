@@ -2,7 +2,7 @@
 % Please edit documentation in R/Bar.R
 \name{Bar}
 \alias{Bar}
-\title{\emph{Bar}}
+\title{Bar}
 \description{
 This is an abstract class that defines the pure virtual methods a concrete
 bar must implement.
@@ -14,7 +14,7 @@ backend implementations can be conveniently obtained using the
 \code{\link{BarFactory}} class.
 }
 \seealso{
-\code{\link{BasicBar}} and \code{\link{ModernBar}}.
+\code{\link{BasicBar}}, \code{\link{ModernBar}}, and \code{\link{BarFactory}}.
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}

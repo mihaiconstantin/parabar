@@ -1,7 +1,7 @@
 #' @include Exception.R Service.R
 
 #' @title
-#' *Backend*
+#' Backend
 #'
 #' @description
 #' This is an abstract class that serves as a base class for all concrete
@@ -16,7 +16,7 @@
 #'
 #' @seealso
 #' [`parabar::Service`], [`parabar::SyncBackend`], [`parabar::AsyncBackend`],
-#' and [`parabar::BackendFactory`].
+#' [`parabar::BackendFactory`], and [`parabar::Context`].
 #'
 #' @export
 Backend <- R6::R6Class("Backend",

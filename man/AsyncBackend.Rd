@@ -11,8 +11,6 @@ session) on a \code{\link[parallel:makeCluster]{parallel::makeCluster()}} cluste
 \code{\link[callr:r_session]{session}}.
 }
 \examples{
-\dontrun{
-
 # Create a specification object.
 specification <- Specification$new()
 
@@ -37,7 +35,10 @@ name <- "parabar"
 # Export the variable to the backend.
 backend$export("name")
 
-# Run an expression on the backend.
+# Remove variable from current environment.
+rm(name)
+
+# Run an expression on the backend, using the exported variable `name`.
 backend$evaluate({
     # Print the name.
     print(paste0("Hello, ", name, "!"))
@@ -63,7 +64,7 @@ backend$sapply(
 
 # Trying to get the output immediately will throw an error, indicating that the
 # task is still running.
-backend$get_output()
+\dontrun{backend$get_output()}
 
 # However, we can block the main process and wait for the task to complete
 # before fetching the results.
@@ -80,12 +81,11 @@ backend$stop()
 
 # Check that the backend is not active.
 backend$active
-}
 
 }
 \seealso{
-\code{\link{Service}}, \code{\link{Backend}}, and
-\code{\link{SyncBackend}}.
+\code{\link{Service}}, \code{\link{Backend}}, \code{\link{SyncBackend}}, and
+\code{\link{ProgressDecorator}}.
 }
 \section{Super classes}{
 \code{\link[parabar:Service]{parabar::Service}} -> \code{\link[parabar:Backend]{parabar::Backend}} -> \code{AsyncBackend}
@@ -257,7 +257,7 @@ Evaluate an arbitrary expression on the backend.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{expression}}{An expression object to evaluate on the backend.}
+\item{\code{expression}}{An unquoted expression to evaluate on the backend.}
 }
 \if{html}{\out{</div>}}
 }

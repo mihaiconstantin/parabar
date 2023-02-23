@@ -34,11 +34,22 @@ set_default_options()
 # Check that the change was applied (i.e., `progress_track: FALSE`).
 getOption("parabar")
 
+# We can also use the built-in helpers to get and set options more conveniently.
+
+# Get the progress tracking option.
+get_option("progress_track")
+
+# Set the progress tracking option to `TRUE`.
+set_option("progress_track", TRUE)
+
+# Check that the change was applied (i.e., `progress_track: TRUE`).
+get_option("progress_track")
+
 }
 \seealso{
-\code{\link[=set_default_options]{set_default_options()}}, and \code{\link[=get_option]{get_option()}}.
+\code{\link[=get_option]{get_option()}}, \code{\link[=set_option]{set_option()}}, and
+\code{\link[=set_default_options]{set_default_options()}}.
 }
-\keyword{internal}
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{

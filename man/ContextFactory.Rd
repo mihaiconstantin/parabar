@@ -23,8 +23,8 @@ class(context)
 
 }
 \seealso{
-\code{\link{Context}}, \code{\link{ProgressDecorator}}, and
-\code{\link{Service}}.
+\code{\link{Context}}, \code{\link{ProgressDecorator}}, \code{\link{Service}},
+and \code{\link{Backend}}
 }
 \section{Methods}{
 \subsection{Public methods}{

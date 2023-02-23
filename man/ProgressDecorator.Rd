@@ -25,12 +25,10 @@ This class is a good example of how to extend the base \code{\link{Context}}
 class to decorate the backend instance with additional functionality.
 }
 \examples{
-\dontrun{
-
 # Define a task to run in parallel.
 task <- function(x, y) {
     # Sleep a bit.
-    Sys.sleep(0.25)
+    Sys.sleep(0.15)
 
     # Return the result of a computation.
     return(x + y)
@@ -55,7 +53,7 @@ backend <- backend_factory$get("sync")
 context <- ProgressDecorator$new()
 
 # Attempt to set the incompatible backend instance.
-context$set_backend(backend)
+\dontrun{context$set_backend(backend)}
 
 # Get a backend instance that does support progress tracking.
 backend <- backend_factory$get("async")
@@ -83,11 +81,11 @@ context$configure_bar(
     format = " > completed :current out of :total tasks [:percent] [:elapsed]"
 )
 
-# Run a task in parallel (i.e., approx. 3.125 seconds).
+# Run a task in parallel (i.e., approx. 1.9 seconds).
 context$sapply(x = 1:25, fun = task, y = 10)
 
 # Get the task output.
-backend$get_output()
+backend$get_output(wait = TRUE)
 
 # Change the bar type.
 bar <- bar_factory$get("basic")
@@ -98,15 +96,14 @@ context$set_bar(bar)
 # Remove the previous bar configuration.
 context$configure_bar()
 
-# Run a task in parallel (i.e., approx. 3.125 seconds).
+# Run a task in parallel (i.e., approx. 1.9 seconds).
 context$sapply(x = 1:25, fun = task, y = 10)
 
 # Get the task output.
-backend$get_output()
+backend$get_output(wait = TRUE)
 
 # Close the backend.
 context$stop()
-}
 
 }
 \seealso{

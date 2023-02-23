@@ -1,6 +1,7 @@
 #' @include Options.R Helper.R Specification.R BackendFactory.R ContextFactory.R Exception.R BarFactory.R
 
 #' @template set-default-options
+#' @order 3
 #' @export
 set_default_options <- function() {
     # Set `Options` instance.
@@ -12,6 +13,7 @@ set_default_options <- function() {
 
 
 #' @template get-option
+#' @order 1
 #' @export
 get_option <- function(option) {
     # Invoke the helper.
@@ -20,6 +22,7 @@ get_option <- function(option) {
 
 
 #' @template set-option
+#' @order 2
 #' @export
 set_option <- function(option, value) {
     # Invoke the helper.

@@ -11,8 +11,6 @@
 #' [`session`][`callr::r_session`].
 #'
 #' @examples
-#' \dontrun{
-#'
 #' # Create a specification object.
 #' specification <- Specification$new()
 #'
@@ -37,7 +35,10 @@
 #' # Export the variable to the backend.
 #' backend$export("name")
 #'
-#' # Run an expression on the backend.
+#' # Remove variable from current environment.
+#' rm(name)
+#'
+#' # Run an expression on the backend, using the exported variable `name`.
 #' backend$evaluate({
 #'     # Print the name.
 #'     print(paste0("Hello, ", name, "!"))
@@ -63,7 +64,7 @@
 #'
 #' # Trying to get the output immediately will throw an error, indicating that the
 #' # task is still running.
-#' backend$get_output()
+#' \dontrun{backend$get_output()}
 #'
 #' # However, we can block the main process and wait for the task to complete
 #' # before fetching the results.
@@ -80,11 +81,10 @@
 #'
 #' # Check that the backend is not active.
 #' backend$active
-#' }
-#' 
+#'
 #' @seealso
-#' [`parabar::Service`], [`parabar::Backend`], and
-#' [`parabar::SyncBackend`].
+#' [`parabar::Service`], [`parabar::Backend`], [`parabar::SyncBackend`], and
+#' [`parabar::ProgressDecorator`].
 #'
 #' @export
 AsyncBackend <- R6::R6Class("AsyncBackend",
@@ -194,11 +194,14 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
 
         # Evaluate an expression on the cluster in the session.
         .evaluate = function(expression) {
+            # Capture the expression.
+            capture <- substitute(expression)
+
            # Perform the evaluation on the cluster via the `R` session.
             private$.cluster$run(function(expression) {
                 # Evaluate the expression.
                 parallel::clusterCall(cluster, eval, expression)
-            }, args = list(expression))
+            }, args = list(capture))
         },
 
         # Run tasks on the cluster in the session asynchronously.
@@ -399,12 +402,19 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
         #' @description
         #' Evaluate an arbitrary expression on the backend.
         #'
-        #' @param expression An expression object to evaluate on the backend.
+        #' @param expression An unquoted expression to evaluate on the backend.
         #'
         #' @return
         #' This method returns the result of the expression evaluation.
         evaluate = function(expression) {
-            private$.evaluate(substitute(expression))
+            # Capture the expression.
+            capture <- substitute(expression)
+
+            # Prepare the call.
+            capture_call <- bquote(private$.evaluate(.(capture)))
+
+            # Perform the call.
+            eval(capture_call)
         },
 
         #' @description

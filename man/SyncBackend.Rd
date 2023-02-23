@@ -34,7 +34,10 @@ name <- "parabar"
 # Export the variable to the backend.
 backend$export("name")
 
-# Run an expression on the backend.
+# Remove variable from current environment.
+rm(name)
+
+# Run an expression on the backend, using the exported variable `name`.
 backend$evaluate({
     # Print the name.
     print(paste0("Hello, ", name, "!"))
@@ -72,8 +75,8 @@ backend$active
 
 }
 \seealso{
-\code{\link{Service}}, \code{\link{Backend}}, and
-\code{\link{AsyncBackend}}.
+\code{\link{Service}}, \code{\link{Backend}}, \code{\link{AsyncBackend}}, and
+\code{\link{Context}}.
 }
 \section{Super classes}{
 \code{\link[parabar:Service]{parabar::Service}} -> \code{\link[parabar:Backend]{parabar::Backend}} -> \code{SyncBackend}
@@ -223,7 +226,7 @@ Evaluate an arbitrary expression on the backend.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{expression}}{An expression object to evaluate on the backend.}
+\item{\code{expression}}{An unquoted expression to evaluate on the backend.}
 }
 \if{html}{\out{</div>}}
 }

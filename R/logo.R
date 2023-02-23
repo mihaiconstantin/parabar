@@ -35,7 +35,20 @@ make_logo <- function(template = "./inst/assets/logo/parabar-logo.txt", version 
 #' @format
 #' An object of class `character` containing the `ASCII` logo.
 #'
+#' @examples
+#' print(LOGO)
+#'
 #' @seealso [parabar::make_logo()]
 #'
 #' @export
 LOGO = ". . . . . . . . . . . . . . . . . . . . . . . . . . .\n.                              _             v1.x.x .\n.                             | |                   .\n.   _ __    __ _  _ __   __ _ | |__    __ _  _ __   .\n.  | '_ \\  / _` || '__| / _` || '_ \\  / _` || '__|  .\n.  | |_) || (_| || |   | (_| || |_) || (_| || |     .\n.  | .__/  \\____||_|    \\____||____/  \\____||_|     .\n.  | |                                              .\n.  |_|                                              .\n.                                                   .\n. . . . . . . . . . . . . . . . . . . . . . . . . . .\n.                         .                         .\n.        https://parabar.mihaiconstantin.com        .\n.                         .                         .\n. . . . . . . . . . . . . . . . . . . . . . . . . . ."
+
+# Add package logo class.
+class(LOGO) <- "parabar"
+
+# Add S3 method for properly printing the logo.
+#' @export
+print.parabar <- function(x, ...) {
+    # Print the logo.
+    cat(LOGO, sep = "")
+}

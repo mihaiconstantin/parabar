@@ -2,7 +2,7 @@
 % Please edit documentation in R/Service.R
 \name{Service}
 \alias{Service}
-\title{\emph{Service}}
+\title{Service}
 \description{
 This is an interface that defines the operations available on a
 \code{\link{Backend}} implementation. Backend implementations and the
@@ -88,6 +88,10 @@ backend.
 \if{html}{\out{<div class="r">}}\preformatted{Service$clear()}\if{html}{\out{</div>}}
 }
 
+\subsection{Details}{
+This method is ran by default when the backend is started.
+}
+
 \subsection{Returns}{
 This method returns void.
 }
@@ -143,7 +147,7 @@ Evaluate an arbitrary expression on the backend.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{expression}}{An expression object to evaluate on the backend.}
+\item{\code{expression}}{An unquoted expression to evaluate on the backend.}
 }
 \if{html}{\out{</div>}}
 }

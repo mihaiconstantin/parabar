@@ -1,7 +1,7 @@
 #' @include Exception.R
 
 #' @title
-#' *Service*
+#' Service
 #'
 #' @description
 #' This is an interface that defines the operations available on a
@@ -53,6 +53,9 @@ Service <- R6::R6Class("Service",
         #' calling `rm(list = ls(all.names = TRUE))` on each node in the
         #' backend.
         #'
+        #' @details
+        #' This method is ran by default when the backend is started.
+        #'
         #' @return
         #' This method returns void.
         clear = function() {
@@ -87,7 +90,7 @@ Service <- R6::R6Class("Service",
         #' @description
         #' Evaluate an arbitrary expression on the backend.
         #'
-        #' @param expression An expression object to evaluate on the backend.
+        #' @param expression An unquoted expression to evaluate on the backend.
         #'
         #' @return
         #' This method returns the result of the expression evaluation.

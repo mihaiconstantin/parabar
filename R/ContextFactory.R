@@ -22,8 +22,8 @@
 #' class(context)
 #'
 #' @seealso
-#' [`parabar::Context`], [`parabar::ProgressDecorator`], and
-#' [`parabar::Service`].
+#' [`parabar::Context`], [`parabar::ProgressDecorator`], [`parabar::Service`],
+#' and [`parabar::Backend`]
 #'
 #' @export
 ContextFactory <- R6::R6Class("ContextFactory",
