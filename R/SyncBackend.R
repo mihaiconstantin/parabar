@@ -252,7 +252,7 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' @description
         #' Evaluate an arbitrary expression on the backend.
         #'
-        #' @param expression An expression object to evaluate on the backend.
+        #' @param expression An unquoted expression to evaluate on the backend.
         #'
         #' @return
         #' This method returns the result of the expression evaluation.
