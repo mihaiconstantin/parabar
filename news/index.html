@@ -47,19 +47,21 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.9.4" id="parabar-094">parabar 0.9.4<a class="anchor" aria-label="anchor" href="#parabar-094"></a></h2>
 <div class="section level3">
+<h3 id="added-0-9-4">Added<a class="anchor" aria-label="anchor" href="#added-0-9-4"></a></h3>
+<ul><li>Add custom styles to <code>extra.scss</code> to improve documentation website.</li>
+<li>Add <code>S3</code> print method for the <code>LOGO</code> object.</li>
+</ul></div>
+<div class="section level3">
 <h3 id="changed-0-9-4">Changed<a class="anchor" aria-label="anchor" href="#changed-0-9-4"></a></h3>
 <ul><li>Improve documentation for exported objects.</li>
 <li>Merge documentations of <code>get_option</code>, <code>set_option</code>, and <code>set_default_options</code>.</li>
 <li>Improved <code>README</code>. More specifically, added description for <code>Service</code> interface methods and enabled documentation linking (i.e., via <code>?</code>) for <code>pkgdown</code> website.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="added-0-9-4">Added<a class="anchor" aria-label="anchor" href="#added-0-9-4"></a></h3>
-<ul><li>Add custom styles to <code>extra.scss</code> to improve documentation website.</li>
-<li>Add <code>S3</code> print method for the <code>LOGO</code> object.</li>
-</ul></div>
-<div class="section level3">
 <h3 id="fixed-0-9-4">Fixed<a class="anchor" aria-label="anchor" href="#fixed-0-9-4"></a></h3>
 <ul><li>Add missing export for <code>Options</code> class.</li>
+<li>Ensure the examples in <code>ProgressBar</code> use <code>wait = TRUE</code> when fetching the output.</li>
+<li>Fix bug in the <code>evaluate</code> backend operation. The expression passed to <code>evaluate</code> was not correctly passed along the function chain to <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parallel::clusterCall</a></code>. See <a href="https://stackoverflow.com/q/75543796/5252007" class="external-link">this question</a> on <code>StackOverflow</code> for clarifications. Closes <a href="https://github.com/mihaiconstantin/parabar/issues/9" class="external-link">#9</a>.</li>
 </ul></div>
 </div>
     <div class="section level2">
