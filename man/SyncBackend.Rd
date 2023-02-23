@@ -34,7 +34,10 @@ name <- "parabar"
 # Export the variable to the backend.
 backend$export("name")
 
-# Run an expression on the backend.
+# Remove variable from current environment.
+rm(name)
+
+# Run an expression on the backend, using the exported variable `name`.
 backend$evaluate({
     # Print the name.
     print(paste0("Hello, ", name, "!"))
@@ -223,7 +226,7 @@ Evaluate an arbitrary expression on the backend.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{expression}}{An expression object to evaluate on the backend.}
+\item{\code{expression}}{An unquoted expression to evaluate on the backend.}
 }
 \if{html}{\out{</div>}}
 }
