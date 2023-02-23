@@ -141,8 +141,11 @@ SyncBackend <- R6::R6Class("SyncBackend",
 
         # Evaluate an expression on the cluster.
         .evaluate = function(expression) {
+            # Capture the expression.
+            capture <- substitute(expression)
+
             # Evaluate the expression.
-            parallel::clusterCall(private$.cluster, eval, expression)
+            parallel::clusterCall(private$.cluster, eval, capture)
         },
 
         # A wrapper around `parallel:parSapply` to run tasks on the cluster.
@@ -254,8 +257,14 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' @return
         #' This method returns the result of the expression evaluation.
         evaluate = function(expression) {
-            # Evaluate the expression.
-            private$.evaluate(substitute(expression))
+            # Capture the expression.
+            capture <- substitute(expression)
+
+            # Create call.
+            capture_call <- bquote(private$.evaluate(.(capture)))
+
+            # Perform the call.
+            eval(capture_call)
         },
 
         #' @description

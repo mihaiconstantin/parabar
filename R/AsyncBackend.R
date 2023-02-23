@@ -191,11 +191,14 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
 
         # Evaluate an expression on the cluster in the session.
         .evaluate = function(expression) {
+            # Capture the expression.
+            capture <- substitute(expression)
+
            # Perform the evaluation on the cluster via the `R` session.
             private$.cluster$run(function(expression) {
                 # Evaluate the expression.
                 parallel::clusterCall(cluster, eval, expression)
-            }, args = list(expression))
+            }, args = list(capture))
         },
 
         # Run tasks on the cluster in the session asynchronously.
@@ -401,7 +404,14 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
         #' @return
         #' This method returns the result of the expression evaluation.
         evaluate = function(expression) {
-            private$.evaluate(substitute(expression))
+            # Capture the expression.
+            capture <- substitute(expression)
+
+            # Prepare the call.
+            capture_call <- bquote(private$.evaluate(.(capture)))
+
+            # Perform the call.
+            eval(capture_call)
         },
 
         #' @description
