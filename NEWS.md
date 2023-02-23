@@ -1,5 +1,9 @@
 # parabar 0.9.4
 
+## Added
+- Add custom styles to `extra.scss` to improve documentation website.
+- Add `S3` print method for the `LOGO` object.
+
 ## Changed
 - Improve documentation for exported objects.
 - Merge documentations of `get_option`, `set_option`, and `set_default_options`.
@@ -7,16 +11,14 @@
   interface methods and enabled documentation linking (i.e., via `?`) for
   `pkgdown` website.
 
-## Added
-- Add custom styles to `extra.scss` to improve documentation website.
-- Add `S3` print method for the `LOGO` object.
-
 ## Fixed
 - Add missing export for `Options` class.
+- Ensure the examples in `ProgressBar` use `wait = TRUE` when fetching the
+  output.
 - Fix bug in the `evaluate` backend operation. The expression passed to
   `evaluate` was not correctly passed along the function chain to
-  `parallel::clusterCall`. See [this question
-  on](https://stackoverflow.com/q/75543796/5252007) `StackOverflow` for
+  `parallel::clusterCall`. See [this
+  question](https://stackoverflow.com/q/75543796/5252007) on `StackOverflow` for
   clarifications. Closes
   [#9](https://github.com/mihaiconstantin/parabar/issues/9).
 
