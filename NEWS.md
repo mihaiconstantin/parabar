@@ -13,6 +13,12 @@
 
 ## Fixed
 - Add missing export for `Options` class.
+- Fix bug in the `evaluate` backend operation. The expression passed to
+  `evaluate` was not correctly passed along the function chain to
+  `parallel::clusterCall`. See [this question
+  on](https://stackoverflow.com/q/75543796/5252007) `StackOverflow` for
+  clarifications. Closes
+  [#9](https://github.com/mihaiconstantin/parabar/issues/9).
 
 # parabar 0.9.3
 
