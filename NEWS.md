@@ -1,3 +1,11 @@
+# Development
+
+## Added
+- Add helper method for checking and validating the type of an object. The
+  `Helper$check_object_type` method checks if the type of an object matches an
+  expected type. If that is not the case, the helper throws an error (i.e.,
+  `Exception$type_not_assignable`).
+
 # parabar 0.9.4
 
 ## Added
