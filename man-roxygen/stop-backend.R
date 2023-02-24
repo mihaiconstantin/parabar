@@ -15,8 +15,11 @@
 #' instance.
 #'
 #' @return
-#' The function returns void. It throws an error if the
-#' [`backend`][`parabar::Backend`] provided is already stopped.
+#' The function returns void. It throws an error if:
+#' - the value provided for the `backend` argument is not an instance of class
+#'   [`parabar::Backend`].
+#' - the [`backend`][`parabar::Backend`] object provided is already stopped
+#'   (i.e., is not active).
 #'
 #' @examples
 #' # Create a synchronous backend.

@@ -11,8 +11,13 @@ stop_backend(backend)
 \code{\link[=start_backend]{start_backend()}} function.}
 }
 \value{
-The function returns void. It throws an error if the
-\code{\link[=Backend]{backend}} provided is already stopped.
+The function returns void. It throws an error if:
+\itemize{
+\item the value provided for the \code{backend} argument is not an instance of class
+\code{\link{Backend}}.
+\item the \code{\link[=Backend]{backend}} object provided is already stopped
+(i.e., is not active).
+}
 }
 \description{
 This function can be used to stop a \code{\link[=Backend]{backend}} created
