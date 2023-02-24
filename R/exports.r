@@ -105,6 +105,16 @@ stop_backend <- function(backend) {
 }
 
 
+#' @export
+clear <- function(backend) {
+    # Check the type.
+    Helper$check_object_type(backend, "Backend")
+
+    # Peek the backend.
+    backend$clear()
+}
+
+
 #' @template par-sapply
 #' @export
 par_sapply <- function(backend = NULL, x, fun, ...) {
