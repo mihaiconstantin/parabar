@@ -8,7 +8,8 @@
 #' See the **Details** section for more information on how this function works.
 #'
 #' @param backend An object of class [`parabar::Backend`] as returned by the
-#' [parabar::start_backend()] function.
+#' [parabar::start_backend()] function. It can also be `NULL` to run the task
+#' sequentially via [base::sapply()]. The default value is `NULL`.
 #'
 #' @param x A vector (i.e., usually of integers) to pass to the `fun` function.
 #'

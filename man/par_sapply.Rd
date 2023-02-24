@@ -4,11 +4,12 @@
 \alias{par_sapply}
 \title{Run a Task in Parallel}
 \usage{
-par_sapply(backend, x, fun, ...)
+par_sapply(backend = NULL, x, fun, ...)
 }
 \arguments{
 \item{backend}{An object of class \code{\link{Backend}} as returned by the
-\code{\link[=start_backend]{start_backend()}} function.}
+\code{\link[=start_backend]{start_backend()}} function. It can also be \code{NULL} to run the task
+sequentially via \code{\link[base:lapply]{base::sapply()}}. The default value is \code{NULL}.}
 
 \item{x}{A vector (i.e., usually of integers) to pass to the \code{fun} function.}
 
