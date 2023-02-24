@@ -115,6 +115,16 @@ clear <- function(backend) {
 }
 
 
+#' @export
+export <- function(backend, variables, environment) {
+    # Check the type.
+    Helper$check_object_type(backend, "Backend")
+
+    # Export variables.
+    backend$export(variables, environment)
+}
+
+
 #' @template par-sapply
 #' @export
 par_sapply <- function(backend = NULL, x, fun, ...) {
