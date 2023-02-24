@@ -116,6 +116,16 @@ clear <- function(backend) {
 
 
 #' @export
+peek <- function(backend) {
+    # Check the type.
+    Helper$check_object_type(backend, "Backend")
+
+    # Peek the backend..
+    backend$peek()
+}
+
+
+#' @export
 export <- function(backend, variables, environment) {
     # Check the type.
     Helper$check_object_type(backend, "Backend")
