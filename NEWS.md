@@ -5,6 +5,7 @@
   `Helper$check_object_type` method checks if the type of an object matches an
   expected type. If that is not the case, the helper throws an error (i.e.,
   `Exception$type_not_assignable`).
+- Add type checks for the exported functions (i.e., the user API).
 
 # parabar 0.9.4
 

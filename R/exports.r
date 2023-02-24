@@ -94,6 +94,9 @@ start_backend <- function(cores, cluster_type = "psock", backend_type = "async")
 #' @template stop-backend
 #' @export
 stop_backend <- function(backend) {
+    # Check the type.
+    Helper$check_object_type(backend, "Backend")
+
     # Stop the backend
     backend$stop()
 
@@ -112,6 +115,11 @@ par_sapply <- function(backend, x, fun, ...) {
 
         # Return results.
         return(output)
+
+    # Otherwise, if a backend is provided.
+    } else {
+        # Check the type.
+        Helper$check_object_type(backend, "Backend")
     }
 
     # Get user warning settings.
