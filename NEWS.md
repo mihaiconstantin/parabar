@@ -7,6 +7,10 @@
   `Exception$type_not_assignable`).
 - Add type checks for the exported functions (i.e., the user API).
 
+## Changed
+- Change `backend` argument of `par_sapply` to `backend = NULL`. This implies,
+  that `par_sapply` without a backend behaves identically to `base::sapply`.
+
 # parabar 0.9.4
 
 ## Added

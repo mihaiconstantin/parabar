@@ -107,7 +107,7 @@ stop_backend <- function(backend) {
 
 #' @template par-sapply
 #' @export
-par_sapply <- function(backend, x, fun, ...) {
+par_sapply <- function(backend = NULL, x, fun, ...) {
     # If no backend is provided.
     if (is.null(backend)) {
         # Then use the built in, non-parallel `base::sapply`.
