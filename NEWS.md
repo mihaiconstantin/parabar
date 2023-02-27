@@ -1,4 +1,4 @@
-# Development
+# parabar 0.10.0
 
 ## Added
 - Add new exported wrappers to the `pkgdown` reference section.
