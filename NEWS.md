@@ -1,6 +1,7 @@
 # Development
 
 ## Added
+- Add new exported wrappers to the `pkgdown` reference section.
 - Add several exported wrappers to the user API:
   - `clear`: to clean a provided backend instance.
   - `export`: to export variables from a give environment to the `.GlobalEnv` of
@@ -14,13 +15,14 @@
   `Exception$type_not_assignable`).
 
 ## Changed
-- Change `backend` argument of `par_sapply` to `backend = NULL`. This implies,
-  that `par_sapply` without a backend behaves identically to `base::sapply`.
+- Update order of topics for website reference section generated via `pkgdown`.
 - Update `roxygen2` `@examples` for exported wrappers. The code for the examples
   is located in the documentation for the `start_backend` function. All other
   exported wrappers (i.e., `clear`, `export`, `peek`, `evaluate`, and
   `par_sapply`) inherit the `@examples` section from `start_backend`.
 - Update references in `@seealso` documentation sections.
+- Change `backend` argument of `par_sapply` to `backend = NULL`. This implies,
+  that `par_sapply` without a backend behaves identically to `base::sapply`.
 
 ## Fixed
 - Update `export` method to use the `.GlobalEnv` as fallback when exporting
