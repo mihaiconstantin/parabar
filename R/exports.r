@@ -126,6 +126,7 @@ peek <- function(backend) {
 }
 
 
+#' @template export
 #' @export
 export <- function(backend, variables, environment) {
     # Check the type.
