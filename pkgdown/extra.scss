@@ -29,6 +29,20 @@
                 border-radius: 1rem;
             }
         }
+
+        #additional-operations ~ table {
+            display: table;
+
+            col {
+                &:first-of-type {
+                    width: 55%;
+                }
+
+                &:last-of-type {
+                    width: 45%;
+                }
+            }
+        }
     }
 
     .row {
