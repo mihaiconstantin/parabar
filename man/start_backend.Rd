@@ -74,56 +74,61 @@ interface.
 # Create an asynchronous backend.
 backend <- start_backend(cores = 2, cluster_type = "psock", backend_type = "async")
 
+# Check that the backend is active.
+backend$active
+
 # Check if there is anything on the backend.
-backend$peek()
+peek(backend)
 
 # Create a dummy variable.
 name <- "parabar"
 
-# Export the variable to the backend.
-backend$export("name")
+# Export the `name` variable in the current environment to the backend.
+export(backend, "name", environment())
+
+# Remove the dummy variable from the current environment.
+rm(name)
+
+# Check the backend to see that the variable has been exported.
+peek(backend)
 
 # Run an expression on the backend.
-backend$evaluate({
+# Note that the symbols in the expression are resolved on the backend.
+evaluate(backend, {
     # Print the name.
     print(paste0("Hello, ", name, "!"))
 })
 
-# Run a task in parallel (i.e., approx. 1.25 seconds).
-backend$sapply(
-    x = 1:10,
-    fun = function(x) {
-        # Sleep a bit.
-        Sys.sleep(0.25)
-
-        # Compute something.
-        output <- x + 1
-
-        # Return the result.
-        return(output)
-    }
-)
-
-# Right know the main process is free and the task is executing on a `PSOCK`
-# cluster started in a background `R` session.
-
-# Wait for the task to finish (i.e., by blocking the main process).
-backend$get_output(wait = TRUE)
-
 # Clear the backend.
-backend$clear()
+clear(backend)
 
-# Check that there is nothing on the cluster.
-backend$peek()
+# Check that there is nothing on the backend.
+peek(backend)
+
+# Use a basic progress bar (i.e., see `parabar::Bar`).
+configure_bar(type = "basic", style = 3)
+
+# Run a task in parallel (i.e., approx. 1.25 seconds).
+output <- par_sapply(backend, x = 1:10, fun = function(x) {
+    # Sleep a bit.
+    Sys.sleep(0.25)
+
+    # Compute and return.
+    return(x + 1)
+})
+
+# Print the output.
+print(output)
 
 # Stop the backend.
-backend$stop()
+stop_backend(backend)
 
 # Check that the backend is not active.
 backend$active
 
 }
 \seealso{
-\code{\link[=stop_backend]{stop_backend()}}, \code{\link{Service}}, \code{\link{Backend}}, and
-\code{\link{BackendFactory}}.
+\code{\link[=peek]{peek()}}, \code{\link[=export]{export()}}, \code{\link[=evaluate]{evaluate()}},
+\code{\link[=clear]{clear()}}, \code{\link[=configure_bar]{configure_bar()}}, \code{\link[=par_sapply]{par_sapply()}},
+\code{\link[=stop_backend]{stop_backend()}}, and \code{\link{Service}}.
 }

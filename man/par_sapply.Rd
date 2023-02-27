@@ -102,6 +102,8 @@ results <- par_sapply(NULL, x = 1:300, fun = task)
 
 }
 \seealso{
-\code{\link[=start_backend]{start_backend()}}, \code{\link[=stop_backend]{stop_backend()}},
-\code{\link[=configure_bar]{configure_bar()}}, \code{\link{Options}}
+\code{\link[=start_backend]{start_backend()}}, \code{\link[=peek]{peek()}}, \code{\link[=export]{export()}},
+\code{\link[=evaluate]{evaluate()}}, \code{\link[=clear]{clear()}}, \code{\link[=configure_bar]{configure_bar()}},
+\code{\link[=stop_backend]{stop_backend()}}, \code{\link[=set_option]{set_option()}}, \code{\link[=get_option]{get_option()}},
+\code{\link{Options}}, and \code{\link{Service}}.
 }

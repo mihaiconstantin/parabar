@@ -84,8 +84,8 @@ backend$active
 
 }
 \seealso{
-\code{\link{Service}}, \code{\link{Backend}}, \code{\link{SyncBackend}}, and
-\code{\link{ProgressDecorator}}.
+\code{\link{Service}}, \code{\link{Backend}}, \code{\link{SyncBackend}},
+\code{\link{ProgressDecorator}}, and \code{\link{TaskState}}.
 }
 \section{Super classes}{
 \code{\link[parabar:Service]{parabar::Service}} -> \code{\link[parabar:Backend]{parabar::Backend}} -> \code{AsyncBackend}
