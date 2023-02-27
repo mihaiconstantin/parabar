@@ -93,5 +93,7 @@
 #' }
 #'
 #' @seealso
-#' [parabar::start_backend()], [parabar::stop_backend()],
-#' [parabar::configure_bar()], [`parabar::Options`]
+#' [parabar::start_backend()], [parabar::peek()], [parabar::export()],
+#' [parabar::evaluate()], [parabar::clear()], [parabar::configure_bar()],
+#' [parabar::stop_backend()], [parabar::set_option()], [parabar::get_option()],
+#' [`parabar::Options`], and [`parabar::Service`].
