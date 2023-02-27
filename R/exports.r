@@ -137,6 +137,7 @@ export <- function(backend, variables, environment) {
 }
 
 
+#' @template evaluate
 #' @export
 evaluate <- function(backend, expression) {
     # Check the type.
