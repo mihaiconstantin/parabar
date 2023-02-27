@@ -1,7 +1,9 @@
 # parabar 0.10.1
 
 ## Changed
-- Remove `\dontrun{}` from `make_logo` function examples as per `CRAN` request.
+- Initially removed `\dontrun{}` from `make_logo` function examples as per
+  `CRAN` request in commit `87678fe`. However, this results in the examples
+  failing the `R-CMD-check` workflow. Reverted the change in commit `a9d11ac`.
 - Update version for constant `LOGO` from `v1.x.x` to `v0.x.x`.
 
 ## Fixed
