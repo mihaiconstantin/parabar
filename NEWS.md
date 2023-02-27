@@ -1,11 +1,20 @@
+# parabar 0.10.1
+
+## Changed
+- Remove `\dontrun{}` from `make_logo` function examples as per `CRAN` request.
+- Update version for constant `LOGO` from `v1.x.x` to `v0.x.x`.
+
+## Fixed
+- Add missing environment in examples for `SyncBackend` class.
+
 # parabar 0.10.0
 
 ## Added
 - Add new exported wrappers to the `pkgdown` reference section.
 - Add several exported wrappers to the user API:
   - `clear`: to clean a provided backend instance.
-  - `export`: to export variables from a give environment to the `.GlobalEnv` of
-    the backend instance.
+  - `export`: to export variables from a given environment to the `.GlobalEnv`
+    of the backend instance.
   - `peek`: to list the variables names available on the backend instance.
   - `evaluate`: to evaluate arbitrary expressions on the backend instance.
 - Add type checks for the exported functions (i.e., the user API).
