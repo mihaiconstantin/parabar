@@ -1,5 +1,5 @@
 #' @title
-#' Export To a Backend
+#' Export Objects To a Backend
 #'
 #' @description
 #' This function can be used to export objects to a
