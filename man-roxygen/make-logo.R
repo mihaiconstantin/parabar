@@ -15,10 +15,13 @@
 #' @return The ASCII logo.
 #'
 #' @examples
+#' \dontrun{
+#'
 #' # Generate the logo.
 #' logo <- make_logo()
 #'
 #' # Print the logo.
 #' cat(logo)
+#' }
 #'
 #' @seealso [`parabar::LOGO`]
