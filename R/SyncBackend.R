@@ -31,8 +31,8 @@
 #' # Create a dummy variable.
 #' name <- "parabar"
 #'
-#' # Export the variable to the backend.
-#' backend$export("name")
+#' # Export the variable from the current environment to the backend.
+#' backend$export("name", environment())
 #'
 #' # Remove variable from current environment.
 #' rm(name)
