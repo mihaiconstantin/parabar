@@ -21,18 +21,7 @@
 #' - the [`backend`][`parabar::Backend`] object provided is already stopped
 #'   (i.e., is not active).
 #'
-#' @examples
-#' # Create a synchronous backend.
-#' backend <- start_backend(cores = 2, cluster_type = "psock", backend_type = "sync")
-#'
-#' # Check that the backend is active.
-#' backend$active
-#'
-#' # Stop the backend.
-#' stop_backend(backend)
-#'
-#' # Check that the backend is not active.
-#' backend$active
+#' @inherit start_backend examples
 #'
 #' @seealso
 #' [parabar::start_backend()], [`parabar::Service`], [`parabar::Backend`], and
