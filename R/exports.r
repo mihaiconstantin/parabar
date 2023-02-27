@@ -115,6 +115,7 @@ clear <- function(backend) {
 }
 
 
+#' @template peek
 #' @export
 peek <- function(backend) {
     # Check the type.
