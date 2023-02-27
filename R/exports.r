@@ -173,15 +173,15 @@ par_sapply <- function(backend = NULL, x, fun, ...) {
     }
 
     # Get user warning settings.
-    warn <- getOption("warn")
+    user_options <- options()
 
     # Enable printing warnings as soon as they occur.
     options(warn = 1)
 
     # Restore user's original settings.
     on.exit({
-        # Reset warning level.
-        options(warn = warn)
+        # Reset user's options.
+        options(user_options)
     })
 
     # Whether to track progress or not.
