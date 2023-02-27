@@ -104,6 +104,7 @@ stop_backend <- function(backend) {
     invisible()
 }
 
+
 #' @template clear
 #' @export
 clear <- function(backend) {
