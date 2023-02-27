@@ -118,5 +118,6 @@
 #' backend$active
 #'
 #' @seealso
-#' [parabar::stop_backend()], [`parabar::Service`], [`parabar::Backend`], and
-#' [`parabar::BackendFactory`].
+#' [parabar::peek()], [parabar::export()], [parabar::evaluate()],
+#' [parabar::clear()], [parabar::configure_bar()], [parabar::par_sapply()],
+#' [parabar::stop_backend()], and [`parabar::Service`].

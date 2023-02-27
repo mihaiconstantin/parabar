@@ -24,5 +24,6 @@
 #' @inherit start_backend examples
 #'
 #' @seealso
-#' [parabar::start_backend()], [`parabar::Service`], [`parabar::Backend`], and
-#' [`parabar::BackendFactory`].
+#' [parabar::start_backend()], [parabar::peek()], [parabar::export()],
+#' [parabar::evaluate()], [parabar::clear()], [parabar::configure_bar()],
+#' [parabar::par_sapply()], and [`parabar::Service`].

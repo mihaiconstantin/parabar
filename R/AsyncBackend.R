@@ -83,8 +83,8 @@
 #' backend$active
 #'
 #' @seealso
-#' [`parabar::Service`], [`parabar::Backend`], [`parabar::SyncBackend`], and
-#' [`parabar::ProgressDecorator`].
+#' [`parabar::Service`], [`parabar::Backend`], [`parabar::SyncBackend`],
+#' [`parabar::ProgressDecorator`], and [`parabar::TaskState`].
 #'
 #' @export
 AsyncBackend <- R6::R6Class("AsyncBackend",
