@@ -1,15 +1,30 @@
 # Development
 
 ## Added
+- Add several exported wrappers to the user API:
+  - `clear`: to clean a provided backend instance.
+  - `export`: to export variables from a give environment to the `.GlobalEnv` of
+    the backend instance.
+  - `peek`: to list the variables names available on the backend instance.
+  - `evaluate`: to evaluate arbitrary expressions on the backend instance.
+- Add type checks for the exported functions (i.e., the user API).
 - Add helper method for checking and validating the type of an object. The
   `Helper$check_object_type` method checks if the type of an object matches an
   expected type. If that is not the case, the helper throws an error (i.e.,
   `Exception$type_not_assignable`).
-- Add type checks for the exported functions (i.e., the user API).
 
 ## Changed
 - Change `backend` argument of `par_sapply` to `backend = NULL`. This implies,
   that `par_sapply` without a backend behaves identically to `base::sapply`.
+- Update `roxygen2` `@examples` for exported wrappers. The code for the examples
+  is located in the documentation for the `start_backend` function. All other
+  exported wrappers (i.e., `clear`, `export`, `peek`, `evaluate`, and
+  `par_sapply`) inherit the `@examples` section from `start_backend`.
+- Update references in `@seealso` documentation sections.
+
+## Fixed
+- Update `export` method to use the `.GlobalEnv` as fallback when exporting
+  variables.
 
 # parabar 0.9.4
 
@@ -29,7 +44,7 @@
 - Ensure the examples in `ProgressBar` use `wait = TRUE` when fetching the
   output.
 - Fix bug in the `evaluate` backend operation. The expression passed to
-  `evaluate` was not correctly passed along the function chain to
+  `evaluate` was not correctly passed down the function chain to
   `parallel::clusterCall`. See [this
   question](https://stackoverflow.com/q/75543796/5252007) on `StackOverflow` for
   clarifications. Closes
