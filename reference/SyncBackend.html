@@ -16,7 +16,7 @@ blocking the main R session)."><meta property="og:image" content="http://parabar
     
     <a class="navbar-brand me-2" href="../index.html">parabar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -321,9 +321,8 @@ the <code>fun</code>. It resembles the format of <code><a href="https://rdrr.io/
 <span class="r-in"><span><span class="co"># Create a dummy variable.</span></span></span>
 <span class="r-in"><span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"parabar"</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Export the variable to the backend.</span></span></span>
-<span class="r-in"><span><span class="va">backend</span><span class="op">$</span><span class="fu">export</span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get(name, envir = envir):</span> object 'name' not found</span>
+<span class="r-in"><span><span class="co"># Export the variable from the current environment to the backend.</span></span></span>
+<span class="r-in"><span><span class="va">backend</span><span class="op">$</span><span class="fu">export</span><span class="op">(</span><span class="st">"name"</span>, <span class="fu"><a href="https://rdrr.io/r/base/environment.html" class="external-link">environment</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Remove variable from current environment.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></span>
@@ -333,7 +332,12 @@ the <code>fun</code>. It resembles the format of <code><a href="https://rdrr.io/
 <span class="r-in"><span>    <span class="co"># Print the name.</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Hello, "</span>, <span class="va">name</span>, <span class="st">"!"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in checkForRemoteErrors(lapply(cl, recvResult)):</span> 2 nodes produced errors; first error: object 'name' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Hello, parabar!"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Hello, parabar!"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run a task in parallel (i.e., approx. 1.25 seconds).</span></span></span>
 <span class="r-in"><span><span class="va">backend</span><span class="op">$</span><span class="fu">sapply</span><span class="op">(</span></span></span>
