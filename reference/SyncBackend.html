@@ -146,7 +146,7 @@ binding <code>cluster</code>.</p>
 </div>
 
 </div><p></p><hr><a id="method-SyncBackend-clear"></a><div class="section">
-<h3 id="method-clear-">Method <code>clear()</code><a class="anchor" aria-label="anchor" href="#method-clear-"></a></h3>
+<h3 id="method-clear-">Method <code><a href="clear.html">clear()</a></code><a class="anchor" aria-label="anchor" href="#method-clear-"></a></h3>
 <p>Remove all objects from the backend. This function is equivalent to
 calling <code>rm(list = ls(all.names = TRUE))</code> on each node in the
 backend.</p><div class="section">
@@ -160,7 +160,7 @@ backend.</p><div class="section">
 </div>
 
 </div><p></p><hr><a id="method-SyncBackend-peek"></a><div class="section">
-<h3 id="method-peek-">Method <code>peek()</code><a class="anchor" aria-label="anchor" href="#method-peek-"></a></h3>
+<h3 id="method-peek-">Method <code><a href="peek.html">peek()</a></code><a class="anchor" aria-label="anchor" href="#method-peek-"></a></h3>
 <p>Inspect the backend for variables available in the <code>.GlobalEnv</code>.</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">peek</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
@@ -175,7 +175,7 @@ node.</p>
 </div>
 
 </div><p></p><hr><a id="method-SyncBackend-export"></a><div class="section">
-<h3 id="method-export-">Method <code>export()</code><a class="anchor" aria-label="anchor" href="#method-export-"></a></h3>
+<h3 id="method-export-">Method <code><a href="export.html">export()</a></code><a class="anchor" aria-label="anchor" href="#method-export-"></a></h3>
 <p>Export variables from a given environment to the backend.</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">export</span><span class="op">(</span><span class="va">variables</span>, <span class="va">environment</span><span class="op">)</span></span></code></pre></div><p></p></div>
@@ -200,7 +200,7 @@ variables.</p></dd>
 </div>
 
 </div><p></p><hr><a id="method-SyncBackend-evaluate"></a><div class="section">
-<h3 id="method-evaluate-">Method <code>evaluate()</code><a class="anchor" aria-label="anchor" href="#method-evaluate-"></a></h3>
+<h3 id="method-evaluate-">Method <code><a href="evaluate.html">evaluate()</a></code><a class="anchor" aria-label="anchor" href="#method-evaluate-"></a></h3>
 <p>Evaluate an arbitrary expression on the backend.</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">evaluate</span><span class="op">(</span><span class="va">expression</span><span class="op">)</span></span></code></pre></div><p></p></div>
@@ -323,6 +323,7 @@ the <code>fun</code>. It resembles the format of <code><a href="https://rdrr.io/
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Export the variable to the backend.</span></span></span>
 <span class="r-in"><span><span class="va">backend</span><span class="op">$</span><span class="fu">export</span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get(name, envir = envir):</span> object 'name' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Remove variable from current environment.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></span>
@@ -332,12 +333,7 @@ the <code>fun</code>. It resembles the format of <code><a href="https://rdrr.io/
 <span class="r-in"><span>    <span class="co"># Print the name.</span></span></span>
 <span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Hello, "</span>, <span class="va">name</span>, <span class="st">"!"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Hello, parabar!"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Hello, parabar!"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in checkForRemoteErrors(lapply(cl, recvResult)):</span> 2 nodes produced errors; first error: object 'name' not found</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Run a task in parallel (i.e., approx. 1.25 seconds).</span></span></span>
 <span class="r-in"><span><span class="va">backend</span><span class="op">$</span><span class="fu">sapply</span><span class="op">(</span></span></span>

@@ -65,9 +65,8 @@ solution for parallel processing in their packages.</p>
     <h2 id="users">Users<a class="anchor" aria-label="anchor" href="#users"></a></h2>
     
 
-<p>For the first category of users, <code>parabar</code> provides three main
-functions of
-interest:</p><ul><li><p><code><a href="start_backend.html">start_backend()</a></code>: creates a parallel backend for executing tasks
+<p>For the first category of users, <code>parabar</code> provides seven main
+functions of interest:</p><ul><li><p><code><a href="start_backend.html">start_backend()</a></code>: creates a parallel backend for executing tasks
 according to the specifications provided.</p></li>
 <li><p><code><a href="stop_backend.html">stop_backend()</a></code>: stops an active backend and makes the <code><a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6::R6</a></code>
 eligible for garbage collection.</p></li>
@@ -75,9 +74,16 @@ eligible for garbage collection.</p></li>
 <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">base::sapply()</a></code> function when no backend is provided. However, when a
 backend is provided, the function will execute a task in parallel on the
 backend, similar to the built-in function <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parallel::parSapply()</a></code>.</p></li>
-</ul><p>Additionally <code>parabar</code> provides a function
-<code><a href="configure_bar.html">configure_bar()</a></code> for configuring the progress bar. Finally, three
-functions can be used to get and set the package options:</p><ul><li><p><code><a href="option.html">get_option()</a></code>: gets the value of a package option.</p></li>
+<li><p><code><a href="clear.html">clear()</a></code>: removes all variables available on a backend.</p></li>
+<li><p><code><a href="peek.html">peek()</a></code>: returns the names of all variables available on a
+backend.</p></li>
+<li><p><code><a href="export.html">export()</a></code>: exports objects from a specified environment to a
+backend.</p></li>
+<li><p><code><a href="evaluate.html">evaluate()</a></code>: evaluates arbitrary and unquoted expression on a
+backend.</p></li>
+</ul><p><code>parabar</code> also provides a function <code><a href="configure_bar.html">configure_bar()</a></code> for
+configuring the progress bar, and three functions can be used to get and set
+the package options:</p><ul><li><p><code><a href="option.html">get_option()</a></code>: gets the value of a package option.</p></li>
 <li><p><code><a href="option.html">set_option()</a></code>: sets the value of a package option.</p></li>
 <li><p><code><a href="option.html">set_default_options()</a></code>: sets default values for all package
 options. This function is automatically called on package load.</p></li>

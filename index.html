@@ -106,7 +106,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <li>Execute a task in parallel.</li>
 <li>Stop the backend.</li>
 </ol>
-<p>Optionally, you can also configure the progress bar if the backend created supports progress tracking.</p>
+<p>Optionally, you can also configure the progress bar if the backend created supports progress tracking, or perform additional operations on the backend.</p>
 <div class="section level4">
 <h4 id="synchronous-backend">Synchronous Backend<a class="anchor" aria-label="anchor" href="#synchronous-backend"></a>
 </h4>
@@ -228,6 +228,52 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <span>    <span class="co"># Compute and return.</span></span>
 <span>    <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="additional-operations">Additional Operations<a class="anchor" aria-label="anchor" href="#additional-operations"></a>
+</h4>
+<p>As indicated above, the general workflow consists of starting a backend, executing a task in parallel, and stopping the backend. However, there are additional operations that can be performed on a backend (i.e., see <em><strong>Developers</strong></em> section). The table below lists all available operations that can be performed on a backend.</p>
+<table class="table">
+<colgroup>
+<col width="73%">
+<col width="26%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Operation</th>
+<th align="left">Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code><a href="https://parabar.mihaiconstantin.com/reference/start_backend.html" class="external-link">start_backend(backend)</a></code></td>
+<td align="left">Start a backend.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://parabar.mihaiconstantin.com/reference/stop_backend.html" class="external-link">stop_backend(backend)</a></code></td>
+<td align="left">Stop a backend.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://parabar.mihaiconstantin.com/reference/clear.html" class="external-link">clear(backend)</a></code></td>
+<td align="left">Remove all objects from a backend.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://parabar.mihaiconstantin.com/reference/peek.html" class="external-link">peek(backend)</a></code></td>
+<td align="left">List the names of the variables on a backend.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://parabar.mihaiconstantin.com/reference/export.html" class="external-link">export(backend, variables, environment)</a></code></td>
+<td align="left">Export objects to a backend.</td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="https://parabar.mihaiconstantin.com/reference/evaluate.html" class="external-link">evaluate(backend, expression)</a></code></td>
+<td align="left">Evaluate expressions on a backend.</td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="https://parabar.mihaiconstantin.com/reference/par_sapply.html" class="external-link">par_sapply(backend, x, fun)</a></code></td>
+<td align="left">Run tasks in parallel on a backend.</td>
+</tr>
+</tbody>
+</table>
+<p>Check the documentation corresponding to each operation for more information and examples.</p>
 </div>
 </div>
 <div class="section level3">

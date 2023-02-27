@@ -76,7 +76,16 @@
     <loc>http://parabar.mihaiconstantin.com/reference/Warning.html</loc>
   </url>
   <url>
+    <loc>http://parabar.mihaiconstantin.com/reference/clear.html</loc>
+  </url>
+  <url>
     <loc>http://parabar.mihaiconstantin.com/reference/configure_bar.html</loc>
+  </url>
+  <url>
+    <loc>http://parabar.mihaiconstantin.com/reference/evaluate.html</loc>
+  </url>
+  <url>
+    <loc>http://parabar.mihaiconstantin.com/reference/export.html</loc>
   </url>
   <url>
     <loc>http://parabar.mihaiconstantin.com/reference/index.html</loc>
@@ -92,6 +101,9 @@
   </url>
   <url>
     <loc>http://parabar.mihaiconstantin.com/reference/parabar-package.html</loc>
+  </url>
+  <url>
+    <loc>http://parabar.mihaiconstantin.com/reference/peek.html</loc>
   </url>
   <url>
     <loc>http://parabar.mihaiconstantin.com/reference/start_backend.html</loc>

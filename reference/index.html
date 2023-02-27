@@ -56,21 +56,6 @@
 
       <dl><dt>
           
-          <code><a href="configure_bar.html">configure_bar()</a></code> 
-        </dt>
-        <dd>Configure The Progress Bar</dd>
-      </dl><dl><dt>
-          
-          <code><a href="option.html">get_option()</a></code> <code><a href="option.html">set_option()</a></code> <code><a href="option.html">set_default_options()</a></code> 
-        </dt>
-        <dd>Get or Set Package Option</dd>
-      </dl><dl><dt>
-          
-          <code><a href="par_sapply.html">par_sapply()</a></code> 
-        </dt>
-        <dd>Run a Task in Parallel</dd>
-      </dl><dl><dt>
-          
           <code><a href="start_backend.html">start_backend()</a></code> 
         </dt>
         <dd>Start a Backend</dd>
@@ -79,6 +64,41 @@
           <code><a href="stop_backend.html">stop_backend()</a></code> 
         </dt>
         <dd>Stop a Backend</dd>
+      </dl><dl><dt>
+          
+          <code><a href="export.html">export()</a></code> 
+        </dt>
+        <dd>Export Objects To a Backend</dd>
+      </dl><dl><dt>
+          
+          <code><a href="peek.html">peek()</a></code> 
+        </dt>
+        <dd>Inspect a Backend</dd>
+      </dl><dl><dt>
+          
+          <code><a href="clear.html">clear()</a></code> 
+        </dt>
+        <dd>Clear a Backend</dd>
+      </dl><dl><dt>
+          
+          <code><a href="evaluate.html">evaluate()</a></code> 
+        </dt>
+        <dd>Evaluate An Expression On The Backend</dd>
+      </dl><dl><dt>
+          
+          <code><a href="par_sapply.html">par_sapply()</a></code> 
+        </dt>
+        <dd>Run a Task in Parallel</dd>
+      </dl><dl><dt>
+          
+          <code><a href="configure_bar.html">configure_bar()</a></code> 
+        </dt>
+        <dd>Configure The Progress Bar</dd>
+      </dl><dl><dt>
+          
+          <code><a href="option.html">get_option()</a></code> <code><a href="option.html">set_option()</a></code> <code><a href="option.html">set_default_options()</a></code> 
+        </dt>
+        <dd>Get or Set Package Option</dd>
       </dl></div><div class="section level2">
       
       <h3 id="developer-classes">Developer Classes<a class="anchor" aria-label="anchor" href="#developer-classes"></a></h3>
@@ -92,9 +112,9 @@
 
       <dl><dt>
           
-          <code><a href="AsyncBackend.html">AsyncBackend</a></code> 
+          <code><a href="Service.html">Service</a></code> 
         </dt>
-        <dd>AsyncBackend</dd>
+        <dd>Service</dd>
       </dl><dl><dt>
           
           <code><a href="Backend.html">Backend</a></code> 
@@ -102,64 +122,19 @@
         <dd>Backend</dd>
       </dl><dl><dt>
           
+          <code><a href="SyncBackend.html">SyncBackend</a></code> 
+        </dt>
+        <dd>SyncBackend</dd>
+      </dl><dl><dt>
+          
+          <code><a href="AsyncBackend.html">AsyncBackend</a></code> 
+        </dt>
+        <dd>AsyncBackend</dd>
+      </dl><dl><dt>
+          
           <code><a href="BackendFactory.html">BackendFactory</a></code> 
         </dt>
         <dd>BackendFactory</dd>
-      </dl><dl><dt>
-          
-          <code><a href="Bar.html">Bar</a></code> 
-        </dt>
-        <dd>Bar</dd>
-      </dl><dl><dt>
-          
-          <code><a href="BarFactory.html">BarFactory</a></code> 
-        </dt>
-        <dd>BackendFactory</dd>
-      </dl><dl><dt>
-          
-          <code><a href="BasicBar.html">BasicBar</a></code> 
-        </dt>
-        <dd>BasicBar</dd>
-      </dl><dl><dt>
-          
-          <code><a href="Context.html">Context</a></code> 
-        </dt>
-        <dd>Context</dd>
-      </dl><dl><dt>
-          
-          <code><a href="ContextFactory.html">ContextFactory</a></code> 
-        </dt>
-        <dd>BackendFactory</dd>
-      </dl><dl><dt>
-          
-          <code><a href="Exception.html">Exception</a></code> 
-        </dt>
-        <dd>Package Exceptions</dd>
-      </dl><dl><dt>
-          
-          <code><a href="Helper.html">Helper</a></code> 
-        </dt>
-        <dd>Package Helpers</dd>
-      </dl><dl><dt>
-          
-          <code><a href="ModernBar.html">ModernBar</a></code> 
-        </dt>
-        <dd>ModernBar</dd>
-      </dl><dl><dt>
-          
-          <code><a href="Options.html">Options</a></code> 
-        </dt>
-        <dd>Class for Package Options</dd>
-      </dl><dl><dt>
-          
-          <code><a href="ProgressDecorator.html">ProgressDecorator</a></code> 
-        </dt>
-        <dd>ProgressDecorator</dd>
-      </dl><dl><dt>
-          
-          <code><a href="Service.html">Service</a></code> 
-        </dt>
-        <dd>Service</dd>
       </dl><dl><dt>
           
           <code><a href="Specification.html">Specification</a></code> 
@@ -167,9 +142,19 @@
         <dd>Specification</dd>
       </dl><dl><dt>
           
-          <code><a href="SyncBackend.html">SyncBackend</a></code> 
+          <code><a href="Context.html">Context</a></code> 
         </dt>
-        <dd>SyncBackend</dd>
+        <dd>Context</dd>
+      </dl><dl><dt>
+          
+          <code><a href="ProgressDecorator.html">ProgressDecorator</a></code> 
+        </dt>
+        <dd>ProgressDecorator</dd>
+      </dl><dl><dt>
+          
+          <code><a href="ContextFactory.html">ContextFactory</a></code> 
+        </dt>
+        <dd>BackendFactory</dd>
       </dl><dl><dt>
           
           <code><a href="TaskState.html">TaskState</a></code> 
@@ -177,9 +162,44 @@
         <dd>TaskState</dd>
       </dl><dl><dt>
           
+          <code><a href="Bar.html">Bar</a></code> 
+        </dt>
+        <dd>Bar</dd>
+      </dl><dl><dt>
+          
+          <code><a href="BasicBar.html">BasicBar</a></code> 
+        </dt>
+        <dd>BasicBar</dd>
+      </dl><dl><dt>
+          
+          <code><a href="ModernBar.html">ModernBar</a></code> 
+        </dt>
+        <dd>ModernBar</dd>
+      </dl><dl><dt>
+          
+          <code><a href="BarFactory.html">BarFactory</a></code> 
+        </dt>
+        <dd>BackendFactory</dd>
+      </dl><dl><dt>
+          
+          <code><a href="Options.html">Options</a></code> 
+        </dt>
+        <dd>Class for Package Options</dd>
+      </dl><dl><dt>
+          
+          <code><a href="Helper.html">Helper</a></code> 
+        </dt>
+        <dd>Package Helpers</dd>
+      </dl><dl><dt>
+          
           <code><a href="Warning.html">Warning</a></code> 
         </dt>
         <dd>Package Warnings</dd>
+      </dl><dl><dt>
+          
+          <code><a href="Exception.html">Exception</a></code> 
+        </dt>
+        <dd>Package Exceptions</dd>
       </dl></div><div class="section level2">
       
       <h3 id="miscellaneous">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous"></a></h3>

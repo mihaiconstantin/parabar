@@ -60,14 +60,15 @@ See the <strong>Details</strong> section for more information on how this functi
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">par_sapply</span><span class="op">(</span><span class="va">backend</span>, <span class="va">x</span>, <span class="va">fun</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">par_sapply</span><span class="op">(</span>backend <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">x</span>, <span class="va">fun</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>backend</dt>
 <dd><p>An object of class <code><a href="Backend.html">Backend</a></code> as returned by the
-<code><a href="start_backend.html">start_backend()</a></code> function.</p></dd>
+<code><a href="start_backend.html">start_backend()</a></code> function. It can also be <code>NULL</code> to run the task
+sequentially via <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">base::sapply()</a></code>. The default value is <code>NULL</code>.</p></dd>
 
 
 <dt>x</dt>
@@ -106,8 +107,10 @@ context is also used if the progress tracking is disabled via the
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="start_backend.html">start_backend()</a></code>, <code><a href="stop_backend.html">stop_backend()</a></code>,
-<code><a href="configure_bar.html">configure_bar()</a></code>, <code><a href="Options.html">Options</a></code></p></div>
+    <div class="dont-index"><p><code><a href="start_backend.html">start_backend()</a></code>, <code><a href="peek.html">peek()</a></code>, <code><a href="export.html">export()</a></code>,
+<code><a href="evaluate.html">evaluate()</a></code>, <code><a href="clear.html">clear()</a></code>, <code><a href="configure_bar.html">configure_bar()</a></code>,
+<code><a href="stop_backend.html">stop_backend()</a></code>, <code><a href="option.html">set_option()</a></code>, <code><a href="option.html">get_option()</a></code>,
+<code><a href="Options.html">Options</a></code>, and <code><a href="Service.html">Service</a></code>.</p></div>
     </div>
 
     <div class="section level2">
