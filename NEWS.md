@@ -15,6 +15,7 @@
   `Exception$type_not_assignable`).
 
 ## Changed
+- Update `README` and package documentation to mention new exported wrappers.
 - Update order of topics for website reference section generated via `pkgdown`.
 - Update `roxygen2` `@examples` for exported wrappers. The code for the examples
   is located in the documentation for the `start_backend` function. All other

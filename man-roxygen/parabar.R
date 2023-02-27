@@ -9,9 +9,8 @@
 #' solution for parallel processing in their packages.
 #'
 #' @section Users:
-#' For the first category of users, [`parabar::parabar`] provides three main
-#' functions of
-#' interest:
+#' For the first category of users, [`parabar::parabar`] provides seven main
+#' functions of interest:
 #' - [parabar::start_backend()]: creates a parallel backend for executing tasks
 #'   according to the specifications provided.
 #' - [parabar::stop_backend()]: stops an active backend and makes the [`R6::R6`]
@@ -20,10 +19,17 @@
 #'   [base::sapply()] function when no backend is provided. However, when a
 #'   backend is provided, the function will execute a task in parallel on the
 #'   backend, similar to the built-in function [parallel::parSapply()].
+#' - [parabar::clear()]: removes all variables available on a backend.
+#' - [parabar::peek()]: returns the names of all variables available on a
+#'   backend.
+#' - [parabar::export()]: exports objects from a specified environment to a
+#'   backend.
+#' - [parabar::evaluate()]: evaluates arbitrary and unquoted expression on a
+#'   backend.
 #'
-#'  Additionally [`parabar::parabar`] provides a function
-#'  [parabar::configure_bar()] for configuring the progress bar. Finally, three
-#'  functions can be used to get and set the package options:
+#'  [`parabar::parabar`] also provides a function [parabar::configure_bar()] for
+#'  configuring the progress bar, and three functions can be used to get and set
+#'  the package options:
 #' - [parabar::get_option()]: gets the value of a package option.
 #' - [parabar::set_option()]: sets the value of a package option.
 #' - [parabar::set_default_options()]: sets default values for all package

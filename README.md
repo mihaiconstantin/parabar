@@ -57,7 +57,7 @@ consists of the following steps:
 3. Stop the backend.
 
 Optionally, you can also configure the progress bar if the backend created
-supports progress tracking.
+supports progress tracking, or perform additional operations on the backend.
 
 #### Synchronous Backend
 The simplest, and perhaps least interesting, way to use
@@ -238,6 +238,26 @@ results <- par_sapply(backend = NULL, 1:300, function(x) {
     x + 1
 })
 ```
+
+#### Additional Operations
+As indicated above, the general workflow consists of starting a backend,
+executing a task in parallel, and stopping the backend. However, there are
+additional operations that can be performed on a backend (i.e., see
+_**Developers**_ section). The table below lists all available operations that
+can be performed on a backend.
+
+| Operation                                                                                                                    | Description                                   |
+| :--------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------- |
+| <code><a href="https://parabar.mihaiconstantin.com/reference/start_backend.html">start_backend(backend)</a></code>           | Start a backend.                              |
+| <code><a href="https://parabar.mihaiconstantin.com/reference/stop_backend.html">stop_backend(backend)</a></code>             | Stop a backend.                               |
+| <code><a href="https://parabar.mihaiconstantin.com/reference/clear.html">clear(backend)</a></code>                           | Remove all objects from a backend.          |
+| <code><a href="https://parabar.mihaiconstantin.com/reference/peek.html">peek(backend)</a></code>                             | List the names of the variables on a backend. |
+| <code><a href="https://parabar.mihaiconstantin.com/reference/export.html">export(backend, variables, environment)</a></code> | Export objects to a backend.                  |
+| <code><a href="https://parabar.mihaiconstantin.com/reference/evaluate.html">evaluate(backend, expression)</a></code>         | Evaluate expressions on a backend.            |
+| <code><a href="https://parabar.mihaiconstantin.com/reference/par_sapply.html">par_sapply(backend, x, fun)</a></code>         | Run tasks in parallel on a backend.           |
+
+Check the documentation corresponding to each operation for more information and
+examples.
 
 ### Developers
 [`parabar`](https://parabar.mihaiconstantin.com) provides a rich API for
