@@ -11,8 +11,8 @@
 #' @details
 #' This function is a convenience wrapper around the lower-lever API of
 #' [`parabar::parabar`] aimed at developers. More specifically, this function
-#' calls the `stop` method on the provided [`backend`][`parabar::Backend`]
-#' instance.
+#' calls the [`stop`][`parabar::Service`] method on the provided
+#' [`backend`][`parabar::Backend`] instance.
 #'
 #' @return
 #' The function returns void. It throws an error if:
