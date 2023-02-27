@@ -94,6 +94,9 @@ start_backend <- function(cores, cluster_type = "psock", backend_type = "async")
 #' @template stop-backend
 #' @export
 stop_backend <- function(backend) {
+    # Check the type.
+    Helper$check_object_type(backend, "Backend")
+
     # Stop the backend
     backend$stop()
 
@@ -102,9 +105,59 @@ stop_backend <- function(backend) {
 }
 
 
+#' @template clear
+#' @export
+clear <- function(backend) {
+    # Check the type.
+    Helper$check_object_type(backend, "Backend")
+
+    # Peek the backend.
+    backend$clear()
+}
+
+
+#' @template peek
+#' @export
+peek <- function(backend) {
+    # Check the type.
+    Helper$check_object_type(backend, "Backend")
+
+    # Peek the backend..
+    backend$peek()
+}
+
+
+#' @template export
+#' @export
+export <- function(backend, variables, environment) {
+    # Check the type.
+    Helper$check_object_type(backend, "Backend")
+
+    # Export variables.
+    backend$export(variables, environment)
+}
+
+
+#' @template evaluate
+#' @export
+evaluate <- function(backend, expression) {
+    # Check the type.
+    Helper$check_object_type(backend, "Backend")
+
+    # Capture the expression.
+    capture <- substitute(expression)
+
+    # Prepare the call.
+    capture_call <- bquote(backend$evaluate(.(capture)))
+
+    # Perform the call.
+    eval(capture_call)
+}
+
+
 #' @template par-sapply
 #' @export
-par_sapply <- function(backend, x, fun, ...) {
+par_sapply <- function(backend = NULL, x, fun, ...) {
     # If no backend is provided.
     if (is.null(backend)) {
         # Then use the built in, non-parallel `base::sapply`.
@@ -112,6 +165,11 @@ par_sapply <- function(backend, x, fun, ...) {
 
         # Return results.
         return(output)
+
+    # Otherwise, if a backend is provided.
+    } else {
+        # Check the type.
+        Helper$check_object_type(backend, "Backend")
     }
 
     # Get user warning settings.

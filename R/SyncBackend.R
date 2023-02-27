@@ -244,8 +244,8 @@ SyncBackend <- R6::R6Class("SyncBackend",
         export = function(variables, environment) {
             # If no environment is provided.
             if (missing(environment)) {
-                # Use the caller's environment where the variables are defined.
-                environment <- parent.frame()
+                # Use the global environment.
+                environment <- .GlobalEnv
             }
 
             # Export and return the output.

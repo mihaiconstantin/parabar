@@ -4,11 +4,12 @@
 \alias{par_sapply}
 \title{Run a Task in Parallel}
 \usage{
-par_sapply(backend, x, fun, ...)
+par_sapply(backend = NULL, x, fun, ...)
 }
 \arguments{
 \item{backend}{An object of class \code{\link{Backend}} as returned by the
-\code{\link[=start_backend]{start_backend()}} function.}
+\code{\link[=start_backend]{start_backend()}} function. It can also be \code{NULL} to run the task
+sequentially via \code{\link[base:lapply]{base::sapply()}}. The default value is \code{NULL}.}
 
 \item{x}{A vector (i.e., usually of integers) to pass to the \code{fun} function.}
 
@@ -101,6 +102,8 @@ results <- par_sapply(NULL, x = 1:300, fun = task)
 
 }
 \seealso{
-\code{\link[=start_backend]{start_backend()}}, \code{\link[=stop_backend]{stop_backend()}},
-\code{\link[=configure_bar]{configure_bar()}}, \code{\link{Options}}
+\code{\link[=start_backend]{start_backend()}}, \code{\link[=peek]{peek()}}, \code{\link[=export]{export()}},
+\code{\link[=evaluate]{evaluate()}}, \code{\link[=clear]{clear()}}, \code{\link[=configure_bar]{configure_bar()}},
+\code{\link[=stop_backend]{stop_backend()}}, \code{\link[=set_option]{set_option()}}, \code{\link[=get_option]{get_option()}},
+\code{\link{Options}}, and \code{\link{Service}}.
 }

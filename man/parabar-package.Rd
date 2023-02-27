@@ -19,9 +19,8 @@ solution for parallel processing in their packages.
 }
 \section{Users}{
 
-For the first category of users, \code{\link{parabar}} provides three main
-functions of
-interest:
+For the first category of users, \code{\link{parabar}} provides seven main
+functions of interest:
 \itemize{
 \item \code{\link[=start_backend]{start_backend()}}: creates a parallel backend for executing tasks
 according to the specifications provided.
@@ -31,11 +30,18 @@ eligible for garbage collection.
 \code{\link[base:lapply]{base::sapply()}} function when no backend is provided. However, when a
 backend is provided, the function will execute a task in parallel on the
 backend, similar to the built-in function \code{\link[parallel:clusterApply]{parallel::parSapply()}}.
+\item \code{\link[=clear]{clear()}}: removes all variables available on a backend.
+\item \code{\link[=peek]{peek()}}: returns the names of all variables available on a
+backend.
+\item \code{\link[=export]{export()}}: exports objects from a specified environment to a
+backend.
+\item \code{\link[=evaluate]{evaluate()}}: evaluates arbitrary and unquoted expression on a
+backend.
 }
 
-Additionally \code{\link{parabar}} provides a function
-\code{\link[=configure_bar]{configure_bar()}} for configuring the progress bar. Finally, three
-functions can be used to get and set the package options:
+\code{\link{parabar}} also provides a function \code{\link[=configure_bar]{configure_bar()}} for
+configuring the progress bar, and three functions can be used to get and set
+the package options:
 \itemize{
 \item \code{\link[=get_option]{get_option()}}: gets the value of a package option.
 \item \code{\link[=set_option]{set_option()}}: sets the value of a package option.

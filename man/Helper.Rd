@@ -8,6 +8,7 @@
 \item{\code{Helper$get_class_name()}}{Helper for getting the class of a given object.}
 \item{\code{Helper$get_option()}}{Get package option, or corresponding default value.}
 \item{\code{Helper$set_option()}}{Set package option.}
+\item{\code{Helper$check_object_type()}}{Check the type of a given object.}
 }
 }
 \description{

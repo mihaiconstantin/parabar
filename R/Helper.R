@@ -11,6 +11,7 @@
 #'   \item{\code{Helper$get_class_name()}}{Helper for getting the class of a given object.}
 #'   \item{\code{Helper$get_option()}}{Get package option, or corresponding default value.}
 #'   \item{\code{Helper$set_option()}}{Set package option.}
+#'   \item{\code{Helper$check_object_type()}}{Check the type of a given object.}
 #' }
 #'
 #' @export
@@ -54,4 +55,16 @@ Helper$set_option <- function(option, value) {
 
     # Set the `Options` instance in the global options.
     options(parabar = options)
+}
+
+# Helper for performing a type check on a given object.
+Helper$check_object_type <- function(object, expected_type) {
+    # Get object class name.
+    type <- Helper$get_class_name(object)
+
+    # If the object does not inherit from the expected type.
+    if (!inherits(object, expected_type)) {
+        # Throw incorrect type error.
+        Exception$type_not_assignable(type, expected_type)
+    }
 }
