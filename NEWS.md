@@ -3,6 +3,10 @@
 ## Changed
 - Update `README` to add `CRAN` installation instructions and new badges.
 
+## Fixed
+- Corrected expression for ignoring `.vscode` and `/inst/design/` folders in
+  `.Rbuildignore.
+
 # parabar 0.10.1
 
 ## Changed
