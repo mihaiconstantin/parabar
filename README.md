@@ -13,10 +13,13 @@
 <!-- badges: start -->
 <p align="center">
     <a href="https://www.repostatus.org/#active"><img src="https://www.repostatus.org/badges/latest/active.svg" alt="Repository status"/></a>
-    <a href="https://github.com/mihaiconstantin/parabar/releases"><img src="https://img.shields.io/github/v/release/mihaiconstantin/parabar?display_name=tag&sort=semver"/></a>
-    <a href="https://github.com/mihaiconstantin/parabar"><img src="https://www.r-pkg.org/badges/version/parabar" alt="CRAN version"/></a>
-    <a href="https://github.com/mihaiconstantin/parabar"><img src="https://cranlogs.r-pkg.org/badges/grand-total/parabar" alt="CRAN RStudio mirror downloads"/></a>
+    <a href="https://github.com/mihaiconstantin/parabar/releases"><img src="https://img.shields.io/github/v/release/mihaiconstantin/parabar?display_name=tag&sort=semver" alt="GitHub version"/></a>
+    <a href="https://CRAN.R-project.org/package=parabar "><img src="https://www.r-pkg.org/badges/version/parabar" alt="CRAN version"/></a>
+    <a href="https://www.r-pkg.org/pkg/parabar"><img src="https://cranlogs.r-pkg.org/badges/grand-total/parabar" alt="CRAN RStudio mirror downloads"/></a>
     <a href="https://github.com/mihaiconstantin/parabar/actions"><img src="https://github.com/mihaiconstantin/parabar/workflows/R-CMD-check/badge.svg" alt="R-CMD-check" /></a>
+    <a href="https://cran.rstudio.com/web/checks/check_results_parabar.html"><img src="https://badges.cranchecks.info/worst/parabar.svg" alt="CRAN checks"/></a>
+    <a href="https://parabar.mihaiconstantin.com"><img src="https://img.shields.io/badge/docs-website-brightgreen" alt="Documentation website"/></a>
+    <a href="https://raw.githubusercontent.com/mihaiconstantin/parabar/main/inst/design/parabar-design.drawio.svg"><img src="https://img.shields.io/badge/design-diagram-brightgreen" alt="Software design diagram"/></a>
 </p>
 <!-- badges: end -->
 
@@ -482,9 +485,9 @@ Check out the UML diagram below for a quick overview of the package design.
 
 ## Contributing
 - Any contributions are welcome and greatly appreciated. Please open a [pull
-  request](https://github.com/mihaiconstantin/parabar/pulls) on GitHub.
+  request](https://github.com/mihaiconstantin/parabar/pulls) on `GitHub`.
 - To report bugs, or request new features, please open an
-  [issue](https://github.com/mihaiconstantin/parabar/issues) on GitHub.
+  [issue](https://github.com/mihaiconstantin/parabar/issues) on `GitHub`.
 
 ## License
 The code in this repository is licensed under the [MIT
