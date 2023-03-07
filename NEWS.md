@@ -1,3 +1,8 @@
+# parabar 0.10.2
+
+## Changed
+- Update `README` to add `CRAN` installation instructions and new badges.
+
 # parabar 0.10.1
 
 ## Changed
