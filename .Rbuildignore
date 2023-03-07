@@ -1,9 +1,9 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 LICENSE.md
-.vscode/
+^\.vscode/$
 inst/debug/
-inst/design/
+^inst/design/$
 archive
 ^\.github$
 ^man-roxygen$
