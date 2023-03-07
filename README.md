@@ -31,11 +31,22 @@ in parallel in an interactive `R` session and track the execution progress, and
 processing in their packages.
 
 ## Installation
-We are planning to submit parabar soon to `CRAN`. In the meantime, you can
-install the latest development version from GitHub using the following command:
+
+You can install `parabar` directly from `CRAN` using the following command:
 
 ```r
-# Install the package.
+# Install the package from `CRAN`.
+install.packages("parabar")
+
+# Load the package.
+library(parabar)
+```
+
+Alternatively, you can also install the latest development version from `GitHub`
+via:
+
+```r
+# Install the package from `GitHub`.
 remotes::install_github("mihaiconstantin/parabar")
 
 # Load the package.
