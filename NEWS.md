@@ -1,3 +1,9 @@
+# Development
+
+## Changed
+- Update `UML` diagram to include missing classes and changed methods. Also
+  updated the corresponding diagram figure in the package documentation.
+
 # parabar 0.10.2
 
 ## Changed
