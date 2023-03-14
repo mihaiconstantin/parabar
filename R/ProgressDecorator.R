@@ -122,8 +122,8 @@ ProgressDecorator <- R6::R6Class("ProgressDecorator",
 
         # Create a temporary file to log progress from backend tasks.
         .make_log = function() {
-            # Get a temporary file name (i.e., OS specific).
-            file_path <- tempfile()
+            # Get a temporary file name (i.e., OS specific) or a fixed one.
+            file_path <- Helper$get_option("progress_log_path")
 
             # Create the temporary file.
             creation_status <- file.create(file_path)
