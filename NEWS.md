@@ -1,6 +1,14 @@
 # Development
 
+## Added
+- Add active biding `Options$progress_log_path` to handle generation of
+  temporary files for tracking the execution progress of tasks ran in parallel.
+  Using a custom path (e.g., for debugging) is also possible by setting this
+  active binding to a desired path.
+
 ## Changed
+- Update private method `.make_log` of `ProgressDecorator` to use the
+  `progress_log_path` option.
 - Update `UML` diagram to include missing classes and changed methods. Also
   updated the corresponding diagram figure in the package documentation.
 
