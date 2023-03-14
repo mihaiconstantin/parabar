@@ -188,9 +188,17 @@ abstract class, and is accessible via the \code{get_output()} method.
 \subsection{Method \code{get_output()}}{
 Get the output of the task execution.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Service$get_output()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Service$get_output(...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Additional optional arguments that may be used by concrete
+implementations.}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Details}{
 This method fetches the output of the task execution after calling
 the \code{sapply()} method. It returns the output and immediately removes
