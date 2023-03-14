@@ -25,7 +25,7 @@ reference:
     - BackendFactory
     - Specification
     - Context
-    - ProgressDecorator
+    - ProgressTrackingContext
     - ContextFactory
     - TaskState
     - Bar

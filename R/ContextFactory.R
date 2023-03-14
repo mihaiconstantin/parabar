@@ -1,4 +1,4 @@
-#' @include Exception.R Context.R ProgressDecorator.R
+#' @include Exception.R Context.R ProgressTrackingContext.R
 
 # Factory for fetching context instances (i.e., for managing and decorating backends).
 #' @title BackendFactory
@@ -22,8 +22,8 @@
 #' class(context)
 #'
 #' @seealso
-#' [`parabar::Context`], [`parabar::ProgressDecorator`], [`parabar::Service`],
-#' and [`parabar::Backend`]
+#' [`parabar::Context`], [`parabar::ProgressTrackingContext`],
+#' [`parabar::Service`], and [`parabar::Backend`]
 #'
 #' @export
 ContextFactory <- R6::R6Class("ContextFactory",
@@ -38,7 +38,7 @@ ContextFactory <- R6::R6Class("ContextFactory",
         #' @details
         #' When `type = "regular"` a [`parabar::Context`] instance is created
         #' and returned. When `type = "progress"` a
-        #' [`parabar::ProgressDecorator`] instance is provided instead.
+        #' [`parabar::ProgressTrackingContext`] instance is provided instead.
         #'
         #' @return
         #' An object of type [`parabar::Context`]. It throws an error if the
@@ -47,7 +47,7 @@ ContextFactory <- R6::R6Class("ContextFactory",
             return(
                 switch(type,
                     regular = Context$new(),
-                    progress = ProgressDecorator$new(),
+                    progress = ProgressTrackingContext$new(),
                     Exception$feature_not_developed()
                 )
             )

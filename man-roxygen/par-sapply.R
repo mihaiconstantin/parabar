@@ -23,7 +23,7 @@
 #' - Instantiates an appropriate [`parabar::parabar`] context. If the backend
 #' supports progress tracking (i.e., the backend is an instance of
 #' [`parabar::AsyncBackend`]), a progress tracking context (i.e.,
-#' [`parabar::ProgressDecorator`]) is instantiated and used. Otherwise, a
+#' [`parabar::ProgressTrackingContext`]) is instantiated and used. Otherwise, a
 #' regular context (i.e., [`parabar::Context`]) is instantiated. A regular
 #' context is also used if the progress tracking is disabled via the
 #' [`parabar::Options`] instance.

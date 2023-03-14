@@ -1,7 +1,7 @@
 #' @include Context.R Bar.R
 
 #' @title
-#' ProgressDecorator
+#' ProgressTrackingContext
 #'
 #' @description
 #' This class represents a progress tracking context for interacting with
@@ -50,7 +50,7 @@
 #' backend <- backend_factory$get("sync")
 #'
 #' # Create a progress tracking context object.
-#' context <- ProgressDecorator$new()
+#' context <- ProgressTrackingContext$new()
 #'
 #' # Attempt to set the incompatible backend instance.
 #' \dontrun{context$set_backend(backend)}
@@ -110,7 +110,7 @@
 #' [`parabar::AsyncBackend`].
 #'
 #' @export
-ProgressDecorator <- R6::R6Class("ProgressDecorator",
+ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
     inherit = Context,
 
     private = list(

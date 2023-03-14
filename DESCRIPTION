@@ -38,7 +38,7 @@ Collate:
     'BasicBar.R'
     'BarFactory.R'
     'Context.R'
-    'ProgressDecorator.R'
+    'ProgressTrackingContext.R'
     'ContextFactory.R'
     'Warning.R'
     'exports.r'

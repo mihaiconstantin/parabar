@@ -306,7 +306,7 @@ A **`context`** represents the specific conditions in which a backend object
 operates. The default context class (i.e., `?Context`) simply forwards the call
 to the corresponding backend method. However, a more complex context can augment
 the operation before forwarding the call to the backend. One example of a
-complex context is the `?ProgressDecorator` class. This class extends the
+complex context is the `?ProgressTrackingContext` class. This class extends the
 regular `?Context` class and decorates the backend `sapply` operation to log the
 progress after each task execution and display a progress bar.
 
@@ -323,8 +323,8 @@ The following are the main classes provided by
 - `BackendFactory`: Factory for creating `Backend` objects.
 - `Context`: Default context for executing backend operations without
   interference.
-- `ProgressDecorator`: Context for decorating the `sapply` operation to track
-  and display the progress.
+- `ProgressTrackingContext`: Context for decorating the `sapply` operation to
+  track and display the progress.
 - `ContextFactory`: Factory for creating `Context` objects.
 
 Additionally, [`parabar`](https://parabar.mihaiconstantin.com) also provides
@@ -419,9 +419,9 @@ context$set_backend(backend)
 The `?Context` class (i.e., and it's subclasses) implements the `?Service`
 interface, which means that we can use it to execute backend operations.
 
-Since we are using the `?ProgressDecorator` context, we also need to register a
-`?Bar` instance with the context. First, let's obtain a `?Bar` instance from the
-`?BarFactory`.
+Since we are using the `?ProgressTrackingContext` context, we also need to
+register a `?Bar` instance with the context. First, let's obtain a `?Bar`
+instance from the `?BarFactory`.
 
 ```r
 # Create a bar factory.

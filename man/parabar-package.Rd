@@ -84,10 +84,10 @@ A \strong{\code{context}} represents the specific conditions in which the backen
 operates. The default, regular \code{\link{Context}} class simply forwards the
 call to the corresponding backend method. However, a more complex context can
 augment the operation before forwarding the call to the backend. One example
-of a complex context is the \code{\link{ProgressDecorator}} class. This class
-extends the regular \code{\link{Context}} class and decorates the backend
-\code{\link[=Service]{sapply()}} operation to log the progress after each task
-execution and display a progress bar.
+of a complex context is the \code{\link{ProgressTrackingContext}} class. This
+class extends the regular \code{\link{Context}} class and decorates the
+backend \code{\link[=Service]{sapply()}} operation to log the progress after
+each task execution and display a progress bar.
 
 The following are the main classes provided by \code{parabar}:
 \itemize{
@@ -104,7 +104,7 @@ backend.
 asynchronous backend.
 \item \code{\link{BackendFactory}}: factory for creating backend objects.
 \item \code{\link{Context}}: default context for executing backend operations.
-\item \code{\link{ProgressDecorator}}: context for decorating the
+\item \code{\link{ProgressTrackingContext}}: context for decorating the
 \code{\link[=Service]{sapply()}} operation to track and display progress.
 \item \code{\link{ContextFactory}}: factory for creating context objects.
 }

@@ -34,7 +34,7 @@ This function is a wrapper around the developer API of the
 \item Instantiates an appropriate \code{\link{parabar}} context. If the backend
 supports progress tracking (i.e., the backend is an instance of
 \code{\link{AsyncBackend}}), a progress tracking context (i.e.,
-\code{\link{ProgressDecorator}}) is instantiated and used. Otherwise, a
+\code{\link{ProgressTrackingContext}}) is instantiated and used. Otherwise, a
 regular context (i.e., \code{\link{Context}}) is instantiated. A regular
 context is also used if the progress tracking is disabled via the
 \code{\link{Options}} instance.
