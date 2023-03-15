@@ -7,6 +7,15 @@
   active binding to a desired path.
 
 ## Changed
+- Replace `\dontrun{}` statements in examples with `try()` calls.
+- Update example for `Options` class to feature the `progress_log_path` active
+  binding.
+- Update progress logging injection approach in `.decorate` method of
+  `ProgressTrackingContext` to use `bquote` instead of `substitute`.
+- **Breaking**. Rename class `ProgressDecorator` to `ProgressTrackingContext` to
+  be more consistent with the idea of *backends* that run in *contexts*.
+- Add `...` optional arguments to signature of `get_output` method in `Service`
+  interface.
 - Update private method `.make_log` of `ProgressDecorator` to use the
   `progress_log_path` option.
 - Update `UML` diagram to include missing classes and changed methods. Also
