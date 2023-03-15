@@ -12,7 +12,7 @@
 #' It registers a backend instance and forwards all [`parabar::Service`] methods
 #' calls to the backend instance. Subclasses can override any of the
 #' [`parabar::Service`] methods to decorate the backend instance with additional
-#' functionality (e.g., see the [`parabar::ProgressDecorator`] class).
+#' functionality (e.g., see the [`parabar::ProgressTrackingContext`] class).
 #'
 #' @examples
 #' # Define a task to run in parallel.
@@ -78,8 +78,8 @@
 #' context$stop()
 #'
 #' @seealso
-#' [`parabar::ProgressDecorator`], [`parabar::Service`], [`parabar::Backend`],
-#' and [`parabar::SyncBackend`].
+#' [`parabar::ProgressTrackingContext`], [`parabar::Service`],
+#' [`parabar::Backend`], and [`parabar::SyncBackend`].
 #'
 #' @export
 Context <- R6::R6Class("Context",

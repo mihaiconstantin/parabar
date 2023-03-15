@@ -64,7 +64,7 @@ backend$sapply(
 
 # Trying to get the output immediately will throw an error, indicating that the
 # task is still running.
-\dontrun{backend$get_output()}
+try(backend$get_output())
 
 # However, we can block the main process and wait for the task to complete
 # before fetching the results.
@@ -85,7 +85,7 @@ backend$active
 }
 \seealso{
 \code{\link{Service}}, \code{\link{Backend}}, \code{\link{SyncBackend}},
-\code{\link{ProgressDecorator}}, and \code{\link{TaskState}}.
+\code{\link{ProgressTrackingContext}}, and \code{\link{TaskState}}.
 }
 \section{Super classes}{
 \code{\link[parabar:Service]{parabar::Service}} -> \code{\link[parabar:Backend]{parabar::Backend}} -> \code{AsyncBackend}

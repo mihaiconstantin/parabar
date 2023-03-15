@@ -103,7 +103,7 @@ backend$stop()
 
 }
 \seealso{
-\code{\link{AsyncBackend}} and \code{\link{ProgressDecorator}}.
+\code{\link{AsyncBackend}} and \code{\link{ProgressTrackingContext}}.
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}

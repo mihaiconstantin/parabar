@@ -126,10 +126,13 @@ Service <- R6::R6Class("Service",
         #' not advised. This method should be called after the execution of a
         #' task.
         #'
+        #' @param ... Additional optional arguments that may be used by concrete
+        #' implementations.
+        #'
         #' @return
         #' A vector or list of the same length as `x` containing the results of
         #' the `fun`. It resembles the format of [base::sapply()].
-        get_output = function() {
+        get_output = function(...) {
             Exception$method_not_implemented()
         }
     )

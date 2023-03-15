@@ -66,10 +66,10 @@
 #' operates. The default, regular [`parabar::Context`] class simply forwards the
 #' call to the corresponding backend method. However, a more complex context can
 #' augment the operation before forwarding the call to the backend. One example
-#' of a complex context is the [`parabar::ProgressDecorator`] class. This class
-#' extends the regular [`parabar::Context`] class and decorates the backend
-#' [`sapply()`][parabar::Service] operation to log the progress after each task
-#' execution and display a progress bar.
+#' of a complex context is the [`parabar::ProgressTrackingContext`] class. This
+#' class extends the regular [`parabar::Context`] class and decorates the
+#' backend [`sapply()`][parabar::Service] operation to log the progress after
+#' each task execution and display a progress bar.
 #'
 #' The following are the main classes provided by `parabar`:
 #' - [`parabar::Service`]: interface for backend operations.
@@ -85,7 +85,7 @@
 #'   asynchronous backend.
 #' - [`parabar::BackendFactory`]: factory for creating backend objects.
 #' - [`parabar::Context`]: default context for executing backend operations.
-#' - [`parabar::ProgressDecorator`]: context for decorating the
+#' - [`parabar::ProgressTrackingContext`]: context for decorating the
 #'   [`sapply()`][parabar::Service] operation to track and display progress.
 #' - [`parabar::ContextFactory`]: factory for creating context objects.
 #'

@@ -23,8 +23,8 @@ class(context)
 
 }
 \seealso{
-\code{\link{Context}}, \code{\link{ProgressDecorator}}, \code{\link{Service}},
-and \code{\link{Backend}}
+\code{\link{Context}}, \code{\link{ProgressTrackingContext}},
+\code{\link{Service}}, and \code{\link{Backend}}
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -54,7 +54,7 @@ and \code{"progress"}. See the \strong{Details} section for more information.}
 \subsection{Details}{
 When \code{type = "regular"} a \code{\link{Context}} instance is created
 and returned. When \code{type = "progress"} a
-\code{\link{ProgressDecorator}} instance is provided instead.
+\code{\link{ProgressTrackingContext}} instance is provided instead.
 }
 
 \subsection{Returns}{

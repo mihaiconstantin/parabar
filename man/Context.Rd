@@ -12,7 +12,7 @@ This class is a vanilla wrapper around a \code{\link{Backend}} implementation.
 It registers a backend instance and forwards all \code{\link{Service}} methods
 calls to the backend instance. Subclasses can override any of the
 \code{\link{Service}} methods to decorate the backend instance with additional
-functionality (e.g., see the \code{\link{ProgressDecorator}} class).
+functionality (e.g., see the \code{\link{ProgressTrackingContext}} class).
 }
 \examples{
 # Define a task to run in parallel.
@@ -79,8 +79,8 @@ context$stop()
 
 }
 \seealso{
-\code{\link{ProgressDecorator}}, \code{\link{Service}}, \code{\link{Backend}},
-and \code{\link{SyncBackend}}.
+\code{\link{ProgressTrackingContext}}, \code{\link{Service}},
+\code{\link{Backend}}, and \code{\link{SyncBackend}}.
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}

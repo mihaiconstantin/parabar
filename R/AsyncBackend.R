@@ -64,7 +64,7 @@
 #'
 #' # Trying to get the output immediately will throw an error, indicating that the
 #' # task is still running.
-#' \dontrun{backend$get_output()}
+#' try(backend$get_output())
 #'
 #' # However, we can block the main process and wait for the task to complete
 #' # before fetching the results.
@@ -84,7 +84,7 @@
 #'
 #' @seealso
 #' [`parabar::Service`], [`parabar::Backend`], [`parabar::SyncBackend`],
-#' [`parabar::ProgressDecorator`], and [`parabar::TaskState`].
+#' [`parabar::ProgressTrackingContext`], and [`parabar::TaskState`].
 #'
 #' @export
 AsyncBackend <- R6::R6Class("AsyncBackend",
