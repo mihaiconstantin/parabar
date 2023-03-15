@@ -53,7 +53,7 @@ backend <- backend_factory$get("sync")
 context <- ProgressTrackingContext$new()
 
 # Attempt to set the incompatible backend instance.
-\dontrun{context$set_backend(backend)}
+try(context$set_backend(backend))
 
 # Get a backend instance that does support progress tracking.
 backend <- backend_factory$get("async")
