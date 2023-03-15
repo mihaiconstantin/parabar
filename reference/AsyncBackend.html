@@ -65,7 +65,7 @@ session) on a <code><a href="https://rdrr.io/r/parallel/makeCluster.html" class=
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="Service.html">Service</a></code>, <code><a href="Backend.html">Backend</a></code>, <code><a href="SyncBackend.html">SyncBackend</a></code>,
-<code><a href="ProgressDecorator.html">ProgressDecorator</a></code>, and <code><a href="TaskState.html">TaskState</a></code>.</p></div>
+<code><a href="ProgressTrackingContext.html">ProgressTrackingContext</a></code>, and <code><a href="TaskState.html">TaskState</a></code>.</p></div>
     </div>
     <div class="section level2">
     <h2 id="super-classes">Super classes<a class="anchor" aria-label="anchor" href="#super-classes"></a></h2>
@@ -398,7 +398,8 @@ the <code>fun</code>. It resembles the format of <code><a href="https://rdrr.io/
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Trying to get the output immediately will throw an error, indicating that the</span></span></span>
 <span class="r-in"><span><span class="co"># task is still running.</span></span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="va">backend</span><span class="op">$</span><span class="fu">get_output</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">backend</span><span class="op">$</span><span class="fu">get_output</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error : A task is currently running.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># However, we can block the main process and wait for the task to complete</span></span></span>
 <span class="r-in"><span><span class="co"># before fetching the results.</span></span></span>

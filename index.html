@@ -316,7 +316,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <div class="section level4">
 <h4 id="contexts">Contexts<a class="anchor" aria-label="anchor" href="#contexts"></a>
 </h4>
-<p>A <strong><code>context</code></strong> represents the specific conditions in which a backend object operates. The default context class (i.e., <code><a href="reference/Context.html">?Context</a></code>) simply forwards the call to the corresponding backend method. However, a more complex context can augment the operation before forwarding the call to the backend. One example of a complex context is the <code><a href="reference/ProgressDecorator.html">?ProgressDecorator</a></code> class. This class extends the regular <code><a href="reference/Context.html">?Context</a></code> class and decorates the backend <code>sapply</code> operation to log the progress after each task execution and display a progress bar.</p>
+<p>A <strong><code>context</code></strong> represents the specific conditions in which a backend object operates. The default context class (i.e., <code><a href="reference/Context.html">?Context</a></code>) simply forwards the call to the corresponding backend method. However, a more complex context can augment the operation before forwarding the call to the backend. One example of a complex context is the <code><a href="reference/ProgressTrackingContext.html">?ProgressTrackingContext</a></code> class. This class extends the regular <code><a href="reference/Context.html">?Context</a></code> class and decorates the backend <code>sapply</code> operation to log the progress after each task execution and display a progress bar.</p>
 </div>
 <div class="section level4">
 <h4 id="main-classes">Main Classes<a class="anchor" aria-label="anchor" href="#main-classes"></a>
@@ -336,7 +336,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <li>
 <code>Context</code>: Default context for executing backend operations without interference.</li>
 <li>
-<code>ProgressDecorator</code>: Context for decorating the <code>sapply</code> operation to track and display the progress.</li>
+<code>ProgressTrackingContext</code>: Context for decorating the <code>sapply</code> operation to track and display the progress.</li>
 <li>
 <code>ContextFactory</code>: Factory for creating <code>Context</code> objects.</li>
 </ul>
@@ -397,7 +397,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <span><span class="co"># Register the backend with the context.</span></span>
 <span><span class="va">context</span><span class="op">$</span><span class="fu">set_backend</span><span class="op">(</span><span class="va">backend</span><span class="op">)</span></span></code></pre></div>
 <p>The <code><a href="reference/Context.html">?Context</a></code> class (i.e., and it’s subclasses) implements the <code><a href="reference/Service.html">?Service</a></code> interface, which means that we can use it to execute backend operations.</p>
-<p>Since we are using the <code><a href="reference/ProgressDecorator.html">?ProgressDecorator</a></code> context, we also need to register a <code><a href="reference/Bar.html">?Bar</a></code> instance with the context. First, let’s obtain a <code><a href="reference/Bar.html">?Bar</a></code> instance from the <code><a href="reference/BarFactory.html">?BarFactory</a></code>.</p>
+<p>Since we are using the <code><a href="reference/ProgressTrackingContext.html">?ProgressTrackingContext</a></code> context, we also need to register a <code><a href="reference/Bar.html">?Bar</a></code> instance with the context. First, let’s obtain a <code><a href="reference/Bar.html">?Bar</a></code> instance from the <code><a href="reference/BarFactory.html">?BarFactory</a></code>.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a bar factory.</span></span>
 <span><span class="va">bar_factory</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/BarFactory.html">BarFactory</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span>

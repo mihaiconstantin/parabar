@@ -125,10 +125,10 @@ each method.</p>
 operates. The default, regular <code><a href="Context.html">Context</a></code> class simply forwards the
 call to the corresponding backend method. However, a more complex context can
 augment the operation before forwarding the call to the backend. One example
-of a complex context is the <code><a href="ProgressDecorator.html">ProgressDecorator</a></code> class. This class
-extends the regular <code><a href="Context.html">Context</a></code> class and decorates the backend
-<code><a href="Service.html">sapply()</a></code> operation to log the progress after each task
-execution and display a progress bar.</p>
+of a complex context is the <code><a href="ProgressTrackingContext.html">ProgressTrackingContext</a></code> class. This
+class extends the regular <code><a href="Context.html">Context</a></code> class and decorates the
+backend <code><a href="Service.html">sapply()</a></code> operation to log the progress after
+each task execution and display a progress bar.</p>
 <p>The following are the main classes provided by <code>parabar</code>:</p><ul><li><p><code><a href="Service.html">Service</a></code>: interface for backend operations.</p></li>
 <li><p><code><a href="Backend.html">Backend</a></code>: abstract class that serves as a base class for all
 concrete implementations.</p></li>
@@ -142,7 +142,7 @@ backend.</p></li>
 asynchronous backend.</p></li>
 <li><p><code><a href="BackendFactory.html">BackendFactory</a></code>: factory for creating backend objects.</p></li>
 <li><p><code><a href="Context.html">Context</a></code>: default context for executing backend operations.</p></li>
-<li><p><code><a href="ProgressDecorator.html">ProgressDecorator</a></code>: context for decorating the
+<li><p><code><a href="ProgressTrackingContext.html">ProgressTrackingContext</a></code>: context for decorating the
 <code><a href="Service.html">sapply()</a></code> operation to track and display progress.</p></li>
 <li><p><code><a href="ContextFactory.html">ContextFactory</a></code>: factory for creating context objects.</p></li>
 </ul></div>

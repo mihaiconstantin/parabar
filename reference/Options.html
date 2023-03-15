@@ -148,7 +148,7 @@ temporary file paths).</p></dd>
 <span class="r-in"><span><span class="co"># To restore defaults, set the default options again.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="option.html">set_default_options</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Check that the change was applied (i.e., `progress_track: FALSE`).</span></span></span>
+<span class="r-in"><span><span class="co"># Check that the change was applied (i.e., `progress_track: TRUE`).</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"parabar"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;Options&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Public:</span>
@@ -166,12 +166,33 @@ temporary file paths).</p></dd>
 <span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_track"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Set the progress tracking option to `TRUE`.</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Set the progress tracking option to `FALSE`.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_track"</span>, <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Check that the change was applied (i.e., `progress_track: TRUE`).</span></span></span>
+<span class="r-in"><span><span class="co"># Check that the change was applied (i.e., `progress_track: FALSE`).</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_track"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Get a temporary file for logging the progress.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_log_path"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpY9Cbq1/file1af05ed51506"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Fix the logging file path.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_log_path"</span>, <span class="st">"./progress.log"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Check that the logging path change was applied.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_log_path"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "./progress.log"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Restore the logging path to the default behavior.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_log_path"</span>, <span class="cn">NULL</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Check that the logging path change was applied.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_log_path"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpY9Cbq1/file1af01f8880bc"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Restore the defaults.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="option.html">set_default_options</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
