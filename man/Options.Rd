@@ -31,7 +31,7 @@ getOption("parabar")
 # To restore defaults, set the default options again.
 set_default_options()
 
-# Check that the change was applied (i.e., `progress_track: FALSE`).
+# Check that the change was applied (i.e., `progress_track: TRUE`).
 getOption("parabar")
 
 # We can also use the built-in helpers to get and set options more conveniently.
@@ -39,11 +39,29 @@ getOption("parabar")
 # Get the progress tracking option.
 get_option("progress_track")
 
-# Set the progress tracking option to `TRUE`.
-set_option("progress_track", TRUE)
+# Set the progress tracking option to `FALSE`.
+set_option("progress_track", FALSE)
 
-# Check that the change was applied (i.e., `progress_track: TRUE`).
+# Check that the change was applied (i.e., `progress_track: FALSE`).
 get_option("progress_track")
+
+# Get a temporary file for logging the progress.
+get_option("progress_log_path")
+
+# Fix the logging file path.
+set_option("progress_log_path", "./progress.log")
+
+# Check that the logging path change was applied.
+get_option("progress_log_path")
+
+# Restore the logging path to the default behavior.
+set_option("progress_log_path", NULL)
+
+# Check that the logging path change was applied.
+get_option("progress_log_path")
+
+# Restore the defaults.
+set_default_options()
 
 }
 \seealso{
