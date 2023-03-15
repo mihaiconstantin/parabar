@@ -140,6 +140,9 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
 
         # Decorate task function to log the progress after each execution.
         .decorate = function(task, log) {
+            # Determine file log lock path.
+            log_lock_path <- paste0(log, ".lock")
+
             # Get the body of the function to patch.
             fun_body <- body(task)
 
@@ -147,21 +150,18 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
             length_fun_body <- length(fun_body)
 
             # Insert the expression.
-            fun_body[[length_fun_body + 1]] <- substitute(
+            fun_body[[length_fun_body + 1]] <- bquote(
                 # The injected expression.
                 on.exit({
                     # Acquire an exclusive lock.
-                    log_lock <- filelock::lock(log_lock_path)
+                    log_lock <- filelock::lock(.(log_lock_path))
 
                     # Write the line.
-                    cat("\n", file = log, sep = "", append = TRUE)
+                    cat("\n", file = .(log), sep = "", append = TRUE)
 
                     # Release the lock.
                     filelock::unlock(log_lock)
-                }),
-
-                # The environment to use for substitution.
-                parent.frame(n = 1)
+                })
             )
 
             # Reorder the body.
@@ -279,9 +279,6 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
         sapply = function(x, fun, ...) {
             # Create file for logging progress.
             log <- private$.make_log()
-
-            # Determine file log lock path.
-            log_lock_path <- paste0(log, ".lock")
 
             # Clear the temporary file on function exit.
             on.exit({
