@@ -26,8 +26,8 @@ The goal of this vignette is to compare the
 available on `CRAN` that provide **progress tracking** functionality for tasks
 executed in parallel on clusters created via `?parallel::makeCluster`. While
 `parabar` provides more functionality, the comparisons and benchmarks presented
-in this article are specifically aimed at its progress tracking functionality.
-The reminder of this article is organized as follows. I start with a section on
+in this article are specifically aimed at its progress-tracking functionality.
+The remainder of this article is organized as follows. I start with a section on
 how `parabar` tackles progress tracking. Then, I iterate over other packages
 that provide progress tracking for parallel tasks and briefly discuss the
 approaches these packages employ. Next, I provide *rough* benchmarks comparing
@@ -56,7 +56,7 @@ for a more detailed overview of the package design.
 
 A [backend](https://parabar.mihaiconstantin.com/reference/Backend.html) is an
 [`R6`](https://r6.r-lib.org) class wrapper around a cluster object obtained from
-the `?parallel::makeCluster` function. The role of a backend is to abide to a
+the `?parallel::makeCluster` function. The role of a backend is to abide by a
 standardized way of interacting with `parallel` clusters by implementing the
 `?Service` interface. In a nutshell, the `?Service` interface defines the set of
 operations that a backend can perform on a cluster object (e.g., exporting
@@ -113,10 +113,10 @@ sapply = function(x, fun, ...) {
 
 This method simply passes its arguments to the `sapply` method of the backend
 instance it wraps stored in the private field `.backend`. Note that the
-`?Backend` and the `?Context` classes share an `sapply` method since both
+`?Backend` and the `?Context` classes share a `sapply` method since both
 implement the `?Service` interface that requires them to provide an
 implementation for such a method. Then, the `?ProgressTrackingContext` can
-override the `sapply` method above to provide progress tracking capabilities as
+override the `sapply` method above to provide progress-tracking capabilities as
 follows (i.e., also see [source code
 here](https://github.com/mihaiconstantin/parabar/blob/3e55fcccc777934595c1225816816ed7426fc891/R/ProgressTrackingContext.R#L264-L297)):
 
@@ -202,13 +202,13 @@ the execution progress.
 
 ## Progress tracking with `pbapply`
 
-[`pbapply`](https://peter.solymos.org/pbapply) is a a versatile package that
+[`pbapply`](https://peter.solymos.org/pbapply) is a versatile package that
 provides progress tracking for various backends vectorized `R` functions in the
 `*apply` family. To understand how `pbapply` approaches progress tracking, we
 can take a look at the implementation of the `?pbapply::pblapply` function,
 which appears to be the workhorse function used by the other `*apply` variants.
 At the time of writing this article, the most recent version of
-`?pbapply::pblapply` is at commit
+`?pbapply::pblapply` is at the commit
 [ed40554](https://github.com/psolymos/pbapply/commit/ed405546122082e7ccf7b0139e2a0f149f57281a)
 on December 10, 2022, in the file
 [`pblapply.R`](https://github.com/psolymos/pbapply/blob/3f95d7515cad9003a29037df7b8cda08ce0ec1f5/R/pblapply.R).
@@ -246,7 +246,7 @@ should be displayed.
 
 The more interesting part, is represented by lines `52` to `61`, which are used
 to define how the progress bar will be created and updated. More specifically,
-line `53` splits the task repetitions into a smaller chunks based on how many
+line `53` splits the task repetitions into smaller chunks based on how many
 tasks we want to run (i.e., `nx`), how many nodes are in the cluster (i.e.,
 `ncl`), and the maximum number of splits we want (i.e., `nout`). For example,
 suppose we want want to run $20$ tasks in parallel on a cluster with three
@@ -262,22 +262,22 @@ print(splits)
 ```
 
 We see that `?pbapply::splitpb` produced seven splits, each consisting of two or
-three tasks repetitions each. In lines `54` and `55` `pbapply` counts how many
-splits were created and starts a progress bar with a minimum of zero and a
-maximum value set to the total number of splits (i.e., seven in this case). Even
-more interesting are lines `58` to `61`. Here, `pbapply` loops over each split
-and calls the selected parallel function (e.g., `?parallel::parLapply`) with the
+three task repetitions. In lines `54` and `55` `pbapply` counts how many splits
+were created and starts a progress bar with a minimum of zero and a maximum
+value set to the total number of splits (i.e., seven in this case). Even more
+interesting are lines `58` to `61`. Here, `pbapply` loops over each split and
+calls the selected parallel function (e.g., `?parallel::parLapply`) with the
 task repetitions corresponding to the current split processed. As soon as this
 parallel function returns, the progress bar is updated with the processed split
 index. Therefore, in the example above, `pbapply` will call the parallel
 function seven times, and hence update the progress bar seven times.
 
-The code snippet above already provides provides us with two important insights
-into how `pbapply` works. First, by default, `pbapply` does not update the
-progress bar after each task repetition. Second, the overhead `pbapply` adds is
-likely given by the repeated calls to the parallel function (e.g.,
-`?parallel::parLapply`) that involves transferring the tasks to the different
-processes that make up the cluster nodes.
+The code snippet above already provides us with two important insights into how
+`pbapply` works. First, by default, `pbapply` does not update the progress bar
+after each task repetition. Second, the overhead `pbapply` adds is likely given
+by the repeated calls to the parallel function (e.g., `?parallel::parLapply`)
+that involves transferring the tasks to the different processes that make up the
+cluster nodes.
 
 We can compare this with the source code of the built-in function
 `parallel::parLapply` displayed below, where we let `X` represent our $20$ task
@@ -339,24 +339,24 @@ will only be called three times, i.e., as indicated in the
 
 This approach is strikingly different from `pbapply` which, in this example,
 results in calling the parallel function (e.g., `?parallel::parLapply`) seven
-times, which in turns results in calling the `?parallel::clusterApply` for each
+times, which in turn results in calling the `?parallel::clusterApply` for each
 individual task repetition. Put simply, in this example, the `parallel` package
 calls the `?parallel::clusterApply` for each chunk, whereas `pbapply` calls the
 `?parallel::clusterApply` for each task repetition. Therefore, the `pbapply`
 progress tracking functionality can be seen as a tradeoff between the
 granularity of the progress bar and the overhead associated with chunking the
 task repetitions and communicating with the cluster nodes. However, this
-overhead is likely negligible when the the number of tasks is low enough and
+overhead is likely negligible when the number of tasks is low enough and
 repeated calls to the `?parallel::clusterApply` are not needed.
 
-In the next section, I provide a provide rough estimates of the overhead
-associated with the progress tracking approaches discussed above.
+In the next section, I provide rough estimates of the overhead associated with
+the progress-tracking approaches discussed above.
 
 ## Overhead
 
 To make things as comparable as possible, I start by defining a dummy task
 function that we can reliably measure how long it takes to execute. We then run
-$1000$ repetitions of this task in parallel via the the built-in function
+$1000$ repetitions of this task in parallel via the built-in function
 `?parallel::parSapply` to establish the baseline execution time. This baseline
 execution time serves as our benchmark for comparing the execution times of the
 progress tracking approaches discussed above (e.g., `pbapply` and `parabar`). To
@@ -438,14 +438,14 @@ standard deviation of $SD = `r round(sd(duration_parallel$time / 1e6), 2)`$.
 We repeat the same setup as above, but this time using the `parabar` package.
 Since the end-user API prevents us from displaying progress bars in
 non-interactive sessions (e.g., knitting `R` vignettes), we can more
-conveniently use the `R6` developer API to force progress tracking nevertheless.
+conveniently use the `R6` developer API to force progress-tracking nevertheless.
 In this case, we use the `?parabar::ProgressTrackingContext` that adds progress
 tracking functionality to tasks executed in parallel. To avoid issues with the
 progress bar not displaying correctly in a non-interactive `R` session, we will
 temporarily redirect the progress bar output to `/dev/null` using the `?sink`
-function. Note that that the progress tracking functionality is still employed
-(i.e., logging the execution progress to a file and reading the file to update
-the progress bar), but the progress bar is not displayed.
+function. Note that the progress tracking functionality is still employed (i.e.,
+logging the execution progress to a file and reading the file to update the
+progress bar), but the progress bar is not displayed.
 
 ```{r}
 # Create a specification object.
@@ -460,7 +460,7 @@ specification$set_type(type = "psock")
 # Get a backend instance that does support progress tracking.
 backend <- AsyncBackend$new()
 
-# Create a progress tracking context object.
+# Create a progress-tracking context object.
 context <- ProgressTrackingContext$new()
 
 # Register the backend with the context.
@@ -514,7 +514,7 @@ milliseconds.
 
 ### `pbapply` execution time
 
-We repeat again the same setup as above, but this time using the `pbapply`
+We repeat, again, the same setup as above, but this time using the `pbapply`
 package via the `?pbapply::pbsapply` function. Just like `parabar`, `pbapply`
 disables progress tracking for non-interactive `R` sessions. Therefore, we first
 need to force progress tracking, and, then, to avoid printing issues, redirect
@@ -721,12 +721,11 @@ demonstrated performance advantage over `pbapply` in terms of execution time
 nodes in the cluster). Execution time aside, `parabar` provides more granular
 progress bars that reflects the actual progress of the task, rather than the
 progress of the parallelization process. Despite the name, `parabar` is more
-than just a package that adds progress bar for parallelized `R` code. Through
+than just a package that adds a progress bar for parallelized `R` code. Through
 its design, it provides a standardized way of interacting with the built-in
 `parallel` package. On top of that, it proposes an extensible mechanism to
 augment the `parallel` package functions with new functionality. This is a key
 benefit that allows for customizing the parallelization process in many
-different ways, such as, for example, sending an email when the parallelized
-task finished executing. Therefore, the progress tracking functionality
-discussed in this article is just one example of what is possible with
-`parabar`.
+different ways, such as sending an email when the parallelized task is finished
+executing. Therefore, the progress tracking functionality discussed in this
+article is just one example of what is possible with `parabar`.
