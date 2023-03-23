@@ -408,7 +408,7 @@ benchmark. We can establish this benchmark using the following code:
 n_tasks <- 1:1000
 
 # Define the benchmark repetitions.
-n_benchmarks <- 20
+n_benchmarks <- 100
 
 # Create a cluster of five nodes.
 cluster <- makeCluster(spec = 5, type = "PSOCK")
