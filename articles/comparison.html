@@ -91,19 +91,19 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>The goal of this vignette is to compare the <a href="https://parabar.mihaiconstantin.com" class="external-link"><code>parabar</code></a>
+<p>The goal of this article is to compare the <a href="https://parabar.mihaiconstantin.com" class="external-link"><code>parabar</code></a>
 package with other packages available on <code>CRAN</code> that provide
-<strong>progress tracking</strong> functionality for tasks executed in
-parallel on clusters created via <code><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">?parallel::makeCluster</a></code>.
-While <code>parabar</code> provides more functionality, the comparisons
-and benchmarks presented in this article are specifically aimed at its
-progress-tracking functionality. The remainder of this article is
-organized as follows. I start with a section on how <code>parabar</code>
-tackles progress tracking. Then, I iterate over other packages that
-provide progress tracking for parallel tasks and briefly discuss the
-approaches these packages employ. Next, I provide <em>rough</em>
-benchmarks comparing the added overhead of these progress-tracking
-approaches to the baseline scenario of using the built-in package <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/html/00Index.html" class="external-link"><code>parallel</code></a>
+<strong>progress tracking</strong> functionality for parallelized
+<code>R</code> code. While <code>parabar</code> provides more features,
+the comparisons and benchmarks presented in this article are
+specifically aimed at its progress-tracking functionality. The remainder
+of this article is organized as follows. I start with a section on how
+<code>parabar</code> tackles progress tracking. Then, I iterate over
+other packages that provide progress tracking for parallel tasks and
+briefly discuss the approaches these packages employ. Next, I provide
+<em>rough</em> benchmarks comparing the added overhead of these
+progress-tracking approaches to the baseline scenario of using the
+built-in package <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/html/00Index.html" class="external-link"><code>parallel</code></a>
 (i.e., without progress tracking).</p>
 </div>
 <div class="section level2">
@@ -119,14 +119,14 @@ and <em><a href="https://parabar.mihaiconstantin.com/#contexts" class="external-
 Below I describe these concepts in more detail and demonstrate how they
 can be used to add new functionality to <code>parabar</code>. This
 example is focused on progress tracking, and it represents but one
-example of what is possible. Check out the <a href="https://raw.githubusercontent.com/mihaiconstantin/parabar/main/inst/design/parabar-design.drawio.svg" class="external-link">UML
+example of what is possible. You may check out the <a href="https://raw.githubusercontent.com/mihaiconstantin/parabar/main/inst/design/parabar-design.drawio.svg" class="external-link">UML
 diagram</a> for a more detailed overview of the package design.</p>
 <div class="section level3">
 <h3 id="backends">Backends<a class="anchor" aria-label="anchor" href="#backends"></a>
 </h3>
 <p>A <a href="https://parabar.mihaiconstantin.com/reference/Backend.html" class="external-link">backend</a>
 is an <a href="https://r6.r-lib.org" class="external-link"><code>R6</code></a> class wrapper
-around a cluster object obtained from the
+around a <em>cluster</em> object obtained from the
 <code><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">?parallel::makeCluster</a></code> function. The role of a backend is
 to abide by a standardized way of interacting with <code>parallel</code>
 clusters by implementing the <code><a href="../reference/Service.html">?Service</a></code> interface. In a
@@ -139,7 +139,7 @@ etc.). Backends can be of different types. Currently,
 backend</a> manages a cluster created in the same process as the backend
 instance itself. An <a href="https://parabar.mihaiconstantin.com/reference/AsyncBackend.html" class="external-link">asynchronous
 backend</a>, on the other hand, manages a cluster created in a
-background <code>R</code> session (i.e., created via the <a href="https://callr.r-lib.org" class="external-link"><code>callr</code></a> class). In
+background <code>R</code> session (i.e., created via the <a href="https://callr.r-lib.org" class="external-link"><code>callr</code></a> package). In
 principle, it is possible to extend <code>parabar</code> with other
 types of backends (e.g., backends that are created on a remote server
 and managed over <code>SSH</code>).</p>
@@ -147,12 +147,12 @@ and managed over <code>SSH</code>).</p>
 <div class="section level3">
 <h3 id="contexts">Contexts<a class="anchor" aria-label="anchor" href="#contexts"></a>
 </h3>
-<p>The <code>parabar</code> package is designed to be extended with new
-functionality, which brings us to the second key concept, namely,
+<p>The <code>parabar</code> package is designed with extensibility in
+mind, which brings us to the second key concept, namely,
 <strong>contexts</strong>. New functionality can be implemented as
 <em>custom contexts</em> that extend the <em>base context</em> class. In
-general, a <em>context</em> is an <code>R6</code> wrapper class for a
-backend instance, with the role of determining how the backend
+simple terms, a <em>context</em> is an <code>R6</code> wrapper class for
+a backend instance, with the role of determining how the backend
 operations defined by the <code><a href="../reference/Service.html">?Service</a></code> interface should be
 executed. The base <code><a href="../reference/Context.html">?Context</a></code> (i.e., that all other custom
 contexts extend) implements the same <code><a href="../reference/Service.html">?Service</a></code> as the
@@ -161,13 +161,13 @@ instance, which in turn interacts with the cluster. For example, calling
 the <code>sapply</code> method on a base <code><a href="../reference/Context.html">?Context</a></code> instance
 will forward the call to the corresponding <code>sapply</code> method on
 the wrapped <code><a href="../reference/Backend.html">?Backend</a></code> instance, which contains the actual
-implementation of interacting with the cluster object (e.g., via
-<code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::parSapply</a></code>).</p>
+implementation details for interacting with the cluster object (e.g.,
+via <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::parSapply</a></code>).</p>
 </div>
 <div class="section level3">
 <h3 id="progress-tracking-functionality">Progress tracking functionality<a class="anchor" aria-label="anchor" href="#progress-tracking-functionality"></a>
 </h3>
-<p>New functionality can be added by creating a custom context that
+<p>New functionality can be added by creating custom contexts that
 extends the base context. Custom contexts can then override and decorate
 the methods of the base context to provide the desired functionality.
 The <code><a href="../reference/ProgressTrackingContext.html">?ProgressTrackingContext</a></code> is an example of such a custom
@@ -175,9 +175,9 @@ context that decorates the <code>sapply</code> method to add progress
 tracking. This specific context works by overriding the
 <code>sapply</code> method of the base <code><a href="../reference/Context.html">?Context</a></code> class to
 add the necessary functionality for progress tracking. More
-specifically, suppose that the <code>sapply</code> method in the base
-<code><a href="../reference/Context.html">?Context</a></code> looks like the following (i.e., also see the <a href="https://github.com/mihaiconstantin/parabar/blob/3e55fcccc777934595c1225816816ed7426fc891/R/Context.R#L185-L202" class="external-link">source
-code here</a>):</p>
+specifically, if we take a look at the <a href="https://github.com/mihaiconstantin/parabar/blob/3e55fcccc777934595c1225816816ed7426fc891/R/Context.R#L185-L202" class="external-link">source
+code</a> for the <code>sapply</code> method of the base
+<code><a href="../reference/Context.html">?Context</a></code> we see the following:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ...</span></span>
 <span></span>
@@ -188,15 +188,14 @@ code here</a>):</p>
 <span></span>
 <span><span class="co"># ...</span></span></code></pre></div>
 <p>This method simply passes its arguments to the <code>sapply</code>
-method of the backend instance it wraps stored in the private field
-<code>.backend</code>. Note that the <code><a href="../reference/Backend.html">?Backend</a></code> and the
-<code><a href="../reference/Context.html">?Context</a></code> classes share a <code>sapply</code> method since
-both implement the <code><a href="../reference/Service.html">?Service</a></code> interface that requires them to
-provide an implementation for such a method. Then, the
-<code><a href="../reference/ProgressTrackingContext.html">?ProgressTrackingContext</a></code> can override the
-<code>sapply</code> method above to provide progress-tracking
-capabilities as follows (i.e., also see <a href="https://github.com/mihaiconstantin/parabar/blob/3e55fcccc777934595c1225816816ed7426fc891/R/ProgressTrackingContext.R#L264-L297" class="external-link">source
-code here</a>):</p>
+method of the wrapped backend instance (i.e., stored in the private
+field <code>.backend</code>). Note that the <code><a href="../reference/Backend.html">?Backend</a></code> and
+the <code><a href="../reference/Context.html">?Context</a></code> classes share a <code>sapply</code> method
+since both implement the <code><a href="../reference/Service.html">?Service</a></code> interface that requires
+them to provide an implementation for such a method. The custom
+<code><a href="../reference/ProgressTrackingContext.html">?ProgressTrackingContext</a></code> can <em>override</em> the <a href="https://github.com/mihaiconstantin/parabar/blob/3e55fcccc777934595c1225816816ed7426fc891/R/ProgressTrackingContext.R#L264-L297" class="external-link"><code>sapply</code>
+method</a> above to provide progress-tracking capabilities as
+follows:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ...</span></span>
 <span><span class="va">sapply</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
@@ -215,9 +214,8 @@ code here</a>):</p>
 <span>    <span class="co"># Show the progress bar and block the main process.</span></span>
 <span>    <span class="va">private</span><span class="op">$</span><span class="fu">.show_progress</span><span class="op">(</span>total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, log <span class="op">=</span> <span class="va">log</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span></span>
 <span><span class="co"># ...</span></span></code></pre></div>
-<p>If we break down the implementation above, the following lines of
+<p>Breaking down the implementation above, the following lines of
 code</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create file for logging progress.</span></span>
@@ -225,46 +223,46 @@ code</p>
 <span></span>
 <span><span class="co"># Clear the temporary file on function exit.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlink.html" class="external-link">unlink</a></span><span class="op">(</span><span class="va">log</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>create a temporary file where the task function will record the
-progress after each task execution (i.e., see <a href="https://github.com/mihaiconstantin/parabar/blob/3e55fcccc777934595c1225816816ed7426fc891/R/ProgressTrackingContext.R#L123-L139" class="external-link">source
-code here</a>), and remove this file when the parallel task has
-completed. The next line of code</p>
+<p><a href="https://github.com/mihaiconstantin/parabar/blob/3e55fcccc777934595c1225816816ed7426fc891/R/ProgressTrackingContext.R#L123-L139" class="external-link">create
+a temporary file</a> where the <code>task</code> function will record
+the progress after each task execution, and remove this file when the
+parallel task has completed. The next line of code</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Decorate task function.</span></span>
 <span><span class="va">task</span> <span class="op">&lt;-</span> <span class="va">private</span><span class="op">$</span><span class="fu">.decorate</span><span class="op">(</span>task <span class="op">=</span> <span class="va">fun</span>, log <span class="op">=</span> <span class="va">log</span><span class="op">)</span></span></code></pre></div>
-<p>decorates the task specified by the user by injecting code that
-enables it to record the progress in the <code>log</code> file after
-each execution (i.e., see <a href="https://github.com/mihaiconstantin/parabar/blob/3e55fcccc777934595c1225816816ed7426fc891/R/ProgressTrackingContext.R#L141-L174" class="external-link">source
-code here</a>). Next, we call the <code>sapply</code> method of the base
+<p><a href="https://github.com/mihaiconstantin/parabar/blob/3e55fcccc777934595c1225816816ed7426fc891/R/ProgressTrackingContext.R#L141-L174" class="external-link">decorates
+the <code>task</code></a> function by injecting code that enables it to
+record the progress in the <code>log</code> file after each execution.
+Next, we call the <code>sapply</code> method of the base
 <code><a href="../reference/Context.html">?Context</a></code> class (i.e., via the <code>super</code> access
 modifier) and pass it the <em>decorated</em> <code>task</code>
 function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Execute the decorated task.</span></span>
 <span><span class="va">super</span><span class="op">$</span><span class="fu">sapply</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, fun <span class="op">=</span> <span class="va">task</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
-<p>As discussed above, this call is forwarded to the <code>sapply</code>
-method on the <code>.backend</code> instance. However, unlike before,
-the <code>task</code> function is now decorated to log the progress to a
-file. Finally, the following line of code</p>
+<p>As mentioned earlier, this call is simply forwarded to the
+<code>sapply</code> method of the <code>.backend</code> instance.
+However, unlike before, the <code>task</code> function is now decorated
+to log the progress to a file. Finally, the following line of code</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Show the progress bar and block the main process.</span></span>
 <span><span class="va">private</span><span class="op">$</span><span class="fu">.show_progress</span><span class="op">(</span>total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, log <span class="op">=</span> <span class="va">log</span><span class="op">)</span></span></code></pre></div>
-<p>simply creates uses a <code><a href="../reference/Bar.html">?Bar</a></code> class to display and update a
+<p>simply creates a <code><a href="../reference/Bar.html">?Bar</a></code> instance to display and update a
 progress bar based on the progress reported in the <code>log</code> file
 (i.e., see <a href="https://github.com/mihaiconstantin/parabar/blob/3e55fcccc777934595c1225816816ed7426fc891/R/ProgressTrackingContext.R#L177-L215" class="external-link">source
 code here</a>).</p>
-<p>In summary, <code>parabar</code> enables progress tracking for
+<p>In summary, <code>parabar</code> enables progress-tracking for
 parallel tasks by adjusting the <code>task</code> function to log to a
 file each time a task has finished executing. The log file is then
 monitored periodically and used to update the progress bar displayed in
 the console (i.e., see also the <code>progress_timeout</code> field of
 <code><a href="../reference/Options.html">?Options</a></code> for how to adjust the timeout between subsequent
-checks of the log file).</p>
-<p>The benefits of this approach are, first, that the progress bar will
-accurately reflect the execution progress of the task, and, second, that
-it works for any kind of tasks (i.e., both simple and complex). One
-potential disadvantage of this approach is the overhead associated with
-the I/O for writing and reading the execution progress.</p>
+checks of the log file). The benefits of this approach are two fold.
+First, the progress bar will accurately reflect the execution progress
+of the task. Second, this scales well to any kind of tasks (i.e., both
+simple and complex). On the other hand, one potential disadvantage of
+this approach is the overhead associated with the I/O for writing and
+reading the execution progress.</p>
 </div>
 </div>
 <div class="section level2">
@@ -272,13 +270,13 @@ the I/O for writing and reading the execution progress.</p>
 </h2>
 <p><a href="https://peter.solymos.org/pbapply" class="external-link"><code>pbapply</code></a>
 is a versatile package that provides progress tracking for various
-backends vectorized <code>R</code> functions in the <code>*apply</code>
-family. To understand how <code>pbapply</code> approaches progress
-tracking, we can take a look at the implementation of the
-<code>?pbapply::pblapply</code> function, which appears to be the
-workhorse function used by the other <code>*apply</code> variants. At
-the time of writing this article, the most recent version of
-<code>?pbapply::pblapply</code> is at the commit <a href="https://github.com/psolymos/pbapply/commit/ed405546122082e7ccf7b0139e2a0f149f57281a" class="external-link">ed40554</a>
+backends and vectorized <code>R</code> functions in the
+<code>*apply</code> family. To understand how <code>pbapply</code>
+approaches progress tracking, we can take a look at the implementation
+details of the <code>?pbapply::pblapply</code> function, which seems to
+be the workhorse function used by the other <code>*apply</code>
+variants. At the time of writing this article, the most recent version
+of the function <code>?pbapply::pblapply</code> is at the commit <a href="https://github.com/psolymos/pbapply/commit/ed405546122082e7ccf7b0139e2a0f149f57281a" class="external-link"><code>ed40554</code></a>
 on December 10, 2022, in the file <a href="https://github.com/psolymos/pbapply/blob/3f95d7515cad9003a29037df7b8cda08ce0ec1f5/R/pblapply.R" class="external-link"><code>pblapply.R</code></a>.
 Looking at the <a href="https://github.com/psolymos/pbapply/blob/3f95d7515cad9003a29037df7b8cda08ce0ec1f5/R/pblapply.R#L46-L61" class="external-link">source
 code lines</a> <code>46</code> to <code>61</code> in the file
@@ -302,15 +300,15 @@ code lines</a> <code>46</code> to <code>61</code> in the file
 <span>        <span class="fu">setpb</span><span class="op">(</span><span class="va">pb</span>, <span class="va">i</span><span class="op">)</span>                                            <span class="co"># 60</span></span>
 <span>    <span class="op">}</span>                                                           <span class="co"># 61</span></span>
 <span><span class="op">}</span> <span class="co"># ...                                                         # 62</span></span></code></pre></div>
-<p>Line <code>46</code> in the code above is used to determine whether
-the parallel backend is a <code>cluster</code> object created using the
-<code>parallel</code> package. When that is the case,
+<p>Line <code>46</code> in the code snippet above is used to determine
+whether the parallel backend is a <code>cluster</code> object created
+via the <code>parallel</code> package. When that is the case,
 <code>pbapply</code> proceeds in lines <code>47</code> and
 <code>48</code> with choosing the appropriate
 <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::parLapply</a></code> function for the parallelization
 (i.e., with or without load balancing). Then, lines <code>50</code> and
-<code>51</code> determine whether a progress bar should be
-displayed.</p>
+<code>51</code> determine whether a progress bar should be displayed
+based on the <code>dopb</code> function.</p>
 <p>The more interesting part, is represented by lines <code>52</code> to
 <code>61</code>, which are used to define how the progress bar will be
 created and updated. More specifically, line <code>53</code> splits the
@@ -328,22 +326,22 @@ case, <code>pbapply</code> creates the following splits:</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">splits</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [1] 1 2 3</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; [1] 4 5 6</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; [1] 7 8 9</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; [[4]]</span></span>
 <span><span class="co">#&gt; [1] 10 11 12</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; [[5]]</span></span>
 <span><span class="co">#&gt; [1] 13 14 15</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; [[6]]</span></span>
 <span><span class="co">#&gt; [1] 16 17 18</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; [[7]]</span></span>
 <span><span class="co">#&gt; [1] 19 20</span></span></code></pre></div>
 <p>We see that <code>?pbapply::splitpb</code> produced seven splits,
@@ -368,7 +366,7 @@ given by the repeated calls to the parallel function (e.g.,
 <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::parLapply</a></code>) that involves transferring the tasks
 to the different processes that make up the cluster nodes.</p>
 <p>We can compare this with the source code of the built-in function
-<code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parallel::parLapply</a></code> displayed below, where we let
+<code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::parLapply</a></code> displayed below, where we let
 <code>X</code> represent our <span class="math inline">\(20\)</span>
 task repetitions and <code>fun</code> the task function to be applied to
 each repetition:</p>
@@ -415,38 +413,39 @@ example results in the following splits:</p>
 <span><span class="fu">parallel</span><span class="fu">:::</span><span class="fu">splitList</span><span class="op">(</span><span class="va">X</span>, <span class="va">nchunks</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [[1]]</span></span>
 <span><span class="co">#&gt; [1] 1 2 3 4 5 6 7</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt; [1]  8  9 10 11 12 13</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; [[3]]</span></span>
 <span><span class="co">#&gt; [1] 14 15 16 17 18 19 20</span></span></code></pre></div>
-<p>We see that <code>pbapply</code> uses a similar idea when creating
+<p>We see that <code>pbapply</code> uses a similar approach for creating
 the task splits, however, unlike <code>pbapply</code>, the built-in
 <code>parallel</code> package creates by default as many tasks splits as
 nodes in the cluster. This means that the
-<code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::clusterApply</a></code> function within the
-<code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::parLapply</a></code> function will only be called three
-times, i.e., as indicated in the <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/html/clusterApply.html" class="external-link">documentation</a>:</p>
+<code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::clusterApply</a></code> function used within
+<code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::parLapply</a></code> will only be called three times, i.e.,
+as stated in the <a href="https://stat.ethz.ch/R-manual/R-devel/library/parallel/html/clusterApply.html" class="external-link">documentation</a>:</p>
 <blockquote>
 <p><code>clusterApply</code> calls fun on the first node with arguments
 x[[1]] and …, on the second node with x[[2]] and …, and so on, recycling
 nodes as needed.</p>
 </blockquote>
 <p>This approach is strikingly different from <code>pbapply</code>
-which, in this example, results in calling the parallel function (e.g.,
-<code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::parLapply</a></code>) seven times, which in turn results in
-calling the <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::clusterApply</a></code> for each individual
-task repetition. Put simply, in this example, the <code>parallel</code>
-package calls the <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::clusterApply</a></code> for each chunk,
-whereas <code>pbapply</code> calls the
-<code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::clusterApply</a></code> for each task repetition.
-Therefore, the <code>pbapply</code> progress tracking functionality can
-be seen as a tradeoff between the granularity of the progress bar and
-the overhead associated with chunking the task repetitions and
-communicating with the cluster nodes. However, this overhead is likely
-negligible when the number of tasks is low enough and repeated calls to
-the <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::clusterApply</a></code> are not needed.</p>
+which, for this example, results in calling the parallel function (e.g.,
+<code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::parLapply</a></code>) seven times, which, in turn, results
+in calling the <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::clusterApply</a></code> for each individual
+task repetition. Put simply, for the example above, the
+<code>parallel</code> package calls the
+<code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::clusterApply</a></code> for each chunk, whereas
+<code>pbapply</code> calls the <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::clusterApply</a></code> for
+each task repetition. Therefore, the <code>pbapply</code> progress
+tracking functionality can be regarded as a tradeoff between the
+granularity of the progress bar and the overhead associated with
+chunking the task repetitions and communicating with the cluster nodes.
+While this overhead is likely negligible when the number of tasks is
+low, such repeated calls to the <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::clusterApply</a></code> are
+definitely something one should consider when scaling things up.</p>
 <p>In the next section, I provide rough estimates of the overhead
 associated with the progress-tracking approaches discussed above.</p>
 </div>
@@ -459,11 +458,11 @@ We then run <span class="math inline">\(1000\)</span> repetitions of
 this task in parallel via the built-in function
 <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::parSapply</a></code> to establish the baseline execution
 time. This baseline execution time serves as our benchmark for comparing
-the execution times of the progress tracking approaches discussed above
+the execution times of the progress-tracking approaches discussed above
 (e.g., <code>pbapply</code> and <code>parabar</code>). To obtain more
 stable results, we determine the execution times based on <span class="math inline">\(100\)</span> replications of the parallelized task
-replications, and provide a summary in the form of a figure. Finally, we
-use the <a href="https://CRAN.R-project.org/package=microbenchmark" class="external-link"><code>microbenchmark</code></a>
+replications, and provide a summary in the form of a figure. To achieve
+this, we use the <a href="https://CRAN.R-project.org/package=microbenchmark" class="external-link"><code>microbenchmark</code></a>
 package for benchmarking the execution times, and the <a href="https://ggplot2.tidyverse.org" class="external-link"><code>ggplot2</code></a> package
 for plotting the results.</p>
 <div class="section level3">
@@ -528,10 +527,10 @@ the following code:</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">duration_parallel</span>, unit <span class="op">=</span> <span class="st">"ms"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
 <span><span class="co">#&gt;      expr      min       lq     mean   median       uq      max neval</span></span>
-<span><span class="co">#&gt;  parallel 14.54549 14.86642 15.20604 14.98447 15.13601 24.26659   100</span></span></code></pre></div>
+<span><span class="co">#&gt;  parallel 14.65648 14.84083 15.14253 14.96682 15.09481 24.25228   100</span></span></code></pre></div>
 <p>Running our <code>task</code> in parallel via the
-<code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::parSapply</a></code> function takes on average <span class="math inline">\(M = 15.21\)</span> milliseconds, with a standard
-deviation of <span class="math inline">\(SD = 1.24\)</span>.</p>
+<code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">?parallel::parSapply</a></code> function takes on average <span class="math inline">\(M = 15.14\)</span> milliseconds, with a standard
+deviation of <span class="math inline">\(SD = 1.04\)</span>.</p>
 </div>
 <div class="section level3">
 <h3 id="parabar-execution-time">
@@ -540,16 +539,16 @@ deviation of <span class="math inline">\(SD = 1.24\)</span>.</p>
 <p>We repeat the same setup as above, but this time using the
 <code>parabar</code> package. Since the end-user API prevents us from
 displaying progress bars in non-interactive sessions (e.g., knitting
-<code>R</code> vignettes), we can more conveniently use the
-<code>R6</code> developer API to force progress-tracking nevertheless.
+<code>R</code> vignettes), we can, more conveniently, use the
+<code>R6</code> developer API to force progress-tracking, nevertheless.
 In this case, we use the <code><a href="../reference/ProgressTrackingContext.html">?parabar::ProgressTrackingContext</a></code>
 that adds progress tracking functionality to tasks executed in parallel.
 To avoid issues with the progress bar not displaying correctly in a
 non-interactive <code>R</code> session, we will temporarily redirect the
 progress bar output to <code>/dev/null</code> using the
-<code><a href="https://rdrr.io/r/base/sink.html" class="external-link">?sink</a></code> function. Note that the progress tracking
+<code><a href="https://rdrr.io/r/base/sink.html" class="external-link">?base::sink</a></code> function. Note that the progress tracking
 functionality is still employed (i.e., logging the execution progress to
-a file and reading the file to update the progress bar), but the
+a file and reading the file to update the progress bar), only the
 progress bar is not displayed.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a specification object.</span></span>
@@ -607,17 +606,17 @@ progress bar is not displayed.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">duration_parabar</span>, unit <span class="op">=</span> <span class="st">"ms"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
 <span><span class="co">#&gt;     expr      min       lq     mean   median       uq      max neval</span></span>
-<span><span class="co">#&gt;  parabar 71.54213 75.88346 82.75349 79.29656 88.71258 113.6531   100</span></span></code></pre></div>
+<span><span class="co">#&gt;  parabar 71.75348 77.14632 85.72571 82.25771 91.12404 166.9339   100</span></span></code></pre></div>
 <p>Based on the results above, we observe that running our
 <code>task</code> function in parallel via <code>parabar</code>, with
-progress tracking, yields an execution time of <span class="math inline">\(M = 82.75\)</span> milliseconds, with a <span class="math inline">\(SD = 9.33\)</span>. Therefore, the overhead of
-<code>parabar</code> relative to <code>parallel</code> is roughly <span class="math inline">\(67.55\)</span> milliseconds.</p>
+progress tracking, yields an execution time of <span class="math inline">\(M = 85.73\)</span> milliseconds, with a <span class="math inline">\(SD = 13.21\)</span>. Therefore, the overhead of
+<code>parabar</code> relative to <code>parallel</code> is roughly <span class="math inline">\(70.58\)</span> milliseconds.</p>
 </div>
 <div class="section level3">
 <h3 id="pbapply-execution-time">
 <code>pbapply</code> execution time<a class="anchor" aria-label="anchor" href="#pbapply-execution-time"></a>
 </h3>
-<p>We repeat, again, the same setup as above, but this time using the
+<p>We repeat, again, the setup above, but this time using the
 <code>pbapply</code> package via the <code>?pbapply::pbsapply</code>
 function. Just like <code>parabar</code>, <code>pbapply</code> disables
 progress tracking for non-interactive <code>R</code> sessions.
@@ -680,8 +679,8 @@ Adjust <code>pbapply</code> options
 <span><span class="co"># Print the duration.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">duration_pbapply</span>, unit <span class="op">=</span> <span class="st">"ms"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;     expr      min       lq    mean   median       uq      max neval</span></span>
-<span><span class="co">#&gt;  pbapply 135.7078 137.3769 145.586 139.7884 150.6699 180.4986   100</span></span></code></pre></div>
+<span><span class="co">#&gt;     expr      min       lq     mean   median       uq      max neval</span></span>
+<span><span class="co">#&gt;  pbapply 134.8485 138.0448 143.4029 140.5481 144.2281 177.0565   100</span></span></code></pre></div>
 <details><summary>
 Restore <code>pbapply</code> options
 </summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -692,17 +691,19 @@ Restore <code>pbapply</code> options
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>knitr.in.progress <span class="op">=</span> <span class="va">knitr_option</span><span class="op">)</span></span></code></pre></div>
 </details><p>The results above indicate that running the <code>task</code>
 function in parallel via <code>pbapply</code>, with progress tracking,
-results in an execution time of <span class="math inline">\(M =
-145.59\)</span> milliseconds, with a <span class="math inline">\(SD =
-10.81\)</span>. Based on these results, the overhead of
-<code>pbapply</code> relative to <code>parallel</code> is roughly <span class="math inline">\(130.38\)</span> milliseconds.</p>
+has an average execution time of <span class="math inline">\(M =
+143.4\)</span> milliseconds, with a <span class="math inline">\(SD =
+8.14\)</span>. Based on these results, the overhead of
+<code>pbapply</code> relative to <code>parallel</code> is roughly <span class="math inline">\(128.26\)</span> milliseconds.</p>
 </div>
 <div class="section level3">
 <h3 id="summary">Summary<a class="anchor" aria-label="anchor" href="#summary"></a>
 </h3>
-<p>In this section, I provide a quick summary of the results obtained
-above. First, we can test whether there are execution time differences
-between <code>parabar</code> and <code>pbapply</code>.</p>
+<p>In this section, I provide a brief summary of the differences in the
+execution times between the parallelization approaches discussed above.
+First, we can test whether there are significant differences in the
+average execution time of <code>parabar</code> and
+<code>pbapply</code>.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Extract duration in milliseconds for `parabar`.</span></span>
 <span><span class="va">parabar_time_ms</span> <span class="op">&lt;-</span> <span class="va">duration_parabar</span><span class="op">$</span><span class="va">time</span> <span class="op">/</span> <span class="fl">1e6</span></span>
@@ -718,23 +719,25 @@ between <code>parabar</code> and <code>pbapply</code>.</p>
 <span></span>
 <span><span class="co"># Print the test result.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">test_result</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt;  Welch Two Sample t-test</span></span>
-<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; data:  parabar_time_ms and pbapply_time_ms</span></span>
-<span><span class="co">#&gt; t = -44, df = 193.81, p-value &lt; 2.2e-16</span></span>
+<span><span class="co">#&gt; t = -37.162, df = 164.72, p-value &lt; 2.2e-16</span></span>
 <span><span class="co">#&gt; alternative hypothesis: true difference in means is not equal to 0</span></span>
 <span><span class="co">#&gt; 95 percent confidence interval:</span></span>
-<span><span class="co">#&gt;  -65.64898 -60.01613</span></span>
+<span><span class="co">#&gt;  -60.74168 -54.61273</span></span>
 <span><span class="co">#&gt; sample estimates:</span></span>
-<span><span class="co">#&gt; mean of x mean of y </span></span>
-<span><span class="co">#&gt;  82.75349 145.58605</span></span></code></pre></div>
-<p>The test statistic indicates statistically significant mean
-differences between the execution times of the <code>parabar</code>
-(i.e., <span class="math inline">\(M = 82.75\)</span>, <span class="math inline">\(SD = 9.33\)</span>) and <code>pbapply</code>
-(i.e., <span class="math inline">\(M = 145.59\)</span>, <span class="math inline">\(SD = 10.81\)</span>) packages, with <span class="math inline">\(t(193.81) = -44\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>.</p>
-<p>Finally, we can display the execution time of the different
-parallelization approaches we discussed.</p>
+<span><span class="co">#&gt; mean of x mean of y</span></span>
+<span><span class="co">#&gt;  85.72571 143.40292</span></span></code></pre></div>
+<p>The test statistic indicates that there are statistically significant
+mean differences between the execution times of the <code>parabar</code>
+(i.e., <span class="math inline">\(M = 85.73\)</span>, <span class="math inline">\(SD = 13.21\)</span>) and <code>pbapply</code>
+(i.e., <span class="math inline">\(M = 143.4\)</span>, <span class="math inline">\(SD = 8.14\)</span>) packages, with <span class="math inline">\(t(164.72) = -37.16\)</span>, <span class="math inline">\(p &lt; 0.001\)</span>.</p>
+<p>Now, we can proceed to display the execution time of the different
+parallelization approaches we discussed. We start with a pre-processing
+step that combines all results into a data frame and computes additional
+variables (e.g., the execution time in milliseconds).</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create data frame from duration objects.</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span></span>
@@ -751,7 +754,20 @@ parallelization approaches we discussed.</p>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">results</span>, <span class="va">expr</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"parabar"</span>, <span class="st">"pbapply"</span><span class="op">)</span><span class="op">)</span>, <span class="st">"yes"</span>, <span class="st">"no"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Plot the results.</span></span>
+<span><span class="co"># Print the data frame.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Unit: milliseconds</span></span>
+<span><span class="co">#&gt;      expr       min        lq      mean    median        uq       max neval</span></span>
+<span><span class="co">#&gt;  parallel  14.65648  14.84083  15.14253  14.96682  15.09481  24.25228   100</span></span>
+<span><span class="co">#&gt;   parabar  71.75348  77.14632  85.72571  82.25771  91.12404 166.93388   100</span></span>
+<span><span class="co">#&gt;   pbapply 134.84855 138.04483 143.40292 140.54812 144.22812 177.05649   100</span></span></code></pre></div>
+<p>Finally, we can plot the box plots of the execution times
+corresponding to the different parallelization approaches we
+discussed.</p>
+<details><summary>
+Code for plotting the results
+</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot the results.</span></span>
 <span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">results</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">expr</span>, y <span class="op">=</span> <span class="va">time_ms</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>    <span class="fu">geom_boxplot</span><span class="op">(</span></span>
 <span>        <span class="fu">aes</span><span class="op">(</span>fill <span class="op">=</span> <span class="va">progress</span><span class="op">)</span>,</span>
@@ -806,32 +822,32 @@ parallelization approaches we discussed.</p>
 <span>            linewidth <span class="op">=</span> <span class="fl">0.1</span></span>
 <span>        <span class="op">)</span></span>
 <span>    <span class="op">)</span></span></code></pre></div>
-<p><img src="comparison-benchmarks-1.png" alt="plot of chunk benchmarks" width="100%" style="display: block; margin: auto;"></p>
+</details><p><img src="comparison-benchmarks-1.png" alt="plot of chunk benchmarks" width="100%" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="conclusion">Conclusion<a class="anchor" aria-label="anchor" href="#conclusion"></a>
 </h2>
-<p>In this article, I discussed different approaches for adding progress
-tracking functionality to parallelized <code>R</code> code, and showed
-that the <code>parabar</code> package is a good alternative to
+<p>In this article, I discussed different approaches for adding
+progress-tracking functionality to parallelized <code>R</code> code, and
+showed that the <code>parabar</code> package is a good alternative to
 <code>pbapply</code> for achieving this. The <code>parabar</code>
-package demonstrated performance advantage over <code>pbapply</code> in
+package demonstrated better performance over the <code>pbapply</code> in
 terms of execution time (i.e., when the number of tasks to run is large
 enough relative to the number of nodes in the cluster). Execution time
-aside, <code>parabar</code> provides more granular progress bars that
-reflects the actual progress of the task, rather than the progress of
-the parallelization process. Despite the name, <code>parabar</code> is
-more than just a package that adds a progress bar for parallelized
+aside, <code>parabar</code> also provides more granular progress bars
+that reflect the actual progress of the task, rather than the progress
+of the parallelization process. Despite the name, <code>parabar</code>
+is more than just a package that adds progress bars for parallelized
 <code>R</code> code. Through its design, it provides a standardized way
 of interacting with the built-in <code>parallel</code> package. On top
 of that, it proposes an extensible mechanism to augment the
 <code>parallel</code> package functions with new functionality. This is
-a key benefit that allows for customizing the parallelization process in
-many different ways, such as sending an email when the parallelized task
-is finished executing. Therefore, the progress tracking functionality
-discussed in this article is just one example of what is possible with
-<code>parabar</code>.</p>
+a key benefit that allows one to customize the parallelization process
+in many different ways, such as sending an email when the parallelized
+task is finished executing. Therefore, the progress tracking
+functionality discussed in this article is just one example of what is
+possible with <code>parabar</code>.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
