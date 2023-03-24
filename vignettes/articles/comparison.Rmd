@@ -8,10 +8,13 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-```
 
-```{r, include=FALSE}
-# Load libraries.
+# Install packages if necessary.
+if(!require("pbapply", character.only = TRUE)) install.packages("pbapply")
+if(!require("microbenchmark", character.only = TRUE)) install.packages("microbenchmark")
+if(!require("ggplot2", character.only = TRUE)) install.packages("ggplot2")
+
+# Load packages.
 library(parallel)
 library(parabar)
 library(pbapply)
