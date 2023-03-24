@@ -16,3 +16,7 @@
 ^node_modules$
 ^_pkgdown\.yml$
 ^pkgdown$
+^vignettes/articles$
+^doc$
+^Meta$
+^vignettes/.*\.Rmd\.orig$

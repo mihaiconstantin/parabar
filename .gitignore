@@ -8,3 +8,6 @@ parabar.Rcheck/
 .temp
 .cache
 docs
+inst/doc
+/doc/
+/Meta/
