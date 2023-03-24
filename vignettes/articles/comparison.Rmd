@@ -10,9 +10,17 @@ knitr::opts_chunk$set(
 )
 
 # Install packages if necessary.
-if(!require("pbapply", character.only = TRUE)) install.packages("pbapply")
-if(!require("microbenchmark", character.only = TRUE)) install.packages("microbenchmark")
-if(!require("ggplot2", character.only = TRUE)) install.packages("ggplot2")
+if (!require("pbapply", character.only = TRUE)) {
+    install.packages("pbapply", repos = "https://cloud.r-project.org")
+}
+
+if (!require("microbenchmark", character.only = TRUE)) {
+    install.packages("microbenchmark", repos = "https://cloud.r-project.org")
+}
+
+if (!require("ggplot2", character.only = TRUE)) {
+    install.packages("ggplot2", repos = "https://cloud.r-project.org")
+}
 
 # Load packages.
 library(parallel)
