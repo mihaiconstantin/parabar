@@ -17,3 +17,5 @@
 ^_pkgdown\.yml$
 ^pkgdown$
 ^vignettes/articles$
+^doc$
+^Meta$
