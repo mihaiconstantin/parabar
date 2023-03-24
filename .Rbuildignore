@@ -19,3 +19,4 @@
 ^vignettes/articles$
 ^doc$
 ^Meta$
+^vignettes/.*\.Rmd\.orig$
