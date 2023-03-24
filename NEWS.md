@@ -1,6 +1,11 @@
 # Development
 
 ## Added
+- Add vignette `comparison.Rmd` to compare `parabar` to the `pbapply` package,
+  and provide rough benchmarks. The `comparison.Rmd` vignette is locally build
+  from the `comparison.Rmd.orig` file (i.e., see [this
+  resource](https://ropensci.org/blog/2019/12/08/precompute-vignettes/) for more
+  information).
 - Add active biding `Options$progress_log_path` to handle generation of
   temporary files for tracking the execution progress of tasks ran in parallel.
   Using a custom path (e.g., for debugging) is also possible by setting this
