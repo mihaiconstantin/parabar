@@ -5,8 +5,12 @@ date: '`r format(Sys.time(), "%d %B, %Y")`'
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+    collapse = TRUE,
+    comment = "#>",
+    dev = "png",
+    dpi = 300,
+    out.width = "100%",
+    fig.path = "comparison-"
 )
 
 # Install packages if necessary.
@@ -649,7 +653,7 @@ $p `r ifelse(round(test_result$p.value, 3) == 0, "< 0.001", paste0("= ", round(t
 Finally, we can display the execution time of the different parallelization
 approaches we discussed.
 
-```{r benchmark-plot, dev="png", fig.width=10, fig.height=7, fig.align="center"}
+```{r benchmarks, fig.width=10, fig.height=7, fig.align="center"}
 # Create data frame from duration objects.
 results <- rbind(
     duration_parallel,
