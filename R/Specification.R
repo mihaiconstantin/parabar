@@ -58,30 +58,36 @@ Specification <- R6::R6Class("Specification",
         # Supported cluster types.
         .types = c(unix = "fork", windows = "psock"),
 
-        # Determine the number of usable cores.
+        # Determine the number of available cores on the machine.
         .get_available_cores = function() {
-            # Get the number of available cores.
-            available <- parallel::detectCores()
+            # Determine the number of cores.
+            return(parallel::detectCores())
+        },
 
+        # Determine the number of usable cores.
+        .determine_usable_cores = function(available_cores) {
             # If the machine has less than two cores.
-            if (available < 2) {
+            if (available_cores < 2) {
                 # Throw.
                 Exception$not_enough_cores()
             }
 
             # If the machine has more than two cores.
-            if (available > 2) {
+            if (available_cores > 2) {
                 # Ensure a core is not used as part of the available pool.
-                available <- available - 1
+                available_cores <- available_cores - 1
             }
 
-            return(available)
+            return(available_cores)
         },
 
         # Determine the number of nodes to create in the cluster,
         .validate_requested_cores = function(requested_cores) {
-            # Get the number of cores that can be used.
+            # Get the number of cores available on the machine.
             available_cores <- private$.get_available_cores()
+
+            # Get the number of cores that can be used.
+            usable_cores <- private$.determine_usable_cores(available_cores)
 
             # If not enough cores are requested.
             if (requested_cores < 2) {
@@ -93,12 +99,12 @@ Specification <- R6::R6Class("Specification",
             }
 
             # If more cores than available are requested.
-            if (requested_cores > available_cores) {
+            if (requested_cores > usable_cores) {
                 # Warn the users.
-                Warning$requested_cluster_cores_too_high(available_cores)
+                Warning$requested_cluster_cores_too_high(usable_cores)
 
                 # Allow all available cores.
-                return(available_cores)
+                return(usable_cores)
             }
 
             # Otherwise, honor the request.
