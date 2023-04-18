@@ -1,6 +1,5 @@
 # Test `Specification` class.
 
-
 test_that("'Specification' fails on single core machines", {
     # Create a specification object.
     specification <- SpecificationTester$new()
@@ -64,4 +63,32 @@ test_that("'Specification' sets the number of cores correctly", {
     # When nine cores are requested.
     expect_warning(specification$set_cores(cores = 9), as_text(Warning$requested_cluster_cores_too_high(specification$usable_cores)))
     expect_equal(specification$cores, 7)
+})
+
+
+test_that("'Specification' sets the type correctly", {
+    # Create specification object.
+    specification <- Specification$new()
+
+    # Let the specification determine the cluster type.
+    specification$set_type(type = NULL)
+
+    # Expect the correct type was determined.
+    if (.Platform$OS.type == "unix") {
+       expect_equal(specification$type, c(unix = "FORK"))
+    } else {
+       expect_equal(specification$type, c(windows = "PSOCK"))
+    }
+
+    # Specify the `FORK` type explicitly.
+    specification$set_type(type = "fork")
+
+    # Expect the correct type was set.
+    expect_equal(specification$type, "FORK")
+
+    # Specify the `PSOCK` type explicitly.
+    specification$set_type(type = "psock")
+
+    # Expect the correct type was set.
+    expect_equal(specification$type, "PSOCK")
 })
