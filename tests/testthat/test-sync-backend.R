@@ -19,6 +19,9 @@ test_that("'SyncBackend' is created correctly", {
     # Start the cluster on the backend.
     backend$start(specification)
 
+    # Exect the cluster to be an object of `parallel` class.
+    expect_true(is(backend$cluster, "cluster"))
+
     # Expect that the cluster is of correct size.
     expect_equal(length(backend$cluster), specification$cores)
 
@@ -48,6 +51,9 @@ test_that("'SyncBackend' is created correctly", {
 
     # Stop the cluster.
     backend$stop()
+
+    # Expect that trying to stop a cluster that is not active throws an error.
+    expect_error(backend$stop(), as_text(Exception$cluster_not_active()))
 })
 
 
@@ -58,8 +64,8 @@ test_that("'SyncBackend' performs operations on the cluster correctly", {
     # Set the number of cores.
     specification$set_cores(cores = 2)
 
-    # Set the cluster type.
-    specification$set_type(type = "psock")
+    # Determine the cluster type automatically.
+    specification$set_type(type = NULL)
 
     # Create a synchronous backend object.
     backend <- SyncBackend$new()
