@@ -1,7 +1,7 @@
 # Test `AsyncBackend` class.
 
 test_that("'AsyncBackend' is created correctly", {
-    # Create a speicifcation.
+    # Create a specification.
     specification <- Specification$new()
 
     # Set the number of cores.
@@ -25,7 +25,7 @@ test_that("'AsyncBackend' is created correctly", {
     # Start the cluster on the backend.
     backend$start(specification)
 
-    # Exect the cluster to be an object of `callr` class.
+    # Expect the cluster to be an object of `callr` class.
     expect_true(is(backend$cluster, "r_session"))
 
     # Expect that the cluster is of correct size.
@@ -49,7 +49,7 @@ test_that("'AsyncBackend' is created correctly", {
     # Expect the cluster field has been cleared.
     expect_null(backend$cluster)
 
-    # Start a new cluster on the same bakend instance.
+    # Start a new cluster on the same backend instance.
     backend$start(specification)
 
     # Expect the cluster is active.
@@ -64,7 +64,7 @@ test_that("'AsyncBackend' is created correctly", {
 
 
 test_that("'AsyncBackend' performs operations on the cluster correctly", {
-    # Create a speicifcation.
+    # Create a specification.
     specification <- Specification$new()
 
     # Set the number of cores.
