@@ -53,6 +53,8 @@ specification$type
 \item{\code{cores}}{The number of nodes to use in the cluster creation.}
 
 \item{\code{type}}{The type of cluster to create.}
+
+\item{\code{types}}{The supported cluster types.}
 }
 \if{html}{\out{</div>}}
 }
