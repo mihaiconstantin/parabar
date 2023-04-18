@@ -7,8 +7,14 @@ test_that("'AsyncBackend' is created correctly", {
     # Set the number of cores.
     specification$set_cores(cores = 2)
 
-    # Pick a cluster type.
-    cluster_type <- sample(specification$types, 1)
+    # Decide what type of cluster to create.
+    if (.Platform$OS.type == "unix") {
+        # Randomly pick a cluster type.
+        cluster_type <- sample(specification$types, 1)
+    } else {
+        # Fix the cluster type to "psock" on Windows.
+        cluster_type <- "psock"
+    }
 
     # Let the specification determine the cluster type.
     specification$set_type(type = cluster_type)
