@@ -1,6 +1,8 @@
 # Development
 
 ## Added
+- Add tests for the following classes: `Specification`, `SyncBackend`, and
+  `AsyncBackend`.
 - Add vignette `comparison.Rmd` to compare `parabar` to the `pbapply` package,
   and provide rough benchmarks. The `comparison.Rmd` vignette is locally build
   from the `comparison.Rmd.orig` file (i.e., see [this
@@ -12,6 +14,7 @@
   active binding to a desired path.
 
 ## Changed
+- Refactor `Specification` for testing purposes.
 - Replace `\dontrun{}` statements in examples with `try()` calls.
 - Update example for `Options` class to feature the `progress_log_path` active
   binding.
