@@ -176,6 +176,9 @@ Specification <- R6::R6Class("Specification",
         cores = function() { return(private$.cores) },
 
         #' @field type The type of cluster to create.
-        type = function() { return(private$.type) }
+        type = function() { return(private$.type) },
+
+        #' @field types The supported cluster types.
+        types = function() { return(private$.types) }
     )
 )
