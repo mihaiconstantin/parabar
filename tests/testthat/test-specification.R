@@ -66,7 +66,7 @@ test_that("'Specification' sets the number of cores correctly", {
 })
 
 
-test_that("'Specification' sets the type correctly", {
+test_that("'Specification' sets the cluster type correctly", {
     # Create specification object.
     specification <- Specification$new()
 
