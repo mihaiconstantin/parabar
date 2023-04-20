@@ -1,6 +1,6 @@
 # Test `SyncBackend` class.
 
-test_that("'SyncBackend' is created correctly", {
+test_that("'SyncBackend' creates and manages clusters correctly", {
     # Create a specification.
     specification <- Specification$new()
 
@@ -78,6 +78,9 @@ test_that("'SyncBackend' performs operations on the cluster correctly", {
 
     # Start the cluster on the backend.
     backend$start(specification)
+
+    # Expect the backend to not support progress tracking.
+    expect_false(backend$supports_progress)
 
     # Expect that the cluster is empty upon creation.
     expect_true(all(sapply(backend$peek(), length) == 0))

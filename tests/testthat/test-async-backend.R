@@ -1,6 +1,6 @@
 # Test `AsyncBackend` class.
 
-test_that("'AsyncBackend' is created correctly", {
+test_that("'AsyncBackend' creates and manages clusters correctly", {
     # Create a specification.
     specification <- Specification$new()
 
@@ -79,6 +79,9 @@ test_that("'AsyncBackend' performs operations on the cluster correctly", {
     # Start the cluster on the backend.
     backend$start(specification)
 
+    # Expect the backend to support progress tracking.
+    expect_true(backend$supports_progress)
+
     # Expect that the cluster is empty upon creation.
     expect_true(all(sapply(backend$peek(), length) == 0))
 
@@ -114,7 +117,7 @@ test_that("'AsyncBackend' performs operations on the cluster correctly", {
     # Expect the that output is correct.
     expect_equal(backend$get_output(wait = TRUE), data + add)
 
-    # Expect that subsequent calls to `get_output` will result in an error.
+    # Expect that subsequent calls to `get_output` will throw an error.
     expect_error(backend$get_output(), as_text(Exception$async_task_not_started()))
 
     # Define a task that will take a bit to compute.
