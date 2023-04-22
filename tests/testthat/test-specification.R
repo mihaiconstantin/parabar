@@ -75,9 +75,20 @@ test_that("'Specification' sets the cluster type correctly", {
 
     # Expect the correct type was determined.
     if (.Platform$OS.type == "unix") {
-       expect_equal(specification$type, c(unix = "FORK"))
+        # Expect a `FORK` cluster on Unix platforms.
+        expect_equal(specification$type, c(unix = "FORK"))
     } else {
-       expect_equal(specification$type, c(windows = "PSOCK"))
+        # Expect a `PSOCK` cluster was inferred on Windows platforms.
+        expect_equal(specification$type, c(windows = "PSOCK"))
+
+        # Expect warning if a `FORK` cluster is requested on Windows platforms.
+        expect_warning(
+            specification$set_type(type = "fork"),
+            as_text(Warning$requested_cluster_type_not_compatible(specification$types))
+        )
+
+        # Expect that the correct type was set.
+        expect_equal(specification$type, c(windows = "PSOCK"))
     }
 
     # Specify the `FORK` type explicitly.
