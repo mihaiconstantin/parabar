@@ -52,6 +52,21 @@ test_task <- function(x, y, z, sleep = 0) {
 }
 
 
+# Check if a task is running on an asynchronous backend, or context.
+task_is_running <- function(backend) {
+    # If a context is passed.
+    if (Helper$get_class_name(backend) == "Context") {
+        # Get the status via the context.
+        status <- backend$backend$task_state$task_is_running
+    } else {
+        # Get the status from the backend directly.
+        status <- backend$task_state$task_is_running
+    }
+
+    return(status)
+}
+
+
 # Helper for testing private methods of `Specification` class.
 SpecificationTester <- R6::R6Class("SpecificationTester",
     inherit = Specification,
