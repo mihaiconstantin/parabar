@@ -336,6 +336,48 @@ BackendImplementation <- R6::R6Class("BackendImplementation",
 )
 
 
+# Helper for testing the `ProgressTrackingContext` class.
+ProgressTrackingContextTester <- R6::R6Class("ProgressTrackingContextTester",
+    inherit = ProgressTrackingContext,
+
+    public = list(
+        # The progress bar output used for testing.
+        progress_bar_output = NULL,
+
+        # Implementation for the `sapply` method preserving the log file.
+        sapply = function(x, fun, ...) {
+            # Create a text connection.
+            connection <- textConnection("output", open = "w", local = TRUE)
+
+            # Capture the output.
+            sink(connection, type = "output")
+            sink(connection, type = "message")
+
+            # Close the connection and reset the sink on exit.
+            on.exit({
+                # Reset the sink.
+                sink(NULL, type = "message")
+                sink(NULL, type = "output")
+
+                # Close the connection.
+                close(connection)
+            })
+
+            # Execute the task.
+            super$sapply(x, fun, ...)
+
+            # Store the progress bar output on the instance.
+            self$progress_bar_output <- output
+        }
+    ),
+
+    active = list(
+        # Expose the bar configuration.
+        bar_config = function() { return(private$.bar_config) }
+    )
+)
+
+
 # Helper for testing method implementations of `Bar` class.
 BarImplementation <- R6::R6Class("BarImplementation",
     inherit = Bar,
