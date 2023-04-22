@@ -1,8 +1,7 @@
 # Development
 
 ## Added
-- Add tests for the following classes: `Specification`, `SyncBackend`, and
-  `AsyncBackend`.
+- Add tests for end-user API and developer API.
 - Add vignette `comparison.Rmd` to compare `parabar` to the `pbapply` package,
   and provide rough benchmarks. The `comparison.Rmd` vignette is locally build
   from the `comparison.Rmd.orig` file (i.e., see [this
