@@ -207,6 +207,34 @@ tests_set_for_asynchronous_backend_operations <- function(service, specification
 }
 
 
+# Set of tests for starting and stopping backends.
+tests_set_for_backend_states <- function(backend, specification) {
+    # Expect an error if an attempt is made to start a cluster while one is already active.
+    expect_error(backend$start(specification), as_text(Exception$cluster_active()))
+
+    # Stop the backend.
+    backend$stop()
+
+    # Expect that stopping the cluster marks it as inactive.
+    expect_false(backend$active)
+
+    # Expect the cluster field has been cleared.
+    expect_null(backend$cluster)
+
+    # Start a new cluster on the same backend instance.
+    backend$start(specification)
+
+    # Expect the cluster is active.
+    expect_true(backend$active)
+
+    # Stop the cluster.
+    backend$stop()
+
+    # Expect that trying to stop a cluster that is not active throws an error.
+    expect_error(backend$stop(), as_text(Exception$cluster_not_active()))
+}
+
+
 # Helper for testing private methods of `Specification` class.
 SpecificationTester <- R6::R6Class("SpecificationTester",
     inherit = Specification,
