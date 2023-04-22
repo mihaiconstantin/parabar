@@ -263,6 +263,32 @@ tests_set_for_unimplemented_service_methods <- function(service) {
 }
 
 
+# Set of tests for creating backends via the user API.
+tests_set_for_backend_creation_via_user_api <- function(cluster_type, backend_type) {
+    # Create a backend.
+    backend <- start_backend(
+        cores = 2,
+        cluster_type = cluster_type,
+        backend_type = backend_type
+    )
+
+    # Expect the backend to be active.
+    expect_true(backend$active)
+
+    # Expect the backend to be of the correct type.
+    expect_equal(
+        Helper$get_class_name(backend),
+        Helper$get_class_name(BackendFactory$new()$get(backend_type))
+    )
+
+    # Stop the backend
+    stop_backend(backend)
+
+    # Expect the backend to be inactive.
+    expect_false(backend$active)
+}
+
+
 # Helper for testing private methods of `Specification` class.
 SpecificationTester <- R6::R6Class("SpecificationTester",
     inherit = Specification,
