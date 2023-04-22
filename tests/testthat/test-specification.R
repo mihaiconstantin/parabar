@@ -91,4 +91,10 @@ test_that("'Specification' sets the cluster type correctly", {
 
     # Expect the correct type was set.
     expect_equal(specification$type, "PSOCK")
+
+    # Expect warning when specifying an invalid type.
+    expect_warning(
+        specification$set_type(type = "invalid"),
+        as_text(Warning$requested_cluster_type_not_supported(specification$types))
+    )
 })
