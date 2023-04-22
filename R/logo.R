@@ -11,7 +11,7 @@ make_logo <- function(template = "./inst/assets/logo/parabar-logo.txt", version 
     logo <- dput(logo)
 
     # Remove output redirection.
-    sink()
+    sink(NULL)
 
     # Update versioning.
     logo <- gsub("{{major}}", version[1], logo, perl = TRUE)
