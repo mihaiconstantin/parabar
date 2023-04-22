@@ -235,6 +235,34 @@ tests_set_for_backend_states <- function(backend, specification) {
 }
 
 
+# Set of tests for unimplemented service methods.
+tests_set_for_unimplemented_service_methods <- function(service) {
+    # Expect an error when calling the `start` method.
+    expect_error(service$start(), as_text(Exception$method_not_implemented()))
+
+    # Expect an error when calling the `stop` method.
+    expect_error(service$stop(), as_text(Exception$method_not_implemented()))
+
+    # Expect an error when calling the `clear` method.
+    expect_error(service$clear(), as_text(Exception$method_not_implemented()))
+
+    # Expect an error when calling the `peek` method.
+    expect_error(service$peek(), as_text(Exception$method_not_implemented()))
+
+    # Expect an error when calling the `export` method.
+    expect_error(service$export(), as_text(Exception$method_not_implemented()))
+
+    # Expect an error when calling the `evaluate` method.
+    expect_error(service$evaluate(), as_text(Exception$method_not_implemented()))
+
+    # Expect an error when calling the `sapply` method.
+    expect_error(service$sapply(), as_text(Exception$method_not_implemented()))
+
+    # Expect an error when calling the `get_output` method.
+    expect_error(service$get_output(), as_text(Exception$method_not_implemented()))
+}
+
+
 # Helper for testing private methods of `Specification` class.
 SpecificationTester <- R6::R6Class("SpecificationTester",
     inherit = Specification,
