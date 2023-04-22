@@ -132,6 +132,15 @@ Specification <- R6::R6Class("Specification",
                 # Default to 'PSOCK'.
                 return(toupper(private$.types["windows"]))
             } else {
+                # If the platform is not Unix.
+                if (.Platform$OS.type == "windows" && requested_type == private$.types["unix"]) {
+                    # Warn if a Unix cluster is requested on Windows.
+                    Warning$requested_cluster_type_not_compatible(private$.types)
+
+                    # Default to 'PSOCK'.
+                    return(toupper(private$.types["windows"]))
+                }
+
                 # Set the cluster as requested.
                 return(toupper(requested_type))
             }
