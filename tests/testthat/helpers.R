@@ -312,3 +312,36 @@ SpecificationTester <- R6::R6Class("SpecificationTester",
         }
     )
 )
+
+
+# Helper for testing method implementations of `Service` interface.
+ServiceImplementation <- R6::R6Class("ServiceImplementation",
+    inherit = Service,
+
+    public = list(
+        # Allow instantiation.
+        initialize = function() {}
+    )
+)
+
+
+# Helper for testing method implementations of `Backend` class.
+BackendImplementation <- R6::R6Class("BackendImplementation",
+    inherit = Backend,
+
+    public = list(
+        # Allow instantiation.
+        initialize = function() {}
+    )
+)
+
+
+# Helper for testing method implementations of `Bar` class.
+BarImplementation <- R6::R6Class("BarImplementation",
+    inherit = Bar,
+
+    public = list(
+        # Allow instantiation.
+        initialize = function() {}
+    )
+)
