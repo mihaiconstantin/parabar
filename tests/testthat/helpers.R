@@ -67,6 +67,62 @@ task_is_running <- function(backend) {
 }
 
 
+# Set of tests for synchronous backend operations.
+tests_set_for_synchronous_backend_operations <- function(service, specification, task) {
+    # Start the cluster on the backend.
+    service$start(specification)
+
+    # Always stop on exit.
+    on.exit({
+        # Stop the backend.
+        service$stop()
+    })
+
+    # Expect that the cluster is empty upon creation.
+    expect_true(all(sapply(service$peek(), length) == 0))
+
+    # Create a variable in a new environment.
+    env <- new.env()
+    env$test_variable <- rnorm(1)
+
+    # Export the variable from the environment to the backend.
+    service$export("test_variable", env)
+
+    # Expect that the variable is on the backend.
+    expect_true(all(service$peek() == "test_variable"))
+
+    # Expect the cluster to hold the correct value for the exported variable.
+    expect_true(all(service$evaluate(test_variable) == env$test_variable))
+
+    # Clear the backend.
+    service$clear()
+
+    # Expect that clearing the cluster leaves it empty.
+    expect_true(all(sapply(service$peek(), length) == 0))
+
+    # Select task arguments for the `sapply` operation.
+    x <- sample(1:100, 100)
+    y <- sample(1:100, 1)
+    z <- sample(1:100, 1)
+    sleep = sample(c(0, 0.001, 0.002), 1)
+
+    # Run the task in parallel.
+    service$sapply(x, task, y = y, z = z, sleep = sleep)
+
+    # Expect the that output is correct.
+    expect_equal(service$get_output(), task(x, y, z))
+
+    # Expect that subsequent calls to `get_output` return `NULL`.
+    expect_null(service$get_output())
+
+    # Expect that the cluster is empty after performing operations on it.
+    expect_true(all(sapply(service$peek(), length) == 0))
+
+    # Remain silent.
+    invisible(NULL)
+}
+
+
 # Helper for testing private methods of `Specification` class.
 SpecificationTester <- R6::R6Class("SpecificationTester",
     inherit = Specification,
