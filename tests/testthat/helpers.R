@@ -30,6 +30,15 @@ pick_cluster_type <- function(types) {
 }
 
 
+# Select backend type.
+pick_backend_type <- function() {
+    # Randomly pick a backend type.
+    backend_type <- sample(c("sync", "async"), 1)
+
+    return(backend_type)
+}
+
+
 # Helper for testing private methods of `Specification` class.
 SpecificationTester <- R6::R6Class("SpecificationTester",
     inherit = Specification,
