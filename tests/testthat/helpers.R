@@ -39,6 +39,19 @@ pick_backend_type <- function() {
 }
 
 
+# Define the test task to use.
+test_task <- function(x, y, z, sleep = 0) {
+    # Sleep a bit or not.
+    Sys.sleep(sleep)
+
+    # Compute something.
+    output <- (x + y) / z
+
+    # Return the result.
+    return(output)
+}
+
+
 # Helper for testing private methods of `Specification` class.
 SpecificationTester <- R6::R6Class("SpecificationTester",
     inherit = Specification,
