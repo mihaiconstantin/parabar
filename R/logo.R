@@ -4,8 +4,17 @@ make_logo <- function(template = "./inst/assets/logo/parabar-logo.txt", version 
     # Load the ASCII logo.
     logo <- readLines(template)
 
+    # Create a text connection.
+    connection <- textConnection(NULL, open = "w", local = TRUE)
+
+    # Close the connection on exit.
+    on.exit({
+        # Close.
+        close(connection)
+    })
+
     # Redirect console output.
-    sink("/dev/null")
+    sink(connection, type = "output")
 
     # Parse the logo.
     logo <- dput(logo)
