@@ -28,6 +28,12 @@
 - Update `UML` diagram to include missing classes and changed methods. Also
   updated the corresponding diagram figure in the package documentation.
 
+## Fixed
+- Update `Specification` to prevent incompatible cluster types (e.g., `FORK`) on
+  `Windows` platforms. For such cases, a warning is issues and the cluster type
+  defaults to `PSOCK`.
+- Ensure `make_logo` can be ran on all platforms.
+
 # parabar 0.10.2
 
 ## Changed
