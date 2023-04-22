@@ -14,6 +14,22 @@ as_text <- function(expression) {
     return(message)
 }
 
+
+# Select a cluster type, with some variability.
+pick_cluster_type <- function(types) {
+    # Decide what type of cluster to create.
+    if (.Platform$OS.type == "unix") {
+        # Randomly pick a cluster type.
+        cluster_type <- sample(types, 1)
+    } else {
+        # Fix the cluster type to "psock" on Windows.
+        cluster_type <- "psock"
+    }
+
+    return(cluster_type)
+}
+
+
 # Helper for testing private methods of `Specification` class.
 SpecificationTester <- R6::R6Class("SpecificationTester",
     inherit = Specification,
