@@ -123,6 +123,90 @@ tests_set_for_synchronous_backend_operations <- function(service, specification,
 }
 
 
+# Set of tests for synchronous backend operations.
+tests_set_for_asynchronous_backend_operations <- function(service, specification, task) {
+    # Start the cluster on the backend.
+    service$start(specification)
+
+    # Always stop on exit.
+    on.exit({
+        # Stop the backend.
+        service$stop()
+    })
+
+    # Expect that the cluster is empty upon creation.
+    expect_true(all(sapply(service$peek(), length) == 0))
+
+    # Create a variable in a new environment.
+    env <- new.env()
+    env$test_variable <- rnorm(1)
+
+    # Export the variable from the environment to the backend.
+    service$export("test_variable", env)
+
+    # Expect that the variable is on the backend.
+    expect_true(all(service$peek() == "test_variable"))
+
+    # Expect the cluster to hold the correct value for the exported variable.
+    expect_true(all(service$evaluate(test_variable) == env$test_variable))
+
+    # Expect that clearing the cluster leaves it empty.
+    service$clear()
+    expect_true(all(sapply(service$peek(), length) == 0))
+
+    # Select task arguments for the `sapply` operation.
+    x <- sample(1:100, 100)
+    y <- sample(1:100, 1)
+    z <- sample(1:100, 1)
+    sleep = sample(c(0, 0.001, 0.002), 1)
+
+    # Compute the correct output.
+    expected_output <- task(x, y, z)
+
+    # Run the task in parallel.
+    service$sapply(x, task, y = y, z = z)
+
+    # Expect the that output is correct.
+    expect_equal(service$get_output(wait = TRUE), expected_output)
+
+    # Expect that subsequent calls to `get_output` will throw an error.
+    expect_error(service$get_output(), as_text(Exception$async_task_not_started()))
+
+    # Run the task in parallel, with a bit of overhead.
+    service$sapply(x, task, y = y, z = z, sleep = sleep)
+
+    # Expect that trying to run a task while another is running fails.
+    expect_error(service$sapply(x, task, y = y, z = z), as_text(Exception$async_task_running()))
+
+    # Expect the that output is correct.
+    expect_equal(service$get_output(wait = TRUE), expected_output)
+
+    # Run the task in parallel.
+    service$sapply(x, task, y = y, z = z, sleep = sleep)
+
+    # Expect that trying to get the output of a task that is still running fails.
+    expect_error(service$get_output(), as_text(Exception$async_task_running()))
+
+    # Block the main thread until the task is finished.
+    while(task_is_running(service)) {
+        # Sleep a bit.
+        Sys.sleep(0.001)
+    }
+
+    # Expect that trying to run a task without reading the previous output fails.
+    expect_error(service$sapply(data, task, add = add), as_text(Exception$async_task_completed()))
+
+    # Expect the that output is correct.
+    expect_equal(service$get_output(), expected_output)
+
+    # Expect that the cluster is empty after performing operations on it.
+    expect_true(all(sapply(service$peek(), length) == 0))
+
+    # Remain silent.
+    invisible(NULL)
+}
+
+
 # Helper for testing private methods of `Specification` class.
 SpecificationTester <- R6::R6Class("SpecificationTester",
     inherit = Specification,
