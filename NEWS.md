@@ -1,6 +1,8 @@
 # Development
 
 ## Added
+- Add `CC BY 4.0` license for package documentation, vignettes, and website
+  content.
 - Add code coverage `GitHub` workflow via
   [`codecov`](https://codecov.io/gh/mihaiconstantin/parabar) and badge in
   `README`.
