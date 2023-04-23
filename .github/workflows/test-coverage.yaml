@@ -9,6 +9,8 @@ on:
   pull_request:
     branches:
       - main
+  # Trigger manually via the GitHub UI.
+  workflow_dispatch:
 
 # Jobs.
 jobs:
