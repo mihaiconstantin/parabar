@@ -187,7 +187,7 @@ for writing and reading the execution progress.
 
 ## Progress tracking with `pbapply`
 
-[`pbapply`](https://peter.solymos.org/pbapply) is a versatile package that
+[`pbapply`](https://peter.solymos.org/pbapply/) is a versatile package that
 provides progress tracking for various backends and vectorized `R` functions in
 the `*apply` family. To understand how `pbapply` approaches progress tracking,
 we can take a look at the implementation details of the `?pbapply::pblapply`
