@@ -355,11 +355,9 @@ test_that("'par_sapply' tracks progress correctly", {
         sink("/dev/null", type = "output")
 
         # Run the task and capture the progress bar output.
-        output <- capture.output(
-            {
+        output <- capture.output({
                 par_sapply(backend, x = 1:100, fun = test_task, 1, 2)
-            },
-            type = "message"
+            }, type = "message"
         )
 
         # Remove output redirection.
@@ -375,11 +373,9 @@ test_that("'par_sapply' tracks progress correctly", {
         )
 
         # Run the task and capture the progress bar output.
-        output <- capture.output(
-            {
+        output <- capture.output({
                 par_sapply(backend, x = 1:100, fun = test_task, 1, 2)
-            },
-            type = "output"
+            }, type = "output"
         )
 
         # Expect the progress bar to be shown correctly.
@@ -389,14 +385,14 @@ test_that("'par_sapply' tracks progress correctly", {
         set_option("progress_track", FALSE)
 
         # Run the task and capture the output without the progress bar.
-        output <- capture.output(
-            {
+        output <- capture.output({
                 par_sapply(backend, x = 1:100, fun = test_task, 1, 2)
-            },
-            type = "output"
+            }, type = "output"
         )
 
         # Expect the progress bar to be missing from the output.
         expect_false(grepl("=\\| 100%", paste0(output, collapse = ""), perl = TRUE))
+    } else {
+        skip("Test only runs in interactive contexts.")
     }
 })
