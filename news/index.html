@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">parabar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.10.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +50,34 @@
       <small>Source: <a href="https://github.com/mihaiconstantin/parabar/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.0" id="parabar-100">parabar 1.0.0<a class="anchor" aria-label="anchor" href="#parabar-100"></a></h2>
+<div class="section level3">
+<h3 id="added-1-0-0">Added<a class="anchor" aria-label="anchor" href="#added-1-0-0"></a></h3>
+<ul><li>Add <code>CC BY 4.0</code> license for package documentation, vignettes, and website content.</li>
+<li>Add code coverage <code>GitHub</code> workflow via <a href="https://codecov.io/gh/mihaiconstantin/parabar" class="external-link"><code>codecov</code></a> and badge in <code>README</code>.</li>
+<li>Add tests for end-user API and developer API.</li>
+<li>Add vignette <code>comparison.Rmd</code> to compare <code>parabar</code> to the <code>pbapply</code> package, and provide rough benchmarks. The <code>comparison.Rmd</code> vignette is locally build from the <code>comparison.Rmd.orig</code> file (i.e., see <a href="https://ropensci.org/blog/2019/12/08/precompute-vignettes/" class="external-link">this resource</a> for more information).</li>
+<li>Add active biding <code>Options$progress_log_path</code> to handle generation of temporary files for tracking the execution progress of tasks ran in parallel. Using a custom path (e.g., for debugging) is also possible by setting this active binding to a desired path.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="changed-1-0-0">Changed<a class="anchor" aria-label="anchor" href="#changed-1-0-0"></a></h3>
+<ul><li>Refactor <code>Specification</code> for testing purposes.</li>
+<li>Replace <code>\dontrun{}</code> statements in examples with <code><a href="https://rdrr.io/r/base/try.html" class="external-link">try()</a></code> calls.</li>
+<li>Update example for <code>Options</code> class to feature the <code>progress_log_path</code> active binding.</li>
+<li>Update progress logging injection approach in <code>.decorate</code> method of <code>ProgressTrackingContext</code> to use <code>bquote</code> instead of <code>substitute</code>.</li>
+<li>
+<strong>Breaking</strong>. Rename class <code>ProgressDecorator</code> to <code>ProgressTrackingContext</code> to be more consistent with the idea of <em>backends</em> that run in <em>contexts</em>.</li>
+<li>Add <code>...</code> optional arguments to signature of <code>get_output</code> method in <code>Service</code> interface.</li>
+<li>Update private method <code>.make_log</code> of <code>ProgressDecorator</code> to use the <code>progress_log_path</code> option.</li>
+<li>Update <code>UML</code> diagram to include missing classes and changed methods. Also updated the corresponding diagram figure in the package documentation.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="fixed-1-0-0">Fixed<a class="anchor" aria-label="anchor" href="#fixed-1-0-0"></a></h3>
+<ul><li>Update <code>Specification</code> to prevent incompatible cluster types (e.g., <code>FORK</code>) on <code>Windows</code> platforms. For such cases, a warning is issues and the cluster type defaults to <code>PSOCK</code>.</li>
+<li>Ensure <code>make_logo</code> can be ran on all platforms.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.10.2" id="parabar-0102">parabar 0.10.2<a class="anchor" aria-label="anchor" href="#parabar-0102"></a></h2>
 <div class="section level3">
