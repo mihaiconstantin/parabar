@@ -1,3 +1,8 @@
+# parabar 1.0.2
+
+## Fixed
+- Fixed `URLs` in package documentation per `CRAN` request.
+
 # parabar 1.0.1
 
 ## Fixed
