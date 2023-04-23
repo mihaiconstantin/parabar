@@ -1,6 +1,6 @@
 Package: parabar
 Title: Progress Bar for Parallel Tasks
-Version: 1.0.0
+Version: 1.0.1
 Authors@R:
     person(given = "Mihai",
            family = "Constantin",

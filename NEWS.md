@@ -1,3 +1,8 @@
+# parabar 1.0.1
+
+## Fixed
+- Update logo version from `v0.x.x` to `v1.x.x`.
+
 # parabar 1.0.0
 
 ## Added
