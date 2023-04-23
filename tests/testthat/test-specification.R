@@ -66,36 +66,60 @@ test_that("'Specification' sets the number of cores correctly", {
 })
 
 
-test_that("'Specification' sets the cluster type correctly", {
+test_that("'Specification' sets the cluster type on Unix correctly", {
+    # Skip test on Windows.
+    skip_on_os("windows")
+
     # Create specification object.
     specification <- Specification$new()
 
     # Let the specification determine the cluster type.
     specification$set_type(type = NULL)
 
-    # Expect the correct type was determined.
-    if (.Platform$OS.type == "unix") {
-        # Expect a `FORK` cluster on Unix platforms.
-        expect_equal(specification$type, c(unix = "FORK"))
-    } else {
-        # Expect a `PSOCK` cluster was inferred on Windows platforms.
-        expect_equal(specification$type, c(windows = "PSOCK"))
-
-        # Expect warning if a `FORK` cluster is requested on Windows platforms.
-        expect_warning(
-            specification$set_type(type = "fork"),
-            as_text(Warning$requested_cluster_type_not_compatible(specification$types))
-        )
-
-        # Expect that the correct type was set.
-        expect_equal(specification$type, c(windows = "PSOCK"))
-    }
+    # Expect a `FORK` cluster was determined as default on Unix platforms.
+    expect_equal(specification$type, c(unix = "FORK"))
 
     # Specify the `FORK` type explicitly.
     specification$set_type(type = "fork")
 
     # Expect the correct type was set.
     expect_equal(specification$type, "FORK")
+
+    # Specify the `PSOCK` type explicitly.
+    specification$set_type(type = "psock")
+
+    # Expect the correct type was set.
+    expect_equal(specification$type, "PSOCK")
+
+    # Expect warning when specifying an invalid type.
+    expect_warning(
+        specification$set_type(type = "invalid"),
+        as_text(Warning$requested_cluster_type_not_supported(specification$types))
+    )
+})
+
+
+test_that("'Specification' sets the cluster type on Windows correctly", {
+    # Skip test on Unix and the like.
+    skip_on_os(c("mac", "linux", "solaris"))
+
+    # Create specification object.
+    specification <- Specification$new()
+
+    # Let the specification determine the cluster type.
+    specification$set_type(type = NULL)
+
+    # Expect a `PSOCK` cluster was determined as default on Windows platforms.
+    expect_equal(specification$type, c(windows = "PSOCK"))
+
+    # Expect warning if a `FORK` cluster is requested on Windows platforms.
+    expect_warning(
+        specification$set_type(type = "fork"),
+        as_text(Warning$requested_cluster_type_not_compatible(specification$types))
+    )
+
+    # Expect that the correct type was set regardless the incompatible request.
+    expect_equal(specification$type, c(windows = "PSOCK"))
 
     # Specify the `PSOCK` type explicitly.
     specification$set_type(type = "psock")
