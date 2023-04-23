@@ -44,6 +44,17 @@ Warning$requested_cluster_type_not_supported <- function(supported_types) {
     )
 }
 
+# Warning for requesting an incompatible cluster type.
+Warning$requested_cluster_type_not_compatible <- function(supported_types) {
+    # Issue the warning.
+    warning(
+        paste0(
+            "Requested cluster type not compatible. Defaulting to '", supported_types["windows"], "'."
+        ),
+        call. = FALSE
+    )
+}
+
 # Warning for using a backend incompatible with progress tracking.
 Warning$progress_not_supported_for_backend <- function(backend) {
     # Get backend type.

@@ -105,6 +105,15 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
             ))
         },
 
+        # Stop the cluster existing in the separate `R` session.
+        .close_cluster = function() {
+            # Send the function.
+            private$.cluster$run(function() {
+                # Stop the cluster.
+                parallel::stopCluster(cluster)
+            })
+        },
+
         # Start a cluster in a separate `R` session.
         .start = function(specification) {
             # If a cluster is already active.
@@ -134,11 +143,8 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
                 Exception$cluster_not_active()
             }
 
-            # Stop the cluster existing in the separate `R` session.
-            private$.cluster$run(function() {
-                # Stop the cluster.
-                parallel::stopCluster(cluster)
-            })
+            # Terminate the cluster in the separate `R` session.
+            private$.close_cluster()
 
             # Terminate the separate `R` session.
             private$.cluster$close()

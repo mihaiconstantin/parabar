@@ -1,6 +1,7 @@
 # Development
 
 ## Added
+- Add tests for end-user API and developer API.
 - Add vignette `comparison.Rmd` to compare `parabar` to the `pbapply` package,
   and provide rough benchmarks. The `comparison.Rmd` vignette is locally build
   from the `comparison.Rmd.orig` file (i.e., see [this
@@ -12,6 +13,7 @@
   active binding to a desired path.
 
 ## Changed
+- Refactor `Specification` for testing purposes.
 - Replace `\dontrun{}` statements in examples with `try()` calls.
 - Update example for `Options` class to feature the `progress_log_path` active
   binding.
@@ -25,6 +27,12 @@
   `progress_log_path` option.
 - Update `UML` diagram to include missing classes and changed methods. Also
   updated the corresponding diagram figure in the package documentation.
+
+## Fixed
+- Update `Specification` to prevent incompatible cluster types (e.g., `FORK`) on
+  `Windows` platforms. For such cases, a warning is issues and the cluster type
+  defaults to `PSOCK`.
+- Ensure `make_logo` can be ran on all platforms.
 
 # parabar 0.10.2
 

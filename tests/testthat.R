@@ -6,6 +6,15 @@
 # * https://r-pkgs.org/tests.html
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
+# Set environmental variable to prevent hang on quitting the `R` session.
+# Error message:
+# - `Error while shutting down parallel: unable to terminate some child processes`
+# See:
+# - https://github.com/r-lib/processx/issues/310
+# - https://github.com/r-lib/processx/issues/240
+# - https://github.com/r-lib/callr/issues/158
+Sys.setenv(PROCESSX_NOTIFY_OLD_SIGCHLD = "true")
+
 library(testthat)
 library(parabar)
 
