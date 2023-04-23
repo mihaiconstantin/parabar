@@ -16,6 +16,7 @@
     <a href="https://github.com/mihaiconstantin/parabar/releases"><img src="https://img.shields.io/github/v/release/mihaiconstantin/parabar?display_name=tag&sort=semver" alt="GitHub version"/></a>
     <a href="https://cran.r-project.org/package=parabar "><img src="https://www.r-pkg.org/badges/version/parabar" alt="CRAN version"/></a>
     <a href="https://www.r-pkg.org/pkg/parabar"><img src="https://cranlogs.r-pkg.org/badges/grand-total/parabar" alt="CRAN RStudio mirror downloads"/></a>
+    <a href="https://codecov.io/gh/mihaiconstantin/parabar"><img src="https://codecov.io/gh/mihaiconstantin/parabar/branch/main/graph/badge.svg?token=1NZWRKQH1T" alt="Code coverage"/></a>
     <a href="https://github.com/mihaiconstantin/parabar/actions"><img src="https://github.com/mihaiconstantin/parabar/workflows/R-CMD-check/badge.svg" alt="R-CMD-check" /></a>
     <a href="https://cran.r-project.org/web/checks/check_results_parabar.html"><img src="https://badges.cranchecks.info/worst/parabar.svg" alt="CRAN checks"/></a>
     <a href="https://parabar.mihaiconstantin.com"><img src="https://img.shields.io/badge/docs-website-brightgreen" alt="Documentation website"/></a>
