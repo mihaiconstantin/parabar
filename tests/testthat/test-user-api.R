@@ -135,12 +135,48 @@ test_that("`configure_bar` sets progress bar configurations correctly", {
 })
 
 
-test_that("'start_backend' handles different backend and cluster types correctly", {
+test_that("'start_backend' handles different backend and cluster types on Unix correctly", {
+    # Skip test on Windows.
+    skip_on_os("windows")
+
     # Expect that the backed is created correctly for different configurations.
     tests_set_for_backend_creation_via_user_api("psock", "sync")
     tests_set_for_backend_creation_via_user_api("fork", "sync")
     tests_set_for_backend_creation_via_user_api("psock", "async")
     tests_set_for_backend_creation_via_user_api("fork", "async")
+
+    # Expect a warning if an incorrect cluster type is requested.
+    expect_warning(
+        tests_set_for_backend_creation_via_user_api("unknown", "sync"),
+        as_text(Warning$requested_cluster_type_not_supported(Specification$new()$types))
+    )
+
+    # Expect an error if an incorrect backend type is requested.
+    expect_error(
+        start_backend(cores = 2, cluster_type = "psock", backend_type = "unknown"),
+        as_text(Exception$feature_not_developed())
+    )
+})
+
+
+test_that("'start_backend' handles different backend and cluster types on Windows correctly", {
+    # Skip test on Unix and the like.
+    skip_on_os(c("mac", "linux", "solaris"))
+
+    # Expect that the backed is created correctly for different configurations.
+    tests_set_for_backend_creation_via_user_api("psock", "sync")
+    tests_set_for_backend_creation_via_user_api("psock", "async")
+
+    # Expect warnings when `FORK` clusters are requested on Windows.
+    expect_warning(
+        tests_set_for_backend_creation_via_user_api("fork", "sync"),
+        as_text(Warning$requested_cluster_type_not_compatible(Specification$new()$types))
+    )
+
+    expect_warning(
+        tests_set_for_backend_creation_via_user_api("fork", "async"),
+        as_text(Warning$requested_cluster_type_not_compatible(Specification$new()$types))
+    )
 
     # Expect a warning if an incorrect cluster type is requested.
     expect_warning(
