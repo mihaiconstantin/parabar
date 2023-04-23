@@ -1,4 +1,4 @@
-# Development
+# parabar 1.0.0
 
 ## Added
 - Add `CC BY 4.0` license for package documentation, vignettes, and website
