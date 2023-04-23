@@ -1,6 +1,9 @@
 # Development
 
 ## Added
+- Add code coverage `GitHub` workflow via
+  [`codecov`](https://codecov.io/gh/mihaiconstantin/parabar) and badge in
+  `README`.
 - Add tests for end-user API and developer API.
 - Add vignette `comparison.Rmd` to compare `parabar` to the `pbapply` package,
   and provide rough benchmarks. The `comparison.Rmd` vignette is locally build
