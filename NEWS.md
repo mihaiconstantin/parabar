@@ -1,3 +1,8 @@
+# parabar 1.0.3
+
+## Fixed
+- Fixed moved `URL` in package `NEWS.md` per `CRAN` request.
+
 # parabar 1.0.2
 
 ## Fixed
@@ -14,7 +19,7 @@
 - Add `CC BY 4.0` license for package documentation, vignettes, and website
   content.
 - Add code coverage `GitHub` workflow via
-  [`codecov`](https://codecov.io/gh/mihaiconstantin/parabar) and badge in
+  [`codecov`](https://app.codecov.io/gh/mihaiconstantin/parabar) and badge in
   `README`.
 - Add tests for end-user API and developer API.
 - Add vignette `comparison.Rmd` to compare `parabar` to the `pbapply` package,
