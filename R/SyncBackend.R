@@ -157,6 +157,12 @@ SyncBackend <- R6::R6Class("SyncBackend",
             parallel::parSapply(private$.cluster, X = x, FUN = fun, ...)
         },
 
+        # A wrapper around `parallel:parLapply` to run tasks on the cluster.
+        .lapply = function(x, fun, ...) {
+            # Run the task and return the results.
+            parallel::parLapply(private$.cluster, X = x, fun = fun, ...)
+        },
+
         # Clear the current output on the backend.
         .clear_output = function() {
             # Clear output.
@@ -285,6 +291,23 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' abstract class, and is accessible via the `get_output()` method.
         sapply = function(x, fun, ...) {
             private$.output = private$.sapply(x, fun, ...)
+        },
+
+        #' @description
+        #' Run a task on the backend akin to [parallel::parLapply()].
+        #'
+        #' @param x An atomic vector or list to pass to the `fun` function.
+        #'
+        #' @param fun A function to apply to each element of `x`.
+        #'
+        #' @param ... Additional arguments to pass to the `fun` function.
+        #'
+        #' @return
+        #' This method returns void. The output of the task execution must be
+        #' stored in the private field `.output` on the [`parabar::Backend`]
+        #' abstract class, and is accessible via the `get_output()` method.
+        lapply = function(x, fun, ...) {
+            private$.output = private$.lapply(x, fun, ...)
         },
 
         #' @description
