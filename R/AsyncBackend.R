@@ -210,7 +210,7 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
             }, args = list(capture))
         },
 
-        # Run tasks on the cluster in the session asynchronously.
+        # Run tasks asynchronously via the cluster in the session.
         .sapply = function(x, fun, ...) {
             # Capture the `...`.
             dots <- list(...)
@@ -225,7 +225,7 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
             }, args = list(x, fun, dots))
         },
 
-        # Run tasks on the cluster in the session via `parallel:parLapply` asynchronously.
+        # Run tasks asynchronously via the cluster in the session.
         .lapply = function(x, fun, ...) {
             # Capture the `...`.
             dots <- list(...)
