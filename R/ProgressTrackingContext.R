@@ -297,23 +297,15 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
         #' stored in the private field `.output` on the [`parabar::Backend`]
         #' abstract class, and is accessible via the `get_output()` method.
         sapply = function(x, fun, ...) {
-            # Create file for logging progress.
-            log <- private$.make_log()
+            # Prepare the backend operation with early evaluated `...`.
+            operation <- bquote(
+                do.call(
+                    super$sapply, c(list(x = x, fun = fun), .(list(...)))
+                )
+            )
 
-            # Clear the temporary file on function exit.
-            on.exit({
-                # Remove.
-                unlink(log)
-            })
-
-            # Decorate task function.
-            task <- private$.decorate(task = fun, log = log)
-
-            # Execute the decorated task.
-            super$sapply(x = x, fun = task, ...)
-
-            # Show the progress bar and block the main process.
-            private$.show_progress(total = length(x), log = log)
+            # Execute the task using the desired backend operation.
+            private$.execute(operation = operation, x = x, fun = fun)
         }
     ),
 
