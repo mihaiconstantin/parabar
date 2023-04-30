@@ -116,6 +116,23 @@ Service <- R6::R6Class("Service",
         },
 
         #' @description
+        #' Run a task on the backend akin to [parallel::parLapply()].
+        #'
+        #' @param x An atomic vector or list to pass to the `fun` function.
+        #'
+        #' @param fun A function to apply to each element of `x`.
+        #'
+        #' @param ... Additional arguments to pass to the `fun` function.
+        #'
+        #' @return
+        #' This method returns void. The output of the task execution must be
+        #' stored in the private field `.output` on the [`parabar::Backend`]
+        #' abstract class, and is accessible via the `get_output()` method.
+        lapply = function(x, fun, ...) {
+            Exception$method_not_implemented()
+        },
+
+        #' @description
         #' Get the output of the task execution.
         #'
         #' @param ... Additional optional arguments that may be used by concrete
