@@ -212,6 +212,27 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
 
             # Close and remove the progress bar.
             private$.bar$terminate()
+        },
+
+        # Template function for tracking progress of backend operations.
+        .execute = function(operation, x, fun) {
+            # Create file for logging progress.
+            log <- private$.make_log()
+
+            # Clear the temporary file on function exit.
+            on.exit({
+                # Remove.
+                unlink(log)
+            })
+
+            # Decorate task function and save it as `task` (i.e., for readability).
+            task <- private$.decorate(task = fun, log = log)
+
+            # Substitute `fun` with `task` (i.e., for readability) and evaluate.
+            eval(substituteDirect(operation, list(fun = task)))
+
+            # Show the progress bar and block the main process.
+            private$.show_progress(total = length(x), log = log)
         }
     ),
 
