@@ -306,6 +306,32 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
 
             # Execute the task using the desired backend operation.
             private$.execute(operation = operation, x = x, fun = fun)
+        },
+
+        #' @description
+        #' Run a task on the backend akin to [parallel::parLapply()], but with a
+        #' progress bar.
+        #'
+        #' @param x An atomic vector or list to pass to the `fun` function.
+        #'
+        #' @param fun A function to apply to each element of `x`.
+        #'
+        #' @param ... Additional arguments to pass to the `fun` function.
+        #'
+        #' @return
+        #' This method returns void. The output of the task execution must be
+        #' stored in the private field `.output` on the [`parabar::Backend`]
+        #' abstract class, and is accessible via the `get_output()` method.
+        lapply = function(x, fun, ...) {
+            # Prepare the backend operation with early evaluated `...`.
+            operation <- bquote(
+                do.call(
+                    super$lapply, c(list(x = x, fun = fun), .(list(...)))
+                )
+            )
+
+            # Execute the task via the `lapply` backend operation.
+            private$.execute(operation = operation, x = x, fun = fun)
         }
     ),
 
