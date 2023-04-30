@@ -273,8 +273,7 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' @description
         #' Run a task on the backend akin to [parallel::parSapply()].
         #'
-        #' @param x A vector (i.e., usually of integers) to pass to the `fun`
-        #' function.
+        #' @param x An atomic vector or list to pass to the `fun` function.
         #'
         #' @param fun A function to apply to each element of `x`.
         #'
