@@ -225,6 +225,21 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
             }, args = list(x, fun, dots))
         },
 
+        # Run tasks on the cluster in the session via `parallel:parLapply` asynchronously.
+        .lapply = function(x, fun, ...) {
+            # Capture the `...`.
+            dots <- list(...)
+
+            # Perform the evaluation from the `R` session.
+            private$.cluster$call(function(x, fun, dots) {
+                # Run the task.
+                output <- do.call(parallel::parLapply, c(list(cluster, x, fun), dots))
+
+                # Return to the session.
+                return(output)
+            }, args = list(x, fun, dots))
+        },
+
         # Clear the current output on the backend.
         .clear_output = function() {
             # Clear output.
@@ -442,6 +457,27 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
 
             # Deploy the task asynchronously.
             private$.sapply(x, fun, ...)
+        },
+
+        #' @description
+        #' Run a task on the backend akin to [parallel::parLapply()].
+        #'
+        #' @param x An atomic vector or list to pass to the `fun` function.
+        #'
+        #' @param fun A function to apply to each element of `x`.
+        #'
+        #' @param ... Additional arguments to pass to the `fun` function.
+        #'
+        #' @return
+        #' This method returns void. The output of the task execution must be
+        #' stored in the private field `.output` on the [`parabar::Backend`]
+        #' abstract class, and is accessible via the `get_output()` method.
+        lapply = function(x, fun, ...) {
+            # Throw if backend is busy.
+            private$.throw_if_backend_is_busy()
+
+            # Deploy the task asynchronously.
+            private$.lapply(x, fun, ...)
         },
 
         #' @description
