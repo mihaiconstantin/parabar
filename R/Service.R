@@ -118,6 +118,9 @@ Service <- R6::R6Class("Service",
         #' @description
         #' Get the output of the task execution.
         #'
+        #' @param ... Additional optional arguments that may be used by concrete
+        #' implementations.
+        #'
         #' @details
         #' This method fetches the output of the task execution after calling
         #' the `sapply()` method. It returns the output and immediately removes
@@ -125,12 +128,11 @@ Service <- R6::R6Class("Service",
         #' not advised. This method should be called after the execution of a
         #' task.
         #'
-        #' @param ... Additional optional arguments that may be used by concrete
-        #' implementations.
-        #'
         #' @return
-        #' A vector or list of the same length as `x` containing the results of
-        #' the `fun`. It resembles the format of [base::sapply()].
+        #' A vector, matrix, or list of the same length as `x`, containing the
+        #' results of the `fun`. The output format differs based on the specific
+        #' operation employed. Check out the documentation for the `apply`
+        #' operations of [`parallel::parallel`] for more information.
         get_output = function(...) {
             Exception$method_not_implemented()
         }

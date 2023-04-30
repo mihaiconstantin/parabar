@@ -465,8 +465,10 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
         #' task is still running.
         #'
         #' @return
-        #' A vector or list of the same length as `x` containing the results of
-        #' the `fun`. It resembles the format of [base::sapply()].
+        #' A vector, matrix, or list of the same length as `x`, containing the
+        #' results of the `fun`. The output format differs based on the specific
+        #' operation employed. Check out the documentation for the `apply`
+        #' operations of [`parallel::parallel`] for more information.
         get_output = function(wait = FALSE) {
             # Reset the output on exit.
             on.exit({
