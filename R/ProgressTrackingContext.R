@@ -225,11 +225,11 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
                 unlink(log)
             })
 
-            # Decorate task function and save it as `task` (i.e., for readability).
-            task <- private$.decorate(task = fun, log = log)
+            # Decorate the task function.
+            fun <- private$.decorate(task = fun, log = log)
 
-            # Substitute `fun` with `task` (i.e., for readability) and evaluate.
-            eval(substituteDirect(operation, list(fun = task)))
+            # Evaluate the operation now referencing the decorated task.
+            eval(operation)
 
             # Show the progress bar and block the main process.
             private$.show_progress(total = length(x), log = log)
