@@ -11,30 +11,19 @@
 #' [parabar::start_backend()] function. It can also be `NULL` to run the task
 #' sequentially via [base::sapply()]. The default value is `NULL`.
 #'
-#' @param x A vector (i.e., usually of integers) to pass to the `fun` function.
+#' @param x An atomic vector or list to pass to the `fun` function.
 #'
 #' @param fun A function to apply to each element of `x`.
 #'
 #' @param ... Additional arguments to pass to the `fun` function.
 #'
 #' @details
-#' This function is a wrapper around the developer API of the
-#' [`parabar::parabar`] package. More specifically, this function:
-#' - Instantiates an appropriate [`parabar::parabar`] context. If the backend
-#' supports progress tracking (i.e., the backend is an instance of
-#' [`parabar::AsyncBackend`]), a progress tracking context (i.e.,
-#' [`parabar::ProgressTrackingContext`]) is instantiated and used. Otherwise, a
-#' regular context (i.e., [`parabar::Context`]) is instantiated. A regular
-#' context is also used if the progress tracking is disabled via the
-#' [`parabar::Options`] instance.
-#' - Registers the [`backend`][`parabar::Backend`] with the context.
-#' - Instantiates and configures the progress bar based on the
-#'   [`parabar::Options`] instance in the session [`base::.Options`] list.
-#' - Executes the task in parallel, and displays a progress bar if appropriate.
+#' This function uses the [`parabar::UserApiConsumer`] class that acts like an
+#' interface for the developer API of the [`parabar::parabar`] package.
 #'
 #' @return
-#' A vector or list of the same length as `x` containing the results of the
-#' `fun`. The output format resembles that of [base::sapply()].
+#' A vector of the same length as `x` containing the results of the `fun`. The
+#' output format resembles that of [base::sapply()].
 #'
 #' @examples
 #' \donttest{
@@ -95,5 +84,6 @@
 #' @seealso
 #' [parabar::start_backend()], [parabar::peek()], [parabar::export()],
 #' [parabar::evaluate()], [parabar::clear()], [parabar::configure_bar()],
-#' [parabar::stop_backend()], [parabar::set_option()], [parabar::get_option()],
-#' [`parabar::Options`], and [`parabar::Service`].
+#' [parabar::par_lapply()], [parabar::stop_backend()], [parabar::set_option()],
+#' [parabar::get_option()], [`parabar::Options`], [`parabar::UserApiConsumer`],
+#' and [`parabar::Service`].
