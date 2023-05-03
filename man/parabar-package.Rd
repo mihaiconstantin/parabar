@@ -19,7 +19,7 @@ solution for parallel processing in their packages.
 }
 \section{Users}{
 
-For the first category of users, \code{\link{parabar}} provides seven main
+For the first category of users, \code{\link{parabar}} provides several main
 functions of interest:
 \itemize{
 \item \code{\link[=start_backend]{start_backend()}}: creates a parallel backend for executing tasks
@@ -30,6 +30,10 @@ eligible for garbage collection.
 \code{\link[base:lapply]{base::sapply()}} function when no backend is provided. However, when a
 backend is provided, the function will execute a task in parallel on the
 backend, similar to the built-in function \code{\link[parallel:clusterApply]{parallel::parSapply()}}.
+\item \code{\link[=par_lapply]{par_lapply()}}: is a drop-in replacement for the built-in
+\code{\link[base:lapply]{base::lapply()}} function when no backend is provided. However, when a
+backend is provided, the function will execute a task in parallel on the
+backend, similar to the built-in function \code{\link[parallel:clusterApply]{parallel::parLapply()}}.
 \item \code{\link[=clear]{clear()}}: removes all variables available on a backend.
 \item \code{\link[=peek]{peek()}}: returns the names of all variables available on a
 backend.
@@ -72,7 +76,8 @@ The \code{\link{Service}} interface defines the following operations:
 \code{\link[=Service]{start()}}, \code{\link[=Service]{stop()}},
 \code{\link[=Service]{clear()}}, \code{\link[=Service]{peek()}},
 \code{\link[=Service]{export()}}, \code{\link[=Service]{evaluate()}},
-\code{\link[=Service]{sapply()}}, and \code{\link[=Service]{get_output()}}.
+\code{\link[=Service]{sapply()}}, \code{\link[=Service]{lapply()}}, and
+\code{\link[=Service]{get_output()}}.
 
 Check out the documentation for \code{\link{Service}} for more information on
 each method.
@@ -85,9 +90,9 @@ operates. The default, regular \code{\link{Context}} class simply forwards the
 call to the corresponding backend method. However, a more complex context can
 augment the operation before forwarding the call to the backend. One example
 of a complex context is the \code{\link{ProgressTrackingContext}} class. This
-class extends the regular \code{\link{Context}} class and decorates the
-backend \code{\link[=Service]{sapply()}} operation to log the progress after
-each task execution and display a progress bar.
+class extends the regular \code{\link{Context}} class and decorates, for
+example, the backend \code{\link[=Service]{sapply()}} operation to log the
+progress after each task execution and display a progress bar.
 
 The following are the main classes provided by \code{parabar}:
 \itemize{
@@ -105,7 +110,8 @@ asynchronous backend.
 \item \code{\link{BackendFactory}}: factory for creating backend objects.
 \item \code{\link{Context}}: default context for executing backend operations.
 \item \code{\link{ProgressTrackingContext}}: context for decorating the
-\code{\link[=Service]{sapply()}} operation to track and display progress.
+\code{\link[=Service]{sapply()}} and \code{\link[=Service]{lapply()}}
+operations to track and display the execution progress.
 \item \code{\link{ContextFactory}}: factory for creating context objects.
 }
 }
@@ -121,7 +127,7 @@ implemented by concrete bar classes.
 \item \code{\link{BasicBar}}: a simple, but robust, bar created via
 \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}} extending the \code{\link{Bar}} abstract class.
 \item \code{\link{ModernBar}}: a modern bar created via \code{\link[progress:progress_bar]{progress::progress_bar}}
-extending the \link{Bar} abstract class.
+extending the \code{\link{Bar}} abstract class.
 \item \code{\link{BarFactory}}: factory for creating bar objects.
 }
 

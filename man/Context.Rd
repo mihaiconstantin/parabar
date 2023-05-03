@@ -101,6 +101,7 @@ context.}
 \item \href{#method-Context-export}{\code{Context$export()}}
 \item \href{#method-Context-evaluate}{\code{Context$evaluate()}}
 \item \href{#method-Context-sapply}{\code{Context$sapply()}}
+\item \href{#method-Context-lapply}{\code{Context$lapply()}}
 \item \href{#method-Context-get_output}{\code{Context$get_output()}}
 \item \href{#method-Context-clone}{\code{Context$clone()}}
 }
@@ -246,8 +247,33 @@ Run a task on the backend akin to \code{\link[parallel:clusterApply]{parallel::p
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{A vector (i.e., usually of integers) to pass to the \code{fun}
-function.}
+\item{\code{x}}{An atomic vector or list to pass to the \code{fun} function.}
+
+\item{\code{fun}}{A function to apply to each element of \code{x}.}
+
+\item{\code{...}}{Additional arguments to pass to the \code{fun} function.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+This method returns void. The output of the task execution must be
+stored in the private field \code{.output} on the \code{\link{Backend}}
+abstract class, and is accessible via the \code{get_output()} method.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Context-lapply"></a>}}
+\if{latex}{\out{\hypertarget{method-Context-lapply}{}}}
+\subsection{Method \code{lapply()}}{
+Run a task on the backend akin to \code{\link[parallel:clusterApply]{parallel::parLapply()}}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Context$lapply(x, fun, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{x}}{An atomic vector or list to pass to the \code{fun} function.}
 
 \item{\code{fun}}{A function to apply to each element of \code{x}.}
 
@@ -288,8 +314,10 @@ task.
 }
 
 \subsection{Returns}{
-A vector or list of the same length as \code{x} containing the results of
-the \code{fun}. It resembles the format of \code{\link[base:lapply]{base::sapply()}}.
+A vector, matrix, or list of the same length as \code{x}, containing the
+results of the \code{fun}. The output format differs based on the specific
+operation employed. Check out the documentation for the \code{apply}
+operations of \code{\link[parallel:parallel-package]{parallel::parallel}} for more information.
 }
 }
 \if{html}{\out{<hr>}}

@@ -124,6 +124,7 @@ has been fetched, the backend is free to deploy another task.
 \item \href{#method-AsyncBackend-export}{\code{AsyncBackend$export()}}
 \item \href{#method-AsyncBackend-evaluate}{\code{AsyncBackend$evaluate()}}
 \item \href{#method-AsyncBackend-sapply}{\code{AsyncBackend$sapply()}}
+\item \href{#method-AsyncBackend-lapply}{\code{AsyncBackend$lapply()}}
 \item \href{#method-AsyncBackend-get_output}{\code{AsyncBackend$get_output()}}
 \item \href{#method-AsyncBackend-clone}{\code{AsyncBackend$clone()}}
 }
@@ -277,8 +278,33 @@ Run a task on the backend akin to \code{\link[parallel:clusterApply]{parallel::p
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{A vector (i.e., usually of integers) to pass to the \code{fun}
-function.}
+\item{\code{x}}{An atomic vector or list to pass to the \code{fun} function.}
+
+\item{\code{fun}}{A function to apply to each element of \code{x}.}
+
+\item{\code{...}}{Additional arguments to pass to the \code{fun} function.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+This method returns void. The output of the task execution must be
+stored in the private field \code{.output} on the \code{\link{Backend}}
+abstract class, and is accessible via the \code{get_output()} method.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-AsyncBackend-lapply"></a>}}
+\if{latex}{\out{\hypertarget{method-AsyncBackend-lapply}{}}}
+\subsection{Method \code{lapply()}}{
+Run a task on the backend akin to \code{\link[parallel:clusterApply]{parallel::parLapply()}}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{AsyncBackend$lapply(x, fun, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{x}}{An atomic vector or list to pass to the \code{fun} function.}
 
 \item{\code{fun}}{A function to apply to each element of \code{x}.}
 
@@ -325,8 +351,10 @@ task is still running.
 }
 
 \subsection{Returns}{
-A vector or list of the same length as \code{x} containing the results of
-the \code{fun}. It resembles the format of \code{\link[base:lapply]{base::sapply()}}.
+A vector, matrix, or list of the same length as \code{x}, containing the
+results of the \code{fun}. The output format differs based on the specific
+operation employed. Check out the documentation for the \code{apply}
+operations of \code{\link[parallel:parallel-package]{parallel::parallel}} for more information.
 }
 }
 \if{html}{\out{<hr>}}
