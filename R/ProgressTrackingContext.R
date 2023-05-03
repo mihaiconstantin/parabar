@@ -126,7 +126,7 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
             file_path <- Helper$get_option("progress_log_path")
 
             # Create the temporary file.
-            creation_status <- file.create(file_path)
+            creation_status <- file.create(file_path, showWarnings = FALSE)
 
             # If the file creation failed.
             if (!creation_status) {
