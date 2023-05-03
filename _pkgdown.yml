@@ -13,6 +13,7 @@ reference:
     - clear
     - evaluate
     - par_sapply
+    - par_lapply
     - configure_bar
     - matches("get_|set_")
   - subtitle: Developer Classes
@@ -36,6 +37,7 @@ reference:
     - Helper
     - Warning
     - Exception
+    - UserApiConsumer
   - subtitle: Miscellaneous
     desc: Very specific functions that may safely be ignored.
   - contents:
