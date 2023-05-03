@@ -29,4 +29,4 @@
 #' @seealso
 #' [parabar::start_backend()], [parabar::peek()], [parabar::evaluate()],
 #' [parabar::clear()], [parabar::configure_bar()], [parabar::par_sapply()],
-#' [parabar::stop_backend()], and [`parabar::Service`].
+#' [parabar::par_lapply()], [parabar::stop_backend()], and [`parabar::Service`].
