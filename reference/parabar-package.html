@@ -71,7 +71,7 @@ solution for parallel processing in their packages.</p>
     <h2 id="users">Users<a class="anchor" aria-label="anchor" href="#users"></a></h2>
     
 
-<p>For the first category of users, <code>parabar</code> provides seven main
+<p>For the first category of users, <code>parabar</code> provides several main
 functions of interest:</p><ul><li><p><code><a href="start_backend.html">start_backend()</a></code>: creates a parallel backend for executing tasks
 according to the specifications provided.</p></li>
 <li><p><code><a href="stop_backend.html">stop_backend()</a></code>: stops an active backend and makes the <code><a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6::R6</a></code>
@@ -80,6 +80,10 @@ eligible for garbage collection.</p></li>
 <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">base::sapply()</a></code> function when no backend is provided. However, when a
 backend is provided, the function will execute a task in parallel on the
 backend, similar to the built-in function <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parallel::parSapply()</a></code>.</p></li>
+<li><p><code><a href="par_lapply.html">par_lapply()</a></code>: is a drop-in replacement for the built-in
+<code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">base::lapply()</a></code> function when no backend is provided. However, when a
+backend is provided, the function will execute a task in parallel on the
+backend, similar to the built-in function <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parallel::parLapply()</a></code>.</p></li>
 <li><p><code><a href="clear.html">clear()</a></code>: removes all variables available on a backend.</p></li>
 <li><p><code><a href="peek.html">peek()</a></code>: returns the names of all variables available on a
 backend.</p></li>
@@ -118,7 +122,8 @@ task will be executed in a background <code>R</code> session.</p>
 <code><a href="Service.html">start()</a></code>, <code><a href="Service.html">stop()</a></code>,
 <code><a href="Service.html">clear()</a></code>, <code><a href="Service.html">peek()</a></code>,
 <code><a href="Service.html">export()</a></code>, <code><a href="Service.html">evaluate()</a></code>,
-<code><a href="Service.html">sapply()</a></code>, and <code><a href="Service.html">get_output()</a></code>.</p>
+<code><a href="Service.html">sapply()</a></code>, <code><a href="Service.html">lapply()</a></code>, and
+<code><a href="Service.html">get_output()</a></code>.</p>
 <p>Check out the documentation for <code><a href="Service.html">Service</a></code> for more information on
 each method.</p>
 </div>
@@ -132,9 +137,9 @@ operates. The default, regular <code><a href="Context.html">Context</a></code> c
 call to the corresponding backend method. However, a more complex context can
 augment the operation before forwarding the call to the backend. One example
 of a complex context is the <code><a href="ProgressTrackingContext.html">ProgressTrackingContext</a></code> class. This
-class extends the regular <code><a href="Context.html">Context</a></code> class and decorates the
-backend <code><a href="Service.html">sapply()</a></code> operation to log the progress after
-each task execution and display a progress bar.</p>
+class extends the regular <code><a href="Context.html">Context</a></code> class and decorates, for
+example, the backend <code><a href="Service.html">sapply()</a></code> operation to log the
+progress after each task execution and display a progress bar.</p>
 <p>The following are the main classes provided by <code>parabar</code>:</p><ul><li><p><code><a href="Service.html">Service</a></code>: interface for backend operations.</p></li>
 <li><p><code><a href="Backend.html">Backend</a></code>: abstract class that serves as a base class for all
 concrete implementations.</p></li>
@@ -149,7 +154,8 @@ asynchronous backend.</p></li>
 <li><p><code><a href="BackendFactory.html">BackendFactory</a></code>: factory for creating backend objects.</p></li>
 <li><p><code><a href="Context.html">Context</a></code>: default context for executing backend operations.</p></li>
 <li><p><code><a href="ProgressTrackingContext.html">ProgressTrackingContext</a></code>: context for decorating the
-<code><a href="Service.html">sapply()</a></code> operation to track and display progress.</p></li>
+<code><a href="Service.html">sapply()</a></code> and <code><a href="Service.html">lapply()</a></code>
+operations to track and display the execution progress.</p></li>
 <li><p><code><a href="ContextFactory.html">ContextFactory</a></code>: factory for creating context objects.</p></li>
 </ul></div>
 
@@ -164,7 +170,7 @@ implemented by concrete bar classes.</p></li>
 <li><p><code><a href="BasicBar.html">BasicBar</a></code>: a simple, but robust, bar created via
 <code><a href="https://rdrr.io/r/utils/txtProgressBar.html" class="external-link">utils::txtProgressBar()</a></code> extending the <code><a href="Bar.html">Bar</a></code> abstract class.</p></li>
 <li><p><code><a href="ModernBar.html">ModernBar</a></code>: a modern bar created via <code><a href="https://rdrr.io/pkg/progress/man/progress_bar.html" class="external-link">progress::progress_bar</a></code>
-extending the <a href="Bar.html">Bar</a> abstract class.</p></li>
+extending the <code><a href="Bar.html">Bar</a></code> abstract class.</p></li>
 <li><p><code><a href="BarFactory.html">BarFactory</a></code>: factory for creating bar objects.</p></li>
 </ul><p>Finally, <code>parabar</code> uses several <code><a href="https://rdrr.io/r/base/options.html" class="external-link">base::options()</a></code> to configure the
 behavior of the functionality it provides. For more information on the

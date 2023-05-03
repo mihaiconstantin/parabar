@@ -284,6 +284,10 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <td align="left"><code><a href="https://parabar.mihaiconstantin.com/reference/par_sapply.html" class="external-link">par_sapply(backend, x, fun)</a></code></td>
 <td align="left">Run tasks in parallel on a backend.</td>
 </tr>
+<tr class="even">
+<td align="left"><code><a href="https://parabar.mihaiconstantin.com/reference/par_lapply.html" class="external-link">par_lapply(backend, x, fun)</a></code></td>
+<td align="left">Run tasks in parallel on a backend.</td>
+</tr>
 </tbody>
 </table>
 <p>Check the documentation corresponding to each operation for more information and examples.</p>
@@ -314,6 +318,8 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <code>evaluate</code>: Evaluate an arbitrary expression on the backend.</li>
 <li>
 <code>sapply</code>: Run a task on the backend.</li>
+<li>
+<code>lapply</code>: Run a task on the backend.</li>
 <li>
 <code>get_output</code>: Get the output of the task execution.</li>
 </ul>
@@ -376,7 +382,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <span></span>
 <span><span class="co"># Start the backend.</span></span>
 <span><span class="va">backend</span><span class="op">$</span><span class="fu">start</span><span class="op">(</span><span class="va">specification</span><span class="op">)</span></span></code></pre></div>
-<p>Finally, we can run a task in parallel by calling the <code>sapply</code> method on the <code>backend</code> instance.</p>
+<p>Finally, we can run a task in parallel by calling, e.g., the <code>sapply</code> method on the <code>backend</code> instance.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Run a task in parallel.</span></span>
 <span><span class="va">backend</span><span class="op">$</span><span class="fu">sapply</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1000</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
@@ -446,6 +452,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <p align="center">
 <a href="https://raw.githubusercontent.com/mihaiconstantin/parabar/main/inst/design/parabar-design.drawio.svg" class="external-link"> <img src="reference/figures/parabar-design.png" alt="parabar Software Design"></a>
 </p>
+<p><strong><em>Note.</em></strong> For the sake of clarity, the diagram only displays the <code>sapply</code> operation for running tasks in parallel. However, other operations are supported as well (i.e., see table in the section <em>Additional Operations</em>).</p>
 </div>
 </div>
 </div>
