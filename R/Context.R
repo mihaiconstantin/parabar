@@ -155,12 +155,17 @@ Context <- R6::R6Class("Context",
         #' @param variables A character vector of variable names to export.
         #'
         #' @param environment An environment object from which to export the
-        #' variables.
+        #' variables. Defaults to the parent frame.
         #'
         #' @return This method returns void.
         export = function(variables, environment) {
+            # If no environment is provided.
+            if (missing(environment)) {
+                # Use the caller's environment where the variables are defined.
+                environment <- parent.frame()
+            }
+
             # Consume the backend API.
-            # TODO: Check that this works as expected (i.e., the environment).
             private$.backend$export(variables, environment)
         },
 

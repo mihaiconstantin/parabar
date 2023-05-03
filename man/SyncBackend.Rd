@@ -207,7 +207,7 @@ Export variables from a given environment to the backend.
 \item{\code{variables}}{A character vector of variable names to export.}
 
 \item{\code{environment}}{An environment object from which to export the
-variables.}
+variables. Defaults to the parent frame.}
 }
 \if{html}{\out{</div>}}
 }

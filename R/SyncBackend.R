@@ -244,14 +244,14 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' @param variables A character vector of variable names to export.
         #'
         #' @param environment An environment object from which to export the
-        #' variables.
+        #' variables. Defaults to the parent frame.
         #'
         #' @return This method returns void.
         export = function(variables, environment) {
             # If no environment is provided.
             if (missing(environment)) {
-                # Use the global environment.
-                environment <- .GlobalEnv
+                # Use the caller's environment where the variables are defined.
+                environment <- parent.frame()
             }
 
             # Export and return the output.
