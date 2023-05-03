@@ -164,3 +164,13 @@ par_sapply <- function(backend = NULL, x, fun, ...) {
     # Execute the task using the `sapply` parallel operation.
     consumer$sapply(backend = backend, x = x, fun = fun, ...)
 }
+
+#' @template par-lapply
+#' @export
+par_lapply <- function(backend = NULL, x, fun, ...) {
+    # Create an user API consumer.
+    consumer <- UserApiConsumer$new()
+
+    # Execute the task using the `sapply` parallel operation.
+    consumer$lapply(backend = backend, x = x, fun = fun, ...)
+}
