@@ -41,6 +41,7 @@ Collate:
     'ProgressTrackingContext.R'
     'ContextFactory.R'
     'Warning.R'
+    'UserApiConsumer.R'
     'exports.r'
     'logo.R'
     'parabar-package.R'

@@ -9,7 +9,7 @@
 #' solution for parallel processing in their packages.
 #'
 #' @section Users:
-#' For the first category of users, [`parabar::parabar`] provides seven main
+#' For the first category of users, [`parabar::parabar`] provides several main
 #' functions of interest:
 #' - [parabar::start_backend()]: creates a parallel backend for executing tasks
 #'   according to the specifications provided.
@@ -19,6 +19,10 @@
 #'   [base::sapply()] function when no backend is provided. However, when a
 #'   backend is provided, the function will execute a task in parallel on the
 #'   backend, similar to the built-in function [parallel::parSapply()].
+#' - [parabar::par_lapply()]: is a drop-in replacement for the built-in
+#'   [base::lapply()] function when no backend is provided. However, when a
+#'   backend is provided, the function will execute a task in parallel on the
+#'   backend, similar to the built-in function [parallel::parLapply()].
 #' - [parabar::clear()]: removes all variables available on a backend.
 #' - [parabar::peek()]: returns the names of all variables available on a
 #'   backend.
@@ -56,7 +60,8 @@
 #' [`start()`][parabar::Service], [`stop()`][parabar::Service],
 #' [`clear()`][parabar::Service], [`peek()`][parabar::Service],
 #' [`export()`][parabar::Service], [`evaluate()`][parabar::Service],
-#' [`sapply()`][parabar::Service], and [`get_output()`][parabar::Service].
+#' [`sapply()`][parabar::Service], [`lapply()`][parabar::Service], and
+#' [`get_output()`][parabar::Service].
 #'
 #' Check out the documentation for [`parabar::Service`] for more information on
 #' each method.
@@ -67,9 +72,9 @@
 #' call to the corresponding backend method. However, a more complex context can
 #' augment the operation before forwarding the call to the backend. One example
 #' of a complex context is the [`parabar::ProgressTrackingContext`] class. This
-#' class extends the regular [`parabar::Context`] class and decorates the
-#' backend [`sapply()`][parabar::Service] operation to log the progress after
-#' each task execution and display a progress bar.
+#' class extends the regular [`parabar::Context`] class and decorates, for
+#' example, the backend [`sapply()`][parabar::Service] operation to log the
+#' progress after each task execution and display a progress bar.
 #'
 #' The following are the main classes provided by `parabar`:
 #' - [`parabar::Service`]: interface for backend operations.
@@ -86,7 +91,8 @@
 #' - [`parabar::BackendFactory`]: factory for creating backend objects.
 #' - [`parabar::Context`]: default context for executing backend operations.
 #' - [`parabar::ProgressTrackingContext`]: context for decorating the
-#'   [`sapply()`][parabar::Service] operation to track and display progress.
+#'   [`sapply()`][parabar::Service] and [`lapply()`][parabar::Service]
+#'   operations to track and display the execution progress.
 #' - [`parabar::ContextFactory`]: factory for creating context objects.
 #'
 #' @section Progress Bars:
@@ -97,7 +103,7 @@
 #' - [`parabar::BasicBar`]: a simple, but robust, bar created via
 #'   [utils::txtProgressBar()] extending the [`parabar::Bar`] abstract class.
 #' - [`parabar::ModernBar`]: a modern bar created via [`progress::progress_bar`]
-#'   extending the [parabar::Bar] abstract class.
+#'   extending the [`parabar::Bar`] abstract class.
 #' - [`parabar::BarFactory`]: factory for creating bar objects.
 #'
 #' Finally, [`parabar::parabar`] uses several [base::options()] to configure the

@@ -157,6 +157,12 @@ SyncBackend <- R6::R6Class("SyncBackend",
             parallel::parSapply(private$.cluster, X = x, FUN = fun, ...)
         },
 
+        # A wrapper around `parallel:parLapply` to run tasks on the cluster.
+        .lapply = function(x, fun, ...) {
+            # Run the task and return the results.
+            parallel::parLapply(private$.cluster, X = x, fun = fun, ...)
+        },
+
         # Clear the current output on the backend.
         .clear_output = function() {
             # Clear output.
@@ -238,14 +244,14 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' @param variables A character vector of variable names to export.
         #'
         #' @param environment An environment object from which to export the
-        #' variables.
+        #' variables. Defaults to the parent frame.
         #'
         #' @return This method returns void.
         export = function(variables, environment) {
             # If no environment is provided.
             if (missing(environment)) {
-                # Use the global environment.
-                environment <- .GlobalEnv
+                # Use the caller's environment where the variables are defined.
+                environment <- parent.frame()
             }
 
             # Export and return the output.
@@ -273,8 +279,7 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' @description
         #' Run a task on the backend akin to [parallel::parSapply()].
         #'
-        #' @param x A vector (i.e., usually of integers) to pass to the `fun`
-        #' function.
+        #' @param x An atomic vector or list to pass to the `fun` function.
         #'
         #' @param fun A function to apply to each element of `x`.
         #'
@@ -289,7 +294,26 @@ SyncBackend <- R6::R6Class("SyncBackend",
         },
 
         #' @description
+        #' Run a task on the backend akin to [parallel::parLapply()].
+        #'
+        #' @param x An atomic vector or list to pass to the `fun` function.
+        #'
+        #' @param fun A function to apply to each element of `x`.
+        #'
+        #' @param ... Additional arguments to pass to the `fun` function.
+        #'
+        #' @return
+        #' This method returns void. The output of the task execution must be
+        #' stored in the private field `.output` on the [`parabar::Backend`]
+        #' abstract class, and is accessible via the `get_output()` method.
+        lapply = function(x, fun, ...) {
+            private$.output = private$.lapply(x, fun, ...)
+        },
+
+        #' @description
         #' Get the output of the task execution.
+        #'
+        #' @param ... Additional arguments currently not in use.
         #'
         #' @details
         #' This method fetches the output of the task execution after calling
@@ -299,9 +323,11 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' task.
         #'
         #' @return
-        #' A vector or list of the same length as `x` containing the results of
-        #' the `fun`. It resembles the format of [base::sapply()].
-        get_output = function() {
+        #' A vector, matrix, or list of the same length as `x`, containing the
+        #' results of the `fun`. The output format differs based on the specific
+        #' operation employed. Check out the documentation for the `apply`
+        #' operations of [`parallel::parallel`] for more information.
+        get_output = function(...) {
             # Reset the output on exit.
             on.exit({
                 # Clear.

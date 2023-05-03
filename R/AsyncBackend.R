@@ -210,7 +210,7 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
             }, args = list(capture))
         },
 
-        # Run tasks on the cluster in the session asynchronously.
+        # Run tasks asynchronously via the cluster in the session.
         .sapply = function(x, fun, ...) {
             # Capture the `...`.
             dots <- list(...)
@@ -219,6 +219,21 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
             private$.cluster$call(function(x, fun, dots) {
                 # Run the task.
                 output <- do.call(parallel::parSapply, c(list(cluster, x, fun), dots))
+
+                # Return to the session.
+                return(output)
+            }, args = list(x, fun, dots))
+        },
+
+        # Run tasks asynchronously via the cluster in the session.
+        .lapply = function(x, fun, ...) {
+            # Capture the `...`.
+            dots <- list(...)
+
+            # Perform the evaluation from the `R` session.
+            private$.cluster$call(function(x, fun, dots) {
+                # Run the task.
+                output <- do.call(parallel::parLapply, c(list(cluster, x, fun), dots))
 
                 # Return to the session.
                 return(output)
@@ -426,8 +441,7 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
         #' @description
         #' Run a task on the backend akin to [parallel::parSapply()].
         #'
-        #' @param x A vector (i.e., usually of integers) to pass to the `fun`
-        #' function.
+        #' @param x An atomic vector or list to pass to the `fun` function.
         #'
         #' @param fun A function to apply to each element of `x`.
         #'
@@ -443,6 +457,27 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
 
             # Deploy the task asynchronously.
             private$.sapply(x, fun, ...)
+        },
+
+        #' @description
+        #' Run a task on the backend akin to [parallel::parLapply()].
+        #'
+        #' @param x An atomic vector or list to pass to the `fun` function.
+        #'
+        #' @param fun A function to apply to each element of `x`.
+        #'
+        #' @param ... Additional arguments to pass to the `fun` function.
+        #'
+        #' @return
+        #' This method returns void. The output of the task execution must be
+        #' stored in the private field `.output` on the [`parabar::Backend`]
+        #' abstract class, and is accessible via the `get_output()` method.
+        lapply = function(x, fun, ...) {
+            # Throw if backend is busy.
+            private$.throw_if_backend_is_busy()
+
+            # Deploy the task asynchronously.
+            private$.lapply(x, fun, ...)
         },
 
         #' @description
@@ -466,8 +501,10 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
         #' task is still running.
         #'
         #' @return
-        #' A vector or list of the same length as `x` containing the results of
-        #' the `fun`. It resembles the format of [base::sapply()].
+        #' A vector, matrix, or list of the same length as `x`, containing the
+        #' results of the `fun`. The output format differs based on the specific
+        #' operation employed. Check out the documentation for the `apply`
+        #' operations of [`parallel::parallel`] for more information.
         get_output = function(wait = FALSE) {
             # Reset the output on exit.
             on.exit({

@@ -1,3 +1,33 @@
+# Development
+
+## Added
+- Add optional arguments to the `get_output` operation of `SyncBackend` for
+  consistency.
+- Add more tests to improve coverage.
+- Add `par_lapply` function to the user `API`. The `par_lapply` function can be
+  used to run tasks in parallel akin to `parallel::parLapply`.
+- Add `UserApiConsumer` `R6` class that provides an opinionated wrapper around
+  the developer `API` of the `parabar` package. All parallel operations (e.g.,
+  `par_sapply` and `par_lapply`) follow more or less the same pattern. The
+  `UserApiConsumer` encapsulates this pattern and makes it easier to extend
+  `parabar` with new parallel functions (e.g., `par_apply`) while avoiding code
+  duplication. The `UserApiConsumer` class can also be used as a standalone
+  class for parallel operations, however, its primary purpose is to be used by
+  the parallel task execution functions in the user `API`.
+
+## Changed
+- Disable warnings for `file.create` in `ProgressTrackingContext` class. This
+  warning is superfluous since the code handles creation failures.
+- Refactor test helpers to avoid code duplication.
+- Update `par_sapply` to use the `UserApiConsumer` class.
+- Update the developer `API` `R6` classes to implement the `lapply` parallel
+  operation.
+
+## Fixed
+- Fix the `export` operation in the `SyncBackend` and `Context` classes to
+  fallback to the parent environment if the argument `environment` is not
+  provided.
+
 # parabar 1.0.3
 
 ## Fixed

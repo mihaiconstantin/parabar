@@ -93,6 +93,7 @@ backend$active
 \item \href{#method-SyncBackend-export}{\code{SyncBackend$export()}}
 \item \href{#method-SyncBackend-evaluate}{\code{SyncBackend$evaluate()}}
 \item \href{#method-SyncBackend-sapply}{\code{SyncBackend$sapply()}}
+\item \href{#method-SyncBackend-lapply}{\code{SyncBackend$lapply()}}
 \item \href{#method-SyncBackend-get_output}{\code{SyncBackend$get_output()}}
 \item \href{#method-SyncBackend-clone}{\code{SyncBackend$clone()}}
 }
@@ -206,7 +207,7 @@ Export variables from a given environment to the backend.
 \item{\code{variables}}{A character vector of variable names to export.}
 
 \item{\code{environment}}{An environment object from which to export the
-variables.}
+variables. Defaults to the parent frame.}
 }
 \if{html}{\out{</div>}}
 }
@@ -246,8 +247,33 @@ Run a task on the backend akin to \code{\link[parallel:clusterApply]{parallel::p
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{x}}{A vector (i.e., usually of integers) to pass to the \code{fun}
-function.}
+\item{\code{x}}{An atomic vector or list to pass to the \code{fun} function.}
+
+\item{\code{fun}}{A function to apply to each element of \code{x}.}
+
+\item{\code{...}}{Additional arguments to pass to the \code{fun} function.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+This method returns void. The output of the task execution must be
+stored in the private field \code{.output} on the \code{\link{Backend}}
+abstract class, and is accessible via the \code{get_output()} method.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-SyncBackend-lapply"></a>}}
+\if{latex}{\out{\hypertarget{method-SyncBackend-lapply}{}}}
+\subsection{Method \code{lapply()}}{
+Run a task on the backend akin to \code{\link[parallel:clusterApply]{parallel::parLapply()}}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{SyncBackend$lapply(x, fun, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{x}}{An atomic vector or list to pass to the \code{fun} function.}
 
 \item{\code{fun}}{A function to apply to each element of \code{x}.}
 
@@ -267,9 +293,16 @@ abstract class, and is accessible via the \code{get_output()} method.
 \subsection{Method \code{get_output()}}{
 Get the output of the task execution.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SyncBackend$get_output()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SyncBackend$get_output(...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{Additional arguments currently not in use.}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Details}{
 This method fetches the output of the task execution after calling
 the \code{sapply()} method. It returns the output and immediately removes
@@ -279,8 +312,10 @@ task.
 }
 
 \subsection{Returns}{
-A vector or list of the same length as \code{x} containing the results of
-the \code{fun}. It resembles the format of \code{\link[base:lapply]{base::sapply()}}.
+A vector, matrix, or list of the same length as \code{x}, containing the
+results of the \code{fun}. The output format differs based on the specific
+operation employed. Check out the documentation for the \code{apply}
+operations of \code{\link[parallel:parallel-package]{parallel::parallel}} for more information.
 }
 }
 \if{html}{\out{<hr>}}

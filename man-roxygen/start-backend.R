@@ -120,4 +120,4 @@
 #' @seealso
 #' [parabar::peek()], [parabar::export()], [parabar::evaluate()],
 #' [parabar::clear()], [parabar::configure_bar()], [parabar::par_sapply()],
-#' [parabar::stop_backend()], and [`parabar::Service`].
+#' [parabar::par_lapply()], [parabar::stop_backend()], and [`parabar::Service`].

@@ -126,7 +126,7 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
             file_path <- Helper$get_option("progress_log_path")
 
             # Create the temporary file.
-            creation_status <- file.create(file_path)
+            creation_status <- file.create(file_path, showWarnings = FALSE)
 
             # If the file creation failed.
             if (!creation_status) {
@@ -212,6 +212,27 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
 
             # Close and remove the progress bar.
             private$.bar$terminate()
+        },
+
+        # Template function for tracking progress of backend operations.
+        .execute = function(operation, x, fun) {
+            # Create file for logging progress.
+            log <- private$.make_log()
+
+            # Clear the temporary file on function exit.
+            on.exit({
+                # Remove.
+                unlink(log)
+            })
+
+            # Decorate the task function.
+            fun <- private$.decorate(task = fun, log = log)
+
+            # Evaluate the operation now referencing the decorated task.
+            eval(operation)
+
+            # Show the progress bar and block the main process.
+            private$.show_progress(total = length(x), log = log)
         }
     ),
 
@@ -265,8 +286,7 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
         #' Run a task on the backend akin to [parallel::parSapply()], but with a
         #' progress bar.
         #'
-        #' @param x A vector (i.e., usually of integers) to pass to the `fun`
-        #' function.
+        #' @param x An atomic vector or list to pass to the `fun` function.
         #'
         #' @param fun A function to apply to each element of `x`.
         #'
@@ -277,23 +297,41 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
         #' stored in the private field `.output` on the [`parabar::Backend`]
         #' abstract class, and is accessible via the `get_output()` method.
         sapply = function(x, fun, ...) {
-            # Create file for logging progress.
-            log <- private$.make_log()
+            # Prepare the backend operation with early evaluated `...`.
+            operation <- bquote(
+                do.call(
+                    super$sapply, c(list(x = x, fun = fun), .(list(...)))
+                )
+            )
 
-            # Clear the temporary file on function exit.
-            on.exit({
-                # Remove.
-                unlink(log)
-            })
+            # Execute the task using the desired backend operation.
+            private$.execute(operation = operation, x = x, fun = fun)
+        },
 
-            # Decorate task function.
-            task <- private$.decorate(task = fun, log = log)
+        #' @description
+        #' Run a task on the backend akin to [parallel::parLapply()], but with a
+        #' progress bar.
+        #'
+        #' @param x An atomic vector or list to pass to the `fun` function.
+        #'
+        #' @param fun A function to apply to each element of `x`.
+        #'
+        #' @param ... Additional arguments to pass to the `fun` function.
+        #'
+        #' @return
+        #' This method returns void. The output of the task execution must be
+        #' stored in the private field `.output` on the [`parabar::Backend`]
+        #' abstract class, and is accessible via the `get_output()` method.
+        lapply = function(x, fun, ...) {
+            # Prepare the backend operation with early evaluated `...`.
+            operation <- bquote(
+                do.call(
+                    super$lapply, c(list(x = x, fun = fun), .(list(...)))
+                )
+            )
 
-            # Execute the decorated task.
-            super$sapply(x = x, fun = task, ...)
-
-            # Show the progress bar and block the main process.
-            private$.show_progress(total = length(x), log = log)
+            # Execute the task via the `lapply` backend operation.
+            private$.execute(operation = operation, x = x, fun = fun)
         }
     ),
 

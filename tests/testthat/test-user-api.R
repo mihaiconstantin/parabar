@@ -223,7 +223,12 @@ test_that("user API functions handle incompatible input correctly", {
     )
 
     expect_error(
-        par_sapply(backend),
+        par_sapply(backend, NULL, NULL),
+        as_text(Exception$type_not_assignable(class(backend), "Backend"))
+    )
+
+    expect_error(
+        par_lapply(backend, NULL, NULL),
         as_text(Exception$type_not_assignable(class(backend), "Backend"))
     )
 })
@@ -278,156 +283,59 @@ test_that("user API functions handle backend operations correctly", {
 })
 
 
-test_that("'par_sapply' correctly runs tasks in parallel", {
-    # Clean-up.
-    on.exit({
-        # Set default values for package options.
-        set_default_options()
-    })
-
-    # Select task arguments for the `sapply` operation.
+test_that("user API functions run tasks in parallel correctly", {
+    # Select task arguments.
     x <- sample(1:100, 100)
     y <- sample(1:100, 1)
     z <- sample(1:100, 1)
     sleep = sample(c(0, 0.001, 0.002), 1)
 
-    # Compute the correct output.
+    # Compute the expected output for the `par_sapply` user API function.
     expected_output <- test_task(x, y, z)
 
-    # Select a cluster type.
-    cluster_type <- pick_cluster_type(Specification$new()$types)
-
-    # Disable progress tracking.
-    set_option("progress_track", FALSE)
-
-    # Create a synchronous backend.
-    backend <- start_backend(
-        cores = 2,
-        cluster_type = cluster_type,
-        backend_type = "sync"
+    # Define the `par_sapply` parallel operation.
+    parallel_sapply <- bquote(
+        par_sapply(backend, x = .(x), fun = test_task, .(y), .(z), sleep = .(sleep)),
     )
 
-    # Expect the output of the task ran in parallel to be correct.
-    expect_equal(
-        par_sapply(backend, x = x, fun = test_task, y, z, sleep = sleep),
-        expected_output
+    # Define the `par_sapply` sequential operation.
+    sequential_sapply <- bquote(
+        par_sapply(backend = NULL, x = .(x), fun = test_task, .(y), .(z)),
     )
 
-    # Enable progress tracking.
-    set_option("progress_track", TRUE)
+    # Expect the `par_sapply` to run the task in parallel correctly.
+    tests_set_for_user_api_task_execution(parallel_sapply, sequential_sapply, expected_output)
 
-    # Expect warning for requesting progress tracking with incompatible backend.
-    expect_warning(
-        par_sapply(backend, x = x, fun = test_task, y, z, sleep = sleep),
-        as_text(Warning$progress_not_supported_for_backend(backend))
+    # Compute the expected output for the `par_lapply` user API function.
+    expected_output <- as.list(expected_output)
+
+    # Define the `par_lapply` parallel operation.
+    parallel_lapply <- bquote(
+        par_lapply(backend, x = .(x), fun = test_task, .(y), .(z), sleep = .(sleep)),
     )
 
-    # Stop the synchronous backend.
-    stop_backend(backend)
-
-    # Create an asynchronous backend.
-    backend <- start_backend(
-        cores = 2,
-        cluster_type = cluster_type,
-        backend_type = "async"
+    # Define the `par_lapply` sequential operation.
+    sequential_lapply <- bquote(
+        par_lapply(backend = NULL, x = .(x), fun = test_task, .(y), .(z)),
     )
 
-    # Expect the output to be correct.
-    expect_equal(
-        par_sapply(backend, x = x, fun = test_task, y, z, sleep = sleep),
-        expected_output
-    )
-
-    # Disable progress tracking.
-    set_option("progress_track", FALSE)
-
-    # Expect the output to be correct.
-    expect_equal(
-        par_sapply(backend, x = x, fun = test_task, y, z, sleep = sleep),
-        expected_output
-    )
-
-    # Stop the asynchronous backend.
-    stop_backend(backend)
-
-    # Expect the task to produce correct output when ran sequentially.
-    expect_equal(
-        par_sapply(backend = NULL, x = x, fun = test_task, y, z),
-        expected_output
-    )
+    # Expect the `par_lapply` to run the task in parallel correctly.
+    tests_set_for_user_api_task_execution(parallel_lapply, sequential_lapply, expected_output)
 })
 
 
-test_that("'par_sapply' tracks progress correctly", {
+test_that("user API functions track progress correctly", {
     # Run the test only in interactive contexts.
     if (interactive()) {
-        # Pick a cluster type.
-        cluster_type <- pick_cluster_type(Specification$new()$types)
+        # Expect progress tracking is displayed correctly via `par_sapply`.
+        tests_set_for_user_api_progress_tracking(bquote(
+            par_sapply(backend, x = 1:100, fun = test_task, 1, 2)
+        ))
 
-        # Create an asynchronous backend.
-        backend <- start_backend(
-            cores = 2,
-            cluster_type = cluster_type,
-            backend_type = "async"
-        )
-
-        # Clean-up on exit.
-        on.exit({
-            # Stop the backend.
-            stop_backend(backend)
-
-            # Restore the default options.
-            set_default_options()
-        })
-
-        # Configure modern bar.
-        configure_bar(
-            type = "modern",
-            force = TRUE,
-            clear = FALSE
-        )
-
-        # Redirect output.
-        sink("/dev/null", type = "output")
-
-        # Run the task and capture the progress bar output.
-        output <- capture.output({
-                par_sapply(backend, x = 1:100, fun = test_task, 1, 2)
-            }, type = "message"
-        )
-
-        # Remove output redirection.
-        sink(NULL)
-
-        # Expect the progress bar to be shown correctly.
-        expect_true(grepl("tasks \\[100%\\]", paste0(output, collapse = ""), perl = TRUE))
-
-        # Configure the basic bar.
-        configure_bar(
-            type = "basic",
-            style = 3
-        )
-
-        # Run the task and capture the progress bar output.
-        output <- capture.output({
-                par_sapply(backend, x = 1:100, fun = test_task, 1, 2)
-            }, type = "output"
-        )
-
-        # Expect the progress bar to be shown correctly.
-        expect_true(grepl("=\\| 100%", paste0(output, collapse = ""), perl = TRUE))
-
-        # Disable progress tracking.
-        set_option("progress_track", FALSE)
-
-        # Run the task and capture the output without the progress bar.
-        output <- capture.output({
-                par_sapply(backend, x = 1:100, fun = test_task, 1, 2)
-            }, type = "output"
-        )
-
-        # Expect the progress bar to be missing from the output.
-        expect_false(grepl("=\\| 100%", paste0(output, collapse = ""), perl = TRUE))
+        # Expect progress tracking is displayed correctly via `par_lapply`.
+        tests_set_for_user_api_progress_tracking(bquote(
+            par_lapply(backend, x = 1:100, fun = test_task, 1, 2)
+        ))
     } else {
         skip("Test only runs in interactive contexts.")
     }

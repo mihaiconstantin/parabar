@@ -155,12 +155,17 @@ Context <- R6::R6Class("Context",
         #' @param variables A character vector of variable names to export.
         #'
         #' @param environment An environment object from which to export the
-        #' variables.
+        #' variables. Defaults to the parent frame.
         #'
         #' @return This method returns void.
         export = function(variables, environment) {
+            # If no environment is provided.
+            if (missing(environment)) {
+                # Use the caller's environment where the variables are defined.
+                environment <- parent.frame()
+            }
+
             # Consume the backend API.
-            # TODO: Check that this works as expected (i.e., the environment).
             private$.backend$export(variables, environment)
         },
 
@@ -185,8 +190,7 @@ Context <- R6::R6Class("Context",
         #' @description
         #' Run a task on the backend akin to [parallel::parSapply()].
         #'
-        #' @param x A vector (i.e., usually of integers) to pass to the `fun`
-        #' function.
+        #' @param x An atomic vector or list to pass to the `fun` function.
         #'
         #' @param fun A function to apply to each element of `x`.
         #'
@@ -199,6 +203,24 @@ Context <- R6::R6Class("Context",
         sapply = function(x, fun, ...) {
             # Consume the backend API.
             private$.backend$sapply(x = x, fun = fun, ...)
+        },
+
+        #' @description
+        #' Run a task on the backend akin to [parallel::parLapply()].
+        #'
+        #' @param x An atomic vector or list to pass to the `fun` function.
+        #'
+        #' @param fun A function to apply to each element of `x`.
+        #'
+        #' @param ... Additional arguments to pass to the `fun` function.
+        #'
+        #' @return
+        #' This method returns void. The output of the task execution must be
+        #' stored in the private field `.output` on the [`parabar::Backend`]
+        #' abstract class, and is accessible via the `get_output()` method.
+        lapply = function(x, fun, ...) {
+            # Consume the backend API.
+            private$.backend$lapply(x = x, fun = fun, ...)
         },
 
         #' @description
@@ -217,8 +239,10 @@ Context <- R6::R6Class("Context",
         #' task.
         #'
         #' @return
-        #' A vector or list of the same length as `x` containing the results of
-        #' the `fun`. It resembles the format of [base::sapply()].
+        #' A vector, matrix, or list of the same length as `x`, containing the
+        #' results of the `fun`. The output format differs based on the specific
+        #' operation employed. Check out the documentation for the `apply`
+        #' operations of [`parallel::parallel`] for more information.
         get_output = function(...) {
             # Consume the backend API.
             private$.backend$get_output(...)

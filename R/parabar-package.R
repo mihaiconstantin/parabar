@@ -17,7 +17,7 @@
 
 # Imports.
 #' @importFrom parallel detectCores makeCluster stopCluster clusterExport
-#' @importFrom parallel clusterEvalQ parSapply parApply clusterCall
+#' @importFrom parallel clusterEvalQ parSapply parLapply clusterCall
 #' @importFrom R6 R6Class
 #' @importFrom progress progress_bar
 #' @importFrom callr r_session

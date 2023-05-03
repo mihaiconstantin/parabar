@@ -158,87 +158,19 @@ evaluate <- function(backend, expression) {
 #' @template par-sapply
 #' @export
 par_sapply <- function(backend = NULL, x, fun, ...) {
-    # If no backend is provided.
-    if (is.null(backend)) {
-        # Then use the built in, non-parallel `base::sapply`.
-        output <- base::sapply(X = x, FUN = fun, ...)
+    # Create an user API consumer.
+    consumer <- UserApiConsumer$new()
 
-        # Return results.
-        return(output)
+    # Execute the task using the `sapply` parallel operation.
+    consumer$sapply(backend = backend, x = x, fun = fun, ...)
+}
 
-    # Otherwise, if a backend is provided.
-    } else {
-        # Check the type.
-        Helper$check_object_type(backend, "Backend")
-    }
+#' @template par-lapply
+#' @export
+par_lapply <- function(backend = NULL, x, fun, ...) {
+    # Create an user API consumer.
+    consumer <- UserApiConsumer$new()
 
-    # Get user warning settings.
-    user_options <- options()
-
-    # Enable printing warnings as soon as they occur.
-    options(warn = 1)
-
-    # Restore user's original settings.
-    on.exit({
-        # Reset user's options.
-        options(user_options)
-    })
-
-    # Whether to track progress or not.
-    progress <- get_option("progress_track")
-
-    # If the user requested progress tracking and the backend does not support it.
-    if (progress && !backend$supports_progress) {
-        # Warn the users.
-        Warning$progress_not_supported_for_backend(backend)
-    }
-
-    # Create a context manager factory.
-    context_factory <- ContextFactory$new()
-
-    # If progress is requested and the conditions are right.
-    if (progress && backend$supports_progress && interactive()) {
-        # Then use a progress-decorated context.
-        context <- context_factory$get("progress")
-
-        # Progress bar type.
-        bar_type <- get_option("progress_bar_type")
-
-        # Progress bar default configuration.
-        bar_config <- get_option("progress_bar_config")[[bar_type]]
-
-        # Create a bar factory.
-        bar_factory <- BarFactory$new()
-
-        # Get a bar of desired type.
-        bar <- bar_factory$get(bar_type)
-
-        # Set the bar.
-        context$set_bar(bar)
-
-        # Configure the bar.
-        do.call(context$configure_bar, bar_config)
-
-    # Otherwise, if progress tracking is not requested, nor possible.
-    } else {
-        # Use a regular context.
-        context <- context_factory$get("regular")
-    }
-
-    # Register the backend with the context.
-    context$set_backend(backend)
-
-    # Execute the task using the backend provided (i.e., aka context).
-    context$sapply(x = x, fun = fun, ...)
-
-    # If the current context wraps a backend that supports progress tracking.
-    if (context$backend$supports_progress) {
-        # Then wait for the results.
-        output <- context$get_output(wait = TRUE)
-    } else {
-        # Otherwise, return the output whenever the task is finished.
-        output <- context$get_output()
-    }
-
-    return(output)
+    # Execute the task using the `sapply` parallel operation.
+    consumer$lapply(backend = backend, x = x, fun = fun, ...)
 }

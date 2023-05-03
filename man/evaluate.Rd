@@ -87,5 +87,5 @@ backend$active
 \seealso{
 \code{\link[=start_backend]{start_backend()}}, \code{\link[=peek]{peek()}}, \code{\link[=export]{export()}},
 \code{\link[=clear]{clear()}}, \code{\link[=configure_bar]{configure_bar()}}, \code{\link[=par_sapply]{par_sapply()}},
-\code{\link[=stop_backend]{stop_backend()}}, and \code{\link{Service}}.
+\code{\link[=par_lapply]{par_lapply()}}, \code{\link[=stop_backend]{stop_backend()}}, and \code{\link{Service}}.
 }
