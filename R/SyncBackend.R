@@ -313,6 +313,8 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' @description
         #' Get the output of the task execution.
         #'
+        #' @param ... Additional arguments currently not in use.
+        #'
         #' @details
         #' This method fetches the output of the task execution after calling
         #' the `sapply()` method. It returns the output and immediately removes
@@ -325,7 +327,7 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' results of the `fun`. The output format differs based on the specific
         #' operation employed. Check out the documentation for the `apply`
         #' operations of [`parallel::parallel`] for more information.
-        get_output = function() {
+        get_output = function(...) {
             # Reset the output on exit.
             on.exit({
                 # Clear.
