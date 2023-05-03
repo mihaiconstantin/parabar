@@ -33,7 +33,7 @@ test_that("'ProgressTrackingContext' sets the backend correctly", {
 })
 
 
-test_that("'ProgressTrackingContext' sets progress bars correctly", {
+test_that("'ProgressTrackingContext' sets the progress bar correctly", {
     # Create a bar factory.
     bar_factory <- BarFactory$new()
 
@@ -90,16 +90,61 @@ test_that("'ProgressTrackingContext' configures the progress bar correctly", {
 })
 
 
+test_that("'ProgressTrackingContext' correctly creates log files.", {
+    # Reset default package options on exit.
+    on.exit({
+        # Set defaults.
+        set_default_options()
+    })
+
+    # Create a progress tracking context object.
+    context <- ProgressTrackingContextTester$new()
+
+    # Create a log file with a randomly generated path.
+    path <- context$make_log()
+
+    # Expect that the file exist at the used path.
+    expect_true(file.exists(path))
+
+    # Remove the file.
+    file.remove(path)
+
+    # Pick a specific log path.
+    log_path <- tempfile(pattern = "progress_log")
+
+    # Fix the log path.
+    set_option("progress_log_path", log_path)
+
+    # Create a log file with the fixed log path.
+    path <- context$make_log()
+
+    # Expect that the correct log path was used.
+    expect_equal(log_path, path)
+
+    # Expect that the log file was created at the fixed path.
+    expect_true(file.exists(path))
+
+    # Remove the file.
+    file.remove(path)
+
+    # Pick an absurd path for the log file.
+    log_path_absurd <- "/absurd/log/file/path"
+
+    # Fix the log path to the absurd value.
+    set_option("progress_log_path", log_path_absurd)
+
+    # Expect error when failing to create the log file.
+    expect_error(
+        context$make_log(),
+        as_text(Exception$temporary_file_creation_failed(log_path_absurd))
+    )
+
+    # Expect that the log file was not created at the absurd path.
+    expect_false(file.exists(log_path_absurd))
+})
+
+
 test_that("'ProgressTrackingContext' executes the task in parallel correctly", {
-    # Select task arguments for the `sapply` operation.
-    x <- sample(1:100, 100)
-    y <- sample(1:100, 1)
-    z <- sample(1:100, 1)
-    sleep = sample(c(0, 0.001, 0.002), 1)
-
-    # Compute the correct output.
-    expected_output <- test_task(x, y, z)
-
     # Create a specification.
     specification <- Specification$new()
 
@@ -124,51 +169,8 @@ test_that("'ProgressTrackingContext' executes the task in parallel correctly", {
     # Start the backend.
     context$start(specification)
 
-    # Create a bar factory.
-    bar_factory <- BarFactory$new()
-
-    # Get a basic bar instance.
-    bar <- bar_factory$get("basic")
-
-    # Register the bar with the context object.
-    context$set_bar(bar)
-
-    # Configure the bar.
-    context$configure_bar(
-        style = 3
-    )
-
-    # Run the task in parallel.
-    context$sapply(x, test_task, y = y, z = z, sleep = sleep)
-
-    # Expect that the task output is correct.
-    expect_equal(context$get_output(wait = TRUE), expected_output)
-
-    # Expect the progress bar was shown correctly.
-    expect_true(any(grepl("=\\| 100%", context$progress_bar_output)))
-
-    # Get a modern bar instance.
-    bar <- bar_factory$get("modern")
-
-    # Register the bar with the same context object.
-    context$set_bar(bar)
-
-    # Configure the bar.
-    context$configure_bar(
-        show_after = 0,
-        format = ":bar| :percent",
-        clear = FALSE,
-        force = TRUE
-    )
-
-    # Run the task in parallel.
-    context$sapply(x, test_task, y = y, z = z, sleep = sleep)
-
-    # Expect that the task output is correct.
-    expect_equal(context$get_output(wait = TRUE), expected_output)
-
-    # Expect the progress bar was shown correctly.
-    expect_true(any(grepl("=\\| 100%", context$progress_bar_output)))
+    # Expect correctly executed tasks and logged progress.
+    tests_set_for_progress_tracking_context(context, test_task)
 
     # Stop the backend.
     context$stop()
