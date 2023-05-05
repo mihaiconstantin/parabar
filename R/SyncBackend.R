@@ -163,6 +163,12 @@ SyncBackend <- R6::R6Class("SyncBackend",
             parallel::parLapply(private$.cluster, X = x, fun = fun, ...)
         },
 
+        # A wrapper around `parallel:parApply` to run tasks on the cluster.
+        .apply = function(x, margin, fun, ...) {
+            # Run the task and return the results.
+            parallel::parApply(private$.cluster, X = x, MARGIN = margin, FUN = fun, ...)
+        },
+
         # Clear the current output on the backend.
         .clear_output = function() {
             # Clear output.
@@ -308,6 +314,31 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' abstract class, and is accessible via the `get_output()` method.
         lapply = function(x, fun, ...) {
             private$.output = private$.lapply(x, fun, ...)
+        },
+
+        #' @description
+        #' Run a task on the backend akin to [parallel::parApply()].
+        #'
+        #' @param x An array to pass to the `fun` function.
+        #'
+        #' @param margin A numeric vector indicating the dimensions of `x` the
+        #' `fun` function should be applied over. For example, for a matrix,
+        #' `margin = 1` indicates applying `fun` rows-wise, `margin = 2`
+        #' indicates applying `fun` columns-wise, and `margin = c(1, 2)`
+        #' indicates applying `fun` element-wise. Named dimensions are also
+        #' possible depending on `x`. See [parallel::parApply()] and
+        #' [base::apply()] for more details.
+        #'
+        #' @param fun A function to apply to `x` according to the `margin`.
+        #'
+        #' @param ... Additional arguments to pass to the `fun` function.
+        #'
+        #' @return
+        #' This method returns void. The output of the task execution must be
+        #' stored in the private field `.output` on the [`parabar::Backend`]
+        #' abstract class, and is accessible via the `get_output()` method.
+        apply = function(x, margin, fun, ...) {
+            private$.output = private$.apply(x, margin, fun, ...)
         },
 
         #' @description
