@@ -1,6 +1,10 @@
 # Development
 
 ## Added
+- Add exception `Exception$primitive_as_task_not_allowed` for trying to decorate
+  primitive functions with progress tracking in the `ProgressTrackingContext`
+  class.
+- Add helper `Helper$is_of_class` to check if an object is of a given class.
 - Add optional arguments to the `get_output` operation of `SyncBackend` for
   consistency.
 - Add more tests to improve coverage.
@@ -24,6 +28,12 @@
   operation.
 
 ## Fixed
+- Update `.decorate` method of `ProgressTrackingContext` to be more flexible.
+  More specifically, the method will now throw when primitive functions are
+  provided for decoration. The method can now handle both inline functions
+  (i.e., `function(x) x`) and functions that have a body defined in terms of
+  compound expressions (i.e., `function(x) { x }`). Closes
+  [#32](https://github.com/mihaiconstantin/parabar/issues/32).
 - Fix the `export` operation in the `SyncBackend` and `Context` classes to
   fallback to the parent environment if the argument `environment` is not
   provided.
