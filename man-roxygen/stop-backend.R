@@ -26,4 +26,5 @@
 #' @seealso
 #' [parabar::start_backend()], [parabar::peek()], [parabar::export()],
 #' [parabar::evaluate()], [parabar::clear()], [parabar::configure_bar()],
-#' [parabar::par_sapply()], [parabar::par_lapply()], and [`parabar::Service`].
+#' [parabar::par_sapply()], [parabar::par_apply()], [parabar::par_lapply()], and
+#' [`parabar::Service`].
