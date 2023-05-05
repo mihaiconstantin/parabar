@@ -1,6 +1,8 @@
 # Development
 
 ## Added
+- Add exception `Exception$array_margins_too_large` for using improper margins
+  in the `Service$apply` operation.
 - Add exception `Exception$primitive_as_task_not_allowed` for trying to decorate
   primitive functions with progress tracking in the `ProgressTrackingContext`
   class.
@@ -8,8 +10,11 @@
 - Add optional arguments to the `get_output` operation of `SyncBackend` for
   consistency.
 - Add more tests to improve coverage.
-- Add `par_lapply` function to the user `API`. The `par_lapply` function can be
-  used to run tasks in parallel akin to `parallel::parLapply`.
+- Add implementation for `Service$lapply` and `Service$apply` operations for all
+  classes that implement the `Service` interface.
+- Add `par_lapply` and `par_apply` functions to the user `API`. These functions
+  can be used to run tasks in parallel akin to `parallel::parLapply` and
+  `parallel::parApply`, respectively.
 - Add `UserApiConsumer` `R6` class that provides an opinionated wrapper around
   the developer `API` of the `parabar` package. All parallel operations (e.g.,
   `par_sapply` and `par_lapply`) follow more or less the same pattern. The
