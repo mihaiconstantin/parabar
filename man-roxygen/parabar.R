@@ -23,6 +23,10 @@
 #'   [base::lapply()] function when no backend is provided. However, when a
 #'   backend is provided, the function will execute a task in parallel on the
 #'   backend, similar to the built-in function [parallel::parLapply()].
+#' - [parabar::par_apply()]: is a drop-in replacement for the built-in
+#'   [base::apply()] function when no backend is provided. However, when a
+#'   backend is provided, the function will execute a task in parallel on the
+#'   backend, similar to the built-in function [parallel::parApply()].
 #' - [parabar::clear()]: removes all variables available on a backend.
 #' - [parabar::peek()]: returns the names of all variables available on a
 #'   backend.
@@ -60,8 +64,8 @@
 #' [`start()`][parabar::Service], [`stop()`][parabar::Service],
 #' [`clear()`][parabar::Service], [`peek()`][parabar::Service],
 #' [`export()`][parabar::Service], [`evaluate()`][parabar::Service],
-#' [`sapply()`][parabar::Service], [`lapply()`][parabar::Service], and
-#' [`get_output()`][parabar::Service].
+#' [`sapply()`][parabar::Service], [`lapply()`][parabar::Service],
+#' [`apply()`][parabar::Service], and [`get_output()`][parabar::Service].
 #'
 #' Check out the documentation for [`parabar::Service`] for more information on
 #' each method.
@@ -91,9 +95,12 @@
 #' - [`parabar::BackendFactory`]: factory for creating backend objects.
 #' - [`parabar::Context`]: default context for executing backend operations.
 #' - [`parabar::ProgressTrackingContext`]: context for decorating the
-#'   [`sapply()`][parabar::Service] and [`lapply()`][parabar::Service]
+#'   [`sapply()`][parabar::Service], [`lapply()`][parabar::Service], and
+#'   [`apply()`][parabar::Service]
 #'   operations to track and display the execution progress.
 #' - [`parabar::ContextFactory`]: factory for creating context objects.
+#' - [`parabar::UserApiConsumer`]: opinionated wrapper around the other
+#'   [`R6::R6`] classes used in by the exported functions for the users.
 #'
 #' @section Progress Bars:
 #' [`parabar::parabar`] also exposes several classes for creating and updating
