@@ -240,6 +240,21 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
             }, args = list(x, fun, dots))
         },
 
+        # Run tasks asynchronously via the cluster in the session.
+        .apply = function(x, margin, fun, ...) {
+            # Capture the `...`.
+            dots <- list(...)
+
+            # Perform the evaluation from the `R` session.
+            private$.cluster$call(function(x, margin, fun, dots) {
+                # Run the task.
+                output <- do.call(parallel::parApply, c(list(cluster, x, margin, fun), dots))
+
+                # Return to the session.
+                return(output)
+            }, args = list(x, margin, fun, dots))
+        },
+
         # Clear the current output on the backend.
         .clear_output = function() {
             # Clear output.
@@ -478,6 +493,36 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
 
             # Deploy the task asynchronously.
             private$.lapply(x, fun, ...)
+        },
+
+
+        #' @description
+        #' Run a task on the backend akin to [parallel::parApply()].
+        #'
+        #' @param x An array to pass to the `fun` function.
+        #'
+        #' @param margin A numeric vector indicating the dimensions of `x` the
+        #' `fun` function should be applied over. For example, for a matrix,
+        #' `margin = 1` indicates applying `fun` rows-wise, `margin = 2`
+        #' indicates applying `fun` columns-wise, and `margin = c(1, 2)`
+        #' indicates applying `fun` element-wise. Named dimensions are also
+        #' possible depending on `x`. See [parallel::parApply()] and
+        #' [base::apply()] for more details.
+        #'
+        #' @param fun A function to apply to `x` according to the `margin`.
+        #'
+        #' @param ... Additional arguments to pass to the `fun` function.
+        #'
+        #' @return
+        #' This method returns void. The output of the task execution must be
+        #' stored in the private field `.output` on the [`parabar::Backend`]
+        #' abstract class, and is accessible via the `get_output()` method.
+        apply = function(x, margin, fun, ...) {
+            # Throw if backend is busy.
+            private$.throw_if_backend_is_busy()
+
+            # Deploy the task asynchronously.
+            private$.apply(x, margin, fun, ...)
         },
 
         #' @description
