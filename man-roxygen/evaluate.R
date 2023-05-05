@@ -8,7 +8,7 @@
 #' @param backend An object of class [`parabar::Backend`] as returned by the
 #' [parabar::start_backend()] function.
 #'
- #' @param expression An unquoted expression to evaluate on the backend.
+#' @param expression An unquoted expression to evaluate on the backend.
 #'
 #' @details
 #' This function is a convenience wrapper around the lower-lever API of
