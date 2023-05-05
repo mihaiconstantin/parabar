@@ -708,6 +708,11 @@ ProgressTrackingContextTester <- R6::R6Class("ProgressTrackingContextTester",
         # Wrapper to expose `.make_log` for testing.
         make_log = function() {
             private$.make_log()
+        },
+
+        # Wrapper to expose the `.decorate` for testing.
+        decorate = function(task, log) {
+            private$.decorate(task, log)
         }
     ),
 
