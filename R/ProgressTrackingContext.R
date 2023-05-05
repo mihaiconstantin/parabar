@@ -120,6 +120,15 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
         # Progress bar configuration.
         .bar_config = list(),
 
+        # Validate the type of task provided.
+        .validate_task = function(task) {
+            # If the task is a primitive.
+            if (is.primitive(task)) {
+                # Then throw an exception.
+                Exception$primitive_as_task_not_allowed()
+            }
+        },
+
         # Create a temporary file to log progress from backend tasks.
         .make_log = function() {
             # Get a temporary file name (i.e., OS specific) or a fixed one.
@@ -216,6 +225,9 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
 
         # Template function for tracking progress of backend operations.
         .execute = function(operation, x, fun) {
+            # Validate the task function provided.
+            private$.validate_task(fun)
+
             # Create file for logging progress.
             log <- private$.make_log()
 
