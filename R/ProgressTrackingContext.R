@@ -149,6 +149,9 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
 
         # Decorate task function to log the progress after each execution.
         .decorate = function(task, log) {
+            # Validate the task function provided.
+            private$.validate_task(task)
+
             # Create the language construct to inject.
             injection <- bquote(
                 # The injected expression to run after each task execution.
@@ -234,9 +237,6 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
 
         # Template function for tracking progress of backend operations.
         .execute = function(operation, x, fun) {
-            # Validate the task function provided.
-            private$.validate_task(fun)
-
             # Create file for logging progress.
             log <- private$.make_log()
 
