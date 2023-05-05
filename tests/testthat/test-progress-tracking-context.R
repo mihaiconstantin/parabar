@@ -90,7 +90,7 @@ test_that("'ProgressTrackingContext' configures the progress bar correctly", {
 })
 
 
-test_that("'ProgressTrackingContext' correctly creates log files.", {
+test_that("'ProgressTrackingContext' creates log files correctly", {
     # Reset default package options on exit.
     on.exit({
         # Set defaults.

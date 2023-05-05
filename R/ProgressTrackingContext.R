@@ -236,7 +236,7 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
         },
 
         # Template function for tracking progress of backend operations.
-        .execute = function(operation, x, fun) {
+        .execute = function(operation, fun, total) {
             # Create file for logging progress.
             log <- private$.make_log()
 
@@ -253,7 +253,7 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
             eval(operation)
 
             # Show the progress bar and block the main process.
-            private$.show_progress(total = length(x), log = log)
+            private$.show_progress(total = total, log = log)
         }
     ),
 
@@ -321,12 +321,12 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
             # Prepare the backend operation with early evaluated `...`.
             operation <- bquote(
                 do.call(
-                    super$sapply, c(list(x = x, fun = fun), .(list(...)))
+                    super$sapply, c(list(x = .(x), fun = fun), .(list(...)))
                 )
             )
 
             # Execute the task using the desired backend operation.
-            private$.execute(operation = operation, x = x, fun = fun)
+            private$.execute(operation = operation, fun = fun, total = length(x))
         },
 
         #' @description
@@ -347,12 +347,12 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
             # Prepare the backend operation with early evaluated `...`.
             operation <- bquote(
                 do.call(
-                    super$lapply, c(list(x = x, fun = fun), .(list(...)))
+                    super$lapply, c(list(x = .(x), fun = fun), .(list(...)))
                 )
             )
 
             # Execute the task via the `lapply` backend operation.
-            private$.execute(operation = operation, x = x, fun = fun)
+            private$.execute(operation = operation, fun = fun, total = length(x))
         }
     ),
 

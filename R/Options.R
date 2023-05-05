@@ -127,7 +127,7 @@ Options <- R6::R6Class("Options",
                 # If the path has not been set yet.
                 if (is.null(private$.progress_log_path)) {
                     # Then generate and return random path.
-                    return(tempfile())
+                    return(tempfile(pattern = "parabar"))
                 }
 
                 # Otherwise return the path already set.
