@@ -20,6 +20,9 @@
   the parallel task execution functions in the user `API`.
 
 ## Changed
+- Force early evaluation for the `x` argument of task execution functions in
+  `ProgressTrackingContext` class.
+- Update the log file for progress tracking to include `parabar` in file name.
 - Disable warnings for `file.create` in `ProgressTrackingContext` class. This
   warning is superfluous since the code handles creation failures.
 - Refactor test helpers to avoid code duplication.
