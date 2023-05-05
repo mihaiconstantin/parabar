@@ -228,6 +228,44 @@ UserApiConsumer <- R6::R6Class("UserApiConsumer",
 
             # Execute the `lapply` operation accordingly and return the results.
             private$.execute(backend, parallel, sequential)
+        },
+
+        #' @description
+        #' Execute a task in parallel akin to [parallel::parApply()].
+        #'
+        #' @param x An array to pass to the `fun` function.
+        #'
+        #' @param margin A numeric vector indicating the dimensions of `x` the
+        #' `fun` function should be applied over. For example, for a matrix,
+        #' `margin = 1` indicates applying `fun` rows-wise, `margin = 2`
+        #' indicates applying `fun` columns-wise, and `margin = c(1, 2)`
+        #' indicates applying `fun` element-wise. Named dimensions are also
+        #' possible depending on `x`. See [parallel::parApply()] and
+        #' [base::apply()] for more details.
+        #'
+        #' @param fun A function to apply to `x` according to the `margin`.
+        #'
+        #' @return
+        #' The dimensions of the output vary according to the `margin` argument.
+        #' Consult the documentation of [base::apply()] for a detailed
+        #' explanation on how the output is structured.
+        apply = function(backend, x, margin, fun, ...) {
+            # Prepare the sequential operation.
+            sequential <- bquote(
+                do.call(
+                    base::apply, c(list(X = .(x), MARGIN = .(margin), FUN = .(fun)), .(list(...)))
+                )
+            )
+
+            # Prepare the parallel operation.
+            parallel <- bquote(
+                do.call(
+                    context$apply, c(list(x = .(x), margin = .(margin), fun = .(fun)), .(list(...)))
+                )
+            )
+
+            # Execute the `lapply` operation accordingly and return the results.
+            private$.execute(backend, parallel, sequential)
         }
     )
 )
