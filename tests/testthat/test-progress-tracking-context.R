@@ -144,6 +144,45 @@ test_that("'ProgressTrackingContext' correctly creates log files.", {
 })
 
 
+test_that("'ProgressTrackingContext' decorates tasks with progress tracking correctly", {
+    # Create a progress tracking context object.
+    context <- ProgressTrackingContextTester$new()
+
+    # Pick a specific log path.
+    log <- "/some/parabar/log/path"
+
+    # Decorate a function with compound expression body (i.e., `{`).
+    decorated_task <- context$decorate(task = function(x) { x + 1 }, log = log)
+
+    # Expect correct decoration for compound expressions.
+    expect_true(body_contains(decorated_task, pattern = log, position = 2))
+
+    # Decorate an inline function.
+    decorated_task <- context$decorate(task = function(x) x + 1, log = log)
+
+    # Expect correct decoration for inline functions.
+    expect_true(body_contains(decorated_task, pattern = log, position = 2))
+
+    # Decorate a `base` method that uses method dispatching.
+    decorated_task <- context$decorate(task = base::mean, log = log)
+
+    # Expect correct decoration for `base` methods.
+    expect_true(body_contains(decorated_task, pattern = log, position = 2))
+
+    # Expect the decoration to fail for primitive functions.
+    expect_error(
+        context$decorate(task = sum, log = log),
+        as_text(Exception$primitive_as_task_not_allowed())
+    )
+
+    # Decorate a wrapped primitive function.
+    decorated_task <- context$decorate(task = function(x) sum(x), log = log)
+
+    # Expect correct decoration for wrapped primitive functions.
+    expect_true(body_contains(decorated_task, pattern = log, position = 2))
+})
+
+
 test_that("'ProgressTrackingContext' executes the task in parallel correctly", {
     # Create a specification.
     specification <- Specification$new()

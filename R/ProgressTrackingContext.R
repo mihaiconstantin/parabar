@@ -120,6 +120,15 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
         # Progress bar configuration.
         .bar_config = list(),
 
+        # Validate the type of task provided.
+        .validate_task = function(task) {
+            # If the task is a primitive.
+            if (is.primitive(task)) {
+                # Then throw an exception.
+                Exception$primitive_as_task_not_allowed()
+            }
+        },
+
         # Create a temporary file to log progress from backend tasks.
         .make_log = function() {
             # Get a temporary file name (i.e., OS specific) or a fixed one.
@@ -140,21 +149,15 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
 
         # Decorate task function to log the progress after each execution.
         .decorate = function(task, log) {
-            # Determine file log lock path.
-            log_lock_path <- paste0(log, ".lock")
+            # Validate the task function provided.
+            private$.validate_task(task)
 
-            # Get the body of the function to patch.
-            fun_body <- body(task)
-
-            # Get the length of the body.
-            length_fun_body <- length(fun_body)
-
-            # Insert the expression.
-            fun_body[[length_fun_body + 1]] <- bquote(
-                # The injected expression.
+            # Create the language construct to inject.
+            injection <- bquote(
+                # The injected expression to run after each task execution.
                 on.exit({
                     # Acquire an exclusive lock.
-                    log_lock <- filelock::lock(.(log_lock_path))
+                    log_lock <- filelock::lock(.(paste0(log, ".lock")))
 
                     # Write the line.
                     cat("\n", file = .(log), sep = "", append = TRUE)
@@ -164,11 +167,29 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
                 })
             )
 
-            # Reorder the body.
-            fun_body <- fun_body[c(1, (length_fun_body + 1), 2:length_fun_body)]
+            # Capture the task body.
+            task_body <- body(task)
 
-            # Attach the function body and return it.
-            body(task) <- fun_body
+            # If the body is a call wrapped in a `{` primitive.
+            if (Helper$is_of_class(task_body, "{")) {
+                # Remove the `{` call.
+                task_body <- as.list(task_body)[-1]
+            }
+
+            # Update the body of the task function.
+            body(task) <- as.call(
+                # Coerce the elements to a `list` mode.
+                c(
+                    # Specify the function part.
+                    as.symbol("{"),
+
+                    # Provide the injection.
+                    injection,
+
+                    # The task body.
+                    task_body
+                )
+            )
 
             return(task)
         },

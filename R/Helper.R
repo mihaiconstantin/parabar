@@ -9,6 +9,7 @@
 #' @format
 #' \describe{
 #'   \item{\code{Helper$get_class_name()}}{Helper for getting the class of a given object.}
+#'   \item{\code{Helper$is_of_class()}}{Check if an object is of a certain class.}
 #'   \item{\code{Helper$get_option()}}{Get package option, or corresponding default value.}
 #'   \item{\code{Helper$set_option()}}{Set package option.}
 #'   \item{\code{Helper$check_object_type()}}{Check the type of a given object.}
@@ -22,6 +23,11 @@ Helper <- R6::R6Class("Helper",
 # Helper for getting the class of a given instance.
 Helper$get_class_name <- function(object) {
     return(class(object)[1])
+}
+
+# Helper to check if object is of certain class.
+Helper$is_of_class <- function(object, class) {
+    return(class(object)[1] == class)
 }
 
 # Get package option, or corresponding default value.

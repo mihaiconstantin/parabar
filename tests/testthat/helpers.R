@@ -68,6 +68,17 @@ task_is_running <- function(backend) {
     return(status)
 }
 
+# Check if the body of a decorated tasks contains a specific pattern.
+body_contains <- function(task, pattern, position = 2) {
+    # Get the body of the decorated task at a specific position.
+    extraction <- as.list(body(task))[position]
+
+    # Check if the body at position contains the pattern.
+    contains <- grepl(pattern, extraction)
+
+    return(contains)
+}
+
 #endregion
 
 
@@ -697,6 +708,11 @@ ProgressTrackingContextTester <- R6::R6Class("ProgressTrackingContextTester",
         # Wrapper to expose `.make_log` for testing.
         make_log = function() {
             private$.make_log()
+        },
+
+        # Wrapper to expose the `.decorate` for testing.
+        decorate = function(task, log) {
+            private$.decorate(task, log)
         }
     ),
 
