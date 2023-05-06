@@ -521,6 +521,9 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
             # Throw if backend is busy.
             private$.throw_if_backend_is_busy()
 
+            # Validate provided margins.
+            Helper$check_array_margins(margin, dim(x))
+
             # Deploy the task asynchronously.
             private$.apply(x, margin, fun, ...)
         },

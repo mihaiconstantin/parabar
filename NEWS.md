@@ -1,6 +1,8 @@
 # Development
 
 ## Added
+- Update implementations of `Service$apply` operation for `Backend` classes to
+  validate the provided `margin` argument before running the parallel operation.
 - Add helper `Helper$check_array_margins` to validate the margins provided to
   the `Service$apply` operation.
 - Add exception `Exception$array_margins_not_compatible` for using improper

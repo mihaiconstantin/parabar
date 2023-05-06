@@ -338,6 +338,10 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' stored in the private field `.output` on the [`parabar::Backend`]
         #' abstract class, and is accessible via the `get_output()` method.
         apply = function(x, margin, fun, ...) {
+            # Validate provided margins.
+            Helper$check_array_margins(margin, dim(x))
+
+            # Deploy the task synchronously.
             private$.output = private$.apply(x, margin, fun, ...)
         },
 
