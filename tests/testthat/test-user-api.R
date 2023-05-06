@@ -231,6 +231,11 @@ test_that("user API functions handle incompatible input correctly", {
         par_lapply(backend, NULL, NULL),
         as_text(Exception$type_not_assignable(class(backend), "Backend"))
     )
+
+    expect_error(
+        par_apply(backend, NULL, NULL, NULL),
+        as_text(Exception$type_not_assignable(class(backend), "Backend"))
+    )
 })
 
 
@@ -321,6 +326,28 @@ test_that("user API functions run tasks in parallel correctly", {
 
     # Expect the `par_lapply` to run the task in parallel correctly.
     tests_set_for_user_api_task_execution(parallel_lapply, sequential_lapply, expected_output)
+
+    # Redefine `x` as a matrix for the `apply` operation.
+    x <- matrix(rnorm(100^2), nrow = 100, ncol = 100)
+
+    # Select a random margin for the matrix.
+    margin <- sample(1:2, 1)
+
+    # Compute the expected output for the `par_apply` user API function.
+    expected_output <- base::apply(x, margin, test_task, y = y, z = z)
+
+    # Define the `par_apply` parallel operation.
+    parallel_apply <- bquote(
+        par_apply(backend, x = .(x), margin = .(margin), fun = test_task, .(y), .(z), sleep = .(sleep))
+    )
+
+    # Define the `par_apply` sequential operation.
+    sequential_apply <- bquote(
+        par_apply(backend = NULL, x = .(x), margin = .(margin), fun = test_task, .(y), .(z))
+    )
+
+    # Expect the `par_apply` to run the task in parallel correctly.
+    tests_set_for_user_api_task_execution(parallel_apply, sequential_apply, expected_output)
 })
 
 
@@ -336,6 +363,18 @@ test_that("user API functions track progress correctly", {
         tests_set_for_user_api_progress_tracking(bquote(
             par_lapply(backend, x = 1:100, fun = test_task, 1, 2)
         ))
+
+        # Create a matrix for the `apply` operation.
+        x <- matrix(rnorm(50^2), nrow = 50, ncol = 50)
+
+        # Select a random margin for the matrix.
+        margin <- sample(1:2, sample(1:2, 1))
+
+        # Expect progress tracking is displayed correctly via `par_apply`.
+        tests_set_for_user_api_progress_tracking(bquote(
+            par_apply(backend, x = .(x), margin = .(margin), fun = test_task, 1, 2)
+        ))
+
     } else {
         skip("Test only runs in interactive contexts.")
     }

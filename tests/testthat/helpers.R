@@ -110,6 +110,9 @@ tests_set_for_unimplemented_service_methods <- function(service) {
     # Expect an error when calling the `lapply` method.
     expect_error(service$lapply(), as_text(Exception$method_not_implemented()))
 
+    # Expect an error when calling the `apply` method.
+    expect_error(service$apply(), as_text(Exception$method_not_implemented()))
+
     # Expect an error when calling the `get_output` method.
     expect_error(service$get_output(), as_text(Exception$method_not_implemented()))
 }
@@ -239,6 +242,39 @@ tests_set_for_synchronous_backend_operations <- function(service, specification,
     # Tests for the `lapply` operation.
     tests_set_for_synchronous_backend_task_execution(operation, service, expected_output)
 
+    # Redefine `x` as a matrix for the `apply` operation.
+    x <- matrix(rnorm(100^2), nrow = 100, ncol = 100)
+
+    # Compute the expected output for the `apply` operation applied over rows.
+    expected_output <- base::apply(x, 1, task, y = y, z = z)
+
+    # Define the `apply` operation over rows.
+    operation <- bquote(service$apply(.(x), 1, .(task), y = .(y), z = .(z), sleep = .(sleep)))
+
+    # Tests for the `apply` operation over rows.
+    tests_set_for_synchronous_backend_task_execution(operation, service, expected_output)
+
+    # Compute the expected output for the `apply` operation applied over columns.
+    expected_output <- base::apply(x, 2, task, y = y, z = z)
+
+    # Define the `apply` operation over columns.
+    operation <- bquote(service$apply(.(x), 2, .(task), y = .(y), z = .(z), sleep = .(sleep)))
+
+    # Tests for the `apply` operation over columns.
+    tests_set_for_synchronous_backend_task_execution(operation, service, expected_output)
+
+    # Redefine a smaller `x` matrix for the `apply` operation applied element-wise.
+    x <- matrix(rnorm(10^2), nrow = 10, ncol = 10)
+
+    # Compute the expected output for the `apply` operation applied element-wise.
+    expected_output <- base::apply(x, c(1, 2), task, y = y, z = z)
+
+    # Define the `apply` operation element-wise.
+    operation <- bquote(service$apply(.(x), c(1, 2), .(task), y = .(y), z = .(z), sleep = .(sleep)))
+
+    # Tests for the `apply` operation element-wise.
+    tests_set_for_synchronous_backend_task_execution(operation, service, expected_output)
+
     # Expect that the cluster is empty after performing operations on it.
     expect_true(all(sapply(service$peek(), length) == 0))
 
@@ -341,6 +377,39 @@ tests_set_for_asynchronous_backend_operations <- function(service, specification
     # Tests for the `lapply` operation.
     tests_set_for_asynchronous_backend_task_execution(operation, service, expected_output)
 
+    # Redefine `x` as a matrix for the `apply` operation.
+    x <- matrix(rnorm(100^2), nrow = 100, ncol = 100)
+
+    # Compute the expected output for the `apply` operation applied over rows.
+    expected_output <- base::apply(x, 1, task, y = y, z = z)
+
+    # Define the `apply` operation over rows.
+    operation <- bquote(service$apply(.(x), 1, .(task), y = .(y), z = .(z), sleep = .(sleep)))
+
+    # Tests for the `apply` operation over rows.
+    tests_set_for_asynchronous_backend_task_execution(operation, service, expected_output)
+
+    # Compute the expected output for the `apply` operation applied over columns.
+    expected_output <- base::apply(x, 2, task, y = y, z = z)
+
+    # Define the `apply` operation over columns.
+    operation <- bquote(service$apply(.(x), 2, .(task), y = .(y), z = .(z), sleep = .(sleep)))
+
+    # Tests for the `apply` operation over columns.
+    tests_set_for_asynchronous_backend_task_execution(operation, service, expected_output)
+
+    # Redefine a smaller `x` matrix for the `apply` operation applied element-wise.
+    x <- matrix(rnorm(10^2), nrow = 10, ncol = 10)
+
+    # Compute the expected output for the `apply` operation applied element-wise.
+    expected_output <- base::apply(x, c(1, 2), task, y = y, z = z)
+
+    # Define the `apply` operation element-wise.
+    operation <- bquote(service$apply(.(x), c(1, 2), .(task), y = .(y), z = .(z), sleep = .(sleep)))
+
+    # Tests for the `apply` operation element-wise.
+    tests_set_for_asynchronous_backend_task_execution(operation, service, expected_output)
+
     # Expect that the cluster is empty after performing operations on it.
     expect_true(all(sapply(service$peek(), length) == 0))
 
@@ -435,6 +504,39 @@ tests_set_for_progress_tracking_context <- function(context, task) {
     operation <- bquote(context$lapply(.(x), .(task), y = .(y), z = .(z), sleep = .(sleep)))
 
     # Tests for the `lapply` operation in a progress tracking context.
+    tests_set_for_task_execution_with_progress_tracking(operation, context, expected_output)
+
+    # Redefine `x` as a matrix for the `apply` operation.
+    x <- matrix(rnorm(100^2), nrow = 100, ncol = 100)
+
+    # Compute the expected output for the `apply` operation applied over rows.
+    expected_output <- base::apply(x, 1, task, y = y, z = z)
+
+    # Define the `apply` operation over rows.
+    operation <- bquote(context$apply(.(x), 1, .(task), y = .(y), z = .(z), sleep = .(sleep)))
+
+    # Tests for the `apply` operation over rows in a progress tracking context.
+    tests_set_for_task_execution_with_progress_tracking(operation, context, expected_output)
+
+    # Compute the expected output for the `apply` operation applied over columns.
+    expected_output <- base::apply(x, 2, task, y = y, z = z)
+
+    # Define the `apply` operation over columns.
+    operation <- bquote(context$apply(.(x), 2, .(task), y = .(y), z = .(z), sleep = .(sleep)))
+
+    # Tests for the `apply` operation over columns in a progress tracking context.
+    tests_set_for_task_execution_with_progress_tracking(operation, context, expected_output)
+
+    # Redefine a smaller `x` matrix for the `apply` operation applied element-wise.
+    x <- matrix(rnorm(10^2), nrow = 10, ncol = 10)
+
+    # Compute the expected output for the `apply` operation applied element-wise.
+    expected_output <- base::apply(x, c(1, 2), task, y = y, z = z)
+
+    # Define the `apply` operation element-wise.
+    operation <- bquote(context$apply(.(x), c(1, 2), .(task), y = .(y), z = .(z), sleep = .(sleep)))
+
+    # Tests for the `apply` operation over all elements in a progress tracking context.
     tests_set_for_task_execution_with_progress_tracking(operation, context, expected_output)
 }
 
@@ -698,6 +800,19 @@ ProgressTrackingContextTester <- R6::R6Class("ProgressTrackingContextTester",
             operation <- bquote(
                 do.call(
                     super$lapply, c(list(.(x), .(fun)), .(list(...)))
+                )
+            )
+
+            # Execute the task via the operation and capture the progress output.
+            private$.execute_and_capture_progress(operation)
+        },
+
+        # Implementation for the `apply` method capturing the progress output.
+        apply = function(x, margin, fun, ...) {
+            # Define the operation.
+            operation <- bquote(
+                do.call(
+                    super$apply, c(list(.(x), .(margin), .(fun)), .(list(...)))
                 )
             )
 
