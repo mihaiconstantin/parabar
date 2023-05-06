@@ -1,8 +1,8 @@
 # Development
 
 ## Added
-- Add exception `Exception$array_margins_too_large` for using improper margins
-  in the `Service$apply` operation.
+- Add exception `Exception$array_margins_not_compatible` for using improper
+  margins in the `Service$apply` operation.
 - Add exception `Exception$primitive_as_task_not_allowed` for trying to decorate
   primitive functions with progress tracking in the `ProgressTrackingContext`
   class.
