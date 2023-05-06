@@ -377,15 +377,6 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
         #' stored in the private field `.output` on the [`parabar::Backend`]
         #' abstract class, and is accessible via the `get_output()` method.
         apply = function(x, margin, fun, ...) {
-            # Get the array dimensions.
-            dimensions <- length(dim(x))
-
-            # If more margins than array dimensions are requested.
-            if (length(margin) > dimensions) {
-                # Throw an error.
-                Exception$array_margins_too_large(dimensions)
-            }
-
             # Determine the number of task executions.
             total <- prod(dim(x)[margin])
 
