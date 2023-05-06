@@ -1,6 +1,8 @@
 # Development
 
 ## Added
+- Add helper `Helper$check_array_margins` to validate the margins provided to
+  the `Service$apply` operation.
 - Add exception `Exception$array_margins_not_compatible` for using improper
   margins in the `Service$apply` operation.
 - Add exception `Exception$primitive_as_task_not_allowed` for trying to decorate
