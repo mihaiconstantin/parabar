@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">parabar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,6 +50,38 @@
       <small>Source: <a href="https://github.com/mihaiconstantin/parabar/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.0" id="parabar-110">parabar 1.1.0<a class="anchor" aria-label="anchor" href="#parabar-110"></a></h2>
+<div class="section level3">
+<h3 id="added-1-1-0">Added<a class="anchor" aria-label="anchor" href="#added-1-1-0"></a></h3>
+<ul><li>Update implementations of <code>Service$apply</code> operation for <code>Backend</code> classes to validate the provided <code>margin</code> argument before running the parallel operation.</li>
+<li>Add helper <code>Helper$check_array_margins</code> to validate the margins provided to the <code>Service$apply</code> operation.</li>
+<li>Add exception <code>Exception$array_margins_not_compatible</code> for using improper margins in the <code>Service$apply</code> operation.</li>
+<li>Add exception <code>Exception$primitive_as_task_not_allowed</code> for trying to decorate primitive functions with progress tracking in the <code>ProgressTrackingContext</code> class.</li>
+<li>Add helper <code>Helper$is_of_class</code> to check if an object is of a given class.</li>
+<li>Add optional arguments to the <code>get_output</code> operation of <code>SyncBackend</code> for consistency.</li>
+<li>Add more tests to improve coverage.</li>
+<li>Add implementation for <code>Service$lapply</code> and <code>Service$apply</code> operations for all classes that implement the <code>Service</code> interface.</li>
+<li>Add <code>par_lapply</code> and <code>par_apply</code> functions to the user <code>API</code>. These functions can be used to run tasks in parallel akin to <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parallel::parLapply</a></code> and <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parallel::parApply</a></code>, respectively.</li>
+<li>Add <code>UserApiConsumer</code> <code>R6</code> class that provides an opinionated wrapper around the developer <code>API</code> of the <code>parabar</code> package. All parallel operations (e.g., <code>par_sapply</code> and <code>par_lapply</code>) follow more or less the same pattern. The <code>UserApiConsumer</code> encapsulates this pattern and makes it easier to extend <code>parabar</code> with new parallel functions (e.g., <code>par_apply</code>) while avoiding code duplication. The <code>UserApiConsumer</code> class can also be used as a standalone class for parallel operations, however, its primary purpose is to be used by the parallel task execution functions in the user <code>API</code>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="changed-1-1-0">Changed<a class="anchor" aria-label="anchor" href="#changed-1-1-0"></a></h3>
+<ul><li>Force early evaluation for the <code>x</code> argument of task execution functions in <code>ProgressTrackingContext</code> class.</li>
+<li>Update the log file for progress tracking to include <code>parabar</code> in file name.</li>
+<li>Disable warnings for <code>file.create</code> in <code>ProgressTrackingContext</code> class. This warning is superfluous since the code handles creation failures.</li>
+<li>Refactor test helpers to avoid code duplication.</li>
+<li>Update <code>par_sapply</code> to use the <code>UserApiConsumer</code> class.</li>
+<li>Update the developer <code>API</code> <code>R6</code> classes to implement the <code>lapply</code> parallel operation.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="fixed-1-1-0">Fixed<a class="anchor" aria-label="anchor" href="#fixed-1-1-0"></a></h3>
+<ul><li>Ensure task execution errors are propagated to the main session in <code>AsyncBackend</code>. Closes <a href="https://github.com/mihaiconstantin/parabar/issues/35" class="external-link">#35</a>.</li>
+<li>Fixed the rendering of <code>CC BY 4.0</code> license icons in <code>README.md</code> for the package website.</li>
+<li>Update <code>.decorate</code> method of <code>ProgressTrackingContext</code> to be more flexible. More specifically, the method will now throw when primitive functions are provided for decoration. The method can now handle both inline functions (i.e., <code>function(x) x</code>) and functions that have a body defined in terms of compound expressions (i.e., <code>function(x) { x }</code>). Closes <a href="https://github.com/mihaiconstantin/parabar/issues/32" class="external-link">#32</a>.</li>
+<li>Fix the <code>export</code> operation in the <code>SyncBackend</code> and <code>Context</code> classes to fallback to the parent environment if the argument <code>environment</code> is not provided.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.3" id="parabar-103">parabar 1.0.3<a class="anchor" aria-label="anchor" href="#parabar-103"></a></h2><p class="text-muted">CRAN release: 2023-04-24</p>
 <div class="section level3">
