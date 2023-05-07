@@ -300,12 +300,12 @@ test_that("user API functions run tasks in parallel correctly", {
 
     # Define the `par_sapply` parallel operation.
     parallel_sapply <- bquote(
-        par_sapply(backend, x = .(x), fun = test_task, .(y), .(z), sleep = .(sleep)),
+        par_sapply(backend, x = .(x), fun = test_task, .(y), .(z), sleep = .(sleep))
     )
 
     # Define the `par_sapply` sequential operation.
     sequential_sapply <- bquote(
-        par_sapply(backend = NULL, x = .(x), fun = test_task, .(y), .(z)),
+        par_sapply(backend = NULL, x = .(x), fun = test_task, .(y), .(z))
     )
 
     # Expect the `par_sapply` to run the task in parallel correctly.
@@ -316,12 +316,12 @@ test_that("user API functions run tasks in parallel correctly", {
 
     # Define the `par_lapply` parallel operation.
     parallel_lapply <- bquote(
-        par_lapply(backend, x = .(x), fun = test_task, .(y), .(z), sleep = .(sleep)),
+        par_lapply(backend, x = .(x), fun = test_task, .(y), .(z), sleep = .(sleep))
     )
 
     # Define the `par_lapply` sequential operation.
     sequential_lapply <- bquote(
-        par_lapply(backend = NULL, x = .(x), fun = test_task, .(y), .(z)),
+        par_lapply(backend = NULL, x = .(x), fun = test_task, .(y), .(z))
     )
 
     # Expect the `par_lapply` to run the task in parallel correctly.
