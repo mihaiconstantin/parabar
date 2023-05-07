@@ -275,6 +275,27 @@ tests_set_for_synchronous_backend_operations <- function(service, specification,
     # Tests for the `apply` operation element-wise.
     tests_set_for_synchronous_backend_task_execution(operation, service, expected_output)
 
+    # Expect error when margins higher than the array dimensions are provided.
+    expect_error(
+        service$apply(x, 3, task, y = y, z = z),
+        as_text(Exception$array_margins_not_compatible(3, dim(x))),
+        fixed = TRUE
+    )
+
+    # Expect error when duplicate margins are provided.
+    expect_error(
+        service$apply(x, c(1, 1), task, y = y, z = z),
+        as_text(Exception$array_margins_not_compatible(c(1, 1), dim(x))),
+        fixed = TRUE
+    )
+
+    # Expect errors when the margins are not compatible with the array dimensions.
+    expect_error(
+        service$apply(x, c(1, 2, 3, 1), task, y = y, z = z),
+        as_text(Exception$array_margins_not_compatible(c(1, 2, 3, 1), dim(x))),
+        fixed = TRUE
+    )
+
     # Expect that the cluster is empty after performing operations on it.
     expect_true(all(sapply(service$peek(), length) == 0))
 
@@ -409,6 +430,27 @@ tests_set_for_asynchronous_backend_operations <- function(service, specification
 
     # Tests for the `apply` operation element-wise.
     tests_set_for_asynchronous_backend_task_execution(operation, service, expected_output)
+
+    # Expect error when margins higher than the array dimensions are provided.
+    expect_error(
+        service$apply(x, 3, task, y = y, z = z),
+        as_text(Exception$array_margins_not_compatible(3, dim(x))),
+        fixed = TRUE
+    )
+
+    # Expect error when duplicate margins are provided.
+    expect_error(
+        service$apply(x, c(1, 1), task, y = y, z = z),
+        as_text(Exception$array_margins_not_compatible(c(1, 1), dim(x))),
+        fixed = TRUE
+    )
+
+    # Expect errors when the margins are not compatible with the array dimensions.
+    expect_error(
+        service$apply(x, c(1, 2, 3, 1), task, y = y, z = z),
+        as_text(Exception$array_margins_not_compatible(c(1, 2, 3, 1), dim(x))),
+        fixed = TRUE
+    )
 
     # Expect that the cluster is empty after performing operations on it.
     expect_true(all(sapply(service$peek(), length) == 0))
