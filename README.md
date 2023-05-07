@@ -265,12 +265,13 @@ can be performed on a backend.
 | :--------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------- |
 | <code><a href="https://parabar.mihaiconstantin.com/reference/start_backend.html">start_backend(backend)</a></code>           | Start a backend.                              |
 | <code><a href="https://parabar.mihaiconstantin.com/reference/stop_backend.html">stop_backend(backend)</a></code>             | Stop a backend.                               |
-| <code><a href="https://parabar.mihaiconstantin.com/reference/clear.html">clear(backend)</a></code>                           | Remove all objects from a backend.          |
+| <code><a href="https://parabar.mihaiconstantin.com/reference/clear.html">clear(backend)</a></code>                           | Remove all objects from a backend.            |
 | <code><a href="https://parabar.mihaiconstantin.com/reference/peek.html">peek(backend)</a></code>                             | List the names of the variables on a backend. |
 | <code><a href="https://parabar.mihaiconstantin.com/reference/export.html">export(backend, variables, environment)</a></code> | Export objects to a backend.                  |
 | <code><a href="https://parabar.mihaiconstantin.com/reference/evaluate.html">evaluate(backend, expression)</a></code>         | Evaluate expressions on a backend.            |
 | <code><a href="https://parabar.mihaiconstantin.com/reference/par_sapply.html">par_sapply(backend, x, fun)</a></code>         | Run tasks in parallel on a backend.           |
 | <code><a href="https://parabar.mihaiconstantin.com/reference/par_lapply.html">par_lapply(backend, x, fun)</a></code>         | Run tasks in parallel on a backend.           |
+| <code><a href="https://parabar.mihaiconstantin.com/reference/par_apply.html">par_apply(backend, x, margin, fun)</a></code>   | Run tasks in parallel on a backend.           |
 
 Check the documentation corresponding to each operation for more information and
 examples.
@@ -300,6 +301,7 @@ The `?Service` interface defines the following operations:
 - `evaluate`: Evaluate an arbitrary expression on the backend.
 - `sapply`: Run a task on the backend.
 - `lapply`: Run a task on the backend.
+- `apply`: Run a task on the backend.
 - `get_output`: Get the output of the task execution.
 
 Check out the documentation for `Service` for more information on each method.
@@ -310,8 +312,8 @@ operates. The default context class (i.e., `?Context`) simply forwards the call
 to the corresponding backend method. However, a more complex context can augment
 the operation before forwarding the call to the backend. One example of a
 complex context is the `?ProgressTrackingContext` class. This class extends the
-regular `?Context` class and decorates the backend `sapply` operation to log the
-progress after each task execution and display a progress bar.
+regular `?Context` class and decorates, e.g., the backend `sapply` operation to
+log the progress after each task execution and display a progress bar.
 
 #### Main Classes
 The following are the main classes provided by
@@ -329,6 +331,7 @@ The following are the main classes provided by
 - `ProgressTrackingContext`: Context for decorating the `sapply` operation to
   track and display the progress.
 - `ContextFactory`: Factory for creating `Context` objects.
+- `UserApiConsumer`: Wrapper around the developer `API`.
 
 Additionally, [`parabar`](https://parabar.mihaiconstantin.com) also provides
 several classes for creating and updating different progress bars, namely:
