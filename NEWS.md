@@ -1,4 +1,4 @@
-# Development
+# parabar 1.1.0
 
 ## Added
 - Update implementations of `Service$apply` operation for `Backend` classes to
