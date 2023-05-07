@@ -96,6 +96,7 @@ context is also used if the progress tracking is disabled via the
 
 <ul><li><p><a href="#method-UserApiConsumer-sapply"><code>UserApiConsumer$sapply()</code></a></p></li>
 <li><p><a href="#method-UserApiConsumer-lapply"><code>UserApiConsumer$lapply()</code></a></p></li>
+<li><p><a href="#method-UserApiConsumer-apply"><code>UserApiConsumer$apply()</code></a></p></li>
 <li><p><a href="#method-UserApiConsumer-clone"><code>UserApiConsumer$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-UserApiConsumer-sapply"></a><div class="section">
 <h3 id="method-sapply-">Method <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply()</a></code><a class="anchor" aria-label="anchor" href="#method-sapply-"></a></h3>
@@ -167,15 +168,61 @@ the task sequentially via <code><a href="https://rdrr.io/r/base/lapply.html" cla
 The output format resembles that of <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">base::lapply()</a></code>.</p>
 </div>
 
-</div><p></p><hr><a id="method-UserApiConsumer-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
-<p>The objects of this class are cloneable with this method.</p><div class="section">
+</div><p></p><hr><a id="method-UserApiConsumer-apply"></a><div class="section">
+<h3 id="method-apply-">Method <code><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply()</a></code><a class="anchor" aria-label="anchor" href="#method-apply-"></a></h3>
+<p>Execute a task in parallel akin to <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parallel::parApply()</a></code>.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">UserApiConsumer</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">UserApiConsumer</span><span class="op">$</span><span class="fu">apply</span><span class="op">(</span><span class="va">backend</span>, <span class="va">x</span>, <span class="va">margin</span>, <span class="va">fun</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>backend</code></dt>
+<dd><p>An object of class <code><a href="Backend.html">Backend</a></code> as returned by
+the <code><a href="start_backend.html">start_backend()</a></code> function. It can also be <code>NULL</code> to run
+the task sequentially via <code><a href="https://rdrr.io/r/base/apply.html" class="external-link">base::apply()</a></code>.</p></dd>
+
+
+<dt><code>x</code></dt>
+<dd><p>An array to pass to the <code>fun</code> function.</p></dd>
+
+
+<dt><code>margin</code></dt>
+<dd><p>A numeric vector indicating the dimensions of <code>x</code> the
+<code>fun</code> function should be applied over. For example, for a matrix,
+<code>margin = 1</code> indicates applying <code>fun</code> rows-wise, <code>margin = 2</code>
+indicates applying <code>fun</code> columns-wise, and <code>margin = c(1, 2)</code>
+indicates applying <code>fun</code> element-wise. Named dimensions are also
+possible depending on <code>x</code>. See <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parallel::parApply()</a></code> and
+<code><a href="https://rdrr.io/r/base/apply.html" class="external-link">base::apply()</a></code> for more details.</p></dd>
+
+
+<dt><code>fun</code></dt>
+<dd><p>A function to apply to <code>x</code> according to the <code>margin</code>.</p></dd>
+
+
+<dt><code>...</code></dt>
+<dd><p>Additional arguments to pass to the <code>fun</code> function.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
+<p>The dimensions of the output vary according to the <code>margin</code> argument.
+Consult the documentation of <code><a href="https://rdrr.io/r/base/apply.html" class="external-link">base::apply()</a></code> for a detailed
+explanation on how the output is structured.</p>
+</div>
+
+</div><p></p><hr><a id="method-UserApiConsumer-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">UserApiConsumer</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
