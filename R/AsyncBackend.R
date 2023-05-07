@@ -263,8 +263,17 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
 
         # Set the output based on the session read.
         .set_output = function() {
-            # Store the relevant results from the output.
-            private$.output <- private$.cluster$read()$result
+            # Get all session output.
+            output <- private$.cluster$read()
+
+            # If an error ocurred in the session.
+            if (!is.null(output$error)) {
+                # Throw error in the main session.
+                Exception$async_task_error(output$error)
+            }
+
+            # Otherwise, store the relevant results from the output.
+            private$.output <- output$result
         },
 
         # Get the current task state (i.e., what is happening in the session).

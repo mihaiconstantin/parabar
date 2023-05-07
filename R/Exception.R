@@ -18,6 +18,7 @@
 #'   \item{\code{Exception$async_task_not_started()}}{Exception for reading results while an asynchronous task has not yet started.}
 #'   \item{\code{Exception$async_task_running()}}{Exception for reading results while an asynchronous task is running.}
 #'   \item{\code{Exception$async_task_completed()}}{Exception for reading results while a completed asynchronous task has unread results.}
+#'   \item{\code{Exception$async_task_error(error)}}{Exception for errors while running an asynchronous task.}
 #'   \item{\code{Exception$temporary_file_creation_failed()}}{Exception for reading results while an asynchronous task is running.}
 #'   \item{\code{Exception$type_not_assignable(actual, expected)}}{Exception for when providing incorrect object types.}
 #'   \item{\code{Exception$unknown_package_option(option)}}{Exception for when requesting unknown package options.}
@@ -90,6 +91,12 @@ Exception$async_task_running <- function() {
 Exception$async_task_completed <- function() {
     # Throw the error.
     stop("A task is completed with unread results.", call. = FALSE)
+}
+
+# Exception for errors in the session while running an asynchronous task.
+Exception$async_task_error <- function(error) {
+    # Throw the error.
+    stop(error)
 }
 
 # Exception for reading results while an asynchronous task is running.
