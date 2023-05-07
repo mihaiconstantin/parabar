@@ -288,6 +288,10 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <td align="left"><code><a href="https://parabar.mihaiconstantin.com/reference/par_lapply.html" class="external-link">par_lapply(backend, x, fun)</a></code></td>
 <td align="left">Run tasks in parallel on a backend.</td>
 </tr>
+<tr class="odd">
+<td align="left"><code><a href="https://parabar.mihaiconstantin.com/reference/par_apply.html" class="external-link">par_apply(backend, x, margin, fun)</a></code></td>
+<td align="left">Run tasks in parallel on a backend.</td>
+</tr>
 </tbody>
 </table>
 <p>Check the documentation corresponding to each operation for more information and examples.</p>
@@ -321,6 +325,8 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <li>
 <code>lapply</code>: Run a task on the backend.</li>
 <li>
+<code>apply</code>: Run a task on the backend.</li>
+<li>
 <code>get_output</code>: Get the output of the task execution.</li>
 </ul>
 <p>Check out the documentation for <code>Service</code> for more information on each method.</p>
@@ -328,7 +334,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <div class="section level4">
 <h4 id="contexts">Contexts<a class="anchor" aria-label="anchor" href="#contexts"></a>
 </h4>
-<p>A <strong><code>context</code></strong> represents the specific conditions in which a backend object operates. The default context class (i.e., <code><a href="reference/Context.html">?Context</a></code>) simply forwards the call to the corresponding backend method. However, a more complex context can augment the operation before forwarding the call to the backend. One example of a complex context is the <code><a href="reference/ProgressTrackingContext.html">?ProgressTrackingContext</a></code> class. This class extends the regular <code><a href="reference/Context.html">?Context</a></code> class and decorates the backend <code>sapply</code> operation to log the progress after each task execution and display a progress bar.</p>
+<p>A <strong><code>context</code></strong> represents the specific conditions in which a backend object operates. The default context class (i.e., <code><a href="reference/Context.html">?Context</a></code>) simply forwards the call to the corresponding backend method. However, a more complex context can augment the operation before forwarding the call to the backend. One example of a complex context is the <code><a href="reference/ProgressTrackingContext.html">?ProgressTrackingContext</a></code> class. This class extends the regular <code><a href="reference/Context.html">?Context</a></code> class and decorates, e.g., the backend <code>sapply</code> operation to log the progress after each task execution and display a progress bar.</p>
 </div>
 <div class="section level4">
 <h4 id="main-classes">Main Classes<a class="anchor" aria-label="anchor" href="#main-classes"></a>
@@ -351,6 +357,8 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <code>ProgressTrackingContext</code>: Context for decorating the <code>sapply</code> operation to track and display the progress.</li>
 <li>
 <code>ContextFactory</code>: Factory for creating <code>Context</code> objects.</li>
+<li>
+<code>UserApiConsumer</code>: Wrapper around the developer <code>API</code>.</li>
 </ul>
 <p>Additionally, <a href="https://parabar.mihaiconstantin.com" class="external-link"><code>parabar</code></a> also provides several classes for creating and updating different progress bars, namely:</p>
 <ul>
