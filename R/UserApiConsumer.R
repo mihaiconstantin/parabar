@@ -233,6 +233,10 @@ UserApiConsumer <- R6::R6Class("UserApiConsumer",
         #' @description
         #' Execute a task in parallel akin to [parallel::parApply()].
         #'
+        #' @param backend An object of class [`parabar::Backend`] as returned by
+        #' the [parabar::start_backend()] function. It can also be `NULL` to run
+        #' the task sequentially via [base::apply()].
+        #'
         #' @param x An array to pass to the `fun` function.
         #'
         #' @param margin A numeric vector indicating the dimensions of `x` the
