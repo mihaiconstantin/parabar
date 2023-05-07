@@ -138,7 +138,7 @@ Exception$array_margins_not_compatible <- function(margins, dimensions) {
 
     # Construct exception message.
     message = paste0(
-        "Margins (", margins, ") not compatible with array dimensions (", dimensions, ")."
+        "Margins {", margins, "} not compatible with array dimensions {", dimensions, "}."
     )
 
     # Throw the error.
