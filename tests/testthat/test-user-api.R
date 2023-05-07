@@ -239,7 +239,7 @@ test_that("user API functions handle incompatible input correctly", {
 })
 
 
-test_that("user API functions handle backend operations correctly", {
+test_that("user API functions handle basic backend operations correctly", {
     # Select a cluster type.
     cluster_type <- pick_cluster_type(Specification$new()$types)
 
