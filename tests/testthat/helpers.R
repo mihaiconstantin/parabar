@@ -234,6 +234,12 @@ tests_set_for_synchronous_backend_operations <- function(service, specification,
     # Tests for the `sapply` operation.
     tests_set_for_synchronous_backend_task_execution(operation, service, expected_output)
 
+    # Expect that errors in the task executed via `sapply` are propagated.
+    expect_error(
+        service$sapply(1:10, function(x) stop("Task error.")),
+        "Task error."
+    )
+
     # Created the expect output.
     expected_output <- as.list(expected_output)
 
@@ -242,6 +248,12 @@ tests_set_for_synchronous_backend_operations <- function(service, specification,
 
     # Tests for the `lapply` operation.
     tests_set_for_synchronous_backend_task_execution(operation, service, expected_output)
+
+    # Expect that errors in the task executed via `lapply` are propagated.
+    expect_error(
+        service$lapply(1:10, function(x) stop("Task error.")),
+        "Task error."
+    )
 
     # Redefine `x` as a matrix for the `apply` operation.
     x <- matrix(rnorm(100^2), nrow = 100, ncol = 100)
@@ -295,6 +307,12 @@ tests_set_for_synchronous_backend_operations <- function(service, specification,
         service$apply(x, c(1, 2, 3, 1), task, y = y, z = z),
         as_text(Exception$array_margins_not_compatible(c(1, 2, 3, 1), dim(x))),
         fixed = TRUE
+    )
+
+    # Expect that errors in the task executed via `apply` are propagated.
+    expect_error(
+        service$apply(matrix(1:100, 10, 10), 1, function(x) stop("Task error.")),
+        "Task error."
     )
 
     # Expect that the cluster is empty after performing operations on it.
@@ -390,6 +408,15 @@ tests_set_for_asynchronous_backend_operations <- function(service, specification
     # Tests for the `sapply` operation.
     tests_set_for_asynchronous_backend_task_execution(operation, service, expected_output)
 
+    # Expect that errors in the task executed via `sapply` are propagated.
+    expect_error(
+        {
+            service$sapply(1:10, function(x) stop("Task error."))
+            service$get_output(wait = TRUE)
+        },
+        "Task error."
+    )
+
     # Compute the expected output for the `lapply` operation.
     expected_output <- as.list(expected_output)
 
@@ -398,6 +425,15 @@ tests_set_for_asynchronous_backend_operations <- function(service, specification
 
     # Tests for the `lapply` operation.
     tests_set_for_asynchronous_backend_task_execution(operation, service, expected_output)
+
+    # Expect that errors in the task executed via `lapply` are propagated.
+    expect_error(
+        {
+            service$lapply(1:10, function(x) stop("Task error."))
+            service$get_output(wait = TRUE)
+        },
+        "Task error."
+    )
 
     # Redefine `x` as a matrix for the `apply` operation.
     x <- matrix(rnorm(100^2), nrow = 100, ncol = 100)
@@ -451,6 +487,15 @@ tests_set_for_asynchronous_backend_operations <- function(service, specification
         service$apply(x, c(1, 2, 3, 1), task, y = y, z = z),
         as_text(Exception$array_margins_not_compatible(c(1, 2, 3, 1), dim(x))),
         fixed = TRUE
+    )
+
+    # Expect that errors in the task executed via `apply` are propagated.
+    expect_error(
+        {
+            service$apply(matrix(1:100, 10, 10), 1, function(x) stop("Task error."))
+            service$get_output(wait = TRUE)
+        },
+        "Task error."
     )
 
     # Expect that the cluster is empty after performing operations on it.
