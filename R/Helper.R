@@ -13,6 +13,7 @@
 #'   \item{\code{Helper$get_option()}}{Get package option, or corresponding default value.}
 #'   \item{\code{Helper$set_option()}}{Set package option.}
 #'   \item{\code{Helper$check_object_type()}}{Check the type of a given object.}
+#'   \item{\code{Helper$check_array_margins(margins, dimensions)}}{Helper to check array margins for the `Service$apply` operation.}
 #' }
 #'
 #' @export
@@ -72,5 +73,23 @@ Helper$check_object_type <- function(object, expected_type) {
     if (!inherits(object, expected_type)) {
         # Throw incorrect type error.
         Exception$type_not_assignable(type, expected_type)
+    }
+}
+
+# Helper for checking the array margins provided for the `apply` operation.
+Helper$check_array_margins <- function(margins, dimensions) {
+    # Conditions to ensure the margins are valid.
+    violations <- c(
+        # Ensure all margins are unique.
+        duplicated(margins),
+
+        # Ensure all margins are within the array dimensions.
+        margins > length(dimensions)
+    )
+
+    # If any violations are found.
+    if (any(violations)) {
+        # Throw an error.
+        Exception$array_margins_not_compatible(margins, dimensions)
     }
 }

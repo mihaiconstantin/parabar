@@ -133,6 +133,31 @@ Service <- R6::R6Class("Service",
         },
 
         #' @description
+        #' Run a task on the backend akin to [parallel::parApply()].
+        #'
+        #' @param x An array to pass to the `fun` function.
+        #'
+        #' @param margin A numeric vector indicating the dimensions of `x` the
+        #' `fun` function should be applied over. For example, for a matrix,
+        #' `margin = 1` indicates applying `fun` rows-wise, `margin = 2`
+        #' indicates applying `fun` columns-wise, and `margin = c(1, 2)`
+        #' indicates applying `fun` element-wise. Named dimensions are also
+        #' possible depending on `x`. See [parallel::parApply()] and
+        #' [base::apply()] for more details.
+        #'
+        #' @param fun A function to apply to `x` according to the `margin`.
+        #'
+        #' @param ... Additional arguments to pass to the `fun` function.
+        #'
+        #' @return
+        #' This method returns void. The output of the task execution must be
+        #' stored in the private field `.output` on the [`parabar::Backend`]
+        #' abstract class, and is accessible via the `get_output()` method.
+        apply = function(x, margin, fun, ...) {
+            Exception$method_not_implemented()
+        },
+
+        #' @description
         #' Get the output of the task execution.
         #'
         #' @param ... Additional optional arguments that may be used by concrete

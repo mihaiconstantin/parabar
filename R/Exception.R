@@ -22,6 +22,7 @@
 #'   \item{\code{Exception$type_not_assignable()}}{Exception for when providing incorrect object types.}
 #'   \item{\code{Exception$unknown_package_option()}}{Exception for when requesting unknown package options.}
 #'   \item{\code{Exception$primitive_as_task_not_allowed()}}{Exception for when decorating primitive functions with progress tracking.}
+#'   \item{\code{Exception$array_margins_not_compatible(actual, allowed)}}{Exception for using improper margins in the `Service$apply` operation.}
 #' }
 #'
 #' @export
@@ -127,3 +128,19 @@ Exception$primitive_as_task_not_allowed <- function() {
     stop(message, call. = FALSE)
 }
 
+# Exception for providing incompatible margins in the `apply` operation.
+Exception$array_margins_not_compatible <- function(margins, dimensions) {
+    # Convert the margins to character.
+    margins <- paste(margins, collapse = ", ")
+
+    # Convert the dimensions to character.
+    dimensions <- paste(dimensions, collapse = ", ")
+
+    # Construct exception message.
+    message = paste0(
+        "Margins {", margins, "} not compatible with array dimensions {", dimensions, "}."
+    )
+
+    # Throw the error.
+    stop(message, call. = FALSE)
+}

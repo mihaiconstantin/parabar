@@ -75,6 +75,7 @@ stop_backend(backend)
 \itemize{
 \item \href{#method-UserApiConsumer-sapply}{\code{UserApiConsumer$sapply()}}
 \item \href{#method-UserApiConsumer-lapply}{\code{UserApiConsumer$lapply()}}
+\item \href{#method-UserApiConsumer-apply}{\code{UserApiConsumer$apply()}}
 \item \href{#method-UserApiConsumer-clone}{\code{UserApiConsumer$clone()}}
 }
 }
@@ -134,6 +135,44 @@ the task sequentially via \code{\link[base:lapply]{base::lapply()}}.}
 \subsection{Returns}{
 A list of the same length as \code{x} containing the results of the \code{fun}.
 The output format resembles that of \code{\link[base:lapply]{base::lapply()}}.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-UserApiConsumer-apply"></a>}}
+\if{latex}{\out{\hypertarget{method-UserApiConsumer-apply}{}}}
+\subsection{Method \code{apply()}}{
+Execute a task in parallel akin to \code{\link[parallel:clusterApply]{parallel::parApply()}}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{UserApiConsumer$apply(backend, x, margin, fun, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{backend}}{An object of class \code{\link{Backend}} as returned by
+the \code{\link[=start_backend]{start_backend()}} function. It can also be \code{NULL} to run
+the task sequentially via \code{\link[base:apply]{base::apply()}}.}
+
+\item{\code{x}}{An array to pass to the \code{fun} function.}
+
+\item{\code{margin}}{A numeric vector indicating the dimensions of \code{x} the
+\code{fun} function should be applied over. For example, for a matrix,
+\code{margin = 1} indicates applying \code{fun} rows-wise, \code{margin = 2}
+indicates applying \code{fun} columns-wise, and \code{margin = c(1, 2)}
+indicates applying \code{fun} element-wise. Named dimensions are also
+possible depending on \code{x}. See \code{\link[parallel:clusterApply]{parallel::parApply()}} and
+\code{\link[base:apply]{base::apply()}} for more details.}
+
+\item{\code{fun}}{A function to apply to \code{x} according to the \code{margin}.}
+
+\item{\code{...}}{Additional arguments to pass to the \code{fun} function.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+The dimensions of the output vary according to the \code{margin} argument.
+Consult the documentation of \code{\link[base:apply]{base::apply()}} for a detailed
+explanation on how the output is structured.
 }
 }
 \if{html}{\out{<hr>}}

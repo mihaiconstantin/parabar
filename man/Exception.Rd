@@ -18,6 +18,7 @@
 \item{\code{Exception$type_not_assignable()}}{Exception for when providing incorrect object types.}
 \item{\code{Exception$unknown_package_option()}}{Exception for when requesting unknown package options.}
 \item{\code{Exception$primitive_as_task_not_allowed()}}{Exception for when decorating primitive functions with progress tracking.}
+\item{\code{Exception$array_margins_not_compatible(actual, allowed)}}{Exception for using improper margins in the \code{Service$apply} operation.}
 }
 }
 \description{

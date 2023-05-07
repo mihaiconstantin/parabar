@@ -14,6 +14,7 @@ reference:
     - evaluate
     - par_sapply
     - par_lapply
+    - par_apply
     - configure_bar
     - matches("get_|set_")
   - subtitle: Developer Classes

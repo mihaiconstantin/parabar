@@ -91,7 +91,7 @@ results <- par_lapply(NULL, x = 1:300, fun = task)
 \seealso{
 \code{\link[=start_backend]{start_backend()}}, \code{\link[=peek]{peek()}}, \code{\link[=export]{export()}},
 \code{\link[=evaluate]{evaluate()}}, \code{\link[=clear]{clear()}}, \code{\link[=configure_bar]{configure_bar()}},
-\code{\link[=par_sapply]{par_sapply()}}, \code{\link[=stop_backend]{stop_backend()}}, \code{\link[=set_option]{set_option()}},
-\code{\link[=get_option]{get_option()}}, \code{\link{Options}}, \code{\link{UserApiConsumer}},
-and \code{\link{Service}}.
+\code{\link[=par_sapply]{par_sapply()}}, \code{\link[=par_apply]{par_apply()}}, \code{\link[=stop_backend]{stop_backend()}},
+\code{\link[=set_option]{set_option()}}, \code{\link[=get_option]{get_option()}}, \code{\link{Options}},
+\code{\link{UserApiConsumer}}, and \code{\link{Service}}.
 }
