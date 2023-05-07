@@ -40,6 +40,9 @@
   operation.
 
 ## Fixed
+- Ensure task execution errors are propagated to the main session in
+  `AsyncBackend`. Closes
+  [#35](https://github.com/mihaiconstantin/parabar/issues/35).
 - Fixed the rendering of `CC BY 4.0` license icons in `README.md` for the
   package website.
 - Update `.decorate` method of `ProgressTrackingContext` to be more flexible.
