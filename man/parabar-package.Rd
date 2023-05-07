@@ -34,6 +34,10 @@ backend, similar to the built-in function \code{\link[parallel:clusterApply]{par
 \code{\link[base:lapply]{base::lapply()}} function when no backend is provided. However, when a
 backend is provided, the function will execute a task in parallel on the
 backend, similar to the built-in function \code{\link[parallel:clusterApply]{parallel::parLapply()}}.
+\item \code{\link[=par_apply]{par_apply()}}: is a drop-in replacement for the built-in
+\code{\link[base:apply]{base::apply()}} function when no backend is provided. However, when a
+backend is provided, the function will execute a task in parallel on the
+backend, similar to the built-in function \code{\link[parallel:clusterApply]{parallel::parApply()}}.
 \item \code{\link[=clear]{clear()}}: removes all variables available on a backend.
 \item \code{\link[=peek]{peek()}}: returns the names of all variables available on a
 backend.
@@ -76,8 +80,8 @@ The \code{\link{Service}} interface defines the following operations:
 \code{\link[=Service]{start()}}, \code{\link[=Service]{stop()}},
 \code{\link[=Service]{clear()}}, \code{\link[=Service]{peek()}},
 \code{\link[=Service]{export()}}, \code{\link[=Service]{evaluate()}},
-\code{\link[=Service]{sapply()}}, \code{\link[=Service]{lapply()}}, and
-\code{\link[=Service]{get_output()}}.
+\code{\link[=Service]{sapply()}}, \code{\link[=Service]{lapply()}},
+\code{\link[=Service]{apply()}}, and \code{\link[=Service]{get_output()}}.
 
 Check out the documentation for \code{\link{Service}} for more information on
 each method.
@@ -110,9 +114,12 @@ asynchronous backend.
 \item \code{\link{BackendFactory}}: factory for creating backend objects.
 \item \code{\link{Context}}: default context for executing backend operations.
 \item \code{\link{ProgressTrackingContext}}: context for decorating the
-\code{\link[=Service]{sapply()}} and \code{\link[=Service]{lapply()}}
+\code{\link[=Service]{sapply()}}, \code{\link[=Service]{lapply()}}, and
+\code{\link[=Service]{apply()}}
 operations to track and display the execution progress.
 \item \code{\link{ContextFactory}}: factory for creating context objects.
+\item \code{\link{UserApiConsumer}}: opinionated wrapper around the other
+\code{\link[R6:R6Class]{R6::R6}} classes used in by the exported functions for the users.
 }
 }
 }
