@@ -28,6 +28,13 @@
                 padding: 1rem;
                 border-radius: 1rem;
             }
+
+            .license-cc img {
+                padding: 0;
+                box-shadow: none;
+                border-radius: 0;
+                margin-left: 3px;
+            }
         }
 
         #additional-operations ~ table {

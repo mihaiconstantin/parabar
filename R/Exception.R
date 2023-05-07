@@ -9,7 +9,7 @@
 #'
 #' @format
 #' \describe{
-#'   \item{\code{Exception$abstract_class_not_instantiable()}}{Exception for instantiating abstract classes or interfaces.}
+#'   \item{\code{Exception$abstract_class_not_instantiable(object)}}{Exception for instantiating abstract classes or interfaces.}
 #'   \item{\code{Exception$method_not_implemented()}}{Exception for calling methods without an implementation.}
 #'   \item{\code{Exception$feature_not_developed()}}{Exception for running into things not yet developed.}
 #'   \item{\code{Exception$not_enough_cores()}}{Exception for requesting more cores than available on the machine.}
@@ -19,8 +19,8 @@
 #'   \item{\code{Exception$async_task_running()}}{Exception for reading results while an asynchronous task is running.}
 #'   \item{\code{Exception$async_task_completed()}}{Exception for reading results while a completed asynchronous task has unread results.}
 #'   \item{\code{Exception$temporary_file_creation_failed()}}{Exception for reading results while an asynchronous task is running.}
-#'   \item{\code{Exception$type_not_assignable()}}{Exception for when providing incorrect object types.}
-#'   \item{\code{Exception$unknown_package_option()}}{Exception for when requesting unknown package options.}
+#'   \item{\code{Exception$type_not_assignable(actual, expected)}}{Exception for when providing incorrect object types.}
+#'   \item{\code{Exception$unknown_package_option(option)}}{Exception for when requesting unknown package options.}
 #'   \item{\code{Exception$primitive_as_task_not_allowed()}}{Exception for when decorating primitive functions with progress tracking.}
 #'   \item{\code{Exception$array_margins_not_compatible(actual, allowed)}}{Exception for using improper margins in the `Service$apply` operation.}
 #' }

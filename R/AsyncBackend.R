@@ -495,7 +495,6 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
             private$.lapply(x, fun, ...)
         },
 
-
         #' @description
         #' Run a task on the backend akin to [parallel::parApply()].
         #'

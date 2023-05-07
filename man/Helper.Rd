@@ -5,11 +5,11 @@
 \title{Package Helpers}
 \format{
 \describe{
-\item{\code{Helper$get_class_name()}}{Helper for getting the class of a given object.}
-\item{\code{Helper$is_of_class()}}{Check if an object is of a certain class.}
-\item{\code{Helper$get_option()}}{Get package option, or corresponding default value.}
-\item{\code{Helper$set_option()}}{Set package option.}
-\item{\code{Helper$check_object_type()}}{Check the type of a given object.}
+\item{\code{Helper$get_class_name(object)}}{Helper for getting the class of a given object.}
+\item{\code{Helper$is_of_class(object, class)}}{Check if an object is of a certain class.}
+\item{\code{Helper$get_option(option)}}{Get package option, or corresponding default value.}
+\item{\code{Helper$set_option(option, value)}}{Set package option.}
+\item{\code{Helper$check_object_type(object, expected_type)}}{Check the type of a given object.}
 \item{\code{Helper$check_array_margins(margins, dimensions)}}{Helper to check array margins for the \code{Service$apply} operation.}
 }
 }

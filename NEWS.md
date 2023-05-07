@@ -40,6 +40,8 @@
   operation.
 
 ## Fixed
+- Fixed the rendering of `CC BY 4.0` license icons in `README.md` for the
+  package website.
 - Update `.decorate` method of `ProgressTrackingContext` to be more flexible.
   More specifically, the method will now throw when primitive functions are
   provided for decoration. The method can now handle both inline functions
