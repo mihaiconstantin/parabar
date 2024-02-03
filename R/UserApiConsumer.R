@@ -144,9 +144,6 @@ UserApiConsumer <- R6::R6Class("UserApiConsumer",
             # Register the backend with the context.
             context$set_backend(backend)
 
-            # Register the backend with the context.
-            context$set_backend(backend)
-
             # Execute the task via the requested parallel operation.
             eval(parallel_operation)
 
