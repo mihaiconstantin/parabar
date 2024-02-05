@@ -80,6 +80,11 @@ tracking should be enabled (i.e., \code{TRUE}) or disabled  (i.e.,
 in seconds) between subsequent checks of the log file for new progress
 records. The default value is \code{0.001}.}
 
+\item{\code{progress_wait}}{A numeric value indicating the approximate
+duration (i.e., in seconds) to wait between progress bar updates
+before checking if the task has finished (i.e., possibly with an
+error). The default value is \code{0.1}.}
+
 \item{\code{progress_bar_type}}{A character string indicating the default
 bar type to use with compatible backends. Possible values are
 \code{"modern"} (the default) or \code{"basic"}.}
