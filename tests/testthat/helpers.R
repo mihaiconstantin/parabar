@@ -574,7 +574,7 @@ tests_set_for_progress_tracking_context <- function(context, task) {
     x <- sample(1:100, 100)
     y <- sample(1:100, 1)
     z <- sample(1:100, 1)
-    sleep = sample(c(0, 0.001, 0.002), 1)
+    sleep <- sample(c(0, 0.001, 0.002), 1)
 
     # Create the expected output for the `sapply` operation.
     expected_output <- task(x, y, z)
