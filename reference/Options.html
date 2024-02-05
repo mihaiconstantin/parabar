@@ -90,6 +90,13 @@ in seconds) between subsequent checks of the log file for new progress
 records. The default value is <code>0.001</code>.</p></dd>
 
 
+<dt><code>progress_wait</code></dt>
+<dd><p>A numeric value indicating the approximate
+duration (i.e., in seconds) to wait between progress bar updates
+before checking if the task has finished (i.e., possibly with an
+error). The default value is <code>0.1</code>.</p></dd>
+
+
 <dt><code>progress_bar_type</code></dt>
 <dd><p>A character string indicating the default
 bar type to use with compatible backends. Possible values are
@@ -148,6 +155,7 @@ temporary file paths).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     progress_log_path: active binding</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     progress_timeout: 0.001</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     progress_track: FALSE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     progress_wait: 0.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Private:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     .progress_log_path: NULL</span>
 <span class="r-in"><span></span></span>
@@ -163,6 +171,7 @@ temporary file paths).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     progress_log_path: active binding</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     progress_timeout: 0.001</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     progress_track: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     progress_wait: 0.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Private:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     .progress_log_path: NULL</span>
 <span class="r-in"><span></span></span>
@@ -181,7 +190,7 @@ temporary file paths).</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get a temporary file for logging the progress.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_log_path"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpQl35Oc/parabar17763c641fb4"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpaUwobO/parabar17b02db2ff8b"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Fix the logging file path.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_log_path"</span>, <span class="st">"./progress.log"</span><span class="op">)</span></span></span>
@@ -195,7 +204,7 @@ temporary file paths).</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check that the logging path change was applied.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_log_path"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpQl35Oc/parabar1776b0bdb91"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpaUwobO/parabar17b07b87b66c"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Restore the defaults.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="option.html">set_default_options</a></span><span class="op">(</span><span class="op">)</span></span></span>
