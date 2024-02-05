@@ -196,7 +196,7 @@ test_that("'ProgressTrackingContext' executes the task in parallel correctly", {
     # Set the cluster type.
     specification$set_type(type = cluster_type)
 
-    # Create a synchronous backend object.
+    # Create an asynchronous backend object.
     backend <- AsyncBackend$new()
 
     # Create a progress tracking context object.
