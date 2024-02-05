@@ -628,6 +628,138 @@ tests_set_for_progress_tracking_context <- function(context, task) {
     tests_set_for_task_execution_with_progress_tracking(operation, context, expected_output)
 }
 
+# Set of tests for executing tasks that throw errors in a progress tracking context.
+tests_set_for_task_execution_with_progress_tracking_and_error <- function(operation, context, expected_error) {
+    # Clear the progress output on exit.
+    on.exit({
+        # Clear the output.
+        context$progress_bar_output <- NULL
+    })
+
+    # Create a bar factory.
+    bar_factory <- BarFactory$new()
+
+    # Get a basic bar instance.
+    bar <- bar_factory$get("basic")
+
+    # Register the bar with the context object.
+    context$set_bar(bar)
+
+    # Configure the bar.
+    context$configure_bar(
+        style = 3
+    )
+
+    # Run the task that throws an error in parallel.
+    eval(operation)
+
+    # Expect that the task interrupted the progress bar with an error message.
+    expect_error(context$get_output(wait = TRUE), expected_error)
+
+    # Get a modern bar instance.
+    bar <- bar_factory$get("modern")
+
+    # Register the bar with the same context object.
+    context$set_bar(bar)
+
+    # Configure the bar.
+    context$configure_bar(
+        show_after = 0,
+        format = ":bar| :percent",
+        clear = FALSE,
+        force = TRUE
+    )
+
+    # Run the task in parallel.
+    eval(operation)
+
+    # Expect that the task interrupted the progress bar with an error message.
+    expect_error(context$get_output(wait = TRUE), expected_error)
+}
+
+# Set of tests for progress bar interruptions in a tracking context.
+tests_set_for_progress_tracking_context_with_error <- function(context) {
+    # Check the type.
+    Helper$check_object_type(context, "ProgressTrackingContextTester")
+
+    # Clean-up.
+    on.exit({
+        # Set default values for package options.
+        set_default_options()
+    })
+
+    # Reduce waiting time between progress bar updates.
+    set_option("progress_wait", 0.01)
+
+    # Define the task.
+    task <- function(x, error_x = 1, sleep = 0) {
+        # Sleep a bit or not.
+        Sys.sleep(sleep)
+
+        # Randomly sample when to throw an error.
+        if(any(x == error_x)) {
+            # Throw an error.
+            stop("Intentional task error.")
+        }
+
+        # Compute something.
+        output <- x + 1
+
+        # Return the result.
+        return(output)
+    }
+
+    # Construct the expected error message.
+    expected_error <- as_text(task(x = 1, error_x = 1))
+
+    # Select task arguments.
+    x <- sample(1:100, 100)
+    error_x <- sample(length(x), 1)
+    sleep <- sample(c(0, 0.001, 0.002), 1)
+
+    # Create the `sapply` operation.
+    operation <- bquote(context$sapply(.(x), .(task), error_x = .(error_x), sleep = .(sleep)))
+
+    # Tests for the `sapply` operation in a progress tracking context with error in the task.
+    tests_set_for_task_execution_with_progress_tracking_and_error(operation, context, expected_error)
+
+    # Create the `lapply` operation.
+    operation <- bquote(context$lapply(.(x), .(task), error_x = .(error_x), sleep = .(sleep)))
+
+    # Tests for the `lapply` operation in a progress tracking context with error in the task.
+    tests_set_for_task_execution_with_progress_tracking_and_error(operation, context, expected_error)
+
+    # Redefine `x` as a matrix for the `apply` operation.
+    x <- matrix(rnorm(100^2), nrow = 100, ncol = 100)
+
+    # Sample new error `x`.
+    error_x <- sample(x, 1)
+
+    # Define the `apply` operation over rows.
+    operation <- bquote(context$apply(.(x), 1, .(task), error_x = .(error_x), sleep = .(sleep)))
+
+    # Tests for the `apply` operation over rows in a progress tracking context with error in the task.
+    tests_set_for_task_execution_with_progress_tracking_and_error(operation, context, expected_error)
+
+    # Define the `apply` operation over columns.
+    operation <- bquote(context$apply(.(x), 2, .(task), error_x = .(error_x), sleep = .(sleep)))
+
+    # Tests for the `apply` operation over columns in a progress tracking context with error in the task.
+    tests_set_for_task_execution_with_progress_tracking_and_error(operation, context, expected_error)
+
+    # Redefine a smaller `x` matrix for the `apply` operation applied element-wise.
+    x <- matrix(rnorm(10^2), nrow = 10, ncol = 10)
+
+    # Sample new error `x`.
+    error_x <- sample(x, 1)
+
+    # Define the `apply` operation element-wise.
+    operation <- bquote(context$apply(.(x), c(1, 2), .(task), error_x = .(error_x), sleep = .(sleep)))
+
+    # Tests for the `apply` operation over all elements in a progress tracking context with error in the task.
+    tests_set_for_task_execution_with_progress_tracking_and_error(operation, context, expected_error)
+}
+
 #endregion
 
 
