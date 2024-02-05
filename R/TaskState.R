@@ -127,6 +127,7 @@ TaskState <- R6::R6Class("TaskState",
             private$.task_is_completed <- (session_state == "busy" && execution_state == "ready")
         }
     ),
+
     public = list(
         #' @description
         #' Create a new [`parabar::TaskState`] object and determine the state of
@@ -141,6 +142,7 @@ TaskState <- R6::R6Class("TaskState",
             private$.set_state(session)
         }
     ),
+
     active = list(
         #' @field task_not_started A logical value indicating whether the task
         #' has been started. It is used to determine if the backend is free to
