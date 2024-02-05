@@ -199,6 +199,9 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
             # Get the checking delay from options.
             timeout <- Helper$get_option("progress_timeout")
 
+            # Get the waiting time between progress bar updates from options.
+            wait <- Helper$get_option("progress_wait")
+
             # Initialize the bar at the initial starting point.
             do.call(
                 private$.bar$create,
@@ -213,7 +216,13 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
             # Counter for the number of tasks processed.
             tasks_processed <- 0
 
-            # While there are still tasks1 to be processed.
+            # Counter for the loop cycles without progress bar updates.
+            cycles_without_tasks_processed <- 0
+
+            # Maximum allowed loop cycles without progress bar updates.
+            allowed_cycles_without_tasks_processed <- ceiling(wait / timeout)
+
+            # While there are still tasks to be processed.
             while (tasks_processed < total) {
                 # Get the current number of tasks processed.
                 current_tasks_processed <- length(readLines(log, warn = FALSE))
@@ -223,8 +232,26 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
                     # Update the number of tasks processed.
                     tasks_processed <- current_tasks_processed
 
+                    # Reset the cycles without progress bar updates.
+                    cycles_without_tasks_processed <- 0
+
                     # Update the progress bar to completed state.
                     private$.bar$update(tasks_processed)
+
+                    # Jump to next iteration.
+                    next
+                }
+
+                # Otherwise, record a new cycle without progress bar update.
+                cycles_without_tasks_processed <- cycles_without_tasks_processed + 1
+
+                # If the number of cycles without progress bar updates exceeded the allowed number.
+                if (cycles_without_tasks_processed > allowed_cycles_without_tasks_processed &&
+                    # And the session has results ready to be read (i.e., the task is completed).
+                    private$.backend$task_state$task_is_completed
+                ) {
+                    # Break the loop to interrupt the progress bar updating.
+                    break
                 }
 
                 # Wait a bit.
