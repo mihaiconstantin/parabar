@@ -84,6 +84,12 @@ Options <- R6::R6Class("Options",
         #' records. The default value is `0.001`.
         progress_timeout = 0.001,
 
+        #' @field progress_wait A numeric value indicating the approximate
+        #' duration (i.e., in seconds) to wait between progress bar updates
+        #' before checking if the task has finished (i.e., possibly with an
+        #' error). The default value is `0.1`.
+        progress_wait = 0.1,
+
         #' @field progress_bar_type A character string indicating the default
         #' bar type to use with compatible backends. Possible values are
         #' `"modern"` (the default) or `"basic"`.
