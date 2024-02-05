@@ -1,3 +1,19 @@
+# parabar 1.1.1
+
+## Added
+- Add tests for progress tracking context when executed tasks throw an error. In
+  relation to [#44](https://github.com/mihaiconstantin/parabar/issues/44).
+
+## Changed
+- Update action versions in GitHub workflows.
+
+## Fixed
+- Fix hanging progress bar on errors in the `ProgressTrackingContext.R` class.
+  Closes [#44](https://github.com/mihaiconstantin/parabar/issues/44).
+- Remove duplicated lines in `UserApiConsumer` class. Closes #41.
+- Fix indentation in `UML` design diagram. Closes #45.
+- Add missing `apply` operation to `README` documentation.
+
 # parabar 1.1.0
 
 ## Added
