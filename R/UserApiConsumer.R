@@ -162,11 +162,11 @@ UserApiConsumer <- R6::R6Class("UserApiConsumer",
 
     public = list(
         #' @description
-        #' Execute a task in parallel akin to [parallel::parSapply()].
+        #' Execute a task in parallel akin to [`parallel::parSapply()`].
         #'
         #' @param backend An object of class [`parabar::Backend`] as returned by
         #' the [parabar::start_backend()] function. It can also be `NULL` to run
-        #' the task sequentially via [base::sapply()].
+        #' the task sequentially via [`base::sapply()`].
         #'
         #' @param x An atomic vector or list to pass to the `fun` function.
         #'
@@ -174,7 +174,7 @@ UserApiConsumer <- R6::R6Class("UserApiConsumer",
         #'
         #' @return
         #' A vector of the same length as `x` containing the results of the
-        #' `fun`. The output format resembles that of [base::sapply()].
+        #' `fun`. The output format resembles that of [`base::sapply()`].
         sapply = function(backend, x, fun, ...) {
             # Prepare the sequential operation.
             sequential <- bquote(
@@ -195,11 +195,11 @@ UserApiConsumer <- R6::R6Class("UserApiConsumer",
         },
 
         #' @description
-        #' Execute a task in parallel akin to [parallel::parLapply()].
+        #' Execute a task in parallel akin to [`parallel::parLapply()`].
         #'
         #' @param backend An object of class [`parabar::Backend`] as returned by
         #' the [parabar::start_backend()] function. It can also be `NULL` to run
-        #' the task sequentially via [base::lapply()].
+        #' the task sequentially via [`base::lapply()`].
         #'
         #' @param x An atomic vector or list to pass to the `fun` function.
         #'
@@ -207,7 +207,7 @@ UserApiConsumer <- R6::R6Class("UserApiConsumer",
         #'
         #' @return
         #' A list of the same length as `x` containing the results of the `fun`.
-        #' The output format resembles that of [base::lapply()].
+        #' The output format resembles that of [`base::lapply()`].
         lapply = function(backend, x, fun, ...) {
             # Prepare the sequential operation.
             sequential <- bquote(
@@ -228,11 +228,11 @@ UserApiConsumer <- R6::R6Class("UserApiConsumer",
         },
 
         #' @description
-        #' Execute a task in parallel akin to [parallel::parApply()].
+        #' Execute a task in parallel akin to [`parallel::parApply()`].
         #'
         #' @param backend An object of class [`parabar::Backend`] as returned by
         #' the [parabar::start_backend()] function. It can also be `NULL` to run
-        #' the task sequentially via [base::apply()].
+        #' the task sequentially via [`base::apply()`].
         #'
         #' @param x An array to pass to the `fun` function.
         #'
@@ -241,14 +241,14 @@ UserApiConsumer <- R6::R6Class("UserApiConsumer",
         #' `margin = 1` indicates applying `fun` rows-wise, `margin = 2`
         #' indicates applying `fun` columns-wise, and `margin = c(1, 2)`
         #' indicates applying `fun` element-wise. Named dimensions are also
-        #' possible depending on `x`. See [parallel::parApply()] and
-        #' [base::apply()] for more details.
+        #' possible depending on `x`. See [`parallel::parApply()`] and
+        #' [`base::apply()`] for more details.
         #'
         #' @param fun A function to apply to `x` according to the `margin`.
         #'
         #' @return
         #' The dimensions of the output vary according to the `margin` argument.
-        #' Consult the documentation of [base::apply()] for a detailed
+        #' Consult the documentation of [`base::apply()`] for a detailed
         #' explanation on how the output is structured.
         apply = function(backend, x, margin, fun, ...) {
             # Prepare the sequential operation.

@@ -331,8 +331,8 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
         },
 
         #' @description
-        #' Run a task on the backend akin to [parallel::parSapply()], but with a
-        #' progress bar.
+        #' Run a task on the backend akin to [`parallel::parSapply()`], but with
+        #' a progress bar.
         #'
         #' @param x An atomic vector or list to pass to the `fun` function.
         #'
@@ -357,8 +357,8 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
         },
 
         #' @description
-        #' Run a task on the backend akin to [parallel::parLapply()], but with a
-        #' progress bar.
+        #' Run a task on the backend akin to [`parallel::parLapply()`], but with
+        #' a progress bar.
         #'
         #' @param x An atomic vector or list to pass to the `fun` function.
         #'
@@ -383,7 +383,7 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
         },
 
         #' @description
-        #' Run a task on the backend akin to [parallel::parApply()].
+        #' Run a task on the backend akin to [`parallel::parApply()`].
         #'
         #' @param x An array to pass to the `fun` function.
         #'
@@ -392,8 +392,8 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
         #' `margin = 1` indicates applying `fun` rows-wise, `margin = 2`
         #' indicates applying `fun` columns-wise, and `margin = c(1, 2)`
         #' indicates applying `fun` element-wise. Named dimensions are also
-        #' possible depending on `x`. See [parallel::parApply()] and
-        #' [base::apply()] for more details.
+        #' possible depending on `x`. See [`parallel::parApply()`] and
+        #' [`base::apply()`] for more details.
         #'
         #' @param fun A function to apply to `x` according to the `margin`.
         #'

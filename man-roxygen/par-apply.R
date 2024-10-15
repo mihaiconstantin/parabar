@@ -3,13 +3,13 @@
 #'
 #' @description
 #' This function can be used to run a task in parallel. The task is executed in
-#' parallel on the specified backend, similar to [parallel::parApply()]. If
-#' `backend = NULL`, the task is executed sequentially using [base::apply()].
+#' parallel on the specified backend, similar to [`parallel::parApply()`]. If
+#' `backend = NULL`, the task is executed sequentially using [`base::apply()`].
 #' See the **Details** section for more information on how this function works.
 #'
 #' @param backend An object of class [`parabar::Backend`] as returned by the
 #' [parabar::start_backend()] function. It can also be `NULL` to run the task
-#' sequentially via [base::apply()]. The default value is `NULL`.
+#' sequentially via [`base::apply()`]. The default value is `NULL`.
 #'
 #' @param x An array to pass to the `fun` function.
 #'
@@ -18,8 +18,8 @@
 #' `margin = 1` indicates applying `fun` rows-wise, `margin = 2`
 #' indicates applying `fun` columns-wise, and `margin = c(1, 2)`
 #' indicates applying `fun` element-wise. Named dimensions are also
-#' possible depending on `x`. See [parallel::parApply()] and
-#' [base::apply()] for more details.
+#' possible depending on `x`. See [`parallel::parApply()`] and
+#' [`base::apply()`] for more details.
 #'
 #' @param fun A function to apply to `x` according to the `margin`.
 #'
@@ -31,7 +31,7 @@
 #'
 #' @return
 #' The dimensions of the output vary according to the `margin` argument. Consult
-#' the documentation of [base::apply()] for a detailed explanation on how the
+#' the documentation of [`base::apply()`] for a detailed explanation on how the
 #' output is structured.
 #'
 #' @examples

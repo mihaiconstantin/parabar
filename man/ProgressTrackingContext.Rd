@@ -110,8 +110,8 @@ context$stop()
 \code{\link{Context}}, \code{\link{Service}}, \code{\link{Backend}}, and
 \code{\link{AsyncBackend}}.
 }
-\section{Super class}{
-\code{\link[parabar:Context]{parabar::Context}} -> \code{ProgressTrackingContext}
+\section{Super classes}{
+\code{\link[parabar:Service]{parabar::Service}} -> \code{\link[parabar:Context]{parabar::Context}} -> \code{ProgressTrackingContext}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -135,6 +135,7 @@ context$stop()
 \if{html}{\out{
 <details><summary>Inherited methods</summary>
 <ul>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="initialize"><a href='../../parabar/html/Service.html#method-Service-initialize'><code>parabar::Service$initialize()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="parabar" data-topic="Context" data-id="clear"><a href='../../parabar/html/Context.html#method-Context-clear'><code>parabar::Context$clear()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="parabar" data-topic="Context" data-id="evaluate"><a href='../../parabar/html/Context.html#method-Context-evaluate'><code>parabar::Context$evaluate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="parabar" data-topic="Context" data-id="export"><a href='../../parabar/html/Context.html#method-Context-export'><code>parabar::Context$export()</code></a></span></li>
@@ -209,8 +210,8 @@ specific concrete bar for details (e.g., \code{\link{ModernBar}}).}
 \if{html}{\out{<a id="method-ProgressTrackingContext-sapply"></a>}}
 \if{latex}{\out{\hypertarget{method-ProgressTrackingContext-sapply}{}}}
 \subsection{Method \code{sapply()}}{
-Run a task on the backend akin to \code{\link[parallel:clusterApply]{parallel::parSapply()}}, but with a
-progress bar.
+Run a task on the backend akin to \code{\link[parallel:clusterApply]{parallel::parSapply()}}, but with
+a progress bar.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ProgressTrackingContext$sapply(x, fun, ...)}\if{html}{\out{</div>}}
 }
@@ -236,8 +237,8 @@ abstract class, and is accessible via the \code{get_output()} method.
 \if{html}{\out{<a id="method-ProgressTrackingContext-lapply"></a>}}
 \if{latex}{\out{\hypertarget{method-ProgressTrackingContext-lapply}{}}}
 \subsection{Method \code{lapply()}}{
-Run a task on the backend akin to \code{\link[parallel:clusterApply]{parallel::parLapply()}}, but with a
-progress bar.
+Run a task on the backend akin to \code{\link[parallel:clusterApply]{parallel::parLapply()}}, but with
+a progress bar.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ProgressTrackingContext$lapply(x, fun, ...)}\if{html}{\out{</div>}}
 }

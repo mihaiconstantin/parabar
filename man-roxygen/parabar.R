@@ -16,17 +16,17 @@
 #' - [parabar::stop_backend()]: stops an active backend and makes the [`R6::R6`]
 #'   eligible for garbage collection.
 #' - [parabar::par_sapply()]: is a drop-in replacement for the built-in
-#'   [base::sapply()] function when no backend is provided. However, when a
+#'   [`base::sapply()`] function when no backend is provided. However, when a
 #'   backend is provided, the function will execute a task in parallel on the
-#'   backend, similar to the built-in function [parallel::parSapply()].
+#'   backend, similar to the built-in function [`parallel::parSapply()`].
 #' - [parabar::par_lapply()]: is a drop-in replacement for the built-in
-#'   [base::lapply()] function when no backend is provided. However, when a
+#'   [`base::lapply()`] function when no backend is provided. However, when a
 #'   backend is provided, the function will execute a task in parallel on the
-#'   backend, similar to the built-in function [parallel::parLapply()].
+#'   backend, similar to the built-in function [`parallel::parLapply()`].
 #' - [parabar::par_apply()]: is a drop-in replacement for the built-in
-#'   [base::apply()] function when no backend is provided. However, when a
+#'   [`base::apply()`] function when no backend is provided. However, when a
 #'   backend is provided, the function will execute a task in parallel on the
-#'   backend, similar to the built-in function [parallel::parApply()].
+#'   backend, similar to the built-in function [`parallel::parApply()`].
 #' - [parabar::clear()]: removes all variables available on a backend.
 #' - [parabar::peek()]: returns the names of all variables available on a
 #'   backend.

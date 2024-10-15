@@ -39,7 +39,7 @@ Create a new \code{\link{Service}} object.
 }
 
 \subsection{Returns}{
-Instantiating this call will throw an error.
+Instantiating this class will throw an error.
 }
 }
 \if{html}{\out{<hr>}}

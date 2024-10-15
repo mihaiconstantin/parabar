@@ -54,7 +54,7 @@ Exception$method_not_implemented <- function() {
 # Exception for running into things not yet developed.
 Exception$feature_not_developed <- function() {
     # Throw the error.
-    stop("Not supported. Please request at 'https://github.com/mihaiconstantin/powerly/issues'.", call. = FALSE)
+    stop("Not supported. Please request at 'https://github.com/mihaiconstantin/parabar/issues'.", call. = FALSE)
 }
 
 # Exception for requesting more cores than available on the machine.
