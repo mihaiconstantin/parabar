@@ -82,6 +82,9 @@ context$stop()
 \code{\link{ProgressTrackingContext}}, \code{\link{Service}},
 \code{\link{Backend}}, and \code{\link{SyncBackend}}.
 }
+\section{Super class}{
+\code{\link[parabar:Service]{parabar::Service}} -> \code{Context}
+}
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
@@ -107,6 +110,13 @@ context.}
 \item \href{#method-Context-clone}{\code{Context$clone()}}
 }
 }
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="initialize"><a href='../../parabar/html/Service.html#method-Service-initialize'><code>parabar::Service$initialize()</code></a></span></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Context-set_backend"></a>}}
 \if{latex}{\out{\hypertarget{method-Context-set_backend}{}}}
