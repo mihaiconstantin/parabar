@@ -42,7 +42,7 @@ Collate:
     'ContextFactory.R'
     'Warning.R'
     'UserApiConsumer.R'
-    'exports.r'
+    'exports.R'
     'logo.R'
     'parabar-package.R'
 Suggests:
