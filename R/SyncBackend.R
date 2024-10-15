@@ -296,7 +296,7 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' stored in the private field `.output` on the [`parabar::Backend`]
         #' abstract class, and is accessible via the `get_output()` method.
         sapply = function(x, fun, ...) {
-            private$.output = private$.sapply(x, fun, ...)
+            private$.output <- private$.sapply(x, fun, ...)
         },
 
         #' @description
@@ -313,7 +313,7 @@ SyncBackend <- R6::R6Class("SyncBackend",
         #' stored in the private field `.output` on the [`parabar::Backend`]
         #' abstract class, and is accessible via the `get_output()` method.
         lapply = function(x, fun, ...) {
-            private$.output = private$.lapply(x, fun, ...)
+            private$.output <- private$.lapply(x, fun, ...)
         },
 
         #' @description
@@ -342,7 +342,7 @@ SyncBackend <- R6::R6Class("SyncBackend",
             Helper$check_array_margins(margin, dim(x))
 
             # Deploy the task synchronously.
-            private$.output = private$.apply(x, margin, fun, ...)
+            private$.output <- private$.apply(x, margin, fun, ...)
         },
 
         #' @description

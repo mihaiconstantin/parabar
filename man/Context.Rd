@@ -96,6 +96,7 @@ context.}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
+\item \href{#method-Context-new}{\code{Context$new()}}
 \item \href{#method-Context-set_backend}{\code{Context$set_backend()}}
 \item \href{#method-Context-start}{\code{Context$start()}}
 \item \href{#method-Context-stop}{\code{Context$stop()}}
@@ -110,13 +111,19 @@ context.}
 \item \href{#method-Context-clone}{\code{Context$clone()}}
 }
 }
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
-<ul>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="initialize"><a href='../../parabar/html/Service.html#method-Service-initialize'><code>parabar::Service$initialize()</code></a></span></li>
-</ul>
-</details>
-}}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Context-new"></a>}}
+\if{latex}{\out{\hypertarget{method-Context-new}{}}}
+\subsection{Method \code{new()}}{
+Create a new \code{\link{Context}} object.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Context$new()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+An object of class \code{\link{Context}}.
+}
+}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Context-set_backend"></a>}}
 \if{latex}{\out{\hypertarget{method-Context-set_backend}{}}}

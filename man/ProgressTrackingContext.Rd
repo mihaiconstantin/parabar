@@ -135,11 +135,11 @@ context$stop()
 \if{html}{\out{
 <details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="initialize"><a href='../../parabar/html/Service.html#method-Service-initialize'><code>parabar::Service$initialize()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="parabar" data-topic="Context" data-id="clear"><a href='../../parabar/html/Context.html#method-Context-clear'><code>parabar::Context$clear()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="parabar" data-topic="Context" data-id="evaluate"><a href='../../parabar/html/Context.html#method-Context-evaluate'><code>parabar::Context$evaluate()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="parabar" data-topic="Context" data-id="export"><a href='../../parabar/html/Context.html#method-Context-export'><code>parabar::Context$export()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="parabar" data-topic="Context" data-id="get_output"><a href='../../parabar/html/Context.html#method-Context-get_output'><code>parabar::Context$get_output()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="Context" data-id="initialize"><a href='../../parabar/html/Context.html#method-Context-initialize'><code>parabar::Context$initialize()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="parabar" data-topic="Context" data-id="peek"><a href='../../parabar/html/Context.html#method-Context-peek'><code>parabar::Context$peek()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="parabar" data-topic="Context" data-id="start"><a href='../../parabar/html/Context.html#method-Context-start'><code>parabar::Context$start()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="parabar" data-topic="Context" data-id="stop"><a href='../../parabar/html/Context.html#method-Context-stop'><code>parabar::Context$stop()</code></a></span></li>
