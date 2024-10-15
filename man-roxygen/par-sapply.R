@@ -3,13 +3,13 @@
 #'
 #' @description
 #' This function can be used to run a task in parallel. The task is executed in
-#' parallel on the specified backend, similar to [parallel::parSapply()]. If
-#' `backend = NULL`, the task is executed sequentially using [base::sapply()].
+#' parallel on the specified backend, similar to [`parallel::parSapply()`]. If
+#' `backend = NULL`, the task is executed sequentially using [`base::sapply()`].
 #' See the **Details** section for more information on how this function works.
 #'
 #' @param backend An object of class [`parabar::Backend`] as returned by the
 #' [parabar::start_backend()] function. It can also be `NULL` to run the task
-#' sequentially via [base::sapply()]. The default value is `NULL`.
+#' sequentially via [`base::sapply()`]. The default value is `NULL`.
 #'
 #' @param x An atomic vector or list to pass to the `fun` function.
 #'
@@ -23,7 +23,7 @@
 #'
 #' @return
 #' A vector of the same length as `x` containing the results of the `fun`. The
-#' output format resembles that of [base::sapply()].
+#' output format resembles that of [`base::sapply()`].
 #'
 #' @examples
 #' \donttest{

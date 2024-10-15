@@ -47,7 +47,7 @@ Backend <- R6::R6Class("Backend",
         #' Create a new [`parabar::Backend`] object.
         #'
         #' @return
-        #' Instantiating this call will throw an error.
+        #' Instantiating this class will throw an error.
         initialize = function() {
             Exception$abstract_class_not_instantiable(self)
         }

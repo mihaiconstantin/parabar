@@ -27,7 +27,7 @@ Bar <- R6::R6Class("Bar",
         #' Create a new [`parabar::Bar`] object.
         #'
         #' @return
-        #' Instantiating this call will throw an error.
+        #' Instantiating this class will throw an error.
         initialize = function() {
             Exception$abstract_class_not_instantiable(self)
         },
