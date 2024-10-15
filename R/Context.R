@@ -83,12 +83,21 @@
 #'
 #' @export
 Context <- R6::R6Class("Context",
+    inherit = Service,
+
     private = list(
         # The backend used by the context manager.
         .backend = NULL
     ),
 
     public = list(
+        #' @description
+        #' Create a new [`parabar::Context`] object.
+        #'
+        #' @return
+        #' An object of class [`parabar::Context`].
+        initialize = function() { invisible() },
+
         #' @description
         #' Set the backend instance to be used by the context.
         #'
