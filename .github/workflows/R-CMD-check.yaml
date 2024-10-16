@@ -1,6 +1,9 @@
 # R CMD check workflow.
 name: R-CMD-check
 
+# Set workflow permissions.
+permissions: read-all
+
 # Run on pushes and pull requests to the `main` branch.
 on:
   push:
@@ -61,3 +64,4 @@ jobs:
         uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
+          build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
