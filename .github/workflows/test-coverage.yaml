@@ -1,6 +1,9 @@
 # Workflow name.
 name: test-coverage
 
+# Set workflow permissions.
+permissions: read-all
+
 # Events.
 on:
   push:
@@ -36,19 +39,30 @@ jobs:
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::covr
+          extra-packages: any::covr, any::xml2
           needs: coverage
 
       # Run the test coverage excluding specific lines.
       - name: Test coverage
         run: |
-          covr::codecov(
+          cov <- covr::package_coverage(
             quiet = FALSE,
             clean = FALSE,
             install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package"),
             line_exclusions = list("R/parabar-package.R", "R/UserApiConsumer.R" = c(118:136))
           )
+          covr::to_cobertura(cov)
         shell: Rscript {0}
+
+      # Upload the coverage report to `Codecov``.
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          fail_ci_if_error: ${{ github.event_name != 'pull_request' && true || false }}
+          file: ./cobertura.xml
+          plugin: noop
+          disable_search: true
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       # Show the output of `testthat`.
       - name: Show testthat output
