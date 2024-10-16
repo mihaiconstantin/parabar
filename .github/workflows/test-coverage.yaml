@@ -23,6 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
     # Actions.
     steps:
       # Checkout.
@@ -35,7 +36,7 @@ jobs:
         with:
           use-public-rspm: true
 
-      # Install `parabar` dependencies and `covr` package.
+      # Install package dependencies and `covr` package.
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
