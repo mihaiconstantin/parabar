@@ -1,3 +1,11 @@
+# parabar 1.2.0
+
+## Changed
+- Enable `roxygen` checks for `R6` documentation in `DESCRIPTION`.
+- Update `Context` to implement the `Service` interface.
+- Update GitHub workflows.
+- Fix typos and other errors in code documentation.
+
 # parabar 1.1.1
 
 ## Added
