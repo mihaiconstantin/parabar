@@ -20,7 +20,7 @@ Imports:
     filelock,
     utils
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
+Roxygen: list(markdown = TRUE, r6 = TRUE)
 RoxygenNote: 7.3.1
 Collate:
     'TaskState.R'
