@@ -1,3 +1,8 @@
+# parabar 1.2.1
+
+## Fixed
+- Update URL with status 301 in `README.md` per `CRAN` checks.
+
 # parabar 1.2.0
 
 ## Changed
