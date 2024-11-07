@@ -8,6 +8,7 @@ test_that("'Options' class fields work correctly", {
     expect_true(options$progress_track)
     expect_equal(options$progress_timeout, 0.001)
     expect_equal(options$progress_bar_type, "modern")
+    expect_equal(options$stop_forceful, FALSE)
 
     # Expect the correct default config for the modern progress bar.
     expect_equal(
