@@ -92,6 +92,9 @@ test_that("'set_option' sets option values correctly", {
     set_option("progress_bar_config", list(test = "test"))
     expect_equal(get_option("progress_bar_config"), list(test = "test"))
 
+    set_option("stop_forceful", TRUE)
+    expect_equal(get_option("stop_forceful"), TRUE)
+
     # Pick an unknown `parabar` package option.
     unknown <- "unknown_parabar_option"
 
