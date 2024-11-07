@@ -19,6 +19,7 @@
 #'   \item{\code{Exception$async_task_running()}}{Exception for reading results while an asynchronous task is running.}
 #'   \item{\code{Exception$async_task_completed()}}{Exception for reading results while a completed asynchronous task has unread results.}
 #'   \item{\code{Exception$async_task_error(error)}}{Exception for errors while running an asynchronous task.}
+#'   \item{\code{Exception$stop_busy_backend_not_allowed()}}{Exception for stopping a busy backend without intent.}
 #'   \item{\code{Exception$temporary_file_creation_failed()}}{Exception for reading results while an asynchronous task is running.}
 #'   \item{\code{Exception$type_not_assignable(actual, expected)}}{Exception for when providing incorrect object types.}
 #'   \item{\code{Exception$unknown_package_option(option)}}{Exception for when requesting unknown package options.}
@@ -97,6 +98,15 @@ Exception$async_task_completed <- function() {
 Exception$async_task_error <- function(error) {
     # Throw the error.
     stop(error)
+}
+
+# Exception for stopping a busy backend without intent.
+Exception$stop_busy_backend_not_allowed <- function() {
+    # Construct exception message.
+    message <- "Cannot stop a busy backend unless the `stop_forceful` option is enabled."
+
+    # Throw the error.
+    stop(message, call. = FALSE)
 }
 
 # Exception for reading results while an asynchronous task is running.
