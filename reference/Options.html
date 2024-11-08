@@ -36,7 +36,7 @@ functionality parabar provides."><meta property="og:image" content="http://parab
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Class for Package Options</h1>
-      <small class="dont-index">Source: <a href="https://github.com/mihaiconstantin/parabar/blob/v1.2.1/R/Options.R" class="external-link"><code>R/Options.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mihaiconstantin/parabar/blob/main/R/Options.R" class="external-link"><code>R/Options.R</code></a></small>
       <div class="d-none name"><code>Options.Rd</code></div>
     </div>
 
@@ -101,6 +101,14 @@ configuration.</p></li>
 </ul></dd>
 
 
+<dt><code>stop_forceful</code></dt>
+<dd><p>A logical value indicating whether to allow
+stopping an asynchronous backend forcefully (i.e., <code>TRUE</code>), or not
+(i.e., <code>FALSE</code>). When stopping forcefully, the backend is terminated
+without waiting for a running tasks to finish or for the results to
+be read into the main <code>R</code> session. The default value is <code>FALSE</code>.</p></dd>
+
+
 </dl><p></p></div>
     </div>
     <div class="section level2">
@@ -141,6 +149,7 @@ temporary file paths).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     progress_timeout: 0.001</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     progress_track: FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     progress_wait: 0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     stop_forceful: FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Private:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     .progress_log_path: NULL</span>
 <span class="r-in"><span></span></span>
@@ -157,6 +166,7 @@ temporary file paths).</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     progress_timeout: 0.001</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     progress_track: TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     progress_wait: 0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     stop_forceful: FALSE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Private:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     .progress_log_path: NULL</span>
 <span class="r-in"><span></span></span>
@@ -175,7 +185,7 @@ temporary file paths).</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get a temporary file for logging the progress.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_log_path"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmphIb3mO/parabar16ad30dc2ad0"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpBpDH4f/parabar169951d566e9"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Fix the logging file path.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="option.html">set_option</a></span><span class="op">(</span><span class="st">"progress_log_path"</span>, <span class="st">"./progress.log"</span><span class="op">)</span></span></span>
@@ -189,7 +199,7 @@ temporary file paths).</p></dd>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check that the logging path change was applied.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="option.html">get_option</a></span><span class="op">(</span><span class="st">"progress_log_path"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmphIb3mO/parabar16ad10b3d3cc"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "/tmp/RtmpBpDH4f/parabar1699eff9477"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Restore the defaults.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="option.html">set_default_options</a></span><span class="op">(</span><span class="op">)</span></span></span>
