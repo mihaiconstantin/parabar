@@ -185,19 +185,6 @@ SyncBackend <- R6::R6Class("SyncBackend",
         initialize = function() {},
 
         #' @description
-        #' Destroy the current [`parabar::SyncBackend`] instance.
-        #'
-        #' @return
-        #' An object of class [`parabar::SyncBackend`].
-        finalize = function() {
-            # If a cluster is active, stop before deleting the instance.
-            if (private$.active) {
-                # Stop the cluster.
-                private$.stop()
-            }
-        },
-
-        #' @description
         #' Start the backend.
         #'
         #' @param specification An object of class [`parabar::Specification`]
