@@ -103,6 +103,12 @@ default configuration:
 \item \code{basic}: The \code{\link[utils:txtProgressBar]{utils::txtProgressBar}} engine, with no default
 configuration.
 }}
+
+\item{\code{stop_forceful}}{A logical value indicating whether to allow
+stopping an asynchronous backend forcefully (i.e., \code{TRUE}), or not
+(i.e., \code{FALSE}). When stopping forcefully, the backend is terminated
+without waiting for a running tasks to finish or for the results to
+be read into the main \code{R} session. The default value is \code{FALSE}.}
 }
 \if{html}{\out{</div>}}
 }

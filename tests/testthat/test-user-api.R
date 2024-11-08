@@ -24,6 +24,7 @@ test_that("'set_default_options' sets default options correctly", {
     expect_equal(session_options$progress_timeout, options$progress_timeout)
     expect_equal(session_options$progress_bar_type, options$progress_bar_type)
     expect_equal(session_options$progress_bar_config, options$progress_bar_config)
+    expect_equal(session_options$stop_forceful, options$stop_forceful)
 
     # Expect the progress log path to differ since it is randomly generated.
     expect_false(session_options$progress_log_path == options$progress_log_path)
@@ -58,6 +59,7 @@ test_that("'get_option' retrieves option values correctly", {
     expect_equal(get_option("progress_timeout"), options$progress_timeout)
     expect_equal(get_option("progress_bar_type"), options$progress_bar_type)
     expect_equal(get_option("progress_bar_config"), options$progress_bar_config)
+    expect_equal(get_option("stop_forceful"), options$stop_forceful)
 
     # Expect the progress log path to differ since it is randomly generated.
     expect_false(get_option("progress_log_path") == options$progress_log_path)
@@ -89,6 +91,9 @@ test_that("'set_option' sets option values correctly", {
 
     set_option("progress_bar_config", list(test = "test"))
     expect_equal(get_option("progress_bar_config"), list(test = "test"))
+
+    set_option("stop_forceful", TRUE)
+    expect_equal(get_option("stop_forceful"), TRUE)
 
     # Pick an unknown `parabar` package option.
     unknown <- "unknown_parabar_option"
