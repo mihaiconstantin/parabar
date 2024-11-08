@@ -380,19 +380,6 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
         initialize = function() { invisible() },
 
         #' @description
-        #' Destroy the current [`parabar::AsyncBackend`] instance.
-        #'
-        #' @return
-        #' An object of class [`parabar::AsyncBackend`].
-        finalize = function() {
-            # If a cluster is active, stop before deleting the instance.
-            if (private$.active) {
-                # Stop the cluster.
-                private$.stop()
-            }
-        },
-
-        #' @description
         #' Start the backend.
         #'
         #' @param specification An object of class [`parabar::Specification`]
