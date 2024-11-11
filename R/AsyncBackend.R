@@ -143,26 +143,29 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
                 Exception$cluster_not_active()
             }
 
-            # Get the task state.
-            task_state <- private$.get_task_state()
+            # Get the session state.
+            state <- private$.get_session_state()
 
             # Get the user's intent for stopping the backend forcefully.
             stop_forceful <- Helper$get_option("stop_forceful")
 
             # If the session is busy and forceful stop is not allowed.
-            if(!task_state$task_not_started && !stop_forceful) {
+            if(state$session_is_busy && !stop_forceful) {
                 # Throw.
                 Exception$stop_busy_backend_not_allowed()
             }
 
-            # If the session is free.
-            if (task_state$task_not_started) {
+            # If the session is idle.
+            if (state$session_is_idle) {
                 # Gracefully terminate the cluster in the separate `R` session.
                 private$.close_cluster()
             }
 
-            # Terminate the separate `R` session with a grace period.
-            private$.cluster$close(grace = 100)
+            # If the session is not already finished.
+            if (!state$session_is_finished) {
+                # Terminate the separate `R` session.
+                private$.cluster$close()
+            }
 
             # Rest the cluster field.
             private$.cluster <- NULL
