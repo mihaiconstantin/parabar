@@ -305,6 +305,21 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
             return(task_state)
         },
 
+        # Get the session state.
+        .get_session_state = function() {
+            # If the backend does not have an active cluster (i.e., session in this case).
+            if (!private$.active) {
+                # Throw.
+                Exception$cluster_not_active()
+            }
+
+            # Create session state object holding the current state.
+            session_state <- SessionState$new(private$.cluster)
+
+            # Return the session state.
+            return(session_state)
+        },
+
         # Throw an exception if the backend is not ready to be used.
         .throw_if_backend_is_busy = function() {
             # Get task state.
@@ -608,6 +623,29 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
                 task_not_started = task_state$task_not_started,
                 task_is_running = task_state$task_is_running,
                 task_is_completed = task_state$task_is_completed
+            ))
+        },
+
+        #' @field session_state A list of logical values indicating the state of
+        #' the background session managing the cluster. See the
+        #' [`parabar::SessionState`] class for more information on the available
+        #' statuses. The following statuses are available:
+        #' - `session_is_starting`: Indicates whether the session is starting.
+        #' - `session_is_idle`: Indicates whether the session is idle.
+        #' - `session_is_busy`: Indicates whether the session is busy. A session
+        #'   is busy when a task is running or when the output of a task has not
+        #'   been fetched into the main `R` session. See the `task_state` field.
+        #' - `session_is_finished`: Indicates whether the session was closed.
+        session_state = function() {
+            # Get a session state instance with the state.
+            session_state <- private$.get_session_state()
+
+            # Return a simplified state.
+            return(list(
+                session_is_starting = session_state$session_is_starting,
+                session_is_idle = session_state$session_is_idle,
+                session_is_busy = session_state$session_is_busy,
+                session_is_finished = session_state$session_is_finished
             ))
         }
     )
