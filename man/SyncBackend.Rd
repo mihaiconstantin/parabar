@@ -85,7 +85,6 @@ backend$active
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-SyncBackend-new}{\code{SyncBackend$new()}}
-\item \href{#method-SyncBackend-finalize}{\code{SyncBackend$finalize()}}
 \item \href{#method-SyncBackend-start}{\code{SyncBackend$start()}}
 \item \href{#method-SyncBackend-stop}{\code{SyncBackend$stop()}}
 \item \href{#method-SyncBackend-clear}{\code{SyncBackend$clear()}}
@@ -106,19 +105,6 @@ backend$active
 Create a new \code{\link{SyncBackend}} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{SyncBackend$new()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-An object of class \code{\link{SyncBackend}}.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-SyncBackend-finalize"></a>}}
-\if{latex}{\out{\hypertarget{method-SyncBackend-finalize}{}}}
-\subsection{Method \code{finalize()}}{
-Destroy the current \code{\link{SyncBackend}} instance.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SyncBackend$finalize()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{
