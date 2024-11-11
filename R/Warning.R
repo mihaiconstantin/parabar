@@ -13,6 +13,7 @@
 #'   \item{\code{Warning$requested_cluster_cores_too_high()}}{Warning for requesting too many cluster cores.}
 #'   \item{\code{Warning$requested_cluster_type_not_supported()}}{Warning for requesting an unsupported cluster type.}
 #'   \item{\code{Warning$progress_not_supported_for_backend()}}{Warning for using a backend incompatible with progress tracking.}
+#'  \item{\code{Warning$error_in_backend_finalizer()}}{Warning for errors in the backend finalizer during garbage collection.}
 #' }
 #'
 #' @export
@@ -64,5 +65,17 @@ Warning$progress_not_supported_for_backend <- function(backend) {
     message <- paste0("Progress tracking not supported for backend of type '", type, "'.")
 
     # Throw the error.
+    warning(message, call. = FALSE)
+}
+
+# Warning for errors in the backend finalizer during garbage collection.
+Warning$error_in_backend_finalizer <- function(backend, error) {
+    # Get the backend type.
+    backend_type <- Helper$get_class_name(backend)
+
+    # Construct the message.
+    message <- paste0("Caught error in '", backend_type ,"' finalizer: '", error$message, "'.")
+
+    # Issue the warning.
     warning(message, call. = FALSE)
 }
