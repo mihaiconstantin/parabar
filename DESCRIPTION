@@ -40,6 +40,7 @@ Collate:
     'Context.R'
     'ProgressTrackingContext.R'
     'ContextFactory.R'
+    'SessionState.R'
     'Warning.R'
     'UserApiConsumer.R'
     'exports.R'
