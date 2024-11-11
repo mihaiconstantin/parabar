@@ -80,10 +80,14 @@
 #' # Check that the session is idle again.
 #' check_state(backend$cluster)
 #'
+#' # Manually close the session.
+#' backend$cluster$close()
+#'
+#' # Check that the session is finished.
+#' check_state(backend$cluster)
+#'
 #' # Stop the backend.
 #' backend$stop()
-#'
-#' # Please close the session manually to check its finished state.
 #'
 #' @seealso
 #' [`parabar::TaskState`], [`parabar::AsyncBackend`] and
