@@ -66,7 +66,6 @@ blocking the main <code>R</code> session).</p>
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
 <ul><li><p><a href="#method-SyncBackend-new"><code>SyncBackend$new()</code></a></p></li>
-<li><p><a href="#method-SyncBackend-finalize"><code>SyncBackend$finalize()</code></a></p></li>
 <li><p><a href="#method-SyncBackend-start"><code>SyncBackend$start()</code></a></p></li>
 <li><p><a href="#method-SyncBackend-stop"><code>SyncBackend$stop()</code></a></p></li>
 <li><p><a href="#method-SyncBackend-clear"><code>SyncBackend$clear()</code></a></p></li>
@@ -90,22 +89,10 @@ blocking the main <code>R</code> session).</p>
 <p>An object of class <code>SyncBackend</code>.</p>
 </div>
 
-</div><p></p><hr><a id="method-SyncBackend-finalize"></a><div class="section">
-<h3 id="method-finalize-">Method <code>finalize()</code><a class="anchor" aria-label="anchor" href="#method-finalize-"></a></h3>
-<p>Destroy the current <code>SyncBackend</code> instance.</p><div class="section">
-<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">finalize</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
-<p>An object of class <code>SyncBackend</code>.</p>
-</div>
-
 </div><p></p><hr><a id="method-SyncBackend-start"></a><div class="section">
 <h3 id="method-start-">Method <code><a href="https://rdrr.io/r/stats/start.html" class="external-link">start()</a></code><a class="anchor" aria-label="anchor" href="#method-start-"></a></h3>
 <p>Start the backend.</p><div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">start</span><span class="op">(</span><span class="va">specification</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -119,7 +106,7 @@ that contains the backend configuration.</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
+<h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
 <p>This method returns void. The resulting backend must be stored in the
 <code>.cluster</code> private field on the <code><a href="Backend.html">Backend</a></code> abstract class,
 and accessible to any concrete backend implementations via the active
@@ -129,12 +116,12 @@ binding <code>cluster</code>.</p>
 </div><p></p><hr><a id="method-SyncBackend-stop"></a><div class="section">
 <h3 id="method-stop-">Method <code><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop()</a></code><a class="anchor" aria-label="anchor" href="#method-stop-"></a></h3>
 <p>Stop the backend.</p><div class="section">
-<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="kw">stop</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
+<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
 <p>This method returns void.</p>
 </div>
 
@@ -143,24 +130,24 @@ binding <code>cluster</code>.</p>
 <p>Remove all objects from the backend. This function is equivalent to
 calling <code>rm(list = ls(all.names = TRUE))</code> on each node in the
 backend.</p><div class="section">
-<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">clear</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
+<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
 <p>This method returns void.</p>
 </div>
 
 </div><p></p><hr><a id="method-SyncBackend-peek"></a><div class="section">
 <h3 id="method-peek-">Method <code><a href="peek.html">peek()</a></code><a class="anchor" aria-label="anchor" href="#method-peek-"></a></h3>
 <p>Inspect the backend for variables available in the <code>.GlobalEnv</code>.</p><div class="section">
-<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">peek</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
+<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
 <p>This method returns a list of character vectors, where each element
 corresponds to a node in the backend. The character vectors contain
 the names of the variables available in the <code>.GlobalEnv</code> on each
@@ -170,7 +157,7 @@ node.</p>
 </div><p></p><hr><a id="method-SyncBackend-export"></a><div class="section">
 <h3 id="method-export-">Method <code><a href="export.html">export()</a></code><a class="anchor" aria-label="anchor" href="#method-export-"></a></h3>
 <p>Export variables from a given environment to the backend.</p><div class="section">
-<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">export</span><span class="op">(</span><span class="va">variables</span>, <span class="va">environment</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -188,14 +175,14 @@ variables. Defaults to the parent frame.</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
+<h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
 <p>This method returns void.</p>
 </div>
 
 </div><p></p><hr><a id="method-SyncBackend-evaluate"></a><div class="section">
 <h3 id="method-evaluate-">Method <code><a href="evaluate.html">evaluate()</a></code><a class="anchor" aria-label="anchor" href="#method-evaluate-"></a></h3>
 <p>Evaluate an arbitrary expression on the backend.</p><div class="section">
-<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">evaluate</span><span class="op">(</span><span class="va">expression</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -208,19 +195,49 @@ variables. Defaults to the parent frame.</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-7">Returns<a class="anchor" aria-label="anchor" href="#returns-7"></a></h4>
+<h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
 <p>This method returns the result of the expression evaluation.</p>
 </div>
 
 </div><p></p><hr><a id="method-SyncBackend-sapply"></a><div class="section">
 <h3 id="method-sapply-">Method <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply()</a></code><a class="anchor" aria-label="anchor" href="#method-sapply-"></a></h3>
 <p>Run a task on the backend akin to <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parallel::parSapply()</a></code>.</p><div class="section">
-<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">sapply</span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>x</code></dt>
+<dd><p>An atomic vector or list to pass to the <code>fun</code> function.</p></dd>
+
+
+<dt><code>fun</code></dt>
+<dd><p>A function to apply to each element of <code>x</code>.</p></dd>
+
+
+<dt><code>...</code></dt>
+<dd><p>Additional arguments to pass to the <code>fun</code> function.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-7">Returns<a class="anchor" aria-label="anchor" href="#returns-7"></a></h4>
+<p>This method returns void. The output of the task execution must be
+stored in the private field <code>.output</code> on the <code><a href="Backend.html">Backend</a></code>
+abstract class, and is accessible via the <code>get_output()</code> method.</p>
+</div>
+
+</div><p></p><hr><a id="method-SyncBackend-lapply"></a><div class="section">
+<h3 id="method-lapply-">Method <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply()</a></code><a class="anchor" aria-label="anchor" href="#method-lapply-"></a></h3>
+<p>Run a task on the backend akin to <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parallel::parLapply()</a></code>.</p><div class="section">
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">lapply</span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>x</code></dt>
 <dd><p>An atomic vector or list to pass to the <code>fun</code> function.</p></dd>
 
@@ -242,40 +259,10 @@ stored in the private field <code>.output</code> on the <code><a href="Backend.h
 abstract class, and is accessible via the <code>get_output()</code> method.</p>
 </div>
 
-</div><p></p><hr><a id="method-SyncBackend-lapply"></a><div class="section">
-<h3 id="method-lapply-">Method <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply()</a></code><a class="anchor" aria-label="anchor" href="#method-lapply-"></a></h3>
-<p>Run a task on the backend akin to <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parallel::parLapply()</a></code>.</p><div class="section">
-<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">lapply</span><span class="op">(</span><span class="va">x</span>, <span class="va">fun</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>x</code></dt>
-<dd><p>An atomic vector or list to pass to the <code>fun</code> function.</p></dd>
-
-
-<dt><code>fun</code></dt>
-<dd><p>A function to apply to each element of <code>x</code>.</p></dd>
-
-
-<dt><code>...</code></dt>
-<dd><p>Additional arguments to pass to the <code>fun</code> function.</p></dd>
-
-
-</dl><p></p></div>
-</div>
-<div class="section">
-<h4 id="returns-9">Returns<a class="anchor" aria-label="anchor" href="#returns-9"></a></h4>
-<p>This method returns void. The output of the task execution must be
-stored in the private field <code>.output</code> on the <code><a href="Backend.html">Backend</a></code>
-abstract class, and is accessible via the <code>get_output()</code> method.</p>
-</div>
-
 </div><p></p><hr><a id="method-SyncBackend-apply"></a><div class="section">
 <h3 id="method-apply-">Method <code><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply()</a></code><a class="anchor" aria-label="anchor" href="#method-apply-"></a></h3>
 <p>Run a task on the backend akin to <code><a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">parallel::parApply()</a></code>.</p><div class="section">
-<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
+<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">apply</span><span class="op">(</span><span class="va">x</span>, <span class="va">margin</span>, <span class="va">fun</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -306,7 +293,7 @@ possible depending on <code>x</code>. See <code><a href="https://rdrr.io/r/paral
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-10">Returns<a class="anchor" aria-label="anchor" href="#returns-10"></a></h4>
+<h4 id="returns-9">Returns<a class="anchor" aria-label="anchor" href="#returns-9"></a></h4>
 <p>This method returns void. The output of the task execution must be
 stored in the private field <code>.output</code> on the <code><a href="Backend.html">Backend</a></code>
 abstract class, and is accessible via the <code>get_output()</code> method.</p>
@@ -315,7 +302,7 @@ abstract class, and is accessible via the <code>get_output()</code> method.</p>
 </div><p></p><hr><a id="method-SyncBackend-get_output"></a><div class="section">
 <h3 id="method-get-output-">Method <code>get_output()</code><a class="anchor" aria-label="anchor" href="#method-get-output-"></a></h3>
 <p>Get the output of the task execution.</p><div class="section">
-<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">get_output</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -337,7 +324,7 @@ task.</p>
 </div>
 
 <div class="section">
-<h4 id="returns-11">Returns<a class="anchor" aria-label="anchor" href="#returns-11"></a></h4>
+<h4 id="returns-10">Returns<a class="anchor" aria-label="anchor" href="#returns-10"></a></h4>
 <p>A vector, matrix, or list of the same length as <code>x</code>, containing the
 results of the <code>fun</code>. The output format differs based on the specific
 operation employed. Check out the documentation for the <code>apply</code>
@@ -347,7 +334,7 @@ operations of <code><a href="https://rdrr.io/r/parallel/parallel-package.html" c
 </div><p></p><hr><a id="method-SyncBackend-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
+<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">SyncBackend</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
