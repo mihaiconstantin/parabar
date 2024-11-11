@@ -86,6 +86,26 @@ start_backend <- function(cores, cluster_type = "psock", backend_type = "async")
     # Start the backend.
     backend$start(specification)
 
+    # Register a finalizer.
+    reg.finalizer(backend, function(backend) {
+        # If the backend is still active when the finalizer runs in the future.
+        if (backend$active) {
+            # Attempt to stop the backend in their stead.
+            tryCatch(
+                # The expression to evaluate.
+                expr = {
+                    # Stop it.
+                    stop_backend(backend)
+                },
+                # Catch any errors.
+                error = function(error) {
+                    # Issue a warning.
+                    Warning$error_in_backend_finalizer(backend, error)
+                }
+            )
+        }
+    }, onexit = TRUE)
+
     # Return the backend.
     return(backend)
 }

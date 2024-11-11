@@ -37,8 +37,11 @@ test_that("'AsyncBackend' creates and manages clusters correctly", {
     # Test backend states.
     tests_set_for_backend_states(backend, specification)
 
-    # Expect error attempting to get the cluster state for an inactive backend.
+    # Expect error attempting to get the task state for an inactive backend.
     expect_error(backend$task_state, as_text(Exception$cluster_not_active()))
+
+    # Expect error attempting to get the session for an inactive backend.
+    expect_error(backend$session_state, as_text(Exception$cluster_not_active()))
 })
 
 

@@ -109,6 +109,19 @@ fetched. Calling the method \code{get_option()} will move the output from
 the background \code{R} session to the main \code{R} session. Once the output
 has been fetched, the backend is free to deploy another task.
 }}
+
+\item{\code{session_state}}{A list of logical values indicating the state of
+the background session managing the cluster. See the
+\code{\link{SessionState}} class for more information on the available
+statuses. The following statuses are available:
+\itemize{
+\item \code{session_is_starting}: Indicates whether the session is starting.
+\item \code{session_is_idle}: Indicates whether the session is idle.
+\item \code{session_is_busy}: Indicates whether the session is busy. A session
+is busy when a task is running or when the output of a task has not
+been fetched into the main \code{R} session. See the \code{task_state} field.
+\item \code{session_is_finished}: Indicates whether the session was closed.
+}}
 }
 \if{html}{\out{</div>}}
 }
@@ -116,7 +129,6 @@ has been fetched, the backend is free to deploy another task.
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-AsyncBackend-new}{\code{AsyncBackend$new()}}
-\item \href{#method-AsyncBackend-finalize}{\code{AsyncBackend$finalize()}}
 \item \href{#method-AsyncBackend-start}{\code{AsyncBackend$start()}}
 \item \href{#method-AsyncBackend-stop}{\code{AsyncBackend$stop()}}
 \item \href{#method-AsyncBackend-clear}{\code{AsyncBackend$clear()}}
@@ -137,19 +149,6 @@ has been fetched, the backend is free to deploy another task.
 Create a new \code{\link{AsyncBackend}} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AsyncBackend$new()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-An object of class \code{\link{AsyncBackend}}.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-AsyncBackend-finalize"></a>}}
-\if{latex}{\out{\hypertarget{method-AsyncBackend-finalize}{}}}
-\subsection{Method \code{finalize()}}{
-Destroy the current \code{\link{AsyncBackend}} instance.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AsyncBackend$finalize()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{

@@ -29,6 +29,7 @@ reference:
     - Context
     - ProgressTrackingContext
     - ContextFactory
+    - SessionState
     - TaskState
     - Bar
     - BasicBar

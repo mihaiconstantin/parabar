@@ -9,6 +9,7 @@
 \item{\code{Warning$requested_cluster_cores_too_high()}}{Warning for requesting too many cluster cores.}
 \item{\code{Warning$requested_cluster_type_not_supported()}}{Warning for requesting an unsupported cluster type.}
 \item{\code{Warning$progress_not_supported_for_backend()}}{Warning for using a backend incompatible with progress tracking.}
+\item{\code{Warning$error_in_backend_finalizer()}}{Warning for errors in the backend finalizer during garbage collection.}
 }
 }
 \description{
