@@ -19,10 +19,10 @@ test_that("'SyncBackend' finalizer executes without throwing", {
 
 
 test_that("'AsyncBackend' finalizer executes without throwing", {
-    # Define a simple task.
+    # Define a simple task with non-trivial computation time.
     task <- function(x) {
         # Sleep a bit.
-        Sys.sleep(0.0025)
+        Sys.sleep(0.001)
 
         # Return the value.
         return(x)
@@ -59,7 +59,7 @@ test_that("'AsyncBackend' finalizer executes without throwing", {
     backend <- start_backend(cores = 2, backend_type = "async")
 
     # Run a task on the backend.
-    backend$sapply(1:100, task)
+    backend$sapply(1:100, function(x) x)
 
     # Block the main session until the task is completed.
     block_until_async_task_finished(backend)
@@ -97,7 +97,7 @@ test_that("'AsyncBackend' finalizer executes without throwing", {
     backend <- start_backend(cores = 2, backend_type = "async")
 
     # Run a task on the backend.
-    backend$sapply(1:100, task)
+    backend$sapply(1:100, function(x) x)
 
     # Block the main session until the task is completed.
     block_until_async_task_finished(backend)
