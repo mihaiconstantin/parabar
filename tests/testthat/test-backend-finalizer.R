@@ -1,20 +1,11 @@
 # Test automatic finalizers for `SyncBackend` and `AsyncBackend` objects.
 
 test_that("'SyncBackend' finalizer executes without throwing", {
-    # Define a simple task.
-    task <- function(x) {
-        # Sleep a bit.
-        Sys.sleep(0.0025)
-
-        # Return the value.
-        return(x)
-    }
-
     # Start a synchronous backend.
     backend <- start_backend(cores = 2, backend_type = "sync")
 
     # Run a task on the backend.
-    backend$sapply(1:100, task)
+    backend$sapply(1:100, function(x) x)
 
     # Remove the backend.
     rm(backend)
