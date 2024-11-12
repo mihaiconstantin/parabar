@@ -80,6 +80,7 @@ body_contains <- function(task, pattern, position = 2) {
     return(contains)
 }
 
+
 # Block the main session until an asynchronous task finishes execution.
 block_until_async_task_finished <- function(backend) {
     # Block the main session until the task is finished.

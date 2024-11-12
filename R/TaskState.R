@@ -105,6 +105,7 @@
 #' @export
 TaskState <- R6::R6Class("TaskState",
     private = list(
+        # Task state fields.
         .task_not_started = NULL,
         .task_is_running = NULL,
         .task_is_completed = NULL,
@@ -132,7 +133,7 @@ TaskState <- R6::R6Class("TaskState",
     public = list(
         #' @description
         #' Create a new [`parabar::TaskState`] object and determine the state of
-        #' a task on a given session.
+        #' a task on a given background [`session`][`callr::r_session`].
         #'
         #' @param session A [`callr::r_session`] object.
         #'

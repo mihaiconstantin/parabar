@@ -305,6 +305,7 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
             # Create task state object holding the current state.
             task_state <- TaskState$new(private$.cluster)
 
+            # Return the task state.
             return(task_state)
         },
 

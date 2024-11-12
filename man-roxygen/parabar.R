@@ -5,8 +5,7 @@
 #' The package is aimed at two audiences: (1) end-users who want to execute a
 #' task in parallel in an interactive `R` session and track the execution
 #' progress, and (2) `R` package developers who want to use [`parabar::parabar`]
-#' as a
-#' solution for parallel processing in their packages.
+#' as a solution for parallel processing in their packages.
 #'
 #' @section Users:
 #' For the first category of users, [`parabar::parabar`] provides several main

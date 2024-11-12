@@ -80,8 +80,8 @@ Options <- R6::R6Class("Options",
         progress_track = TRUE,
 
         #' @field progress_timeout A numeric value indicating the timeout (i.e.,
-        #' in seconds) between subsequent checks of the log file for new progress
-        #' records. The default value is `0.001`.
+        #' in seconds) between subsequent checks of the log file for new
+        #' progress records. The default value is `0.001`.
         progress_timeout = 0.001,
 
         #' @field progress_wait A numeric value indicating the approximate

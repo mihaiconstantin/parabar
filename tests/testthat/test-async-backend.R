@@ -126,7 +126,7 @@ test_that("'AsyncBackend' performs operations on the cluster correctly", {
     # Determine the cluster type automatically.
     specification$set_type(type = cluster_type)
 
-    # Create a synchronous backend object.
+    # Create an asynchronous backend object.
     backend <- AsyncBackend$new()
 
     # Perform tests for asynchronous backend operations.
