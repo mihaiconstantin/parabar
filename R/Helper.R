@@ -66,11 +66,11 @@ Helper$set_option <- function(option, value) {
 
 # Helper for performing a type check on a given object.
 Helper$check_object_type <- function(object, expected_type) {
-    # Get object class name.
-    type <- Helper$get_class_name(object)
-
     # If the object does not inherit from the expected type.
     if (!inherits(object, expected_type)) {
+        # Get object class name.
+        type <- Helper$get_class_name(object)
+
         # Throw incorrect type error.
         Exception$type_not_assignable(type, expected_type)
     }
