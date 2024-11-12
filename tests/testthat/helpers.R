@@ -366,10 +366,7 @@ tests_set_for_asynchronous_backend_task_execution <- function(operation, service
     expect_error(service$get_output(), as_text(Exception$async_task_running()))
 
     # Block the main thread until the task is finished.
-    while(task_is_running(service)) {
-        # Sleep a bit.
-        Sys.sleep(0.001)
-    }
+    block_until_async_task_finished(service)
 
     # Expect that trying to run a task without reading the previous output fails.
     expect_error(eval(operation), as_text(Exception$async_task_completed()))
