@@ -56,12 +56,13 @@ backend implementations can be conveniently obtained using the
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="Service.html">Service</a></code>, <code><a href="SyncBackend.html">SyncBackend</a></code>, <code><a href="AsyncBackend.html">AsyncBackend</a></code>,
-<code><a href="BackendFactory.html">BackendFactory</a></code>, and <code><a href="Context.html">Context</a></code>.</p></div>
+    <div class="dont-index"><p><code><a href="BackendService.html">BackendService</a></code>, <code><a href="SyncBackend.html">SyncBackend</a></code>,
+<code><a href="AsyncBackend.html">AsyncBackend</a></code>, <code><a href="BackendFactory.html">BackendFactory</a></code>, and
+<code><a href="Context.html">Context</a></code>.</p></div>
     </div>
     <div class="section level2">
     <h2 id="super-class">Super class<a class="anchor" aria-label="anchor" href="#super-class"></a></h2>
-    <p><code><a href="Service.html">parabar::Service</a></code> -&gt; <code>Backend</code></p>
+    <p><code><a href="BackendService.html">parabar::BackendService</a></code> -&gt; <code>Backend</code></p>
     </div>
     <div class="section level2">
     <h2 id="active-bindings">Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
@@ -93,16 +94,16 @@ implementation has an active cluster.</p></dd>
 
 <ul><li><p><a href="#method-Backend-new"><code>Backend$new()</code></a></p></li>
 <li><p><a href="#method-Backend-clone"><code>Backend$clone()</code></a></p></li>
-</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="apply"><a href="Service.html#method-apply"><code>parabar::Service$apply()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="clear"><a href="Service.html#method-clear"><code>parabar::Service$clear()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="evaluate"><a href="Service.html#method-evaluate"><code>parabar::Service$evaluate()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="export"><a href="Service.html#method-export"><code>parabar::Service$export()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="get_output"><a href="Service.html#method-get_output"><code>parabar::Service$get_output()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="lapply"><a href="Service.html#method-lapply"><code>parabar::Service$lapply()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="peek"><a href="Service.html#method-peek"><code>parabar::Service$peek()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="sapply"><a href="Service.html#method-sapply"><code>parabar::Service$sapply()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="start"><a href="Service.html#method-start"><code>parabar::Service$start()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="stop"><a href="Service.html#method-stop"><code>parabar::Service$stop()</code></a></span></li>
+</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="apply"><a href="BackendService.html#method-apply"><code>parabar::BackendService$apply()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="clear"><a href="BackendService.html#method-clear"><code>parabar::BackendService$clear()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="evaluate"><a href="BackendService.html#method-evaluate"><code>parabar::BackendService$evaluate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="export"><a href="BackendService.html#method-export"><code>parabar::BackendService$export()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="get_output"><a href="BackendService.html#method-get_output"><code>parabar::BackendService$get_output()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="lapply"><a href="BackendService.html#method-lapply"><code>parabar::BackendService$lapply()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="peek"><a href="BackendService.html#method-peek"><code>parabar::BackendService$peek()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="sapply"><a href="BackendService.html#method-sapply"><code>parabar::BackendService$sapply()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="start"><a href="BackendService.html#method-start"><code>parabar::BackendService$start()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="stop"><a href="BackendService.html#method-stop"><code>parabar::BackendService$stop()</code></a></span></li>
 </ul></details></p><hr><a id="method-Backend-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Create a new <code>Backend</code> object.</p><div class="section">

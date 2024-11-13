@@ -112,8 +112,8 @@ is an <a href="https://r6.r-lib.org" class="external-link"><code>R6</code></a> c
 around a <em>cluster</em> object obtained from the
 <code><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">?parallel::makeCluster</a></code> function. The role of a backend is
 to abide by a standardized way of interacting with <code>parallel</code>
-clusters by implementing the <code><a href="../reference/Service.html">?Service</a></code> interface. In a
-nutshell, the <code><a href="../reference/Service.html">?Service</a></code> interface defines the set of
+clusters by implementing the <code>?Service</code> interface. In a
+nutshell, the <code>?Service</code> interface defines the set of
 operations that a backend can perform on a cluster object (e.g.,
 exporting variables, evaluating expressions, running parallel tasks
 etc.). Backends can be of different types. Currently,
@@ -136,9 +136,9 @@ mind, which brings us to the second key concept, namely,
 <em>custom contexts</em> that extend the <em>base context</em> class. In
 simple terms, a <em>context</em> is an <code>R6</code> wrapper class for
 a backend instance, with the role of determining how the backend
-operations defined by the <code><a href="../reference/Service.html">?Service</a></code> interface should be
+operations defined by the <code>?Service</code> interface should be
 executed. The base <code><a href="../reference/Context.html">?Context</a></code> (i.e., that all other custom
-contexts extend) implements the same <code><a href="../reference/Service.html">?Service</a></code> as the
+contexts extend) implements the same <code>?Service</code> as the
 backend instance and simply forwards its method calls to the backend
 instance, which in turn interacts with the cluster. For example, calling
 the <code>sapply</code> method on a base <code><a href="../reference/Context.html">?Context</a></code> instance
@@ -174,7 +174,7 @@ code</a> for the <code>sapply</code> method of the base
 method of the wrapped backend instance (i.e., stored in the private
 field <code>.backend</code>). Note that the <code><a href="../reference/Backend.html">?Backend</a></code> and
 the <code><a href="../reference/Context.html">?Context</a></code> classes share a <code>sapply</code> method
-since both implement the <code><a href="../reference/Service.html">?Service</a></code> interface that requires
+since both implement the <code>?Service</code> interface that requires
 them to provide an implementation for such a method. The custom
 <code><a href="../reference/ProgressTrackingContext.html">?ProgressTrackingContext</a></code> can <em>override</em> the <a href="https://github.com/mihaiconstantin/parabar/blob/3e55fcccc777934595c1225816816ed7426fc891/R/ProgressTrackingContext.R#L264-L297" class="external-link"><code>sapply</code>
 method</a> above to provide progress-tracking capabilities as

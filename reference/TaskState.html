@@ -65,7 +65,8 @@ polling the process (i.e., see the <code>poll_process</code> method for
 <code><a href="https://callr.r-lib.org/reference/r_session.html" class="external-link">callr::r_session</a></code>) as follows:</p><table class="table table"><tr><td>Session State</td><td>Execution State</td><td>Not Started</td><td>Is Running</td><td>Is Completed</td></tr><tr><td><code>idle</code></td><td><code>timeout</code></td><td><code>TRUE</code></td><td><code>FALSE</code></td><td><code>FALSE</code></td></tr><tr><td><code>busy</code></td><td><code>timeout</code></td><td><code>FALSE</code></td><td><code>TRUE</code></td><td><code>FALSE</code></td></tr><tr><td><code>busy</code></td><td><code>ready</code></td><td><code>FALSE</code></td><td><code>FALSE</code></td><td><code>TRUE</code></td></tr></table></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="AsyncBackend.html">AsyncBackend</a></code> and <code><a href="ProgressTrackingContext.html">ProgressTrackingContext</a></code>.</p></div>
+    <div class="dont-index"><p><code><a href="SessionState.html">SessionState</a></code>, <code><a href="AsyncBackend.html">AsyncBackend</a></code> and
+<code><a href="ProgressTrackingContext.html">ProgressTrackingContext</a></code>.</p></div>
     </div>
     <div class="section level2">
     <h2 id="active-bindings">Active bindings<a class="anchor" aria-label="anchor" href="#active-bindings"></a></h2>
@@ -98,7 +99,7 @@ has been completed and the output needs to be retrieved.</p></dd>
 </ul></div><p></p><hr><a id="method-TaskState-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Create a new <code>TaskState</code> object and determine the state of
-a task on a given session.</p><div class="section">
+a task on a given background <code><a href="https://callr.r-lib.org/reference/r_session.html" class="external-link">session</a></code>.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/TaskState.html">TaskState</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">session</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>

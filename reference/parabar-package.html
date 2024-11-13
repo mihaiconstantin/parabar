@@ -49,8 +49,7 @@ A simple interface in the form of R6 classes for executing tasks in parallel, tr
     <p>The package is aimed at two audiences: (1) end-users who want to execute a
 task in parallel in an interactive <code>R</code> session and track the execution
 progress, and (2) <code>R</code> package developers who want to use <code>parabar</code>
-as a
-solution for parallel processing in their packages.</p>
+as a solution for parallel processing in their packages.</p>
     </div>
     <div class="section level2">
     <h2 id="users">Users<a class="anchor" aria-label="anchor" href="#users"></a></h2>
@@ -101,20 +100,22 @@ in parallel.</p><div class="section">
 
 
 <p>A <strong><code>backend</code></strong> represents a set of operations, defined by the
-<code><a href="Service.html">Service</a></code> interface, that can be deployed on a cluster returned by
-<code><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">parallel::makeCluster()</a></code>. Backends can be synchronous (i.e.,
+<code><a href="BackendService.html">BackendService</a></code> interface, that can be deployed on a cluster
+returned by <code><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">parallel::makeCluster()</a></code>. Backends can be synchronous (i.e.,
 <code><a href="SyncBackend.html">SyncBackend</a></code>) or asynchronous (i.e., <code><a href="AsyncBackend.html">AsyncBackend</a></code>).
 The former will block the execution of the current <code>R</code> session until the
 parallel task is completed, while the latter will return immediately and the
 task will be executed in a background <code>R</code> session.</p>
-<p>The <code><a href="Service.html">Service</a></code> interface defines the following operations:
-<code><a href="Service.html">start()</a></code>, <code><a href="Service.html">stop()</a></code>,
-<code><a href="Service.html">clear()</a></code>, <code><a href="Service.html">peek()</a></code>,
-<code><a href="Service.html">export()</a></code>, <code><a href="Service.html">evaluate()</a></code>,
-<code><a href="Service.html">sapply()</a></code>, <code><a href="Service.html">lapply()</a></code>,
-<code><a href="Service.html">apply()</a></code>, and <code><a href="Service.html">get_output()</a></code>.</p>
-<p>Check out the documentation for <code><a href="Service.html">Service</a></code> for more information on
-each method.</p>
+<p>The <code><a href="BackendService.html">BackendService</a></code> interface defines the following operations:
+<code><a href="BackendService.html">start()</a></code>, <code><a href="BackendService.html">stop()</a></code>,
+<code><a href="BackendService.html">clear()</a></code>, <code><a href="BackendService.html">peek()</a></code>,
+<code><a href="BackendService.html">export()</a></code>,
+<code><a href="BackendService.html">evaluate()</a></code>,
+<code><a href="BackendService.html">sapply()</a></code>, <code><a href="BackendService.html">lapply()</a></code>,
+<code><a href="BackendService.html">apply()</a></code>, and
+<code><a href="BackendService.html">get_output()</a></code>.</p>
+<p>Check out the documentation for <code><a href="BackendService.html">BackendService</a></code> for more
+information on each method.</p>
 </div>
 
 <div class="section">
@@ -127,9 +128,9 @@ call to the corresponding backend method. However, a more complex context can
 augment the operation before forwarding the call to the backend. One example
 of a complex context is the <code><a href="ProgressTrackingContext.html">ProgressTrackingContext</a></code> class. This
 class extends the regular <code><a href="Context.html">Context</a></code> class and decorates, for
-example, the backend <code><a href="Service.html">sapply()</a></code> operation to log the
-progress after each task execution and display a progress bar.</p>
-<p>The following are the main classes provided by <code>parabar</code>:</p><ul><li><p><code><a href="Service.html">Service</a></code>: interface for backend operations.</p></li>
+example, the backend <code><a href="BackendService.html">sapply()</a></code> operation to log
+the progress after each task execution and display a progress bar.</p>
+<p>The following are the main classes provided by <code>parabar</code>:</p><ul><li><p><code><a href="BackendService.html">BackendService</a></code>: interface for backend operations.</p></li>
 <li><p><code><a href="Backend.html">Backend</a></code>: abstract class that serves as a base class for all
 concrete implementations.</p></li>
 <li><p><code><a href="SyncBackend.html">SyncBackend</a></code>: synchronous backend extending the abstract
@@ -143,9 +144,10 @@ asynchronous backend.</p></li>
 <li><p><code><a href="BackendFactory.html">BackendFactory</a></code>: factory for creating backend objects.</p></li>
 <li><p><code><a href="Context.html">Context</a></code>: default context for executing backend operations.</p></li>
 <li><p><code><a href="ProgressTrackingContext.html">ProgressTrackingContext</a></code>: context for decorating the
-<code><a href="Service.html">sapply()</a></code>, <code><a href="Service.html">lapply()</a></code>, and
-<code><a href="Service.html">apply()</a></code>
-operations to track and display the execution progress.</p></li>
+<code><a href="BackendService.html">sapply()</a></code>,
+<code><a href="BackendService.html">lapply()</a></code>, and
+<code><a href="BackendService.html">apply()</a></code> operations to track and display the
+execution progress.</p></li>
 <li><p><code><a href="ContextFactory.html">ContextFactory</a></code>: factory for creating context objects.</p></li>
 <li><p><code><a href="UserApiConsumer.html">UserApiConsumer</a></code>: opinionated wrapper around the other
 <code><a href="https://r6.r-lib.org/reference/R6Class.html" class="external-link">R6::R6</a></code> classes used in by the exported functions for the users.</p></li>

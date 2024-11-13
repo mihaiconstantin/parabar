@@ -10,6 +10,7 @@
 <url><loc>http://parabar.mihaiconstantin.com/reference/AsyncBackend.html</loc></url>
 <url><loc>http://parabar.mihaiconstantin.com/reference/Backend.html</loc></url>
 <url><loc>http://parabar.mihaiconstantin.com/reference/BackendFactory.html</loc></url>
+<url><loc>http://parabar.mihaiconstantin.com/reference/BackendService.html</loc></url>
 <url><loc>http://parabar.mihaiconstantin.com/reference/Bar.html</loc></url>
 <url><loc>http://parabar.mihaiconstantin.com/reference/BarFactory.html</loc></url>
 <url><loc>http://parabar.mihaiconstantin.com/reference/BasicBar.html</loc></url>
@@ -21,7 +22,6 @@
 <url><loc>http://parabar.mihaiconstantin.com/reference/ModernBar.html</loc></url>
 <url><loc>http://parabar.mihaiconstantin.com/reference/Options.html</loc></url>
 <url><loc>http://parabar.mihaiconstantin.com/reference/ProgressTrackingContext.html</loc></url>
-<url><loc>http://parabar.mihaiconstantin.com/reference/Service.html</loc></url>
 <url><loc>http://parabar.mihaiconstantin.com/reference/SessionState.html</loc></url>
 <url><loc>http://parabar.mihaiconstantin.com/reference/Specification.html</loc></url>
 <url><loc>http://parabar.mihaiconstantin.com/reference/SyncBackend.html</loc></url>

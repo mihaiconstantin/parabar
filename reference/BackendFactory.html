@@ -46,7 +46,7 @@ Backend abstract class."><meta property="og:image" content="http://parabar.mihai
 
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="Service.html">Service</a></code>, <code><a href="Backend.html">Backend</a></code>, <code><a href="SyncBackend.html">SyncBackend</a></code>,
+    <div class="dont-index"><p><code><a href="BackendService.html">BackendService</a></code>, <code><a href="Backend.html">Backend</a></code>, <code><a href="SyncBackend.html">SyncBackend</a></code>,
 <code><a href="AsyncBackend.html">AsyncBackend</a></code>, and <code><a href="ContextFactory.html">ContextFactory</a></code>.</p></div>
     </div>
     <div class="section level2">
@@ -118,14 +118,14 @@ throws an error if the requested backend <code>type</code> is not supported.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check the class of the backend instance.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">backend</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "SyncBackend" "Backend"     "Service"     "R6"         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "SyncBackend"    "Backend"        "BackendService" "R6"            </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Get an asynchronous backend instance.</span></span></span>
 <span class="r-in"><span><span class="va">backend</span> <span class="op">&lt;-</span> <span class="va">backend_factory</span><span class="op">$</span><span class="fu">get</span><span class="op">(</span><span class="st">"async"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Check the class of the backend instance.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">backend</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "AsyncBackend" "Backend"      "Service"      "R6"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "AsyncBackend"   "Backend"        "BackendService" "R6"            </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

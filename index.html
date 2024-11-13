@@ -289,8 +289,8 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <div class="section level4">
 <h4 id="backends">Backends<a class="anchor" aria-label="anchor" href="#backends"></a>
 </h4>
-<p>A <strong><code>backend</code></strong> represents a set of operations, defined by the <code><a href="reference/Service.html">?Service</a></code> interface. Backends can be synchronous (i.e., <code><a href="reference/SyncBackend.html">?SyncBackend</a></code>) or asynchronous (i.e., <code><a href="reference/AsyncBackend.html">?AsyncBackend</a></code>). The former will block the execution of the current <code>R</code> session until the parallel task is completed, while the latter will return immediately and the task will be executed in a background <code>R</code> session.</p>
-<p>The <code><a href="reference/Service.html">?Service</a></code> interface defines the following operations:</p>
+<p>A <strong><code>backend</code></strong> represents a set of operations, defined by the <code><a href="reference/BackendService.html">?BackendService</a></code> interface. Backends can be synchronous (i.e., <code><a href="reference/SyncBackend.html">?SyncBackend</a></code>) or asynchronous (i.e., <code><a href="reference/AsyncBackend.html">?AsyncBackend</a></code>). The former will block the execution of the current <code>R</code> session until the parallel task is completed, while the latter will return immediately and the task will be executed in a background <code>R</code> session.</p>
+<p>The <code><a href="reference/BackendService.html">?BackendService</a></code> interface defines the following operations:</p>
 <ul>
 <li>
 <code>start</code>: Start the backend.</li>
@@ -313,7 +313,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <li>
 <code>get_output</code>: Get the output of the task execution.</li>
 </ul>
-<p>Check out the documentation for <code>Service</code> for more information on each method.</p>
+<p>Check out the documentation for <code>BackendService</code> for more information on each method.</p>
 </div>
 <div class="section level4">
 <h4 id="contexts">Contexts<a class="anchor" aria-label="anchor" href="#contexts"></a>
@@ -326,11 +326,11 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <p>The following are the main classes provided by <a href="https://parabar.mihaiconstantin.com" class="external-link"><code>parabar</code></a>:</p>
 <ul>
 <li>
-<code>Service</code>: Interface for backend operations.</li>
+<code>BackendService</code>: Interface for backend operations.</li>
 <li>
-<code>SyncBackend</code>: Synchronous backend extending the abstract <code>Backend</code> class and implementing the <code>Service</code> interface.</li>
+<code>SyncBackend</code>: Synchronous backend extending the abstract <code>Backend</code> class and implementing the <code>BackendService</code> interface.</li>
 <li>
-<code>AsyncBackend</code>: Asynchronous backend extending the abstract <code>Backend</code> class and implementing the <code>Service</code> interface.</li>
+<code>AsyncBackend</code>: Asynchronous backend extending the abstract <code>Backend</code> class and implementing the <code>BackendService</code> interface.</li>
 <li>
 <code>Specification</code>: Backend specification used when starting a backend.</li>
 <li>
@@ -400,7 +400,7 @@ Progress Bar for Parallel Tasks <br><sub>…and more</sub>
 <span></span>
 <span><span class="co"># Register the backend with the context.</span></span>
 <span><span class="va">context</span><span class="op">$</span><span class="fu">set_backend</span><span class="op">(</span><span class="va">backend</span><span class="op">)</span></span></code></pre></div>
-<p>The <code><a href="reference/Context.html">?Context</a></code> class (i.e., and it’s subclasses) implements the <code><a href="reference/Service.html">?Service</a></code> interface, which means that we can use it to execute backend operations.</p>
+<p>The <code><a href="reference/Context.html">?Context</a></code> class (i.e., and it’s subclasses) implements the <code><a href="reference/BackendService.html">?BackendService</a></code> interface, which means that we can use it to execute backend operations.</p>
 <p>Since we are using the <code><a href="reference/ProgressTrackingContext.html">?ProgressTrackingContext</a></code> context, we also need to register a <code><a href="reference/Bar.html">?Bar</a></code> instance with the context. First, let’s obtain a <code><a href="reference/Bar.html">?Bar</a></code> instance from the <code><a href="reference/BarFactory.html">?BarFactory</a></code>.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a bar factory.</span></span>
