@@ -5,10 +5,10 @@
 \title{AsyncBackend}
 \description{
 This is a concrete implementation of the abstract class \code{\link{Backend}}
-that implements the \code{\link{Service}} interface. This backend executes
-tasks in parallel asynchronously (i.e., without blocking the main \code{R}
-session) on a \code{\link[parallel:makeCluster]{parallel::makeCluster()}} cluster created in a background \code{R}
-\code{\link[callr:r_session]{session}}.
+that implements the \code{\link{BackendService}} interface. This backend
+executes tasks in parallel asynchronously (i.e., without blocking the main
+\code{R} session) on a \code{\link[parallel:makeCluster]{parallel::makeCluster()}} cluster created in a background
+\code{R} \code{\link[callr:r_session]{session}}.
 }
 \examples{
 # Create a specification object.
@@ -84,11 +84,11 @@ backend$active
 
 }
 \seealso{
-\code{\link{Service}}, \code{\link{Backend}}, \code{\link{SyncBackend}},
+\code{\link{BackendService}}, \code{\link{Backend}}, \code{\link{SyncBackend}},
 \code{\link{ProgressTrackingContext}}, and \code{\link{TaskState}}.
 }
 \section{Super classes}{
-\code{\link[parabar:Service]{parabar::Service}} -> \code{\link[parabar:Backend]{parabar::Backend}} -> \code{AsyncBackend}
+\code{\link[parabar:BackendService]{parabar::BackendService}} -> \code{\link[parabar:Backend]{parabar::Backend}} -> \code{AsyncBackend}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}

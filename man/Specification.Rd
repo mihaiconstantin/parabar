@@ -5,8 +5,8 @@
 \title{Specification}
 \description{
 This class contains the information required to start a backend. An instance
-of this class is used by the \code{start} method of the \code{\link{Service}}
-interface.
+of this class is used by the \code{start} method of the
+\code{\link{BackendService}} interface.
 }
 \examples{
 # Create a specification object.
@@ -44,8 +44,8 @@ specification$type
 
 }
 \seealso{
-\code{\link{Service}}, \code{\link{Backend}}, \code{\link{SyncBackend}}, and
-\code{\link{AsyncBackend}}.
+\code{\link{BackendService}}, \code{\link{Backend}}, \code{\link{SyncBackend}},
+and \code{\link{AsyncBackend}}.
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}

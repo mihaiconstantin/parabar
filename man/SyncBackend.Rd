@@ -5,9 +5,9 @@
 \title{SyncBackend}
 \description{
 This is a concrete implementation of the abstract class \code{\link{Backend}}
-that implements the \code{\link{Service}} interface. This backend executes
-tasks in parallel on a \code{\link[parallel:makeCluster]{parallel::makeCluster()}} cluster synchronously (i.e.,
-blocking the main \code{R} session).
+that implements the \code{\link{BackendService}} interface. This backend
+executes tasks in parallel on a \code{\link[parallel:makeCluster]{parallel::makeCluster()}} cluster
+synchronously (i.e., blocking the main \code{R} session).
 }
 \examples{
 # Create a specification object.
@@ -75,11 +75,11 @@ backend$active
 
 }
 \seealso{
-\code{\link{Service}}, \code{\link{Backend}}, \code{\link{AsyncBackend}}, and
-\code{\link{Context}}.
+\code{\link{BackendService}}, \code{\link{Backend}}, \code{\link{AsyncBackend}},
+and \code{\link{Context}}.
 }
 \section{Super classes}{
-\code{\link[parabar:Service]{parabar::Service}} -> \code{\link[parabar:Backend]{parabar::Backend}} -> \code{SyncBackend}
+\code{\link[parabar:BackendService]{parabar::BackendService}} -> \code{\link[parabar:Backend]{parabar::Backend}} -> \code{SyncBackend}
 }
 \section{Methods}{
 \subsection{Public methods}{

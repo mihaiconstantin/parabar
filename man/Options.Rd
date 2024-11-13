@@ -77,8 +77,8 @@ tracking should be enabled (i.e., \code{TRUE}) or disabled  (i.e.,
 \code{TRUE}.}
 
 \item{\code{progress_timeout}}{A numeric value indicating the timeout (i.e.,
-in seconds) between subsequent checks of the log file for new progress
-records. The default value is \code{0.001}.}
+in seconds) between subsequent checks of the log file for new
+progress records. The default value is \code{0.001}.}
 
 \item{\code{progress_wait}}{A numeric value indicating the approximate
 duration (i.e., in seconds) to wait between progress bar updates

@@ -93,5 +93,5 @@ results <- par_sapply(NULL, x = 1:300, fun = task)
 \code{\link[=evaluate]{evaluate()}}, \code{\link[=clear]{clear()}}, \code{\link[=configure_bar]{configure_bar()}},
 \code{\link[=par_lapply]{par_lapply()}}, \code{\link[=par_apply]{par_apply()}}, \code{\link[=stop_backend]{stop_backend()}},
 \code{\link[=set_option]{set_option()}}, \code{\link[=get_option]{get_option()}}, \code{\link{Options}},
-\code{\link{UserApiConsumer}}, and \code{\link{Service}}.
+\code{\link{UserApiConsumer}}, and \code{\link{BackendService}}.
 }

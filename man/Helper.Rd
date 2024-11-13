@@ -10,7 +10,7 @@
 \item{\code{Helper$get_option(option)}}{Get package option, or corresponding default value.}
 \item{\code{Helper$set_option(option, value)}}{Set package option.}
 \item{\code{Helper$check_object_type(object, expected_type)}}{Check the type of a given object.}
-\item{\code{Helper$check_array_margins(margins, dimensions)}}{Helper to check array margins for the \code{Service$apply} operation.}
+\item{\code{Helper$check_array_margins(margins, dimensions)}}{Helper to check array margins for the \code{BackendService$apply} operation.}
 }
 }
 \description{

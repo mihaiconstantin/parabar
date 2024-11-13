@@ -14,8 +14,7 @@ A simple interface in the form of R6 classes for executing tasks in parallel, tr
 The package is aimed at two audiences: (1) end-users who want to execute a
 task in parallel in an interactive \code{R} session and track the execution
 progress, and (2) \code{R} package developers who want to use \code{\link{parabar}}
-as a
-solution for parallel processing in their packages.
+as a solution for parallel processing in their packages.
 }
 \section{Users}{
 
@@ -69,22 +68,24 @@ in parallel.
 \subsection{Backends}{
 
 A \strong{\code{backend}} represents a set of operations, defined by the
-\code{\link{Service}} interface, that can be deployed on a cluster returned by
-\code{\link[parallel:makeCluster]{parallel::makeCluster()}}. Backends can be synchronous (i.e.,
+\code{\link{BackendService}} interface, that can be deployed on a cluster
+returned by \code{\link[parallel:makeCluster]{parallel::makeCluster()}}. Backends can be synchronous (i.e.,
 \code{\link{SyncBackend}}) or asynchronous (i.e., \code{\link{AsyncBackend}}).
 The former will block the execution of the current \code{R} session until the
 parallel task is completed, while the latter will return immediately and the
 task will be executed in a background \code{R} session.
 
-The \code{\link{Service}} interface defines the following operations:
-\code{\link[=Service]{start()}}, \code{\link[=Service]{stop()}},
-\code{\link[=Service]{clear()}}, \code{\link[=Service]{peek()}},
-\code{\link[=Service]{export()}}, \code{\link[=Service]{evaluate()}},
-\code{\link[=Service]{sapply()}}, \code{\link[=Service]{lapply()}},
-\code{\link[=Service]{apply()}}, and \code{\link[=Service]{get_output()}}.
+The \code{\link{BackendService}} interface defines the following operations:
+\code{\link[=BackendService]{start()}}, \code{\link[=BackendService]{stop()}},
+\code{\link[=BackendService]{clear()}}, \code{\link[=BackendService]{peek()}},
+\code{\link[=BackendService]{export()}},
+\code{\link[=BackendService]{evaluate()}},
+\code{\link[=BackendService]{sapply()}}, \code{\link[=BackendService]{lapply()}},
+\code{\link[=BackendService]{apply()}}, and
+\code{\link[=BackendService]{get_output()}}.
 
-Check out the documentation for \code{\link{Service}} for more information on
-each method.
+Check out the documentation for \code{\link{BackendService}} for more
+information on each method.
 }
 
 \subsection{Contexts}{
@@ -95,12 +96,12 @@ call to the corresponding backend method. However, a more complex context can
 augment the operation before forwarding the call to the backend. One example
 of a complex context is the \code{\link{ProgressTrackingContext}} class. This
 class extends the regular \code{\link{Context}} class and decorates, for
-example, the backend \code{\link[=Service]{sapply()}} operation to log the
-progress after each task execution and display a progress bar.
+example, the backend \code{\link[=BackendService]{sapply()}} operation to log
+the progress after each task execution and display a progress bar.
 
 The following are the main classes provided by \code{parabar}:
 \itemize{
-\item \code{\link{Service}}: interface for backend operations.
+\item \code{\link{BackendService}}: interface for backend operations.
 \item \code{\link{Backend}}: abstract class that serves as a base class for all
 concrete implementations.
 \item \code{\link{SyncBackend}}: synchronous backend extending the abstract
@@ -114,9 +115,10 @@ asynchronous backend.
 \item \code{\link{BackendFactory}}: factory for creating backend objects.
 \item \code{\link{Context}}: default context for executing backend operations.
 \item \code{\link{ProgressTrackingContext}}: context for decorating the
-\code{\link[=Service]{sapply()}}, \code{\link[=Service]{lapply()}}, and
-\code{\link[=Service]{apply()}}
-operations to track and display the execution progress.
+\code{\link[=BackendService]{sapply()}},
+\code{\link[=BackendService]{lapply()}}, and
+\code{\link[=BackendService]{apply()}} operations to track and display the
+execution progress.
 \item \code{\link{ContextFactory}}: factory for creating context objects.
 \item \code{\link{UserApiConsumer}}: opinionated wrapper around the other
 \code{\link[R6:R6Class]{R6::R6}} classes used in by the exported functions for the users.
