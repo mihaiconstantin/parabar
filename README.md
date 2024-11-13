@@ -285,13 +285,13 @@ From a high-level perspective, the package consists of **`backends`** and
 parallel.
 
 #### Backends
-A **`backend`** represents a set of operations, defined by the `?Service`
+A **`backend`** represents a set of operations, defined by the `?BackendService`
 interface. Backends can be synchronous (i.e., `?SyncBackend`) or asynchronous
 (i.e., `?AsyncBackend`). The former will block the execution of the current `R`
 session until the parallel task is completed, while the latter will return
 immediately and the task will be executed in a background `R` session.
 
-The `?Service` interface defines the following operations:
+The `?BackendService` interface defines the following operations:
 
 - `start`: Start the backend.
 - `stop`: Stop the backend.
@@ -304,7 +304,8 @@ The `?Service` interface defines the following operations:
 - `apply`: Run a task on the backend.
 - `get_output`: Get the output of the task execution.
 
-Check out the documentation for `Service` for more information on each method.
+Check out the documentation for `BackendService` for more information on each
+method.
 
 #### Contexts
 A **`context`** represents the specific conditions in which a backend object
@@ -319,11 +320,11 @@ log the progress after each task execution and display a progress bar.
 The following are the main classes provided by
 [`parabar`](https://parabar.mihaiconstantin.com):
 
-- `Service`: Interface for backend operations.
+- `BackendService`: Interface for backend operations.
 - `SyncBackend`: Synchronous backend extending the abstract `Backend` class and
-  implementing the `Service` interface.
+  implementing the `BackendService` interface.
 - `AsyncBackend`: Asynchronous backend extending the abstract `Backend` class
-  and implementing the `Service` interface.
+  and implementing the `BackendService` interface.
 - `Specification`: Backend specification used when starting a backend.
 - `BackendFactory`: Factory for creating `Backend` objects.
 - `Context`: Default context for executing backend operations without
@@ -422,8 +423,9 @@ context <- context_factory$get("progress")
 context$set_backend(backend)
 ```
 
-The `?Context` class (i.e., and it's subclasses) implements the `?Service`
-interface, which means that we can use it to execute backend operations.
+The `?Context` class (i.e., and it's subclasses) implements the
+`?BackendService` interface, which means that we can use it to execute backend
+operations.
 
 Since we are using the `?ProgressTrackingContext` context, we also need to
 register a `?Bar` instance with the context. First, let's obtain a `?Bar`

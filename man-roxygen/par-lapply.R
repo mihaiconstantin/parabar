@@ -86,4 +86,4 @@
 #' [parabar::evaluate()], [parabar::clear()], [parabar::configure_bar()],
 #' [parabar::par_sapply()], [parabar::par_apply()], [parabar::stop_backend()],
 #' [parabar::set_option()], [parabar::get_option()], [`parabar::Options`],
-#' [`parabar::UserApiConsumer`], and [`parabar::Service`].
+#' [`parabar::UserApiConsumer`], and [`parabar::BackendService`].

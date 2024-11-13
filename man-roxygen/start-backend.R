@@ -53,13 +53,13 @@
 #' process during task execution, while the asynchronous backend is
 #' non-blocking. Check out the implementations listed in the table above for
 #' more information. All concrete implementations extend the
-#' [`parabar::Backend`] abstract class and implement the [`parabar::Service`]
-#' interface.
+#' [`parabar::Backend`] abstract class and implement the
+#' [`parabar::BackendService`] interface.
 #'
 #' @return
 #' A [`parabar::Backend`] instance that can be used to parallelize computations.
 #' The methods available on the [`parabar::Backend`] instance are defined by the
-#' [`parabar::Service`] interface.
+#' [`parabar::BackendService`] interface.
 #'
 #' @examples
 #' # Create an asynchronous backend.
@@ -121,4 +121,4 @@
 #' [parabar::peek()], [parabar::export()], [parabar::evaluate()],
 #' [parabar::clear()], [parabar::configure_bar()], [parabar::par_sapply()],
 #' [parabar::par_lapply()], [parabar::par_apply()], [parabar::stop_backend()],
-#' and [`parabar::Service`].
+#' and [`parabar::BackendService`].

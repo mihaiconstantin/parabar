@@ -25,7 +25,7 @@ class(backend)
 
 }
 \seealso{
-\code{\link{Service}}, \code{\link{Backend}}, \code{\link{SyncBackend}},
+\code{\link{BackendService}}, \code{\link{Backend}}, \code{\link{SyncBackend}},
 \code{\link{AsyncBackend}}, and \code{\link{ContextFactory}}.
 }
 \section{Methods}{

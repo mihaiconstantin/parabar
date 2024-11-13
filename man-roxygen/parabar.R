@@ -5,8 +5,7 @@
 #' The package is aimed at two audiences: (1) end-users who want to execute a
 #' task in parallel in an interactive `R` session and track the execution
 #' progress, and (2) `R` package developers who want to use [`parabar::parabar`]
-#' as a
-#' solution for parallel processing in their packages.
+#' as a solution for parallel processing in their packages.
 #'
 #' @section Users:
 #' For the first category of users, [`parabar::parabar`] provides several main
@@ -53,22 +52,24 @@
 #'
 #' ### Backends
 #' A **`backend`** represents a set of operations, defined by the
-#' [`parabar::Service`] interface, that can be deployed on a cluster returned by
-#' [parallel::makeCluster()]. Backends can be synchronous (i.e.,
+#' [`parabar::BackendService`] interface, that can be deployed on a cluster
+#' returned by [parallel::makeCluster()]. Backends can be synchronous (i.e.,
 #' [`parabar::SyncBackend`]) or asynchronous (i.e., [`parabar::AsyncBackend`]).
 #' The former will block the execution of the current `R` session until the
 #' parallel task is completed, while the latter will return immediately and the
 #' task will be executed in a background `R` session.
 #'
-#' The [`parabar::Service`] interface defines the following operations:
-#' [`start()`][parabar::Service], [`stop()`][parabar::Service],
-#' [`clear()`][parabar::Service], [`peek()`][parabar::Service],
-#' [`export()`][parabar::Service], [`evaluate()`][parabar::Service],
-#' [`sapply()`][parabar::Service], [`lapply()`][parabar::Service],
-#' [`apply()`][parabar::Service], and [`get_output()`][parabar::Service].
+#' The [`parabar::BackendService`] interface defines the following operations:
+#' [`start()`][parabar::BackendService], [`stop()`][parabar::BackendService],
+#' [`clear()`][parabar::BackendService], [`peek()`][parabar::BackendService],
+#' [`export()`][parabar::BackendService],
+#' [`evaluate()`][parabar::BackendService],
+#' [`sapply()`][parabar::BackendService], [`lapply()`][parabar::BackendService],
+#' [`apply()`][parabar::BackendService], and
+#' [`get_output()`][parabar::BackendService].
 #'
-#' Check out the documentation for [`parabar::Service`] for more information on
-#' each method.
+#' Check out the documentation for [`parabar::BackendService`] for more
+#' information on each method.
 #'
 #' ### Contexts
 #' A **`context`** represents the specific conditions in which the backend
@@ -77,11 +78,11 @@
 #' augment the operation before forwarding the call to the backend. One example
 #' of a complex context is the [`parabar::ProgressTrackingContext`] class. This
 #' class extends the regular [`parabar::Context`] class and decorates, for
-#' example, the backend [`sapply()`][parabar::Service] operation to log the
-#' progress after each task execution and display a progress bar.
+#' example, the backend [`sapply()`][parabar::BackendService] operation to log
+#' the progress after each task execution and display a progress bar.
 #'
 #' The following are the main classes provided by `parabar`:
-#' - [`parabar::Service`]: interface for backend operations.
+#' - [`parabar::BackendService`]: interface for backend operations.
 #' - [`parabar::Backend`]: abstract class that serves as a base class for all
 #'   concrete implementations.
 #' - [`parabar::SyncBackend`]: synchronous backend extending the abstract
@@ -95,9 +96,10 @@
 #' - [`parabar::BackendFactory`]: factory for creating backend objects.
 #' - [`parabar::Context`]: default context for executing backend operations.
 #' - [`parabar::ProgressTrackingContext`]: context for decorating the
-#'   [`sapply()`][parabar::Service], [`lapply()`][parabar::Service], and
-#'   [`apply()`][parabar::Service]
-#'   operations to track and display the execution progress.
+#'   [`sapply()`][parabar::BackendService],
+#'   [`lapply()`][parabar::BackendService], and
+#'   [`apply()`][parabar::BackendService] operations to track and display the
+#'   execution progress.
 #' - [`parabar::ContextFactory`]: factory for creating context objects.
 #' - [`parabar::UserApiConsumer`]: opinionated wrapper around the other
 #'   [`R6::R6`] classes used in by the exported functions for the users.

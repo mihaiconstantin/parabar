@@ -23,7 +23,7 @@
 #' class(backend)
 #'
 #' @seealso
-#' [`parabar::Service`], [`parabar::Backend`], [`parabar::SyncBackend`],
+#' [`parabar::BackendService`], [`parabar::Backend`], [`parabar::SyncBackend`],
 #' [`parabar::AsyncBackend`], and [`parabar::ContextFactory`].
 #'
 #' @export

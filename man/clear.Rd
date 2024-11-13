@@ -21,7 +21,7 @@ by \code{\link[=start_backend]{start_backend()}}.
 \details{
 This function is a convenience wrapper around the lower-lever API of
 \code{\link{parabar}} aimed at developers. More specifically, this function
-calls the \code{\link[=Service]{clear}} method on the provided
+calls the \code{\link[=BackendService]{clear}} method on the provided
 \code{\link[=Backend]{backend}} instance.
 }
 \examples{
@@ -85,5 +85,5 @@ backend$active
 \code{\link[=start_backend]{start_backend()}}, \code{\link[=peek]{peek()}}, \code{\link[=export]{export()}},
 \code{\link[=evaluate]{evaluate()}}, \code{\link[=configure_bar]{configure_bar()}}, \code{\link[=par_sapply]{par_sapply()}},
 \code{\link[=par_lapply]{par_lapply()}}, \code{\link[=par_apply]{par_apply()}}, \code{\link[=stop_backend]{stop_backend()}},
-and \code{\link{Service}}.
+and \code{\link{BackendService}}.
 }

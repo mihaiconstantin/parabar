@@ -5,9 +5,9 @@
 #'
 #' @description
 #' This is a concrete implementation of the abstract class [`parabar::Backend`]
-#' that implements the [`parabar::Service`] interface. This backend executes
-#' tasks in parallel on a [parallel::makeCluster()] cluster synchronously (i.e.,
-#' blocking the main `R` session).
+#' that implements the [`parabar::BackendService`] interface. This backend
+#' executes tasks in parallel on a [parallel::makeCluster()] cluster
+#' synchronously (i.e., blocking the main `R` session).
 #'
 #' @examples
 #' # Create a specification object.
@@ -74,8 +74,8 @@
 #' backend$active
 #'
 #' @seealso
-#' [`parabar::Service`], [`parabar::Backend`], [`parabar::AsyncBackend`], and
-#' [`parabar::Context`].
+#' [`parabar::BackendService`], [`parabar::Backend`], [`parabar::AsyncBackend`],
+#' and [`parabar::Context`].
 #'
 #' @export
 SyncBackend <- R6::R6Class("SyncBackend",

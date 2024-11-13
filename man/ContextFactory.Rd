@@ -2,7 +2,7 @@
 % Please edit documentation in R/ContextFactory.R
 \name{ContextFactory}
 \alias{ContextFactory}
-\title{BackendFactory}
+\title{ContextFactory}
 \description{
 This class is a factory that provides instances of the \code{\link{Context}}
 class.
@@ -24,7 +24,7 @@ class(context)
 }
 \seealso{
 \code{\link{Context}}, \code{\link{ProgressTrackingContext}},
-\code{\link{Service}}, and \code{\link{Backend}}
+\code{\link{BackendService}}, and \code{\link{Backend}}
 }
 \section{Methods}{
 \subsection{Public methods}{

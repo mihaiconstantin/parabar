@@ -5,7 +5,8 @@
 \title{ProgressTrackingContext}
 \description{
 This class represents a progress tracking context for interacting with
-\code{\link{Backend}} implementations via the \code{\link{Service}} interface.
+\code{\link{Backend}} implementations via the \code{\link{BackendService}}
+interface.
 }
 \details{
 This class extends the base \code{\link{Context}} class and overrides the
@@ -107,11 +108,11 @@ context$stop()
 
 }
 \seealso{
-\code{\link{Context}}, \code{\link{Service}}, \code{\link{Backend}}, and
+\code{\link{Context}}, \code{\link{BackendService}}, \code{\link{Backend}}, and
 \code{\link{AsyncBackend}}.
 }
 \section{Super classes}{
-\code{\link[parabar:Service]{parabar::Service}} -> \code{\link[parabar:Context]{parabar::Context}} -> \code{ProgressTrackingContext}
+\code{\link[parabar:BackendService]{parabar::BackendService}} -> \code{\link[parabar:Context]{parabar::Context}} -> \code{ProgressTrackingContext}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -159,7 +160,8 @@ Set the backend instance to be used by the context.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{backend}}{An object of class \code{\link{Backend}} that supports
-progress tracking implements the \code{\link{Service}} interface.}
+progress tracking implements the \code{\link{BackendService}}
+interface.}
 }
 \if{html}{\out{</div>}}
 }

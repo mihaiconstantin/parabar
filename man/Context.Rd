@@ -5,14 +5,16 @@
 \title{Context}
 \description{
 This class represents the base context for interacting with
-\code{\link{Backend}} implementations via the \code{\link{Service}} interface.
+\code{\link{Backend}} implementations via the \code{\link{BackendService}}
+interface.
 }
 \details{
 This class is a vanilla wrapper around a \code{\link{Backend}} implementation.
-It registers a backend instance and forwards all \code{\link{Service}} methods
-calls to the backend instance. Subclasses can override any of the
-\code{\link{Service}} methods to decorate the backend instance with additional
-functionality (e.g., see the \code{\link{ProgressTrackingContext}} class).
+It registers a backend instance and forwards all \code{\link{BackendService}}
+methods calls to the backend instance. Subclasses can override any of the
+\code{\link{BackendService}} methods to decorate the backend instance with
+additional functionality (e.g., see the \code{\link{ProgressTrackingContext}}
+class for an example).
 }
 \examples{
 # Define a task to run in parallel.
@@ -79,11 +81,11 @@ context$stop()
 
 }
 \seealso{
-\code{\link{ProgressTrackingContext}}, \code{\link{Service}},
+\code{\link{ProgressTrackingContext}}, \code{\link{BackendService}},
 \code{\link{Backend}}, and \code{\link{SyncBackend}}.
 }
 \section{Super class}{
-\code{\link[parabar:Service]{parabar::Service}} -> \code{Context}
+\code{\link[parabar:BackendService]{parabar::BackendService}} -> \code{Context}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -137,7 +139,7 @@ Set the backend instance to be used by the context.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{backend}}{An object of class \code{\link{Backend}} that
-implements the \code{\link{Service}} interface.}
+implements the \code{\link{BackendService}} interface.}
 }
 \if{html}{\out{</div>}}
 }

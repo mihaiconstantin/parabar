@@ -91,7 +91,7 @@ test_that("'AsyncBackend' stops busy clusters correctly", {
     set_option("stop_forceful", FALSE)
 
     # Make sure the backend has unread results.
-    backend$sapply(1:100, test_task)
+    backend$sapply(1:100, function(x) x)
 
     # Block the main session until the task is finished.
     block_until_async_task_finished(backend)
@@ -126,7 +126,7 @@ test_that("'AsyncBackend' performs operations on the cluster correctly", {
     # Determine the cluster type automatically.
     specification$set_type(type = cluster_type)
 
-    # Create a synchronous backend object.
+    # Create an asynchronous backend object.
     backend <- AsyncBackend$new()
 
     # Perform tests for asynchronous backend operations.

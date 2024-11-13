@@ -20,7 +20,7 @@ reference:
   - subtitle: Developer Classes
     desc: API based on the `R6` class system for package developers.
   - contents:
-    - Service
+    - BackendService
     - Backend
     - SyncBackend
     - AsyncBackend

@@ -1,7 +1,6 @@
 #' @include Exception.R Context.R ProgressTrackingContext.R
 
-# Factory for fetching context instances (i.e., for managing and decorating backends).
-#' @title BackendFactory
+#' @title ContextFactory
 #'
 #' @description
 #' This class is a factory that provides instances of the [`parabar::Context`]
@@ -23,7 +22,7 @@
 #'
 #' @seealso
 #' [`parabar::Context`], [`parabar::ProgressTrackingContext`],
-#' [`parabar::Service`], and [`parabar::Backend`]
+#' [`parabar::BackendService`], and [`parabar::Backend`]
 #'
 #' @export
 ContextFactory <- R6::R6Class("ContextFactory",

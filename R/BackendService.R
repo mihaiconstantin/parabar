@@ -1,7 +1,7 @@
 #' @include Exception.R
 
 #' @title
-#' Service
+#' BackendService
 #'
 #' @description
 #' This is an interface that defines the operations available on a
@@ -13,10 +13,10 @@
 #' and [`parabar::Context`].
 #'
 #' @export
-Service <- R6::R6Class("Service",
+BackendService <- R6::R6Class("BackendService",
     public = list(
         #' @description
-        #' Create a new [`parabar::Service`] object.
+        #' Create a new [`parabar::BackendService`] object.
         #'
         #' @return
         #' Instantiating this class will throw an error.

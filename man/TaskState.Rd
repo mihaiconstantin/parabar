@@ -103,7 +103,8 @@ backend$stop()
 
 }
 \seealso{
-\code{\link{AsyncBackend}} and \code{\link{ProgressTrackingContext}}.
+\code{\link{SessionState}}, \code{\link{AsyncBackend}} and
+\code{\link{ProgressTrackingContext}}.
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -132,7 +133,7 @@ has been completed and the output needs to be retrieved.}
 \if{latex}{\out{\hypertarget{method-TaskState-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new \code{\link{TaskState}} object and determine the state of
-a task on a given session.
+a task on a given background \code{\link[callr:r_session]{session}}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TaskState$new(session)}\if{html}{\out{</div>}}
 }

@@ -80,6 +80,7 @@ body_contains <- function(task, pattern, position = 2) {
     return(contains)
 }
 
+
 # Block the main session until an asynchronous task finishes execution.
 block_until_async_task_finished <- function(backend) {
     # Block the main session until the task is finished.
@@ -97,7 +98,7 @@ block_until_async_task_finished <- function(backend) {
 
 #region Tests sets applicable to all backends types.
 
-# Set of tests for unimplemented service methods.
+# Set of tests for unimplemented backend service methods.
 tests_set_for_unimplemented_service_methods <- function(service) {
     # Expect an error when calling the `start` method.
     expect_error(service$start(), as_text(Exception$method_not_implemented()))
@@ -366,10 +367,7 @@ tests_set_for_asynchronous_backend_task_execution <- function(operation, service
     expect_error(service$get_output(), as_text(Exception$async_task_running()))
 
     # Block the main thread until the task is finished.
-    while(task_is_running(service)) {
-        # Sleep a bit.
-        Sys.sleep(0.001)
-    }
+    block_until_async_task_finished(service)
 
     # Expect that trying to run a task without reading the previous output fails.
     expect_error(eval(operation), as_text(Exception$async_task_completed()))
@@ -955,9 +953,9 @@ SpecificationTester <- R6::R6Class("SpecificationTester",
 )
 
 
-# Helper for testing method implementations of `Service` interface.
-ServiceImplementation <- R6::R6Class("ServiceImplementation",
-    inherit = Service,
+# Helper for testing method implementations of `BackendService` interface.
+BackendServiceImplementation <- R6::R6Class("BackendServiceImplementation",
+    inherit = BackendService,
 
     public = list(
         # Allow instantiation.

@@ -13,7 +13,7 @@
 #'   \item{\code{Helper$get_option(option)}}{Get package option, or corresponding default value.}
 #'   \item{\code{Helper$set_option(option, value)}}{Set package option.}
 #'   \item{\code{Helper$check_object_type(object, expected_type)}}{Check the type of a given object.}
-#'   \item{\code{Helper$check_array_margins(margins, dimensions)}}{Helper to check array margins for the `Service$apply` operation.}
+#'   \item{\code{Helper$check_array_margins(margins, dimensions)}}{Helper to check array margins for the `BackendService$apply` operation.}
 #' }
 #'
 #' @export
@@ -66,11 +66,11 @@ Helper$set_option <- function(option, value) {
 
 # Helper for performing a type check on a given object.
 Helper$check_object_type <- function(object, expected_type) {
-    # Get object class name.
-    type <- Helper$get_class_name(object)
-
     # If the object does not inherit from the expected type.
     if (!inherits(object, expected_type)) {
+        # Get object class name.
+        type <- Helper$get_class_name(object)
+
         # Throw incorrect type error.
         Exception$type_not_assignable(type, expected_type)
     }

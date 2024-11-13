@@ -15,11 +15,12 @@ backend implementations can be conveniently obtained using the
 \code{\link{BackendFactory}} class.
 }
 \seealso{
-\code{\link{Service}}, \code{\link{SyncBackend}}, \code{\link{AsyncBackend}},
-\code{\link{BackendFactory}}, and \code{\link{Context}}.
+\code{\link{BackendService}}, \code{\link{SyncBackend}},
+\code{\link{AsyncBackend}}, \code{\link{BackendFactory}}, and
+\code{\link{Context}}.
 }
 \section{Super class}{
-\code{\link[parabar:Service]{parabar::Service}} -> \code{Backend}
+\code{\link[parabar:BackendService]{parabar::BackendService}} -> \code{Backend}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -48,16 +49,16 @@ implementation has an active cluster.}
 \if{html}{\out{
 <details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="apply"><a href='../../parabar/html/Service.html#method-Service-apply'><code>parabar::Service$apply()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="clear"><a href='../../parabar/html/Service.html#method-Service-clear'><code>parabar::Service$clear()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="evaluate"><a href='../../parabar/html/Service.html#method-Service-evaluate'><code>parabar::Service$evaluate()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="export"><a href='../../parabar/html/Service.html#method-Service-export'><code>parabar::Service$export()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="get_output"><a href='../../parabar/html/Service.html#method-Service-get_output'><code>parabar::Service$get_output()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="lapply"><a href='../../parabar/html/Service.html#method-Service-lapply'><code>parabar::Service$lapply()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="peek"><a href='../../parabar/html/Service.html#method-Service-peek'><code>parabar::Service$peek()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="sapply"><a href='../../parabar/html/Service.html#method-Service-sapply'><code>parabar::Service$sapply()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="start"><a href='../../parabar/html/Service.html#method-Service-start'><code>parabar::Service$start()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="parabar" data-topic="Service" data-id="stop"><a href='../../parabar/html/Service.html#method-Service-stop'><code>parabar::Service$stop()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="apply"><a href='../../parabar/html/BackendService.html#method-BackendService-apply'><code>parabar::BackendService$apply()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="clear"><a href='../../parabar/html/BackendService.html#method-BackendService-clear'><code>parabar::BackendService$clear()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="evaluate"><a href='../../parabar/html/BackendService.html#method-BackendService-evaluate'><code>parabar::BackendService$evaluate()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="export"><a href='../../parabar/html/BackendService.html#method-BackendService-export'><code>parabar::BackendService$export()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="get_output"><a href='../../parabar/html/BackendService.html#method-BackendService-get_output'><code>parabar::BackendService$get_output()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="lapply"><a href='../../parabar/html/BackendService.html#method-BackendService-lapply'><code>parabar::BackendService$lapply()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="peek"><a href='../../parabar/html/BackendService.html#method-BackendService-peek'><code>parabar::BackendService$peek()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="sapply"><a href='../../parabar/html/BackendService.html#method-BackendService-sapply'><code>parabar::BackendService$sapply()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="start"><a href='../../parabar/html/BackendService.html#method-BackendService-start'><code>parabar::BackendService$start()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="parabar" data-topic="BackendService" data-id="stop"><a href='../../parabar/html/BackendService.html#method-BackendService-stop'><code>parabar::BackendService$stop()</code></a></span></li>
 </ul>
 </details>
 }}

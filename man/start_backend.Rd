@@ -22,7 +22,7 @@ See the section \strong{Backend Type} for more information.}
 \value{
 A \code{\link{Backend}} instance that can be used to parallelize computations.
 The methods available on the \code{\link{Backend}} instance are defined by the
-\code{\link{Service}} interface.
+\code{\link{BackendService}} interface.
 }
 \description{
 This function can be used to start a backend. Check out the \strong{Details}
@@ -66,8 +66,8 @@ asynchronous backend the cluster is created in a backend \code{R} process using
 process during task execution, while the asynchronous backend is
 non-blocking. Check out the implementations listed in the table above for
 more information. All concrete implementations extend the
-\code{\link{Backend}} abstract class and implement the \code{\link{Service}}
-interface.
+\code{\link{Backend}} abstract class and implement the
+\code{\link{BackendService}} interface.
 }
 
 \examples{
@@ -131,5 +131,5 @@ backend$active
 \code{\link[=peek]{peek()}}, \code{\link[=export]{export()}}, \code{\link[=evaluate]{evaluate()}},
 \code{\link[=clear]{clear()}}, \code{\link[=configure_bar]{configure_bar()}}, \code{\link[=par_sapply]{par_sapply()}},
 \code{\link[=par_lapply]{par_lapply()}}, \code{\link[=par_apply]{par_apply()}}, \code{\link[=stop_backend]{stop_backend()}},
-and \code{\link{Service}}.
+and \code{\link{BackendService}}.
 }
