@@ -23,7 +23,7 @@
 #'
 #' @seealso
 #' [`parabar::Context`], [`parabar::ProgressTrackingContext`],
-#' [`parabar::Service`], and [`parabar::Backend`]
+#' [`parabar::BackendService`], and [`parabar::Backend`]
 #'
 #' @export
 ContextFactory <- R6::R6Class("ContextFactory",

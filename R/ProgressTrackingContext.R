@@ -5,7 +5,8 @@
 #'
 #' @description
 #' This class represents a progress tracking context for interacting with
-#' [`parabar::Backend`] implementations via the [`parabar::Service`] interface.
+#' [`parabar::Backend`] implementations via the [`parabar::BackendService`]
+#' interface.
 #'
 #' @details
 #' This class extends the base [`parabar::Context`] class and overrides the
@@ -106,7 +107,7 @@
 #' context$stop()
 #'
 #' @seealso
-#' [`parabar::Context`], [`parabar::Service`], [`parabar::Backend`], and
+#' [`parabar::Context`], [`parabar::BackendService`], [`parabar::Backend`], and
 #' [`parabar::AsyncBackend`].
 #'
 #' @export
@@ -289,7 +290,8 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
         #' Set the backend instance to be used by the context.
         #'
         #' @param backend An object of class [`parabar::Backend`] that supports
-        #' progress tracking implements the [`parabar::Service`] interface.
+        #' progress tracking implements the [`parabar::BackendService`]
+        #' interface.
         #'
         #' @details
         #' This method overrides the parent method to validate the backend

@@ -11,7 +11,7 @@
 #' @details
 #' This function is a convenience wrapper around the lower-lever API of
 #' [`parabar::parabar`] aimed at developers. More specifically, this function
-#' calls the [`peek`][`parabar::Service`] method on the provided
+#' calls the [`peek`][`parabar::BackendService`] method on the provided
 #' [`backend`][`parabar::Backend`] instance.
 #'
 #' @return
@@ -26,4 +26,4 @@
 #' [parabar::start_backend()], [parabar::export()], [parabar::evaluate()],
 #' [parabar::clear()], [parabar::configure_bar()], [parabar::par_sapply()],
 #' [parabar::par_lapply()], [parabar::par_apply()], [parabar::stop_backend()],
-#' and [`parabar::Service`].
+#' and [`parabar::BackendService`].

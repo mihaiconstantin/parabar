@@ -5,14 +5,16 @@
 #'
 #' @description
 #' This class represents the base context for interacting with
-#' [`parabar::Backend`] implementations via the [`parabar::Service`] interface.
+#' [`parabar::Backend`] implementations via the [`parabar::BackendService`]
+#' interface.
 #'
 #' @details
 #' This class is a vanilla wrapper around a [`parabar::Backend`] implementation.
-#' It registers a backend instance and forwards all [`parabar::Service`] methods
-#' calls to the backend instance. Subclasses can override any of the
-#' [`parabar::Service`] methods to decorate the backend instance with additional
-#' functionality (e.g., see the [`parabar::ProgressTrackingContext`] class).
+#' It registers a backend instance and forwards all [`parabar::BackendService`]
+#' methods calls to the backend instance. Subclasses can override any of the
+#' [`parabar::BackendService`] methods to decorate the backend instance with
+#' additional functionality (e.g., see the [`parabar::ProgressTrackingContext`]
+#' class for an example).
 #'
 #' @examples
 #' # Define a task to run in parallel.
@@ -78,12 +80,12 @@
 #' context$stop()
 #'
 #' @seealso
-#' [`parabar::ProgressTrackingContext`], [`parabar::Service`],
+#' [`parabar::ProgressTrackingContext`], [`parabar::BackendService`],
 #' [`parabar::Backend`], and [`parabar::SyncBackend`].
 #'
 #' @export
 Context <- R6::R6Class("Context",
-    inherit = Service,
+    inherit = BackendService,
 
     private = list(
         # The backend used by the context manager.
@@ -102,7 +104,7 @@ Context <- R6::R6Class("Context",
         #' Set the backend instance to be used by the context.
         #'
         #' @param backend An object of class [`parabar::Backend`] that
-        #' implements the [`parabar::Service`] interface.
+        #' implements the [`parabar::BackendService`] interface.
         set_backend = function(backend) {
             private$.backend <- backend
         },

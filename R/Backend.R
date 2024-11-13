@@ -1,4 +1,4 @@
-#' @include Exception.R Service.R
+#' @include Exception.R BackendService.R
 
 #' @title
 #' Backend
@@ -15,12 +15,13 @@
 #' [`parabar::BackendFactory`] class.
 #'
 #' @seealso
-#' [`parabar::Service`], [`parabar::SyncBackend`], [`parabar::AsyncBackend`],
-#' [`parabar::BackendFactory`], and [`parabar::Context`].
+#' [`parabar::BackendService`], [`parabar::SyncBackend`],
+#' [`parabar::AsyncBackend`], [`parabar::BackendFactory`], and
+#' [`parabar::Context`].
 #'
 #' @export
 Backend <- R6::R6Class("Backend",
-    inherit = Service,
+    inherit = BackendService,
 
     private = list(
         # The engine used to dispatch the tasks.

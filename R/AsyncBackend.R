@@ -5,10 +5,10 @@
 #'
 #' @description
 #' This is a concrete implementation of the abstract class [`parabar::Backend`]
-#' that implements the [`parabar::Service`] interface. This backend executes
-#' tasks in parallel asynchronously (i.e., without blocking the main `R`
-#' session) on a [parallel::makeCluster()] cluster created in a background `R`
-#' [`session`][`callr::r_session`].
+#' that implements the [`parabar::BackendService`] interface. This backend
+#' executes tasks in parallel asynchronously (i.e., without blocking the main
+#' `R` session) on a [parallel::makeCluster()] cluster created in a background
+#' `R` [`session`][`callr::r_session`].
 #'
 #' @examples
 #' # Create a specification object.
@@ -83,7 +83,7 @@
 #' backend$active
 #'
 #' @seealso
-#' [`parabar::Service`], [`parabar::Backend`], [`parabar::SyncBackend`],
+#' [`parabar::BackendService`], [`parabar::Backend`], [`parabar::SyncBackend`],
 #' [`parabar::ProgressTrackingContext`], and [`parabar::TaskState`].
 #'
 #' @export

@@ -28,7 +28,7 @@ Collate:
     'Helper.R'
     'Exception.R'
     'Specification.R'
-    'Service.R'
+    'BackendService.R'
     'Backend.R'
     'AsyncBackend.R'
     'SyncBackend.R'

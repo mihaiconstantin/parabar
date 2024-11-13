@@ -98,7 +98,7 @@ block_until_async_task_finished <- function(backend) {
 
 #region Tests sets applicable to all backends types.
 
-# Set of tests for unimplemented service methods.
+# Set of tests for unimplemented backend service methods.
 tests_set_for_unimplemented_service_methods <- function(service) {
     # Expect an error when calling the `start` method.
     expect_error(service$start(), as_text(Exception$method_not_implemented()))
@@ -953,9 +953,9 @@ SpecificationTester <- R6::R6Class("SpecificationTester",
 )
 
 
-# Helper for testing method implementations of `Service` interface.
-ServiceImplementation <- R6::R6Class("ServiceImplementation",
-    inherit = Service,
+# Helper for testing method implementations of `BackendService` interface.
+BackendServiceImplementation <- R6::R6Class("BackendServiceImplementation",
+    inherit = BackendService,
 
     public = list(
         # Allow instantiation.

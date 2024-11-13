@@ -5,8 +5,8 @@
 #'
 #' @description
 #' This class contains the information required to start a backend. An instance
-#' of this class is used by the `start` method of the [`parabar::Service`]
-#' interface.
+#' of this class is used by the `start` method of the
+#' [`parabar::BackendService`] interface.
 #'
 #' @examples
 #' # Create a specification object.
@@ -43,8 +43,8 @@
 #' specification$type
 #'
 #' @seealso
-#' [`parabar::Service`], [`parabar::Backend`], [`parabar::SyncBackend`], and
-#' [`parabar::AsyncBackend`].
+#' [`parabar::BackendService`], [`parabar::Backend`], [`parabar::SyncBackend`],
+#' and [`parabar::AsyncBackend`].
 #'
 #' @export
 Specification <- R6::R6Class("Specification",
