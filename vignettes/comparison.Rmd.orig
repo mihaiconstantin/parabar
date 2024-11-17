@@ -2,6 +2,7 @@
 title: "Comparison with other approaches"
 date: '`r format(Sys.time(), "%d %B, %Y")`'
 output: rmarkdown::html_vignette
+author: Mihai Constantin
 vignette: >
   %\VignetteIndexEntry{Comparison with other approaches}
   %\VignetteEngine{knitr::rmarkdown}
