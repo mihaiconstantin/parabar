@@ -22,6 +22,7 @@
 #' @importFrom progress progress_bar
 #' @importFrom callr r_session
 #' @importFrom filelock lock unlock
+#' @importFrom ps ps_handle ps_interrupt
 
 #' @template parabar
 "_PACKAGE"
