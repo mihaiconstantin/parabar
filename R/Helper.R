@@ -14,6 +14,7 @@
 #'   \item{\code{Helper$set_option(option, value)}}{Set package option.}
 #'   \item{\code{Helper$check_object_type(object, expected_type)}}{Check the type of a given object.}
 #'   \item{\code{Helper$check_array_margins(margins, dimensions)}}{Helper to check array margins for the `BackendService$apply` operation.}
+#'   \item{\code{Helper$get_worker_pids(backend)}}{Get the process IDs for the workers spawned by the cluster on the backend.}
 #' }
 #'
 #' @export
@@ -93,3 +94,22 @@ Helper$check_array_margins <- function(margins, dimensions) {
         Exception$array_margins_not_compatible(margins, dimensions)
     }
 }
+
+# Get the process IDs for the workers spawned by the cluster on the backend.
+Helper$get_worker_pids <- function(backend) {
+    # Check the type.
+    Helper$check_object_type(backend, "Backend")
+
+    # Get the worker process IDs.
+    worker_pids <- backend$evaluate(
+        # Issue the call to get the pids.
+        Sys.getpid()
+    )
+
+    # Return the worker process IDs as a vector.
+    return(
+        # Unlist.
+        unlist(worker_pids)
+    )
+}
+
