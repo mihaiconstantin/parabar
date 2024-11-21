@@ -16,6 +16,7 @@ Imports:
     R6,
     progress,
     parallel,
+    ps,
     callr,
     filelock,
     utils
