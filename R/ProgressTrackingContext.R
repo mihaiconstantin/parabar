@@ -265,6 +265,9 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
 
         # Template function for tracking progress of backend operations.
         .execute = function(operation, fun, total) {
+            # Get the worker process IDs.
+            worker_pids <- Helper$get_worker_pids(private$.backend)
+
             # Create file for logging progress.
             log <- private$.make_log()
 
@@ -280,8 +283,18 @@ ProgressTrackingContext <- R6::R6Class("ProgressTrackingContext",
             # Evaluate the operation now referencing the decorated task.
             eval(operation)
 
-            # Show the progress bar and block the main process.
-            private$.show_progress(total = total, log = log)
+            # Monitor the progress bar for user interrupts.
+            tryCatch(
+                expr = {
+                    # Show the progress bar and block the main process.
+                    private$.show_progress(total = total, log = log)
+                },
+                # Catch and propagate the user interrupt.
+                interrupt = function(condition) {
+                    # Propagate the interrupt signal to the background session.
+                    Helper$propagate_interrupt(private$.backend, worker_pids)
+                }
+            )
         }
     ),
 
