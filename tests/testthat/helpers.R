@@ -57,7 +57,7 @@ test_task <- function(x, y, z, sleep = 0) {
 # Check if a task is running on an asynchronous backend, or context.
 task_is_running <- function(backend) {
     # If a context is passed.
-    if (Helper$get_class_name(backend) == "Context") {
+    if ("Context" %in% class(backend)) {
         # Get the status via the context.
         status <- backend$backend$task_state$task_is_running
     } else {
