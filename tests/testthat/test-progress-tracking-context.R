@@ -247,3 +247,39 @@ test_that("'ProgressTrackingContext' interrupts progress tracking on task error 
     # Stop the backend.
     context$stop()
 })
+
+
+test_that("'ProgressTrackingContext' interrupts progress tracking on interrupt signal correctly", {
+    # Create a specification.
+    specification <- Specification$new()
+
+    # Set the number of cores.
+    specification$set_cores(cores = 2)
+
+    # Determine the cluster type.
+    cluster_type <- pick_cluster_type(specification$types)
+
+    # Set the cluster type.
+    specification$set_type(type = cluster_type)
+
+    # Create an asynchronous backend object.
+    backend <- AsyncBackend$new()
+
+    # Create a progress tracking context object.
+    context <- ProgressTrackingContextTester$new()
+
+    # Register the backend with the context object.
+    context$set_backend(backend)
+
+    # Start the backend.
+    context$start(specification)
+
+    # On exit, stop the backend.
+    on.exit({
+        # Stop the backend.
+        context$stop()
+    })
+
+    # Expect correctly interrupted progress bars and task execution.
+    tests_set_for_progress_tracking_context_with_interrupt(context)
+})
