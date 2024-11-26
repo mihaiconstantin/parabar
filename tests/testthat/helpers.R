@@ -687,7 +687,7 @@ tests_set_for_task_execution_with_progress_tracking_and_error <- function(operat
     expect_error(context$get_output(wait = TRUE), expected_error)
 }
 
-# Set of tests for progress bar interruptions in a tracking context.
+# Set of tests for progress bar interruptions due to error in a tracking context.
 tests_set_for_progress_tracking_context_with_error <- function(context) {
     # Check the type.
     Helper$check_object_type(context, "ProgressTrackingContextTester")
