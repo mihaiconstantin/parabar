@@ -11,6 +11,8 @@
 \item{\code{Helper$set_option(option, value)}}{Set package option.}
 \item{\code{Helper$check_object_type(object, expected_type)}}{Check the type of a given object.}
 \item{\code{Helper$check_array_margins(margins, dimensions)}}{Helper to check array margins for the \code{BackendService$apply} operation.}
+\item{\code{Helper$get_worker_pids(backend)}}{Get the process IDs for the workers spawned by the cluster on the backend.}
+\item{\code{Helper$propagate_interrupt(backend, worker_pids)}}{Helper to propagate a user interrupt to an asynchronous backend.}
 }
 }
 \description{
