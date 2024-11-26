@@ -933,8 +933,8 @@ tests_set_for_progress_tracking_context_with_interrupt <- function(context) {
    # Select task arguments.
     x <- sample(1:100, 100)
 
-    # A task duration of 20 milliseconds is already reasonably short.
-    sleep <- 0.02
+    # A task duration of 100 milliseconds is already reasonably short.
+    sleep <- 0.1
 
     # Create the `sapply` operation.
     operation <- bquote(context$sapply(.(x), .(task), sleep = .(sleep)))
