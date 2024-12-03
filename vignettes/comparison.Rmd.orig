@@ -499,9 +499,10 @@ nevertheless. In this case, we use the `?parabar::ProgressTrackingContext` that
 adds progress tracking functionality to tasks executed in parallel. To avoid
 issues with the progress bar not displaying correctly in a non-interactive `R`
 session, we will temporarily redirect the progress bar output to `/dev/null`
-using the `?base::sink` function. Note that the progress tracking functionality
-is still employed (i.e., logging the execution progress to a file and reading
-the file to update the progress bar), only the progress bar is not displayed.
+(i.e., or `nul` on `Windows`) using the `?base::sink` function. Note that the
+progress tracking functionality is still employed (i.e., logging the execution
+progress to a file and reading the file to update the progress bar), only the
+progress bar is not displayed.
 
 ```{r}
 # Create a specification object.
@@ -535,7 +536,7 @@ context$set_bar(bar)
 duration_parabar <- microbenchmark(
     # The task to benchmark.
     parabar = {
-        # Redirect the output.
+        # Redirect the output (i.e., use `nul` for `Windows`).
         sink("/dev/null")
 
         # Run a task in parallel.
@@ -574,7 +575,7 @@ We repeat, again, the setup above, but this time using the `pbapply` package via
 the `?pbapply::pbsapply` function. Just like `parabar`, `pbapply` disables
 progress tracking for non-interactive `R` sessions. Therefore, we first need to
 force progress tracking, and, then, to avoid printing issues, redirect the
-progress bar output to `/dev/null`.
+progress bar output to `/dev/null` (i.e., or `nul` on `Windows`).
 
 <details><summary>Adjust <code>pbapply</code> options</summary>
 
@@ -615,7 +616,7 @@ cluster <- makeCluster(spec = 5, type = "PSOCK")
 duration_pbapply <- microbenchmark(
     # The task to benchmark.
     pbapply = {
-        # Redirect the output.
+        # Redirect the output (i.e., use `nul` for `Windows`).
         sink("/dev/null")
 
         # Run the task in parallel.
