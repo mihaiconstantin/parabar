@@ -707,7 +707,7 @@ tests_set_for_progress_tracking_context_with_error <- function(context) {
         Sys.sleep(sleep)
 
         # Randomly sample when to throw an error.
-        if(any(x == error_x)) {
+        if (any(x == error_x)) {
             # Throw an error.
             stop("Intentional task error.")
         }
