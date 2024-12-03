@@ -284,7 +284,7 @@ AsyncBackend <- R6::R6Class("AsyncBackend",
             # Get all session output.
             output <- private$.cluster$read()
 
-            # If an error ocurred in the session.
+            # If an error occurred in the session.
             if (!is.null(output$error)) {
                 # Throw error in the main session.
                 Exception$async_task_error(output$error)
