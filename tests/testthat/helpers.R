@@ -889,8 +889,14 @@ tests_set_for_user_api_progress_tracking <- function(operation) {
         clear = FALSE
     )
 
-    # Redirect output.
-    sink("/dev/null", type = "output")
+    # Redirect output accordingly.
+    if (.Platform$OS.type == "windows") {
+        # Redirect output to `nul`.
+        sink("nul", type = "output")
+    } else {
+        # Redirect output to `/dev/null`.
+        sink("/dev/null", type = "output")
+    }
 
     # Run the task and capture the progress bar output.
     output <- capture.output({ eval(operation) }, type = "message")
