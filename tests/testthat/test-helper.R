@@ -22,8 +22,29 @@ test_that("'Helper$propagate_interrupt' sends interrupt signals correctly", {
     # Get the worker process `IDs`.
     worker_pids <- Helper$get_worker_pids(backend)
 
+    # Get worker handles.
+    worker_handles <- lapply(worker_pids, ps::ps_handle)
+
     # Keep just the cluster busy.
     backend$cluster$call(function() {
+        # Sleep for quite a bit.
+        Sys.sleep(10)
+    })
+
+    # Propagate an interrupt signal to the cluster and the workers.
+    Helper$propagate_interrupt(backend, worker_pids)
+
+    # Expect the cluster to throw an error.
+    expect_error(backend$get_output(wait = TRUE), "callr subprocess interrupted")
+
+    # Expect that the cluster is idle.
+    expect_true(backend$session_state$session_is_idle)
+
+    # Expect the workers to be free.
+    expect_equal(unlist(evaluate(backend, "Worker free.")), rep("Worker free.", 2))
+
+    # Keep both the session and the workers busy.
+    backend$sapply(1:10, function(x) {
         # Sleep for quite a bit.
         Sys.sleep(1)
     })
@@ -40,29 +61,8 @@ test_that("'Helper$propagate_interrupt' sends interrupt signals correctly", {
     # Expect the workers to be free.
     expect_equal(unlist(evaluate(backend, "Worker free.")), rep("Worker free.", 2))
 
-    # Keep both the backend and the workers busy.
-    backend$sapply(1:10, function(x) {
-        # Sleep for quite a bit.
-        Sys.sleep(0.25)
-    })
-
-    # Propagate an interrupt signal to the cluster and the workers.
-    Helper$propagate_interrupt(backend, worker_pids)
-
-    # Expect the cluster to throw an error.
-    expect_error(backend$get_output(wait = TRUE), "callr subprocess interrupted")
-
-    # Expect that the cluster is idle.
-    expect_true(backend$session_state$session_is_idle)
-
-    # Expect the workers to be free.
-    expect_equal(unlist(evaluate(backend, "Worker free.")), rep("Worker free.", 2))
-
     # Expect that the session is alive.
     expect_true(backend$session_state$session_is_idle)
-
-    # Get worker PIDs handles.
-    worker_handles <- lapply(worker_pids, ps::ps_handle)
 
     # Expect that the workers are still alive.
     expect_true(ps::ps_is_running(worker_handles[[1]]))
