@@ -115,15 +115,14 @@ Helper$get_worker_pids <- function(backend) {
 }
 
 # Helper to propagate a user interrupt to an asynchronous backend.
-# Also see https://github.com/r-lib/callr/issues/294.
+# Also see issues:
+# - https://github.com/r-lib/callr/issues/294
+# - https://github.com/r-lib/ps/issues/187
 Helper$propagate_interrupt <- function(backend, worker_pids) {
     # Check the type.
     Helper$check_object_type(backend, "AsyncBackend")
 
-    # Send an interrupt signal to background session.
-    backend$cluster$interrupt()
-
-    # Manually stop the workers in case the interrupt did not propagate.
+    # Manually stop the workers first.
     lapply(
         # Worker process IDs.
         worker_pids,
@@ -140,6 +139,9 @@ Helper$propagate_interrupt <- function(backend, worker_pids) {
             }, silent = TRUE)
         }
     )
+
+    # Send an interrupt signal to background session.
+    backend$cluster$interrupt()
 
     # Remain silent.
     invisible()
