@@ -27,9 +27,12 @@ test_that("'Helper$propagate_interrupt' sends interrupt signals correctly", {
 
     # Keep just the cluster busy.
     backend$cluster$call(function() {
-        # Sleep for quite a bit.
-        Sys.sleep(10)
+        # An infinite loop.
+        while (TRUE) { Sys.sleep(0.1) }
     })
+
+    # Wait a bit for the call to take effect.
+    Sys.sleep(0.25)
 
     # Propagate an interrupt signal to the cluster and the workers.
     Helper$propagate_interrupt(backend, worker_pids)
@@ -44,10 +47,13 @@ test_that("'Helper$propagate_interrupt' sends interrupt signals correctly", {
     expect_equal(unlist(evaluate(backend, "Worker free.")), rep("Worker free.", 2))
 
     # Keep both the session and the workers busy.
-    backend$sapply(1:10, function(x) {
-        # Sleep for quite a bit.
-        Sys.sleep(1)
+    backend$sapply(1:2, function(x) {
+        # An infinite loop.
+        while (TRUE) { Sys.sleep(0.1) }
     })
+
+    # Wait a bit for the call to take effect.
+    Sys.sleep(0.25)
 
     # Propagate an interrupt signal to the cluster and the workers.
     Helper$propagate_interrupt(backend, worker_pids)
