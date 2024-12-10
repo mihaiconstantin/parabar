@@ -153,7 +153,7 @@ Specification <- R6::R6Class("Specification",
         #'
         #' @details
         #' This method also performs a validation of the requested number of
-        #' cores, ensuring that the the value lies between `2` and
+        #' cores, ensuring that the the value lies between `1` and
         #' `parallel::detectCores() - 1`.
         set_cores = function(cores) {
             # Set cores.

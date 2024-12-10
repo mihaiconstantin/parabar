@@ -84,7 +84,7 @@ Set the number of nodes to use in the cluster.
 }
 \subsection{Details}{
 This method also performs a validation of the requested number of
-cores, ensuring that the the value lies between \code{2} and
+cores, ensuring that the the value lies between \code{1} and
 \code{parallel::detectCores() - 1}.
 }
 
