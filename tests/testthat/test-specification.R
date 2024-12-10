@@ -23,18 +23,37 @@ test_that("'Specification' sets the number of cores correctly", {
 
     # When zero cores are requested.
     expect_warning(specification$set_cores(cores = 0), as_text(Warning$requested_cluster_cores_too_low()))
-    expect_equal(specification$cores, 2)
+    expect_equal(specification$cores, 1)
 
     # When one core is requested.
-    expect_warning(specification$set_cores(cores = 1), as_text(Warning$requested_cluster_cores_too_low()))
-    expect_equal(specification$cores, 2)
+    specification$set_cores(cores = 1)
+    expect_equal(specification$cores, 1)
+
+    # When two cores are requested.
+    expect_warning(specification$set_cores(cores = 2), as_text(Warning$requested_cluster_cores_too_high(specification$usable_cores)))
+    expect_equal(specification$cores, 1)
+
+    # When more than two cores are requested.
+    expect_warning(specification$set_cores(cores = 7), as_text(Warning$requested_cluster_cores_too_high(specification$usable_cores)))
+    expect_equal(specification$cores, 1)
+
+    # Suppose the machine has three cores.
+    specification$available_cores <- 3
+
+    # When zero cores are requested.
+    expect_warning(specification$set_cores(cores = 0), as_text(Warning$requested_cluster_cores_too_low()))
+    expect_equal(specification$cores, 1)
+
+    # When one core is requested.
+    specification$set_cores(cores = 1)
+    expect_equal(specification$cores, 1)
 
     # When two cores are requested.
     specification$set_cores(cores = 2)
     expect_equal(specification$cores, 2)
 
-    # When more than two cores are requested.
-    expect_warning(specification$set_cores(cores = 7), as_text(Warning$requested_cluster_cores_too_high(specification$usable_cores)))
+    # When three cores are requested.
+    expect_warning(specification$set_cores(cores = 3), as_text(Warning$requested_cluster_cores_too_high(specification$usable_cores)))
     expect_equal(specification$cores, 2)
 
     # Suppose the machine has eight cores.
@@ -42,11 +61,11 @@ test_that("'Specification' sets the number of cores correctly", {
 
     # When zero cores are requested.
     expect_warning(specification$set_cores(cores = 0), as_text(Warning$requested_cluster_cores_too_low()))
-    expect_equal(specification$cores, 2)
+    expect_equal(specification$cores, 1)
 
     # When one core is requested.
-    expect_warning(specification$set_cores(cores = 1), as_text(Warning$requested_cluster_cores_too_low()))
-    expect_equal(specification$cores, 2)
+    specification$set_cores(cores = 1)
+    expect_equal(specification$cores, 1)
 
     # When two cores are requested.
     specification$set_cores(cores = 2)

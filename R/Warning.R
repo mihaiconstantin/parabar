@@ -23,14 +23,20 @@ Warning <- R6::R6Class("Warning",
 
 # Warning for not requesting enough cluster cores.
 Warning$requested_cluster_cores_too_low <- function() {
+    # Construct the message.
+    message <- paste0("Argument `cores` too low. Setting to 1.")
+
     # Issue the warning.
-    warning("Argument `cores` must be greater than 1. Setting to 2.", call. = FALSE)
+    warning(message, call. = FALSE)
 }
 
 # Warning for requesting too many cluster cores.
 Warning$requested_cluster_cores_too_high <- function(max_cores) {
+    # Construct the message.
+    message <- paste0("Argument `cores` cannot be larger than ", max_cores, ". Setting to ", max_cores, ".")
+
     # Issue the warning.
-    warning(paste0("Argument `cores` cannot be larger than ", max_cores, ". Setting to ", max_cores, "."), call. = FALSE)
+    warning(message, call. = FALSE)
 }
 
 # Warning for requesting an unsupported cluster type.

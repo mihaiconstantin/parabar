@@ -72,13 +72,11 @@ Specification <- R6::R6Class("Specification",
                 Exception$not_enough_cores()
             }
 
-            # If the machine has more than two cores.
-            if (available_cores > 2) {
-                # Ensure a core is not used as part of the available pool.
-                available_cores <- available_cores - 1
-            }
+            # Otherwise, ensure a core is always left free of computation.
+            usable_cores <- available_cores - 1
 
-            return(available_cores)
+            # Return the number of usable cores.
+            return(usable_cores)
         },
 
         # Determine the number of nodes to create in the cluster,
@@ -90,12 +88,12 @@ Specification <- R6::R6Class("Specification",
             usable_cores <- private$.determine_usable_cores(available_cores)
 
             # If not enough cores are requested.
-            if (requested_cores < 2) {
+            if (requested_cores < 1) {
                 # Warn the users.
                 Warning$requested_cluster_cores_too_low()
 
-                # Allow two cores.
-                return(2)
+                # Allow one core.
+                return(1)
             }
 
             # If more cores than available are requested.
@@ -155,7 +153,7 @@ Specification <- R6::R6Class("Specification",
         #'
         #' @details
         #' This method also performs a validation of the requested number of
-        #' cores, ensuring that the the value lies between `2` and
+        #' cores, ensuring that the the value lies between `1` and
         #' `parallel::detectCores() - 1`.
         set_cores = function(cores) {
             # Set cores.
