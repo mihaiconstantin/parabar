@@ -72,13 +72,11 @@ Specification <- R6::R6Class("Specification",
                 Exception$not_enough_cores()
             }
 
-            # If the machine has more than two cores.
-            if (available_cores > 2) {
-                # Ensure a core is not used as part of the available pool.
-                available_cores <- available_cores - 1
-            }
+            # Otherwise, ensure a core is always left free of computation.
+            usable_cores <- available_cores - 1
 
-            return(available_cores)
+            # Return the number of usable cores.
+            return(usable_cores)
         },
 
         # Determine the number of nodes to create in the cluster,
