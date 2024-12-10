@@ -1,3 +1,50 @@
+# parabar 1.3.0
+
+## Added
+- Update `AsyncBackend` to allow forceful stopping of the cluster. This is
+  controlled by the package option `stop_forceful`, which, when set to `TRUE`,
+  permits the backend to stop the cluster even if tasks are running or if tasks
+  have finished but their results have not yet been read into the main session.
+  The stopping logic is now based on the newly added class `SessionState`.
+  Closes [#59](https://github.com/mihaiconstantin/parabar/issues/59).
+- Add `SessionState` class to easily check if an asynchronous backend is ready
+  for certain operations.
+- Add tests for the `SessionState` and `TaskState` classes, and other
+  improvements to the existing tests.
+- Introduce "pseudo-tests" for `SyncBackend` and `AsyncBackend` finalizers.
+  These tests don't perform real assertions but instead verify that finalizers
+  are invoked when backend instances are garbage collected. As of now, there
+  appears to be no reliable way to programmatically capture conditions handled
+  within a finalizer triggered by manual `gc()` invocation.
+
+## Changed
+- Remove `SyncBackend` and `AsyncBackend` destructors in favour of `R`
+  finalizers registered via `base::reg.finalizer`.
+- Rename `Service` to `BackendService` for clarity and consistency. While the
+  name `Service` makes sense in the context of the `parabar` package, it can be
+  confusing when using `parabar` in conjunction with other packages (e.g., in
+  the context of the `powerly` package). The new name `BackendService` is
+  hopefully more descriptive and less likely to clash with other packages.
+- Update `comparison.Rmd` vignette to refresh the comparison between `parabar`
+  and `pbapply` packages.
+- Update design diagram and improved its readability and the client code
+  examples.
+- Refactor `task_is_running` test helper to accept more context types.
+- Update `Specification` to allow backends with a single core. Closes
+  [#71](https://github.com/mihaiconstantin/parabar/issues/71).
+
+## Fixed
+- Fix error triggered by the invocation of the backend destructors (i.e., see
+  issue [#61](https://github.com/mihaiconstantin/parabar/issues/61)). Clean-up
+  of resources is now handled via the `base::reg.finalizer` mechanism, with
+  finalizers being automatically registered when a backend is created. This
+  ensures that the cluster is stopped and resources are released even if the
+  user forgets to call `stop_backend` explicitly. Closes
+  [#61](https://github.com/mihaiconstantin/parabar/issues/61).
+- Fix the `sink` redirect to use the correct destination on `Windows` (i.e.,
+  `nul` instead of `/dev/null`). Closes
+  [#74](https://github.com/mihaiconstantin/parabar/issues/74).
+
 # parabar 1.2.1
 
 ## Fixed
