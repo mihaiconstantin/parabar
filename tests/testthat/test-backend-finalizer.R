@@ -28,14 +28,8 @@ test_that("'AsyncBackend' finalizer executes without throwing", {
         return(x)
     }
 
-    # Create text connection.
-    connection <- textConnection("log", open = "w")
-
     # Ensure forceful stop is disabled.
     set_option("stop_forceful", FALSE)
-
-    # Define warning pattern to match.
-    pattern <- "Caught error in 'AsyncBackend' finalizer"
 
     # #region Test finalizer with a running task.
 

@@ -103,7 +103,7 @@ Exception$async_task_error <- function(error) {
 # Exception for stopping a busy backend without intent.
 Exception$stop_busy_backend_not_allowed <- function() {
     # Construct exception message.
-    message <- "Cannot stop a busy backend unless the `stop_forceful` option is enabled."
+    message <- "Cannot stop a busy backend when option `stop_forceful = FALSE`."
 
     # Throw the error.
     stop(message, call. = FALSE)
