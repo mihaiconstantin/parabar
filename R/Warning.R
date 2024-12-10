@@ -32,8 +32,11 @@ Warning$requested_cluster_cores_too_low <- function() {
 
 # Warning for requesting too many cluster cores.
 Warning$requested_cluster_cores_too_high <- function(max_cores) {
+    # Construct the message.
+    message <- paste0("Argument `cores` cannot be larger than ", max_cores, ". Setting to ", max_cores, ".")
+
     # Issue the warning.
-    warning(paste0("Argument `cores` cannot be larger than ", max_cores, ". Setting to ", max_cores, "."), call. = FALSE)
+    warning(message, call. = FALSE)
 }
 
 # Warning for requesting an unsupported cluster type.
