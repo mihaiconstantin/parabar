@@ -88,12 +88,12 @@ Specification <- R6::R6Class("Specification",
             usable_cores <- private$.determine_usable_cores(available_cores)
 
             # If not enough cores are requested.
-            if (requested_cores < 2) {
+            if (requested_cores < 1) {
                 # Warn the users.
                 Warning$requested_cluster_cores_too_low()
 
-                # Allow two cores.
-                return(2)
+                # Allow one core.
+                return(1)
             }
 
             # If more cores than available are requested.
