@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">parabar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +35,30 @@
       <small>Source: <a href="https://github.com/mihaiconstantin/parabar/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.0" id="parabar-130">parabar 1.3.0<a class="anchor" aria-label="anchor" href="#parabar-130"></a></h2>
+<div class="section level3">
+<h3 id="added-1-3-0">Added<a class="anchor" aria-label="anchor" href="#added-1-3-0"></a></h3>
+<ul><li>Update <code>AsyncBackend</code> to allow forceful stopping of the cluster. This is controlled by the package option <code>stop_forceful</code>, which, when set to <code>TRUE</code>, permits the backend to stop the cluster even if tasks are running or if tasks have finished but their results have not yet been read into the main session. The stopping logic is now based on the newly added class <code>SessionState</code>. Closes <a href="https://github.com/mihaiconstantin/parabar/issues/59" class="external-link">#59</a>.</li>
+<li>Add <code>SessionState</code> class to easily check if an asynchronous backend is ready for certain operations.</li>
+<li>Add tests for the <code>SessionState</code> and <code>TaskState</code> classes, and other improvements to the existing tests.</li>
+<li>Introduce “pseudo-tests” for <code>SyncBackend</code> and <code>AsyncBackend</code> finalizers. These tests don’t perform real assertions but instead verify that finalizers are invoked when backend instances are garbage collected. As of now, there appears to be no reliable way to programmatically capture conditions handled within a finalizer triggered by manual <code><a href="https://rdrr.io/r/base/gc.html" class="external-link">gc()</a></code> invocation.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="changed-1-3-0">Changed<a class="anchor" aria-label="anchor" href="#changed-1-3-0"></a></h3>
+<ul><li>Remove <code>SyncBackend</code> and <code>AsyncBackend</code> destructors in favour of <code>R</code> finalizers registered via <code><a href="https://rdrr.io/r/base/reg.finalizer.html" class="external-link">base::reg.finalizer</a></code>.</li>
+<li>Rename <code>Service</code> to <code>BackendService</code> for clarity and consistency. While the name <code>Service</code> makes sense in the context of the <code>parabar</code> package, it can be confusing when using <code>parabar</code> in conjunction with other packages (e.g., in the context of the <code>powerly</code> package). The new name <code>BackendService</code> is hopefully more descriptive and less likely to clash with other packages.</li>
+<li>Update <code>comparison.Rmd</code> vignette to refresh the comparison between <code>parabar</code> and <code>pbapply</code> packages.</li>
+<li>Update design diagram and improved its readability and the client code examples.</li>
+<li>Refactor <code>task_is_running</code> test helper to accept more context types.</li>
+<li>Update <code>Specification</code> to allow backends with a single core. Closes <a href="https://github.com/mihaiconstantin/parabar/issues/71" class="external-link">#71</a>.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="fixed-1-3-0">Fixed<a class="anchor" aria-label="anchor" href="#fixed-1-3-0"></a></h3>
+<ul><li>Fix error triggered by the invocation of the backend destructors (i.e., see issue <a href="https://github.com/mihaiconstantin/parabar/issues/61" class="external-link">#61</a>). Clean-up of resources is now handled via the <code><a href="https://rdrr.io/r/base/reg.finalizer.html" class="external-link">base::reg.finalizer</a></code> mechanism, with finalizers being automatically registered when a backend is created. This ensures that the cluster is stopped and resources are released even if the user forgets to call <code>stop_backend</code> explicitly. Closes <a href="https://github.com/mihaiconstantin/parabar/issues/61" class="external-link">#61</a>.</li>
+<li>Fix the <code>sink</code> redirect to use the correct destination on <code>Windows</code> (i.e., <code>nul</code> instead of <code>/dev/null</code>). Closes <a href="https://github.com/mihaiconstantin/parabar/issues/74" class="external-link">#74</a>.</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.1" id="parabar-121">parabar 1.2.1<a class="anchor" aria-label="anchor" href="#parabar-121"></a></h2><p class="text-muted">CRAN release: 2024-10-17</p>
 <div class="section level3">
