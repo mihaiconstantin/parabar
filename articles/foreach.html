@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Using `parabar` with `foreach` via `doParabar` • parabar</title>
+<title>Using `parabar` with `foreach` • parabar</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -16,7 +16,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Using `parabar` with `foreach` via `doParabar`">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Using `parabar` with `foreach`">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -40,7 +40,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/comparison.html">Comparison with other approaches</a></li>
-    <li><a class="dropdown-item" href="../articles/foreach.html">Using `parabar` with `foreach` via `doParabar`</a></li>
+    <li><a class="dropdown-item" href="../articles/foreach.html">Using `parabar` with `foreach`</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -62,7 +62,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Using `parabar` with `foreach` via `doParabar`</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>Using `parabar` with `foreach`</h1>
                         <h4 data-toc-skip class="author">Mihai
 Constantin</h4>
             
@@ -223,9 +223,9 @@ operator.</li>
 </ul>
 <p><em>Note.</em> Two particularly relevant
 <code>foreach::foreach</code> arguments in the context of parallelizing
-<code>R</code> code are <code>export</code> and <code>packages</code>.
-The <code>export</code> argument specifies the variables that need to be
-exported to the backend, while the <code>packages</code> argument
+<code>R</code> code are <code>.export</code> and <code>.packages</code>.
+The <code>.export</code> argument specifies the variables that need to
+be exported to the backend, while the <code>packages</code> argument
 specifies the packages that need to be loaded on the backend.</p>
 </div>
 <div class="section level2">
@@ -249,12 +249,14 @@ the necessary packages:</p>
 tracking as follows:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create an asynchronous `parabar` backend.</span></span>
-<span><span class="va">backend</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/start_backend.html">start_backend</a></span><span class="op">(</span>cores <span class="op">=</span> <span class="fl">2</span>, cluster_type <span class="op">=</span> <span class="st">"psock"</span>, backend_type <span class="op">=</span> <span class="st">"async"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">backend</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/start_backend.html">start_backend</a></span><span class="op">(</span></span>
+<span>    cores <span class="op">=</span> <span class="fl">2</span>, cluster_type <span class="op">=</span> <span class="st">"psock"</span>, backend_type <span class="op">=</span> <span class="st">"async"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>At this point, we have a parallelization backend that we can register
 with the <code>foreach</code> package. We do this via the
 <code>registerDoParabar</code> function:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Register the backend with the `foreach` package for the `%dopar%` operator.</span></span>
+<code class="sourceCode R"><span><span class="co"># Register the backend with the `foreach` package.</span></span>
 <span><span class="fu">registerDoParabar</span><span class="op">(</span><span class="va">backend</span><span class="op">)</span></span></code></pre></div>
 <p>To verify that the backend has been registered successfully, we can
 use some of the function provides by the <code>foreach</code> package to
@@ -284,7 +286,9 @@ parallel. For example:</p>
 <span><span class="va">z</span> <span class="op">&lt;-</span> <span class="st">"Not to be exported."</span></span>
 <span></span>
 <span><span class="co"># Used the registered backend to run a task in parallel via `foreach`.</span></span>
-<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">foreach</span><span class="op">(</span>i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, .export <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, .combine <span class="op">=</span> <span class="va">c</span><span class="op">)</span> <span class="op">%dopar%</span> <span class="op">{</span></span>
+<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">foreach</span><span class="op">(</span></span>
+<span>    i <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">300</span>, .export <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span>, .combine <span class="op">=</span> <span class="va">c</span></span>
+<span><span class="op">)</span> <span class="op">%dopar%</span> <span class="op">{</span></span>
 <span>    <span class="co"># Sleep a bit to simulate a long-running task.</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/Sys.sleep.html" class="external-link">Sys.sleep</a></span><span class="op">(</span><span class="fl">0.01</span><span class="op">)</span></span>
 <span></span>
@@ -293,7 +297,7 @@ parallel. For example:</p>
 <span><span class="op">}</span></span>
 <span><span class="co">#&gt; completed 0 out of 300 tasks [ 0%] [ 0s]</span></span>
 <span><span class="co">#&gt; ...</span></span>
-<span><span class="co">#&gt; completed 3 out of 300 tasks [ 10%] [ 0s]</span></span>
+<span><span class="co">#&gt; completed 60 out of 300 tasks [ 20%] [ 1s]</span></span>
 <span><span class="co">#&gt; ...</span></span>
 <span><span class="co">#&gt; completed 300 out of 300 tasks [100%] [ 2s]</span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
