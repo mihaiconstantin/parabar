@@ -118,7 +118,7 @@ As you may have noticed, the arguments that pertain to the behavior of the
 `foreach::foreach` function are prepended with a dot. There are more arguments
 available. For a complete list, see the documentation for `foreach::foreach` and
 the vignette [*Using the `foreach`
-package*](https://cran.r-project.org/web/packages/foreach/vignettes/foreach.html).
+package*](https://CRAN.R-project.org/package=foreach/vignettes/foreach.html).
 
 ## Running In Parallel
 
