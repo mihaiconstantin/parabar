@@ -1,0 +1,285 @@
+---
+title: "Using `parabar` with `foreach` via `doParabar`"
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+output: rmarkdown::html_vignette
+author: Mihai Constantin
+vignette: >
+  %\VignetteIndexEntry{Using `parabar` with `foreach` via `doParabar`}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    dev = "png",
+    dpi = 300,
+    out.width = "100%",
+    fig.path = "foreach-"
+)
+
+# Install packages if necessary.
+if (!require("foreach", character.only = TRUE)) {
+    install.packages("foreach", repos = "https://cloud.r-project.org")
+}
+
+if (!require("doParabar", character.only = TRUE)) {
+    install.packages("doParabar", repos = "https://cloud.r-project.org")
+}
+
+# Load packages.
+library(doParabar)
+library(parabar)
+library(foreach)
+```
+
+## Introduction
+
+The goal of this article is to provide a minimal example of how to use the
+[`parabar`](https://parabar.mihaiconstantin.com) and
+[`foreach`](https://CRAN.R-project.org/package=foreach) packages together. The
+`foreach` package is a popular package that provides syntactic sugar for
+executing tasks sequentially (i.e., via the `%do%` operator) or in parallel
+(i.e., via the `%dopar%` operator). In this article, I will provide a brief
+introduction to the `foreach` package and show how it can be used to run tasks
+in parallel with the `parabar` package. If you are not yet familiar with the
+`parabar` package, make sure to check out the
+[documentation](https://parabar.mihaiconstantin.com) for information on how to
+get started.
+
+## Overview
+
+In a nutshell, the `foreach` package provides a way to iterate over a collection
+of elements. For iterating over the respective collection sequentially, one can
+use the `%do%` operator as follows:
+
+```{r}
+# Load the library.
+library(foreach)
+
+# For each element.
+foreach(i = 1:5) %do% {
+    # Do something.
+    i * 2
+}
+```
+
+In this example, the line
+
+```r
+# Load the library.
+library(foreach)
+```
+
+loads the `foreach` package, making all of its functions and operators available
+in main session. More interestingly, the call
+
+```r
+foreach(i = 1:5)
+```
+
+takes the named argument `i = 1:5` provided as input and returns an iterator
+object of class `foreach`. Then, the `%do%` operator is used to execute the
+expression on the right-hand side of the operator
+
+```r
+{
+    # Do something.
+    i * 2
+}
+```
+
+for each element of the iterator object.
+
+*Note.* The `foreach::foreach` function may take additional arguments that
+control the behavior of the iteration process, accumulation of the results, and
+the task execution. For example, by default, the `foreach::foreach` function
+returns the accumulated results as a list. However, the `foreach::foreach` can
+take a `.combine` argument that specifies how the results of each iteration
+should be combined into a single object. Specifying, for instance, `.combine =
+c` for the example above instructs `foreach::foreach` that we expect the results
+back as a vector instead of a list:
+
+```{r}
+# For each element.
+foreach(i = 1:5, .combine = c) %do% {
+    # Do something.
+    i * 2
+}
+```
+
+Moreover, using the `.final` argument, we can provide a function that acts on
+the accumulated results right before their are provided back to the user. This
+is useful when we want to perform some final operation on the results before
+returning them. For example, suppose we want to sum the results of the
+iterations. We can do this as follows:
+
+```{r}
+# For each element.
+foreach(i = 1:5, .combine = c, .final = sum) %do% {
+    # Do something.
+    i * 2
+}
+```
+
+As you may have noticed, the arguments that pertain to the behavior of the
+`foreach::foreach` function are prepended with a dot. There are more arguments
+available. For a complete list, see the documentation for `foreach::foreach` and
+the vignette [*Using the `foreach`
+package*](https://cran.r-project.org/web/packages/foreach/vignettes/foreach.html).
+
+## Running In Parallel
+
+If we want to run a task in parallel, we need to provide a backend that supports
+parallelizing the task. Since the `foreach` package is not a parallelization
+package per se, it does not provide a backend for parallelizing tasks by
+default. Instead, it provides a flexible mechanism to register any
+parallelization backend with it, as long as that backend supports the `%dopar%`
+operator.
+
+The workflow for running a task in parallel with the `foreach` package involves:
+
+1. Obtaining a parallelization backend.
+2. Registering the backend with the `foreach` package.
+3. Running the task in parallel using the `%dopar%` operator.
+
+While the `parabar` package provides
+[synchronous](https://parabar.mihaiconstantin.com/reference/SyncBackend) and
+[asynchronous](https://parabar.mihaiconstantin.com/reference/AsyncBackend)
+parallelization backends, it does not work out of the box with the `foreach`
+package. This is where the
+[`doParabar`](https://github.com/mihaiconstantin/doParabar) package comes into
+play. The `doParabar` encapsulated the necessary logic to adapt `parabar`
+backends to work seamlessly with the `foreach` package.
+
+At a high level the `doParabar` package consists of two main functions:
+
+- [`doPar`](https://github.com/mihaiconstantin/doParabar/blob/main/R/doPar.R):
+  provides an implementation for the `%dopar%` operator (e.g.,
+  think of it as an adapter that connects the `foreach` and `parabar` packages).
+  This function implements the various arguments of the `foreach::foreach`
+  function and determines how the tasks are parallelized using a `parabar`
+  backend.
+- [`registerDoParabar`](https://github.com/mihaiconstantin/doParabar/blob/main/R/registerDoParabar.R):
+  registers the `doPar` implementation with the `foreach` package. This function
+  sets up the necessary hooks in the `foreach` package to use the `doPar`
+  implementation for the `%dopar%` operator. In other words, it tells `foreach`
+  that as long as a `parabar` backend is registered, it should use the `doPar`
+  implementation in `doParabar` for the `%dopar%` operator.
+
+*Note.* Two particularly relevant `foreach::foreach` arguments in the context of
+parallelizing `R` code are `export` and `packages`. The `export` argument
+specifies the variables that need to be exported to the backend, while the
+`packages` argument specifies the packages that need to be loaded on the
+backend.
+
+## Using `doParabar`
+
+Unlike other `foreach` adapter packages out there (e.g., `doParallel`), the the
+`doParabar` package does not automatically load other packages. Instead, I
+recommend to explicitly load the necessary packages in your scripts. In a
+similar vein, `R` package developers should add the necessary packages to the
+`Imports` field in the `DESCRIPTION` file of their package. Therefore, the first
+step in using `parabar` with `foreach` is to load the necessary packages:
+
+```r
+# Load the packages.
+library(doParabar)
+library(parabar)
+library(foreach)
+```
+
+Next, we proceed by using `parabar` to create an [asynchronous]()
+parallelization backend that supports progress tracking as follows:
+
+```{r}
+# Create an asynchronous `parabar` backend.
+backend <- start_backend(cores = 2, cluster_type = "psock", backend_type = "async")
+```
+
+At this point, we have a parallelization backend that we can register with the
+`foreach` package. We do this via the `registerDoParabar` function:
+
+```{r}
+# Register the backend with the `foreach` package for the `%dopar%` operator.
+registerDoParabar(backend)
+```
+
+To verify that the backend has been registered successfully, we can use some of
+the function provides by the `foreach` package to query information about the
+backend:
+
+```{r}
+# Get the parallel backend name.
+getDoParName()
+
+# Check that the parallel backend has been registered.
+getDoParRegistered()
+
+# Get the current version of backend registration.
+getDoParVersion()
+
+# Get the number of cores used by the backend.
+getDoParWorkers()
+```
+
+Now, we can use the `%dopar%` operator to run tasks in parallel. For example:
+
+```{r}
+# Define some variables strangers to the backend.
+x <- 10
+y <- 100
+z <- "Not to be exported."
+
+# Used the registered backend to run a task in parallel via `foreach`.
+results <- foreach(i = 1:300, .export = c("x", "y"), .combine = c) %dopar% {
+    # Sleep a bit to simulate a long-running task.
+    Sys.sleep(0.01)
+
+    # Compute and return.
+    i + x + y
+}
+
+# Show a few results.
+head(results, n = 10)
+tail(results, n = 10)
+```
+
+*Note.* The `doParabar` package does not automatically export objects (i.e., or
+packages for that manner) to the backend. While this break "tradition" with
+other `foreach` adapter packages, it is a deliberate design choice made to
+encourage users to keep their scripts tidy and be mindful of what they export to
+the backend. (i.e., see the `.export`, `.noexport`, and `.packages` arguments of
+the `foreach` function).
+
+We can verify that objects are not automatically exported to the backend by
+checking the value of the `z` variable on the backend. We expect this call to
+throw an error, since `z` was never exported to the backend:
+
+```{r}
+# Verify that the variable `z` was not exported.
+try(evaluate(backend, z))
+```
+
+Finally, we can stop the backend when we are done with as we would normally do:
+
+```{r}
+# Stop the backend.
+stop_backend(backend)
+```
+
+## Conclusion
+
+In this article, I provided a short introduction on how to run tasks in parallel
+on [`parabar`](https://parabar.mihaiconstantin.com) backends using
+[`foreach`](https://CRAN.R-project.org/package=foreach) semantics. This
+integration is possible via the
+[`doParabar`](https://github.com/mihaiconstantin/doParabar) package, which
+provides an implementation for the `%dopar%` operator (i.e., the `doPar`
+function) and a function to register the implementation with the `foreach`
+package (i.e., the `registerDoParabar` function). The source code for the
+`doParabar` package can be consulted on `GitHub` at
+[github.com/mihaiconstantin/doParabar](https://github.com/mihaiconstantin/doParabar).
+I kindly welcome any feedback or contributions to improving `parabar` or
+`doParabar`.
