@@ -1,3 +1,9 @@
+# parabar 1.4.1
+
+## Fixed
+- Update URL in `foreach` vignette to respect the `CRAN` canonical package URL
+  format.
+
 # parabar 1.4.0
 
 ## Added
