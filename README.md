@@ -24,7 +24,7 @@
 </p>
 <!-- badges: end -->
 
-A [`parabar`](https://parabar.mihaiconstantin.com) is a package designed to
+[`parabar`](https://parabar.mihaiconstantin.com) is a package designed to
 provide a simple interface for executing tasks in parallel, while also providing
 functionality for tracking and displaying the progress of the tasks.
 
