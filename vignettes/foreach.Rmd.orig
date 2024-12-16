@@ -190,7 +190,8 @@ library(parabar)
 library(foreach)
 ```
 
-Next, we proceed by using `parabar` to create an [asynchronous]()
+Next, we proceed by using `parabar` to create an
+[asynchronous](https://parabar.mihaiconstantin.com/reference/AsyncBackend)
 parallelization backend that supports progress tracking as follows:
 
 ```{r}
