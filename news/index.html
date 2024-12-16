@@ -19,6 +19,7 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/comparison.html">Comparison with other approaches</a></li>
+    <li><a class="dropdown-item" href="../articles/foreach.html">Using `parabar` with `foreach` via `doParabar`</a></li>
   </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -32,11 +33,11 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/mihaiconstantin/parabar/blob/v1.3.0/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/mihaiconstantin/parabar/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.3.0" id="parabar-130">parabar 1.3.0<a class="anchor" aria-label="anchor" href="#parabar-130"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.3.0" id="parabar-130">parabar 1.3.0<a class="anchor" aria-label="anchor" href="#parabar-130"></a></h2><p class="text-muted">CRAN release: 2024-12-10</p>
 <div class="section level3">
 <h3 id="added-1-3-0">Added<a class="anchor" aria-label="anchor" href="#added-1-3-0"></a></h3>
 <ul><li>Update <code>AsyncBackend</code> to allow forceful stopping of the cluster. This is controlled by the package option <code>stop_forceful</code>, which, when set to <code>TRUE</code>, permits the backend to stop the cluster even if tasks are running or if tasks have finished but their results have not yet been read into the main session. The stopping logic is now based on the newly added class <code>SessionState</code>. Closes <a href="https://github.com/mihaiconstantin/parabar/issues/59" class="external-link">#59</a>.</li>
