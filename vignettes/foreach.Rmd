@@ -1,10 +1,10 @@
 ---
-title: "Using `parabar` with `foreach` via `doParabar`"
+title: "Using `parabar` with `foreach`"
 date: '16 December, 2024'
 output: rmarkdown::html_vignette
 author: Mihai Constantin
 vignette: >
-  %\VignetteIndexEntry{Using `parabar` with `foreach` via `doParabar`}
+  %\VignetteIndexEntry{Using `parabar` with `foreach`}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -160,7 +160,7 @@ At a high level the `doParabar` package consists of two main functions:
   implementation in `doParabar` for the `%dopar%` operator.
 
 *Note.* Two particularly relevant `foreach::foreach` arguments in the context of
-parallelizing `R` code are `export` and `packages`. The `export` argument
+parallelizing `R` code are `.export` and `.packages`. The `.export` argument
 specifies the variables that need to be exported to the backend, while the
 `packages` argument specifies the packages that need to be loaded on the
 backend.
@@ -186,14 +186,16 @@ parallelization backend that supports progress tracking as follows:
 
 ```r
 # Create an asynchronous `parabar` backend.
-backend <- start_backend(cores = 2, cluster_type = "psock", backend_type = "async")
+backend <- start_backend(
+    cores = 2, cluster_type = "psock", backend_type = "async"
+)
 ```
 
 At this point, we have a parallelization backend that we can register with the
 `foreach` package. We do this via the `registerDoParabar` function:
 
 ```r
-# Register the backend with the `foreach` package for the `%dopar%` operator.
+# Register the backend with the `foreach` package.
 registerDoParabar(backend)
 ```
 
@@ -235,7 +237,9 @@ y <- 100
 z <- "Not to be exported."
 
 # Used the registered backend to run a task in parallel via `foreach`.
-results <- foreach(i = 1:300, .export = c("x", "y"), .combine = c) %dopar% {
+results <- foreach(
+    i = 1:300, .export = c("x", "y"), .combine = c
+) %dopar% {
     # Sleep a bit to simulate a long-running task.
     Sys.sleep(0.01)
 
@@ -244,7 +248,7 @@ results <- foreach(i = 1:300, .export = c("x", "y"), .combine = c) %dopar% {
 }
 #> completed 0 out of 300 tasks [ 0%] [ 0s]
 #> ...
-#> completed 3 out of 300 tasks [ 10%] [ 0s]
+#> completed 60 out of 300 tasks [ 20%] [ 1s]
 #> ...
 #> completed 300 out of 300 tasks [100%] [ 2s]
 ```
