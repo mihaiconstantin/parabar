@@ -1,3 +1,8 @@
+# parabar 1.4.2
+
+## Fixed
+- Add missing URL in `foreach` vignette.
+
 # parabar 1.4.1
 
 ## Fixed
