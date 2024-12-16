@@ -1,3 +1,12 @@
+# parabar 1.4.0
+
+## Added
+- Add vignette `foreach.Rmd` to illustrate how `parabar` can be used in
+  conjunction with the `foreach` package. The implementation for the `%dopar%`
+  operator is provided by the
+   [`doParabar`](https://github.com/mihaiconstantin/doParabar) package. The
+  `foreach.Rmd` vignette is locally build from the `foreach.Rmd.orig` file.
+
 # parabar 1.3.0
 
 ## Added
