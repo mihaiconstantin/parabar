@@ -1,10 +1,10 @@
 ---
-title: "Using `parabar` with `foreach` via `doParabar`"
+title: "Using `parabar` with `foreach`"
 date: '`r format(Sys.time(), "%d %B, %Y")`'
 output: rmarkdown::html_vignette
 author: Mihai Constantin
 vignette: >
-  %\VignetteIndexEntry{Using `parabar` with `foreach` via `doParabar`}
+  %\VignetteIndexEntry{Using `parabar` with `foreach`}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
