@@ -687,7 +687,7 @@ tests_set_for_task_execution_with_progress_tracking_and_error <- function(operat
     expect_error(context$get_output(wait = TRUE), expected_error)
 }
 
-# Set of tests for progress bar interruptions in a tracking context.
+# Set of tests for progress bar interruptions due to error in a tracking context.
 tests_set_for_progress_tracking_context_with_error <- function(context) {
     # Check the type.
     Helper$check_object_type(context, "ProgressTrackingContextTester")
@@ -768,6 +768,209 @@ tests_set_for_progress_tracking_context_with_error <- function(context) {
 
     # Tests for the `apply` operation over all elements in a progress tracking context with error in the task.
     tests_set_for_task_execution_with_progress_tracking_and_error(operation, context, expected_error)
+}
+
+# Set of tests for executing tasks that are interrupted in a progress tracking context.
+tests_set_for_task_execution_with_progress_tracking_and_interrupt <- function(operation, context, expected_error) {
+    # Clear the progress output on exit.
+    on.exit({
+        # Clear the output.
+        context$progress_bar_output <- NULL
+    })
+
+    # Start a new session to interrupt the current one after some delay.
+    session <- callr::r_session$new()
+
+    # Always close the session on exit.
+    on.exit({
+        # Stop the session.
+        session$close()
+    }, add = TRUE)
+
+    # Get the current session PID.
+    pid <- Sys.getpid()
+
+    # Create a bar factory.
+    bar_factory <- BarFactory$new()
+
+    # Get a basic bar instance.
+    bar <- bar_factory$get("basic")
+
+    # Register the bar with the context object.
+    context$set_bar(bar)
+
+    # Configure the bar.
+    context$configure_bar(
+        style = 3
+    )
+
+    # Issue a delayed interrupt signal to the current session.
+    session$call(function(pid) {
+        # Get a process handle.
+        handle <- ps::ps_handle(pid)
+
+        # Sleep a bit longer.
+        Sys.sleep(0.1)
+
+        # Issue the interrupt signal.
+        ps::ps_interrupt(p = handle, ctrl_c = TRUE)
+    }, args = list(pid))
+
+    # Run the indefinitely running task in parallel.
+    eval(operation)
+
+    # At one point the interruption will kick in.
+
+    # Block until the session is ready to have results read.
+    block_until_async_task_finished(context)
+
+    # Read the session result to free the session.
+    session$read()
+
+    # Expect the task to be interrupted with the expected error message.
+    expect_error(context$get_output(wait = TRUE), expected_error)
+
+    # Expect that the cluster session is `idle`.
+    expect_equal(context$backend$cluster$get_state(), "idle")
+
+    # Expect that the workers are free.
+    expect_equal(unlist(context$evaluate("Workers free")), rep("Workers free", 2))
+
+    # Get a modern bar instance.
+    bar <- bar_factory$get("modern")
+
+    # Register the bar with the same context object.
+    context$set_bar(bar)
+
+    # Configure the bar.
+    context$configure_bar(
+        show_after = 0,
+        format = ":bar| :percent",
+        clear = FALSE,
+        force = TRUE
+    )
+
+    # Issue a delayed interrupt signal to the current session.
+    session$call(function(pid) {
+        # Get a process handle.
+        handle <- ps::ps_handle(pid)
+
+        # Sleep a bit longer.
+        Sys.sleep(0.1)
+
+        # Issue the interrupt signal.
+        ps::ps_interrupt(p = handle, ctrl_c = TRUE)
+    }, args = list(pid))
+
+    # Run the indefinitely running task in parallel.
+    eval(operation)
+
+    # At one point the interruption will kick in.
+
+    # Block until the session is ready to have results read.
+    block_until_async_task_finished(context)
+
+    # Read the session result to free the session.
+    session$read()
+
+    # Expect the task to be interrupted with the expected error message.
+    expect_error(context$get_output(wait = TRUE), expected_error)
+
+    # Expect that the cluster session is `idle`.
+    expect_equal(context$backend$cluster$get_state(), "idle")
+
+    # Expect that the workers are free.
+    expect_equal(unlist(context$evaluate("Workers free")), rep("Workers free", 2))
+}
+
+# Set of tests for progress bar interruptions due to interrupt signal in a tracking context.
+tests_set_for_progress_tracking_context_with_interrupt <- function(context) {
+    # Check the type.
+    Helper$check_object_type(context, "ProgressTrackingContextTester")
+
+    # Clean-up.
+    on.exit({
+        # Set default values for package options.
+        set_default_options()
+    })
+
+    # Reduce waiting time between progress bar updates.
+    set_option("progress_wait", 0.01)
+
+    # Define the task.
+    task <- function(x, sleep) {
+        # Keep the workers busy indefinitely.
+        while (TRUE) {
+            # Sleep a bit always.
+            Sys.sleep(sleep)
+        }
+    }
+
+    # Execute a dummy task in the background session.
+    context$backend$cluster$call(function() {
+        # Keep the session busy.
+        while (TRUE) {
+            # Sleep a bit.
+            Sys.sleep(0.1)
+        }
+    })
+
+    # Interrupt the session.
+    context$backend$cluster$interrupt()
+
+    # Block until the session is ready to have results read.
+    block_until_async_task_finished(context)
+
+    # Capture and construct the expected error message.
+    expected_error <- as_text(
+        # Throw the error returned from the interrupted session.
+        stop(context$backend$cluster$read()$error)
+    )
+
+    # Expect the session to be `idle`.
+    expect_equal(context$backend$cluster$get_state(), "idle")
+
+   # Select task arguments.
+    x <- sample(1:100, 100)
+
+    # A task duration of 100 milliseconds is already reasonably short.
+    sleep <- 0.1
+
+    # Create the `sapply` operation.
+    operation <- bquote(context$sapply(.(x), .(task), sleep = .(sleep)))
+
+    # Tests for the `sapply` operation in a progress tracking context with interrupt signal.
+    tests_set_for_task_execution_with_progress_tracking_and_interrupt(operation, context, expected_error)
+
+    # Create the `lapply` operation.
+    operation <- bquote(context$lapply(.(x), .(task), sleep = .(sleep)))
+
+    # Tests for the `sapply` operation in a progress tracking context with interrupt signal.
+    tests_set_for_task_execution_with_progress_tracking_and_interrupt(operation, context, expected_error)
+
+    # Redefine `x` as a matrix for the `apply` operation.
+    x <- matrix(rnorm(100^2), nrow = 100, ncol = 100)
+
+    # Define the `apply` operation over rows.
+    operation <- bquote(context$apply(.(x), 1, .(task), sleep = .(sleep)))
+
+    # Tests for the `apply` operation over rows in a progress tracking context with interrupt signal.
+    tests_set_for_task_execution_with_progress_tracking_and_interrupt(operation, context, expected_error)
+
+    # Define the `apply` operation over columns.
+    operation <- bquote(context$apply(.(x), 2, .(task), sleep = .(sleep)))
+
+    # Tests for the `apply` operation over columns in a progress tracking context with interrupt signal.
+    tests_set_for_task_execution_with_progress_tracking_and_interrupt(operation, context, expected_error)
+
+    # Redefine a smaller `x` matrix for the `apply` operation applied element-wise.
+    x <- matrix(rnorm(10^2), nrow = 10, ncol = 10)
+
+    # Define the `apply` operation element-wise.
+    operation <- bquote(context$apply(.(x), c(1, 2), .(task), sleep = .(sleep)))
+
+    # Tests for the `apply` operation over all elements in a progress tracking context with interrupt signal.
+    tests_set_for_task_execution_with_progress_tracking_and_interrupt(operation, context, expected_error)
 }
 
 #endregion
