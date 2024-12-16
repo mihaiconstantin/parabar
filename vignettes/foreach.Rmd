@@ -160,7 +160,7 @@ At a high level the `doParabar` package consists of two main functions:
   implementation in `doParabar` for the `%dopar%` operator.
 
 *Note.* Two particularly relevant `foreach::foreach` arguments in the context of
-parallelizing `R` code are `export` and `packages`. The `export` argument
+parallelizing `R` code are `.export` and `.packages`. The `.export` argument
 specifies the variables that need to be exported to the backend, while the
 `packages` argument specifies the packages that need to be loaded on the
 backend.
