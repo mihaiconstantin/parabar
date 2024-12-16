@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">parabar</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,7 +68,7 @@ Constantin</h4>
             
             <h4 data-toc-skip class="date">16 December, 2024</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/mihaiconstantin/parabar/blob/v1.4.1/vignettes/foreach.Rmd" class="external-link"><code>vignettes/foreach.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mihaiconstantin/parabar/blob/main/vignettes/foreach.Rmd" class="external-link"><code>vignettes/foreach.Rmd</code></a></small>
       <div class="d-none name"><code>foreach.Rmd</code></div>
     </div>
 
@@ -245,8 +245,8 @@ the necessary packages:</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">doParabar</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://parabar.mihaiconstantin.com" class="external-link">parabar</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RevolutionAnalytics/foreach" class="external-link">foreach</a></span><span class="op">)</span></span></code></pre></div>
-<p>Next, we proceed by using <code>parabar</code> to create an <a href="">asynchronous</a> parallelization backend that supports progress
-tracking as follows:</p>
+<p>Next, we proceed by using <code>parabar</code> to create an <a href="https://parabar.mihaiconstantin.com/reference/AsyncBackend" class="external-link">asynchronous</a>
+parallelization backend that supports progress tracking as follows:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create an asynchronous `parabar` backend.</span></span>
 <span><span class="va">backend</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/start_backend.html">start_backend</a></span><span class="op">(</span></span>
