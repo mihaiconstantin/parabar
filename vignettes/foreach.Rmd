@@ -4,7 +4,7 @@ date: '16 December, 2024'
 output: rmarkdown::html_vignette
 author: Mihai Constantin
 vignette: >
-  %\VignetteIndexEntry{Comparison with other approaches}
+  %\VignetteIndexEntry{Using `parabar` with `foreach` via `doParabar`}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
