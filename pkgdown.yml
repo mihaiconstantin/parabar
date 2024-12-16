@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   comparison: comparison.html
   foreach: foreach.html
-last_built: 2024-12-16T22:32Z
+last_built: 2024-12-16T22:35Z
 urls:
   reference: http://parabar.mihaiconstantin.com/reference
   article: http://parabar.mihaiconstantin.com/articles
